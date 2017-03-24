@@ -7,6 +7,8 @@ class CreateHistoryGroups < ActiveRecord::Migration[5.0]
       t.references :student, foreign_key: true
       t.references :teacher, foreign_key: true
 
+      t.integer :state
+
       t.timestamps
     end
   end

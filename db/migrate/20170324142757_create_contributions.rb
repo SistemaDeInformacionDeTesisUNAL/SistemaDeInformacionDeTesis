@@ -6,6 +6,8 @@ class CreateContributions < ActiveRecord::Migration[5.0]
       t.text :description
       t.references :investigation_group, foreign_key: true
 
+      t.integer :state
+
       t.timestamps
     end
   end
