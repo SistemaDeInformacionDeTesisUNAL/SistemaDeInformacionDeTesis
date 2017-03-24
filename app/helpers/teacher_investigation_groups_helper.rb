@@ -1,0 +1,2 @@
+module TeacherInvestigationGroupsHelper
+end

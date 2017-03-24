@@ -1,0 +1,2 @@
+module TagInvestigationGroupsHelper
+end

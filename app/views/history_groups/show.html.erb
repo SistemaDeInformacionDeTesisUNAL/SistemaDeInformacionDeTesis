@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bonding date:</strong>
+  <%= @history_group.bonding_date %>
+</p>
+
+<p>
+  <strong>Exit date:</strong>
+  <%= @history_group.exit_date %>
+</p>
+
+<p>
+  <strong>Investigation group:</strong>
+  <%= @history_group.investigation_group %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @history_group.student %>
+</p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @history_group.teacher %>
+</p>
+
+<%= link_to 'Edit', edit_history_group_path(@history_group) %> |
+<%= link_to 'Back', history_groups_path %>

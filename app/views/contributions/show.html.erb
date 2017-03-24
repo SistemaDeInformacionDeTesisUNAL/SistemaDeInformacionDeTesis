@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @contribution.name %>
+</p>
+
+<p>
+  <strong>Publication date:</strong>
+  <%= @contribution.publication_date %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @contribution.description %>
+</p>
+
+<p>
+  <strong>Investigation group:</strong>
+  <%= @contribution.investigation_group %>
+</p>
+
+<%= link_to 'Edit', edit_contribution_path(@contribution) %> |
+<%= link_to 'Back', contributions_path %>

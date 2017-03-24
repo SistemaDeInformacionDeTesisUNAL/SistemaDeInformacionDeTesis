@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @investigation_group.name %>
+</p>
+
+<p>
+  <strong>Createdate:</strong>
+  <%= @investigation_group.createDate %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @investigation_group.description %>
+</p>
+
+<%= link_to 'Edit', edit_investigation_group_path(@investigation_group) %> |
+<%= link_to 'Back', investigation_groups_path %>

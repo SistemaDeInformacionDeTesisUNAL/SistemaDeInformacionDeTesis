@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @teacher_investigation_group.teacher %>
+</p>
+
+<p>
+  <strong>Investigation group:</strong>
+  <%= @teacher_investigation_group.investigation_group %>
+</p>
+
+<%= link_to 'Edit', edit_teacher_investigation_group_path(@teacher_investigation_group) %> |
+<%= link_to 'Back', teacher_investigation_groups_path %>

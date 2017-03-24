@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bonding_date: 2017-03-24
+  exit_date: 2017-03-24
+  investigation_group: one
+  student: one
+  teacher: one
+
+two:
+  bonding_date: 2017-03-24
+  exit_date: 2017-03-24
+  investigation_group: two
+  student: two
+  teacher: two
