@@ -34,9 +34,9 @@ class DeviseTokenAuthCreateTeachers < ActiveRecord::Migration[5.0]
       # t.datetime :locked_at
 
       ## User Info
-      t.string :name, :null => false, :limit => 25
       t.string :lastname, :null => false, :limit => 25
       t.string :institutional_user, :null => false, unique: true
+      t.string :name, :null => false, :limit => 25
 
       ## Tokens
       t.json :tokens
