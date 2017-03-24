@@ -1,2 +1,946 @@
   [1m[35m (0.2ms)[0m  [1m[34mSELECT VERSION()[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT VERSION()[0m
+  [1m[35m (603.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (116.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (314.2ms)[0m  [1m[35mCREATE TABLE "students" ("provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying, "lastname" character varying, "institutional_user" serial primary key, "investigation_group_id" integer, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_46ff4a01e3"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (123.2ms)[0m  [1m[35mCREATE TABLE "students" ("provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying, "lastname" character varying, "institutional_user" serial primary key, "investigation_group_id" integer, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_46ff4a01e3"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (223.6ms)[0m  [1m[35mCREATE TABLE "investigation_groups" ("id" serial primary key, "name" character varying, "createDate" date, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170323140626"]]
+  [1m[35m (27.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (327.7ms)[0m  [1m[35mCREATE TABLE "students" ("provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying, "lastname" character varying, "institutional_user" serial primary key, "investigation_group_id" integer, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_46ff4a01e3"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (39.9ms)[0m  [1m[35mCREATE  INDEX  "index_students_on_investigation_group_id" ON "students"  ("investigation_group_id")[0m
+  [1m[35m (32.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_institutional_user" ON "students"  ("institutional_user")[0m
+  [1m[35m (32.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_uid_and_provider" ON "students"  ("uid", "provider")[0m
+  [1m[35m (32.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_reset_password_token" ON "students"  ("reset_password_token")[0m
+  [1m[35m (32.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_confirmation_token" ON "students"  ("confirmation_token")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015833"]]
+  [1m[35m (25.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (94.6ms)[0m  [1m[35mCREATE TABLE "teachers" ("id" serial primary key, "provider" character varying DEFAULT 'email' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying, "lastname" character varying, "institutional_user" character varying, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (17.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_email" ON "teachers"  ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP INDEX  "index_students_on_confirmation_token"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_students_on_reset_password_token"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_students_on_uid_and_provider"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_students_on_institutional_user"[0m
+  [1m[35m (23.7ms)[0m  [1m[35mDROP TABLE "students"[0m
+  [1m[35mSQL (12.2ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324015833"]]
+  [1m[35m (9.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE "investigation_groups"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170323140626"]]
+  [1m[35m (25.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (116.6ms)[0m  [1m[35mCREATE TABLE "investigation_groups" ("id" serial primary key, "name" character varying, "createDate" date, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170323140626"]]
+  [1m[35m (15.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (102.4ms)[0m  [1m[35mCREATE TABLE "students" ("provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying, "lastname" character varying, "institutional_user" serial primary key, "investigation_group_id" integer, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_46ff4a01e3"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCREATE  INDEX  "index_students_on_investigation_group_id" ON "students"  ("investigation_group_id")[0m
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_institutional_user" ON "students"  ("institutional_user")[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_uid_and_provider" ON "students"  ("uid", "provider")[0m
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_reset_password_token" ON "students"  ("reset_password_token")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_confirmation_token" ON "students"  ("confirmation_token")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015833"]]
+  [1m[35m (14.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (127.3ms)[0m  [1m[35mCREATE TABLE "teachers" ("id" serial primary key, "provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_institutional_user" character varying, "name" character varying, "lastname" character varying, "institutional_user" character varying, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (43.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_institutional_user" ON "teachers"  ("institutional_user")[0m
+  [1m[35m (51.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_uid_and_provider" ON "teachers"  ("uid", "provider")[0m
+  [1m[35m (54.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_reset_password_token" ON "teachers"  ("reset_password_token")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_confirmation_token" ON "teachers"  ("confirmation_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015936"]]
+  [1m[35m (22.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTeacherInvestigationGroups (20170324141237)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (53.7ms)[0m  [1m[35mCREATE TABLE "teacher_investigation_groups" ("id" serial primary key, "teacher_id" integer, "investigation_group_id" integer, "rol" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e24779e0ef"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+, CONSTRAINT "fk_rails_7619ce8a8c"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_teacher_investigation_groups_on_teacher_id" ON "teacher_investigation_groups"  ("teacher_id")[0m
+  [1m[35m (40.5ms)[0m  [1m[35mCREATE  INDEX  "index_teacher_investigation_groups_on_investigation_group_id" ON "teacher_investigation_groups"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141237"]]
+  [1m[35m (21.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfiles (20170324141515)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (111.1ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" serial primary key, "entity" character varying, "URL" text, "student_id" integer, "teacher_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b3845cb217"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+, CONSTRAINT "fk_rails_605b0f1a3b"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTeacherInvestigationGroups (20170324141237)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mDROP TABLE "teacher_investigation_groups"[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141237"]]
+  [1m[35m (10.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_confirmation_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_reset_password_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_uid_and_provider"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_institutional_user"[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE "teachers"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324015936"]]
+  [1m[35m (18.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP INDEX  "index_students_on_confirmation_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_students_on_reset_password_token"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP INDEX  "index_students_on_uid_and_provider"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_students_on_institutional_user"[0m
+  [1m[35m (1.4ms)[0m  [1m[35mDROP TABLE "students"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324015833"]]
+  [1m[35m (18.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE "investigation_groups"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170323140626"]]
+  [1m[35m (19.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (105.7ms)[0m  [1m[35mCREATE TABLE "investigation_groups" ("id" serial primary key, "name" character varying, "createDate" date, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170323140626"]]
+  [1m[35m (16.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (102.1ms)[0m  [1m[35mCREATE TABLE "students" ("id" serial primary key, "provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying, "lastname" character varying, "institutional_user" character varying, "investigation_group_id" integer, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_46ff4a01e3"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (53.4ms)[0m  [1m[35mCREATE  INDEX  "index_students_on_investigation_group_id" ON "students"  ("investigation_group_id")[0m
+  [1m[35m (42.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_institutional_user" ON "students"  ("institutional_user")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_uid_and_provider" ON "students"  ("uid", "provider")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_reset_password_token" ON "students"  ("reset_password_token")[0m
+  [1m[35m (54.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_confirmation_token" ON "students"  ("confirmation_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015833"]]
+  [1m[35m (26.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (93.4ms)[0m  [1m[35mCREATE TABLE "teachers" ("id" serial primary key, "provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_institutional_user" character varying, "name" character varying, "lastname" character varying, "institutional_user" character varying, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (54.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_institutional_user" ON "teachers"  ("institutional_user")[0m
+  [1m[35m (33.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_uid_and_provider" ON "teachers"  ("uid", "provider")[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_reset_password_token" ON "teachers"  ("reset_password_token")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_confirmation_token" ON "teachers"  ("confirmation_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015936"]]
+  [1m[35m (21.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTeacherInvestigationGroups (20170324141237)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (32.7ms)[0m  [1m[35mCREATE TABLE "teacher_investigation_groups" ("id" serial primary key, "teacher_id" integer, "investigation_group_id" integer, "rol" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e24779e0ef"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+, CONSTRAINT "fk_rails_7619ce8a8c"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (42.6ms)[0m  [1m[35mCREATE  INDEX  "index_teacher_investigation_groups_on_teacher_id" ON "teacher_investigation_groups"  ("teacher_id")[0m
+  [1m[35m (53.4ms)[0m  [1m[35mCREATE  INDEX  "index_teacher_investigation_groups_on_investigation_group_id" ON "teacher_investigation_groups"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141237"]]
+  [1m[35m (20.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfiles (20170324141515)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (78.7ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" serial primary key, "entity" character varying, "URL" text, "student_id" integer, "teacher_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b3845cb217"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+, CONSTRAINT "fk_rails_605b0f1a3b"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+)[0m
+  [1m[35m (53.4ms)[0m  [1m[35mCREATE  INDEX  "index_profiles_on_student_id" ON "profiles"  ("student_id")[0m
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE  INDEX  "index_profiles_on_teacher_id" ON "profiles"  ("teacher_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141515"]]
+  [1m[35m (18.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEvents (20170324141756)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (102.6ms)[0m  [1m[35mCREATE TABLE "events" ("id" serial primary key, "name" character varying, "date" date, "time" time, "description" text, "investigation_group_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_3dc94443d8"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE  INDEX  "index_events_on_investigation_group_id" ON "events"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141756"]]
+  [1m[35m (26.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventStudents (20170324141908)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (59.6ms)[0m  [1m[35mCREATE TABLE "event_students" ("id" serial primary key, "event_id" integer, "student_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_947f4f9871"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+, CONSTRAINT "fk_rails_f57e32fbf8"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+)[0m
+  [1m[35m (64.9ms)[0m  [1m[35mCREATE  INDEX  "index_event_students_on_event_id" ON "event_students"  ("event_id")[0m
+  [1m[35m (54.3ms)[0m  [1m[35mCREATE  INDEX  "index_event_students_on_student_id" ON "event_students"  ("student_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141908"]]
+  [1m[35m (26.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventTeachers (20170324141935)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (60.8ms)[0m  [1m[35mCREATE TABLE "event_teachers" ("id" serial primary key, "event_id" integer, "teacher_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_a758853e18"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+, CONSTRAINT "fk_rails_db40e50501"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_event_teachers_on_event_id" ON "event_teachers"  ("event_id")[0m
+  [1m[35m (54.4ms)[0m  [1m[35mCREATE  INDEX  "index_event_teachers_on_teacher_id" ON "event_teachers"  ("teacher_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141935"]]
+  [1m[35m (25.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateHistoryGroups (20170324142547)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (39.5ms)[0m  [1m[35mCREATE TABLE "history_groups" ("id" serial primary key, "bonding_date" date, "exit_date" date, "investigation_group_id" integer, "student_id" integer, "teacher_id" integer, "state" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_9b13a03da7"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+, CONSTRAINT "fk_rails_8fb5121e6a"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+, CONSTRAINT "fk_rails_ec3efb35d1"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+)[0m
+  [1m[35m (44.3ms)[0m  [1m[35mCREATE  INDEX  "index_history_groups_on_investigation_group_id" ON "history_groups"  ("investigation_group_id")[0m
+  [1m[35m (43.3ms)[0m  [1m[35mCREATE  INDEX  "index_history_groups_on_student_id" ON "history_groups"  ("student_id")[0m
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE  INDEX  "index_history_groups_on_teacher_id" ON "history_groups"  ("teacher_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324142547"]]
+  [1m[35m (21.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateContributions (20170324142757)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (77.1ms)[0m  [1m[35mCREATE TABLE "contributions" ("id" serial primary key, "name" character varying, "publication_date" date, "description" text, "investigation_group_id" integer, "state" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_ffe1946b61"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE  INDEX  "index_contributions_on_investigation_group_id" ON "contributions"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324142757"]]
+  [1m[35m (20.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUserContributions (20170324143013)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (45.2ms)[0m  [1m[35mCREATE TABLE "user_contributions" ("id" serial primary key, "student_id" integer, "teacher_id" integer, "contribution_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_a586f00106"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+, CONSTRAINT "fk_rails_0181d0d017"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+, CONSTRAINT "fk_rails_ae59875445"
+FOREIGN KEY ("contribution_id")
+  REFERENCES "contributions" ("id")
+)[0m
+  [1m[35m (42.2ms)[0m  [1m[35mCREATE  INDEX  "index_user_contributions_on_student_id" ON "user_contributions"  ("student_id")[0m
+  [1m[35m (39.8ms)[0m  [1m[35mCREATE  INDEX  "index_user_contributions_on_teacher_id" ON "user_contributions"  ("teacher_id")[0m
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE  INDEX  "index_user_contributions_on_contribution_id" ON "user_contributions"  ("contribution_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143013"]]
+  [1m[35m (18.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUbications (20170324143135)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (91.3ms)[0m  [1m[35mCREATE TABLE "ubications" ("id" serial primary key, "link" text, "contribution_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_71dd0a44b8"
+FOREIGN KEY ("contribution_id")
+  REFERENCES "contributions" ("id")
+)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_ubications_on_contribution_id" ON "ubications"  ("contribution_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143135"]]
+  [1m[35m (17.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTags (20170324143216)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (81.5ms)[0m  [1m[35mCREATE TABLE "tags" ("id" serial primary key, "name" character varying, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143216"]]
+  [1m[35m (16.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTagContributions (20170324143318)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (38.2ms)[0m  [1m[35mCREATE TABLE "tag_contributions" ("id" serial primary key, "tag_id" integer, "contribution_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_7a612a79f4"
+FOREIGN KEY ("tag_id")
+  REFERENCES "tags" ("id")
+, CONSTRAINT "fk_rails_a6f20c4c13"
+FOREIGN KEY ("contribution_id")
+  REFERENCES "contributions" ("id")
+)[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCREATE  INDEX  "index_tag_contributions_on_tag_id" ON "tag_contributions"  ("tag_id")[0m
+  [1m[35m (43.4ms)[0m  [1m[35mCREATE  INDEX  "index_tag_contributions_on_contribution_id" ON "tag_contributions"  ("contribution_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143318"]]
+  [1m[35m (25.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTagInvestigationGroups (20170324143355)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (58.9ms)[0m  [1m[35mCREATE TABLE "tag_investigation_groups" ("id" serial primary key, "tag_id" integer, "investigation_group_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_8771b64758"
+FOREIGN KEY ("tag_id")
+  REFERENCES "tags" ("id")
+, CONSTRAINT "fk_rails_0c0f1187f7"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (56.3ms)[0m  [1m[35mCREATE  INDEX  "index_tag_investigation_groups_on_tag_id" ON "tag_investigation_groups"  ("tag_id")[0m
+  [1m[35m (43.4ms)[0m  [1m[35mCREATE  INDEX  "index_tag_investigation_groups_on_investigation_group_id" ON "tag_investigation_groups"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143355"]]
+  [1m[35m (24.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (8.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-03-24 16:57:32 UTC], ["updated_at", 2017-03-24 16:57:32 UTC]]
+  [1m[35m (5.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTagInvestigationGroups (20170324143355)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE "tag_investigation_groups"[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324143355"]]
+  [1m[35m (10.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTagContributions (20170324143318)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE "tag_contributions"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324143318"]]
+  [1m[35m (19.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTags (20170324143216)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTags (20170324143216)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE "tags"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324143216"]]
+  [1m[35m (23.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUbications (20170324143135)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "ubications"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324143135"]]
+  [1m[35m (20.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUserContributions (20170324143013)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.6ms)[0m  [1m[35mDROP TABLE "user_contributions"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324143013"]]
+  [1m[35m (30.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateContributions (20170324142757)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mDROP TABLE "contributions"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324142757"]]
+  [1m[35m (18.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateHistoryGroups (20170324142547)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE "history_groups"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324142547"]]
+  [1m[35m (20.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateEventTeachers (20170324141935)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE "event_teachers"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141935"]]
+  [1m[35m (23.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateEventStudents (20170324141908)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "event_students"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141908"]]
+  [1m[35m (24.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateEvents (20170324141756)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "events"[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141756"]]
+  [1m[35m (18.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateProfiles (20170324141515)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.7ms)[0m  [1m[35mDROP TABLE "profiles"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141515"]]
+  [1m[35m (28.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTeacherInvestigationGroups (20170324141237)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.7ms)[0m  [1m[35mDROP TABLE "teacher_investigation_groups"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141237"]]
+  [1m[35m (17.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_confirmation_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_reset_password_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_uid_and_provider"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_institutional_user"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE "teachers"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324015936"]]
+  [1m[35m (13.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP INDEX  "index_students_on_confirmation_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_students_on_reset_password_token"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_students_on_uid_and_provider"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_students_on_institutional_user"[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE "students"[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324015833"]]
+  [1m[35m (25.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE "investigation_groups"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170323140626"]]
+  [1m[35m (15.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (238.6ms)[0m  [1m[35mCREATE TABLE "investigation_groups" ("id" serial primary key, "name" character varying(25) DEFAULT '' NOT NULL, "create_date" date NOT NULL, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170323140626"]]
+  [1m[35m (28.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (98.1ms)[0m  [1m[35mCREATE TABLE "students" ("id" serial primary key, "provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying(25) NOT NULL, "lastname" character varying(25) NOT NULL, "institutional_user" character varying NOT NULL, "investigation_group_id" integer, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_46ff4a01e3"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (42.1ms)[0m  [1m[35mCREATE  INDEX  "index_students_on_investigation_group_id" ON "students"  ("investigation_group_id")[0m
+  [1m[35m (53.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_institutional_user" ON "students"  ("institutional_user")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_uid_and_provider" ON "students"  ("uid", "provider")[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_reset_password_token" ON "students"  ("reset_password_token")[0m
+  [1m[35m (54.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_confirmation_token" ON "students"  ("confirmation_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015833"]]
+  [1m[35m (26.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (102.2ms)[0m  [1m[35mCREATE TABLE "teachers" ("id" serial primary key, "provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_institutional_user" character varying, "name" character varying(25) NOT NULL, "lastname" character varying(25) NOT NULL, "institutional_user" character varying NOT NULL, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_institutional_user" ON "teachers"  ("institutional_user")[0m
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_uid_and_provider" ON "teachers"  ("uid", "provider")[0m
+  [1m[35m (31.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_reset_password_token" ON "teachers"  ("reset_password_token")[0m
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_confirmation_token" ON "teachers"  ("confirmation_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015936"]]
+  [1m[35m (24.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTeacherInvestigationGroups (20170324141237)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_confirmation_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_reset_password_token"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_uid_and_provider"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_institutional_user"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE "teachers"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324015936"]]
+  [1m[35m (6.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP INDEX  "index_students_on_confirmation_token"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP INDEX  "index_students_on_reset_password_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_students_on_uid_and_provider"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_students_on_institutional_user"[0m
+  [1m[35m (1.4ms)[0m  [1m[35mDROP TABLE "students"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324015833"]]
+  [1m[35m (46.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE "investigation_groups"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170323140626"]]
+  [1m[35m (18.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (111.9ms)[0m  [1m[35mCREATE TABLE "investigation_groups" ("id" serial primary key, "name" character varying(25) DEFAULT '' NOT NULL, "create_date" date NOT NULL, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170323140626"]]
+  [1m[35m (19.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (120.7ms)[0m  [1m[35mCREATE TABLE "students" ("id" serial primary key, "provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying(25) NOT NULL, "lastname" character varying(25) NOT NULL, "institutional_user" character varying NOT NULL, "investigation_group_id" integer, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_46ff4a01e3"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (53.5ms)[0m  [1m[35mCREATE  INDEX  "index_students_on_investigation_group_id" ON "students"  ("investigation_group_id")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_institutional_user" ON "students"  ("institutional_user")[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_uid_and_provider" ON "students"  ("uid", "provider")[0m
+  [1m[35m (87.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_reset_password_token" ON "students"  ("reset_password_token")[0m
+  [1m[35m (43.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_confirmation_token" ON "students"  ("confirmation_token")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015833"]]
+  [1m[35m (18.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (100.9ms)[0m  [1m[35mCREATE TABLE "teachers" ("id" serial primary key, "provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_institutional_user" character varying, "name" character varying(25) NOT NULL, "lastname" character varying(25) NOT NULL, "institutional_user" character varying NOT NULL, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_institutional_user" ON "teachers"  ("institutional_user")[0m
+  [1m[35m (56.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_uid_and_provider" ON "teachers"  ("uid", "provider")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_reset_password_token" ON "teachers"  ("reset_password_token")[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_confirmation_token" ON "teachers"  ("confirmation_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015936"]]
+  [1m[35m (25.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTeacherInvestigationGroups (20170324141237)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (39.3ms)[0m  [1m[35mCREATE TABLE "teacher_investigation_groups" ("id" serial primary key, "teacher_id" integer, "investigation_group_id" integer, "rol" integer DEFAULT 2 NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e24779e0ef"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+, CONSTRAINT "fk_rails_7619ce8a8c"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE  INDEX  "index_teacher_investigation_groups_on_teacher_id" ON "teacher_investigation_groups"  ("teacher_id")[0m
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE  INDEX  "index_teacher_investigation_groups_on_investigation_group_id" ON "teacher_investigation_groups"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141237"]]
+  [1m[35m (23.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfiles (20170324141515)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (97.3ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" serial primary key, "entity" character varying NOT NULL, "URL" text NOT NULL, "student_id" integer, "teacher_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b3845cb217"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+, CONSTRAINT "fk_rails_605b0f1a3b"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+)[0m
+  [1m[35m (53.4ms)[0m  [1m[35mCREATE  INDEX  "index_profiles_on_student_id" ON "profiles"  ("student_id")[0m
+  [1m[35m (54.2ms)[0m  [1m[35mCREATE  INDEX  "index_profiles_on_teacher_id" ON "profiles"  ("teacher_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141515"]]
+  [1m[35m (24.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEvents (20170324141756)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (96.7ms)[0m  [1m[35mCREATE TABLE "events" ("id" serial primary key, "name" character varying(45) NOT NULL, "datetime" timestamp NOT NULL, "description" text, "investigation_group_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_3dc94443d8"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (54.1ms)[0m  [1m[35mCREATE  INDEX  "index_events_on_investigation_group_id" ON "events"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141756"]]
+  [1m[35m (23.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventStudents (20170324141908)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (52.9ms)[0m  [1m[35mCREATE TABLE "event_students" ("id" serial primary key, "event_id" integer, "student_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_947f4f9871"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+, CONSTRAINT "fk_rails_f57e32fbf8"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+)[0m
+  [1m[35m (53.5ms)[0m  [1m[35mCREATE  INDEX  "index_event_students_on_event_id" ON "event_students"  ("event_id")[0m
+  [1m[35m (55.0ms)[0m  [1m[35mCREATE  INDEX  "index_event_students_on_student_id" ON "event_students"  ("student_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141908"]]
+  [1m[35m (9.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventTeachers (20170324141935)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (52.9ms)[0m  [1m[35mCREATE TABLE "event_teachers" ("id" serial primary key, "event_id" integer, "teacher_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_a758853e18"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+, CONSTRAINT "fk_rails_db40e50501"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_event_teachers_on_event_id" ON "event_teachers"  ("event_id")[0m
+  [1m[35m (54.5ms)[0m  [1m[35mCREATE  INDEX  "index_event_teachers_on_teacher_id" ON "event_teachers"  ("teacher_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141935"]]
+  [1m[35m (20.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateHistoryGroups (20170324142547)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateEventTeachers (20170324141935)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE "event_teachers"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141935"]]
+  [1m[35m (11.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateEventStudents (20170324141908)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE "event_students"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141908"]]
+  [1m[35m (22.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEvents (20170324141756)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "events"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141756"]]
+  [1m[35m (6.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfiles (20170324141515)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE "profiles"[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141515"]]
+  [1m[35m (8.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTeacherInvestigationGroups (20170324141237)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE "teacher_investigation_groups"[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324141237"]]
+  [1m[35m (9.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_confirmation_token"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_reset_password_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_uid_and_provider"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_teachers_on_institutional_user"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "teachers"[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324015936"]]
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP INDEX  "index_students_on_confirmation_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_students_on_reset_password_token"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_students_on_uid_and_provider"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_students_on_institutional_user"[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE "students"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170324015833"]]
+  [1m[35m (21.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE "investigation_groups"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20170323140626"]]
+  [1m[35m (29.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateInvestigationGroups (20170323140626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (130.2ms)[0m  [1m[35mCREATE TABLE "investigation_groups" ("id" serial primary key, "name" character varying(25) DEFAULT '' NOT NULL, "create_date" date NOT NULL, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170323140626"]]
+  [1m[35m (18.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateStudents (20170324015833)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (88.4ms)[0m  [1m[35mCREATE TABLE "students" ("id" serial primary key, "provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "name" character varying(25) NOT NULL, "lastname" character varying(25) NOT NULL, "institutional_user" character varying NOT NULL, "investigation_group_id" integer, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_46ff4a01e3"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (52.1ms)[0m  [1m[35mCREATE  INDEX  "index_students_on_investigation_group_id" ON "students"  ("investigation_group_id")[0m
+  [1m[35m (44.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_institutional_user" ON "students"  ("institutional_user")[0m
+  [1m[35m (54.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_uid_and_provider" ON "students"  ("uid", "provider")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_reset_password_token" ON "students"  ("reset_password_token")[0m
+  [1m[35m (54.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_students_on_confirmation_token" ON "students"  ("confirmation_token")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015833"]]
+  [1m[35m (27.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateTeachers (20170324015936)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (101.3ms)[0m  [1m[35mCREATE TABLE "teachers" ("id" serial primary key, "provider" character varying DEFAULT 'institutional_user' NOT NULL, "uid" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_institutional_user" character varying, "name" character varying(25) NOT NULL, "lastname" character varying(25) NOT NULL, "institutional_user" character varying NOT NULL, "tokens" json, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (54.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_institutional_user" ON "teachers"  ("institutional_user")[0m
+  [1m[35m (64.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_uid_and_provider" ON "teachers"  ("uid", "provider")[0m
+  [1m[35m (54.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_reset_password_token" ON "teachers"  ("reset_password_token")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_teachers_on_confirmation_token" ON "teachers"  ("confirmation_token")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324015936"]]
+  [1m[35m (15.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTeacherInvestigationGroups (20170324141237)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (71.1ms)[0m  [1m[35mCREATE TABLE "teacher_investigation_groups" ("id" serial primary key, "teacher_id" integer, "investigation_group_id" integer, "rol" integer DEFAULT 2 NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e24779e0ef"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+, CONSTRAINT "fk_rails_7619ce8a8c"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (53.5ms)[0m  [1m[35mCREATE  INDEX  "index_teacher_investigation_groups_on_teacher_id" ON "teacher_investigation_groups"  ("teacher_id")[0m
+  [1m[35m (43.3ms)[0m  [1m[35mCREATE  INDEX  "index_teacher_investigation_groups_on_investigation_group_id" ON "teacher_investigation_groups"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141237"]]
+  [1m[35m (13.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfiles (20170324141515)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (98.7ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" serial primary key, "entity" character varying NOT NULL, "URL" text NOT NULL, "student_id" integer, "teacher_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b3845cb217"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+, CONSTRAINT "fk_rails_605b0f1a3b"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_profiles_on_student_id" ON "profiles"  ("student_id")[0m
+  [1m[35m (54.3ms)[0m  [1m[35mCREATE  INDEX  "index_profiles_on_teacher_id" ON "profiles"  ("teacher_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141515"]]
+  [1m[35m (21.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEvents (20170324141756)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (89.1ms)[0m  [1m[35mCREATE TABLE "events" ("id" serial primary key, "name" character varying(45) NOT NULL, "datetime" timestamp NOT NULL, "description" text, "investigation_group_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_3dc94443d8"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCREATE  INDEX  "index_events_on_investigation_group_id" ON "events"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141756"]]
+  [1m[35m (30.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventStudents (20170324141908)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (45.6ms)[0m  [1m[35mCREATE TABLE "event_students" ("id" serial primary key, "event_id" integer, "student_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_947f4f9871"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+, CONSTRAINT "fk_rails_f57e32fbf8"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+)[0m
+  [1m[35m (54.0ms)[0m  [1m[35mCREATE  INDEX  "index_event_students_on_event_id" ON "event_students"  ("event_id")[0m
+  [1m[35m (76.5ms)[0m  [1m[35mCREATE  INDEX  "index_event_students_on_student_id" ON "event_students"  ("student_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141908"]]
+  [1m[35m (82.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventTeachers (20170324141935)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (71.5ms)[0m  [1m[35mCREATE TABLE "event_teachers" ("id" serial primary key, "event_id" integer, "teacher_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_a758853e18"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+, CONSTRAINT "fk_rails_db40e50501"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+)[0m
+  [1m[35m (53.5ms)[0m  [1m[35mCREATE  INDEX  "index_event_teachers_on_event_id" ON "event_teachers"  ("event_id")[0m
+  [1m[35m (54.3ms)[0m  [1m[35mCREATE  INDEX  "index_event_teachers_on_teacher_id" ON "event_teachers"  ("teacher_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324141935"]]
+  [1m[35m (15.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateHistoryGroups (20170324142547)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (60.5ms)[0m  [1m[35mCREATE TABLE "history_groups" ("id" serial primary key, "bonding_date" date NOT NULL, "exit_date" date, "investigation_group_id" integer NOT NULL, "student_id" integer, "teacher_id" integer, "state" integer DEFAULT 0 NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_9b13a03da7"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+, CONSTRAINT "fk_rails_8fb5121e6a"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+, CONSTRAINT "fk_rails_ec3efb35d1"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+)[0m
+  [1m[35m (53.5ms)[0m  [1m[35mCREATE  INDEX  "index_history_groups_on_investigation_group_id" ON "history_groups"  ("investigation_group_id")[0m
+  [1m[35m (41.1ms)[0m  [1m[35mCREATE  INDEX  "index_history_groups_on_student_id" ON "history_groups"  ("student_id")[0m
+  [1m[35m (54.2ms)[0m  [1m[35mCREATE  INDEX  "index_history_groups_on_teacher_id" ON "history_groups"  ("teacher_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324142547"]]
+  [1m[35m (36.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateContributions (20170324142757)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (95.7ms)[0m  [1m[35mCREATE TABLE "contributions" ("id" serial primary key, "name" character varying(100) NOT NULL, "publication_date" date NOT NULL, "description" text, "investigation_group_id" integer NOT NULL, "state" integer DEFAULT 2 NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_ffe1946b61"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE  INDEX  "index_contributions_on_investigation_group_id" ON "contributions"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324142757"]]
+  [1m[35m (22.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUserContributions (20170324143013)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (66.6ms)[0m  [1m[35mCREATE TABLE "user_contributions" ("id" serial primary key, "student_id" integer, "teacher_id" integer, "contribution_id" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_a586f00106"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+, CONSTRAINT "fk_rails_0181d0d017"
+FOREIGN KEY ("teacher_id")
+  REFERENCES "teachers" ("id")
+, CONSTRAINT "fk_rails_ae59875445"
+FOREIGN KEY ("contribution_id")
+  REFERENCES "contributions" ("id")
+)[0m
+  [1m[35m (41.3ms)[0m  [1m[35mCREATE  INDEX  "index_user_contributions_on_student_id" ON "user_contributions"  ("student_id")[0m
+  [1m[35m (43.4ms)[0m  [1m[35mCREATE  INDEX  "index_user_contributions_on_teacher_id" ON "user_contributions"  ("teacher_id")[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE  INDEX  "index_user_contributions_on_contribution_id" ON "user_contributions"  ("contribution_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143013"]]
+  [1m[35m (20.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUbications (20170324143135)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (112.0ms)[0m  [1m[35mCREATE TABLE "ubications" ("id" serial primary key, "link" text NOT NULL, "contribution_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_71dd0a44b8"
+FOREIGN KEY ("contribution_id")
+  REFERENCES "contributions" ("id")
+)[0m
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_ubications_on_contribution_id" ON "ubications"  ("contribution_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143135"]]
+  [1m[35m (18.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTags (20170324143216)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (101.8ms)[0m  [1m[35mCREATE TABLE "tags" ("id" serial primary key, "name" character varying(15) NOT NULL, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143216"]]
+  [1m[35m (28.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTagContributions (20170324143318)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (46.6ms)[0m  [1m[35mCREATE TABLE "tag_contributions" ("id" serial primary key, "tag_id" integer, "contribution_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_7a612a79f4"
+FOREIGN KEY ("tag_id")
+  REFERENCES "tags" ("id")
+, CONSTRAINT "fk_rails_a6f20c4c13"
+FOREIGN KEY ("contribution_id")
+  REFERENCES "contributions" ("id")
+)[0m
+  [1m[35m (53.0ms)[0m  [1m[35mCREATE  INDEX  "index_tag_contributions_on_tag_id" ON "tag_contributions"  ("tag_id")[0m
+  [1m[35m (64.6ms)[0m  [1m[35mCREATE  INDEX  "index_tag_contributions_on_contribution_id" ON "tag_contributions"  ("contribution_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143318"]]
+  [1m[35m (15.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTagInvestigationGroups (20170324143355)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (93.7ms)[0m  [1m[35mCREATE TABLE "tag_investigation_groups" ("id" serial primary key, "tag_id" integer, "investigation_group_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_8771b64758"
+FOREIGN KEY ("tag_id")
+  REFERENCES "tags" ("id")
+, CONSTRAINT "fk_rails_0c0f1187f7"
+FOREIGN KEY ("investigation_group_id")
+  REFERENCES "investigation_groups" ("id")
+)[0m
+  [1m[35m (98.0ms)[0m  [1m[35mCREATE  INDEX  "index_tag_investigation_groups_on_tag_id" ON "tag_investigation_groups"  ("tag_id")[0m
+  [1m[35m (76.9ms)[0m  [1m[35mCREATE  INDEX  "index_tag_investigation_groups_on_investigation_group_id" ON "tag_investigation_groups"  ("investigation_group_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170324143355"]]
+  [1m[35m (25.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m

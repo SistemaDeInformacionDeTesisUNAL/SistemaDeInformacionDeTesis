@@ -1,8 +1,8 @@
 class DeviseTokenAuthCreateStudents < ActiveRecord::Migration[5.0]
   def change
-    create_table(:students) do |t|
+    create_table :students do |t|
       ## Required
-      t.string :provider, :null => false, :default => "email"
+      t.string :provider, :null => false, :default => "institutional_user"
       t.string :uid, :null => false, :default => ""
 
       ## Database authenticatable
@@ -34,10 +34,10 @@ class DeviseTokenAuthCreateStudents < ActiveRecord::Migration[5.0]
       # t.datetime :locked_at
 
       ## User Info
-      t.string :name
-      t.string :nickname
-      t.string :email
-      t.references :investigation_group, foreign_key: true
+      t.string :name, :null => false, :limit => 25
+      t.string :lastname, :null => false, :limit => 25
+      t.string :institutional_user, :null => false, unique: true
+      t.references :investigation_group, foreign_key: true, :null => true
 
       ## Tokens
       t.json :tokens
@@ -45,7 +45,7 @@ class DeviseTokenAuthCreateStudents < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :students, :email,                unique: true
+    add_index :students, :institutional_user,   unique: true
     add_index :students, [:uid, :provider],     unique: true
     add_index :students, :reset_password_token, unique: true
     add_index :students, :confirmation_token,   unique: true

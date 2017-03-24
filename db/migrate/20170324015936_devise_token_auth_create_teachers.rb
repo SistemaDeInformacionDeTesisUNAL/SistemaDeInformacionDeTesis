@@ -2,7 +2,7 @@ class DeviseTokenAuthCreateTeachers < ActiveRecord::Migration[5.0]
   def change
     create_table(:teachers) do |t|
       ## Required
-      t.string :provider, :null => false, :default => "email"
+      t.string :provider, :null => false, :default => "institutional_user"
       t.string :uid, :null => false, :default => ""
 
       ## Database authenticatable
@@ -26,17 +26,17 @@ class DeviseTokenAuthCreateTeachers < ActiveRecord::Migration[5.0]
       t.string   :confirmation_token
       t.datetime :confirmed_at
       t.datetime :confirmation_sent_at
-      t.string   :unconfirmed_email # Only if using reconfirmable
+      t.string   :unconfirmed_institutional_user # Only if using reconfirmable
 
       ## Lockable
       # t.integer  :failed_attempts, :default => 0, :null => false # Only if lock strategy is :failed_attempts
-      # t.string   :unlock_token # Only if unlock strategy is :email or :both
+      # t.string   :unlock_token # Only if unlock strategy is :institutional_user or :both
       # t.datetime :locked_at
 
       ## User Info
-      t.string :name
-      t.string :nickname
-      t.string :email
+      t.string :name, :null => false, :limit => 25
+      t.string :lastname, :null => false, :limit => 25
+      t.string :institutional_user, :null => false, unique: true
 
       ## Tokens
       t.json :tokens
@@ -44,7 +44,7 @@ class DeviseTokenAuthCreateTeachers < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :teachers, :email,                unique: true
+    add_index :teachers, :institutional_user,   unique: true
     add_index :teachers, [:uid, :provider],     unique: true
     add_index :teachers, :reset_password_token, unique: true
     add_index :teachers, :confirmation_token,   unique: true
