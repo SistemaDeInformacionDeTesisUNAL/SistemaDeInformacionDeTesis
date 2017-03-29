@@ -1,4 +1,6 @@
 class Contribution < ApplicationRecord
+  attr_accessible :name, :publication_date, :state, :description
+
   has_many :user_contributions
   has_many :students, through: :user_contributions
 	has_many :teachers, through: :user_contributions
@@ -19,4 +21,12 @@ class Contribution < ApplicationRecord
   validates :state, :numericality { :only_integer => true }
   validates :state, :numericality { :greater_than_or_equal_to => 0 }
   validates :state, :numericality { :less_than_or_equal_to => 2 }
+  validates :comprobar_fecha
+
+  #Fecha de la contribución no puede ser mayor que la del día actual
+  def comprobar_fecha
+    if publication_date > Date.today
+      #Añadimos error
+      errors.add(:publication_date, "Fecha incorrecta")
+  end
 end

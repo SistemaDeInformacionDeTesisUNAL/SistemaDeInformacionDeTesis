@@ -1,5 +1,5 @@
 class Student < ActiveRecord::Base
-
+ attr_accessible :name, :lastname, :institutional_user
   belongs_to :investigation_group
 
   has_many :profiles

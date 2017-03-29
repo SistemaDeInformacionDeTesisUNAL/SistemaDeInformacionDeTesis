@@ -7,5 +7,9 @@ class CreateInvestigationGroups < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+
+    add_index :investigation_groups, :name
+    add_index :investigation_groups, :create_date
+    
   end
 end

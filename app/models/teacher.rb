@@ -1,4 +1,5 @@
 class Teacher < ActiveRecord::Base
+  attr_accessible :name, :lastname, :institutional_user, :rol
   has_many :profiles
 
   has_many :event_teachers
