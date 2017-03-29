@@ -1,5 +1,4 @@
 class Student < ActiveRecord::Base
-
   belongs_to :investigation_group
 
   has_many :profiles
