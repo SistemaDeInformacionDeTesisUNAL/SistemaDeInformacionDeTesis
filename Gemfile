@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-
+gem 'wdm', '>=0.1.0' if Gem.win_platform?
 gem 'devise_token_auth'
 gem 'devise'
 gem 'omniauth'
