@@ -4,7 +4,9 @@
 Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( home.css )
 Rails.application.config.assets.precompile += %w( about.css )
-
+Rails.application.config.assets.precompile += %w( w3.css )
+Rails.application.config.assets.precompile += %w( font-awesome.css )
+Rails.application.config.assets.precompile += %w( font-lato.css )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
