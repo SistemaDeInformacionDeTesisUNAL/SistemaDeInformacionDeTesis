@@ -1,0 +1,9 @@
+diff a/app/views/layouts/application.html.erb b/app/views/layouts/application.html.erb	(rejected hunks)
+@@ -1,7 +1,6 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+-    <title>SistemaDeInformacionDeTesis</title>
+     <title>Sistema de información de tesis :: Universidad Nacional de Colombia</title>
+     <link rel="shortcut icon" href="/assets/favicon.ico"/>
+     <%= csrf_meta_tags %>
