@@ -1,11 +1,12 @@
 class HistoryGroup < ApplicationRecord
 
 	belongs_to :investigation_group
-  	belongs_to :student
-  	belongs_to :teacher
+  belongs_to :student
+	belongs_to :teacher
 
-  	enum state: {Active: 1, Inactive: 2}
+  enum status: [ :Active, :Inactive ]
 
-  	validates :bonding_date, :state, :presence => true
-  	validates_inclusion_of :state, in: 1..2
+  validates :bonding_date, :presence => true
+	validates :state, :presence => true
+	validates_inclusion_of :state, in: 0..1
 end

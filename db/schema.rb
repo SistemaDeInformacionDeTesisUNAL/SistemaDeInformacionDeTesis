@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20170324143355) do
     t.string   "name",                   limit: 100,             null: false
     t.date     "publication_date",                               null: false
     t.text     "description"
-    t.integer  "investigation_group_id",                         null: false
     t.integer  "state",                              default: 2, null: false
+    t.integer  "investigation_group_id"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.index ["investigation_group_id"], name: "index_contributions_on_investigation_group_id", using: :btree
@@ -58,14 +58,14 @@ ActiveRecord::Schema.define(version: 20170324143355) do
   end
 
   create_table "history_groups", force: :cascade do |t|
-    t.date     "bonding_date",           null: false
+    t.date     "bonding_date",                       null: false
     t.date     "exit_date"
-    t.integer  "investigation_group_id", null: false
+    t.integer  "state",                  default: 0, null: false
+    t.integer  "investigation_group_id",             null: false
     t.integer  "student_id"
     t.integer  "teacher_id"
-    t.integer  "state"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["investigation_group_id"], name: "index_history_groups_on_investigation_group_id", using: :btree
     t.index ["student_id"], name: "index_history_groups_on_student_id", using: :btree
     t.index ["teacher_id"], name: "index_history_groups_on_teacher_id", using: :btree
@@ -148,9 +148,9 @@ ActiveRecord::Schema.define(version: 20170324143355) do
   end
 
   create_table "teacher_investigation_groups", force: :cascade do |t|
+    t.integer  "rol",                    default: 0, null: false
     t.integer  "teacher_id"
     t.integer  "investigation_group_id"
-    t.integer  "rol",                    default: 1, null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.index ["investigation_group_id"], name: "index_teacher_investigation_groups_on_investigation_group_id", using: :btree
