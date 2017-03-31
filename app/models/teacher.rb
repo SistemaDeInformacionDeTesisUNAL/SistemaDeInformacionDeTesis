@@ -11,7 +11,7 @@ class Teacher < ActiveRecord::Base
   has_many :contributions, through: :user_contributions
 
   has_many :teacher_investigation_groups
-	has_many :investigation_groups, through: :teacher_investigation_groups
+  has_many :investigation_groups, through: :teacher_investigation_groups
 
   has_many :history_groups
   # Include default devise modules.
@@ -39,5 +39,7 @@ class Teacher < ActiveRecord::Base
    def self.users_by_investigation_groups(page = 1, per_page = 10)
      joins(:investigation_groups).select("teachers.*").group("teachers.id").paginate(:page => page,:per_page => per_page)
    end
+   
+
   
 end

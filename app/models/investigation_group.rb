@@ -1,5 +1,5 @@
 class InvestigationGroup < ApplicationRecord
-	attr_accessible :name, :create_date, :description
+	attr_accessor :name, :create_date, :description
   has_many :students
 
 	has_many :teacher_investigation_groups

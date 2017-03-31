@@ -1,5 +1,5 @@
 class Ubication < ApplicationRecord
-	attr_accessible :link
+	attr_accessor :link
   belongs_to :contribution
 
   validates :link, :presence => true
