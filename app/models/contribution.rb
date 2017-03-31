@@ -1,5 +1,4 @@
-class Contribution < ApplicationRecord
-  attr_accessible :name, :publication_date, :state, :description
+  class Contribution < ActiveRecord::Base
 
   has_many :user_contributions
   has_many :students, through: :user_contributions
@@ -18,15 +17,14 @@ class Contribution < ApplicationRecord
   validates :name, :length => { :maximum => 100, :too_long => "%{count} Demasiados caracteres" }
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
-  validates :state, :numericality { :only_integer => true }
-  validates :state, :numericality { :greater_than_or_equal_to => 0 }
-  validates :state, :numericality { :less_than_or_equal_to => 2 }
-  validates :comprobar_fecha
+  validates_inclusion_of :state, in: 0..2
+  #validates :comprobar_fecha
 
   #Fecha de la contribución no puede ser mayor que la del día actual
   def comprobar_fecha
-    if publication_date > Date.today
+    if :publication_date > Date.today
       #Añadimos error
       errors.add(:publication_date, "Fecha incorrecta")
+    end
   end
 end

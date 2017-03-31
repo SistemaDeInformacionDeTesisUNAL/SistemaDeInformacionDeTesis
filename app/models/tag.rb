@@ -1,6 +1,5 @@
 class Tag < ApplicationRecord
-	attr_accessible :name, :description		
-	end
+
 	has_many :tag_contributions
 	has_many :contributions, through: :tag_contributions
 
