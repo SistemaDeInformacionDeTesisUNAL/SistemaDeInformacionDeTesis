@@ -33,9 +33,12 @@ class Contribution < ApplicationRecord
       errors.add(:publication_date, "Fecha incorrecta")
   end
   
-   #def self.load_contributions(page = 1, per_page = 10)
+  def self.load_contributions_page(page = 1, per_page = 10)
+	includes(:tag_contributions,:investigation_group,:ubications,:user_contributions).paginate(:page => page,:per_page => per_page) 
+ end
+ 
    def self.load_contributions(**args)
-     #includes(:tag_contributions,:investigation_group,:ubications,:user_contributions).paginate(:page => page,:per_page => per_page)
+     
 	 includes(:name, :description, :state, :publication_date).paginate(:page => page,:per_page => per_page)
    end 
    
@@ -47,5 +50,15 @@ class Contribution < ApplicationRecord
    def self.contribution_by_teacher(teacher_id,**args)
 	load_teachers(**args).where("contributions.teacher_id LIKE ?", "#{teacher_id}%")
    end
+   
+   def self.contribution_by_investigation_group(group_id,**args)
+	load_groups(**args).where("contributions.group_id LIKE ?","#{group_id}%")
+   end
+   
+   
+   def self.contribution_by_ubications(page = 1, per_page = 10)
+	includes(:ubications,:name,:description,:state).paginate(:page => page,:per_page => per_page)
+   end
+   
   
 end
