@@ -2,8 +2,8 @@ class TeacherInvestigationGroup < ApplicationRecord
   belongs_to :teacher
   belongs_to :investigation_group
 
-  enum rol: {Admin: 0, Owner: 1, Teacher: 2}
+  enum rol: {Teacher: 1, Admin: 2, Owner: 3}
 
   validates :rol, :presence => true
-  validates_inclusion_of :rol, in: 0..2
+  validates_inclusion_of :rol, in: 1..3
 end

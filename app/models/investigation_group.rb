@@ -14,9 +14,9 @@ class InvestigationGroup < ApplicationRecord
 
 	has_many :history_groups
 
-  default_scope {order("InvestigationGroups.name ASC")}
-  scope :sort_by_name, -> (ord) {order("InvestigationGroups.name #{ord}")}
-  scope :sort_by_create_date, -> (ord) {order("InvestigationGroups.created_at #{ord}")}
+  default_scope {order("investigation_groups.name ASC")}
+  scope :sort_by_name, -> (ord) {order("investigation_groups.name #{ord}")}
+  scope :sort_by_create_date, -> (ord) {order("investigation_groups.created_at #{ord}")}
 
   validates :name, :create_date, :presence => true
   validates :name, :length => { :maximum => 100, :too_long => "%{count} Demasiados caracteres" }
@@ -39,7 +39,7 @@ class InvestigationGroup < ApplicationRecord
 
     def self.groups_by_name(name,**args)
     load_groups(args)
-      .where("InvestigationGroups.name LIKE ?", "#{name.downcase}%")
+      .where("investigation_groups.name LIKE ?", "#{name.downcase}%")
   end
 
     def self.group_by_id(id)
@@ -49,7 +49,7 @@ class InvestigationGroup < ApplicationRecord
 
   def self.groups_by_ids(ids,**args)
     load_groups(args)
-      .where(InvestigationGroups: {
+      .where(investigation_groups: {
         id: ids
       })
   end

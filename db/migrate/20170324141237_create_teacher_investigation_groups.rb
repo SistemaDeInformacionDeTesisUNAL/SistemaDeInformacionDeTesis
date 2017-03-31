@@ -3,7 +3,7 @@ class CreateTeacherInvestigationGroups < ActiveRecord::Migration[5.0]
     create_table :teacher_investigation_groups do |t|
       t.references :teacher, foreign_key: true
       t.references :investigation_group, foreign_key: true
-      t.integer :rol, :null => false, default: 2
+      t.integer :rol, :null => false, default: 1
 
       t.timestamps
     end

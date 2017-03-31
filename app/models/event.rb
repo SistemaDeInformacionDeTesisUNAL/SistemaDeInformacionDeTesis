@@ -11,7 +11,7 @@ class Event < ApplicationRecord
 
   scope :sort_by_create_date, -> (ord) {order("Events.created_at #{ord}")}
 
-  validates :name, :datetime, :presence => true
+  validates :name, :date_time, :presence => true
   validates :name, :uniqueness => true
   validates :name, :length => { :maximum => 45, :too_long => "%{count} Demasiados caracteres" }
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
@@ -20,20 +20,20 @@ class Event < ApplicationRecord
 
   #Fecha de la creación del evento no puede ser menor que la del día actual
   def comprobar_fecha
-    if :datetime < Date.today
+    if :date_time < Date.today
       #Añadimos error
-      errors.add(:datetime, "Fecha incorrecta")
+      errors.add(:date_time, "Fecha incorrecta")
     end
   end
 
   def self.load_events(**args)
-    includes(:name,:datetime,:description, :investigation_group)
+    includes(:name,:date_time,:description, :investigation_group)
       .paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
   def self.events_by_name(name,**args)
     load_groups(args)
-      .where("Events.name LIKE ?", "#{name.downcase}%")
+      .where("event.name LIKE ?", "#{name.downcase}%")
   end
 
   def self.event_by_id(id)
@@ -43,12 +43,12 @@ class Event < ApplicationRecord
 
   def self.event_by_investigationGroup(group_id,**ars)
     load_groups(args)
-      .where("Events.investigation_group_id LIKE ?", "#{group_id}%")
+      .where("event.investigation_group_id LIKE ?", "#{group_id}%")
   end
 
   def self.events_by_ids(ids,**args)
     load_groups(args)
-      .where(Events: {
+      .where(event: {
         id: ids
       })
   end

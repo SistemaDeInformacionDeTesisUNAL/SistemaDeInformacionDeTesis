@@ -7,7 +7,7 @@ class CreateHistoryGroups < ActiveRecord::Migration[5.0]
       t.references :student, foreign_key: true, :null => true
       t.references :teacher, foreign_key: true, :null => true
 
-      t.integer :state, :null => false, default: 0
+      t.integer :state, :null => false, default: 1
 
       t.integer :state
 
