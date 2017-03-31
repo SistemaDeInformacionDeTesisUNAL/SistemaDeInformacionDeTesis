@@ -1,5 +1,5 @@
 class Contribution < ApplicationRecord
-  attr_accessor :name, :publication_date, :state, :description
+  #attr_accessor :name, :publication_date, :state, :description
   
   default_scope {order("contributions.publication_date ASC")}
   scope :order_by_publication_date, -> (type) {order("contributions.publication_date #{type}")}
@@ -33,12 +33,19 @@ class Contribution < ApplicationRecord
       errors.add(:publication_date, "Fecha incorrecta")
   end
   
-  def self.load_contributions(page = 1, per_page = 10)
-     includes(:tag_contributions,:investigation_group,:ubications,:user_contributions).paginate(:page => page,:per_page => per_page)
+   #def self.load_contributions(page = 1, per_page = 10)
+   def self.load_contributions(**args)
+     #includes(:tag_contributions,:investigation_group,:ubications,:user_contributions).paginate(:page => page,:per_page => per_page)
+	 includes(:name, :description, :state, :publication_date).paginate(:page => page,:per_page => per_page)
    end 
    
    def self.contribution_by_id(id)
-	includes(:ubications,:investigation_group,:user_contributions,:tag_contributions).find_by_id(id)
+	#includes(:ubications,:investigation_group,:user_contributions,:tag_contributions).find_by_id(id)
+	includes(:name,:description,:state,:publication_date).find_by_id(:id)
+   end
+  
+   def self.contribution_by_teacher(teacher_id,**args)
+	load_teachers(**args).where("contributions.teacher_id LIKE ?", "#{teacher_id}%")
    end
   
 end

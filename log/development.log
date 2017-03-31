@@ -1122,3 +1122,44 @@ Completed 200 OK in 1202ms (Views: 1138.7ms | ActiveRecord: 0.0ms)
   [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
   [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started GET "/" for ::1 at 2017-03-31 06:50:00 -0500
+Started GET "/" for ::1 at 2017-03-31 06:50:00 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (68.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (109.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1841.2ms)
+  Rendered static_pages/home.html.erb within layouts/application (1798.6ms)
+Completed 200 OK in 4018ms (Views: 3912.0ms | ActiveRecord: 0.0ms)
+
+
+Completed 200 OK in 4000ms (Views: 3899.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/about" for ::1 at 2017-03-31 06:51:07 -0500
+Processing by StaticPagesController#about as HTML
+  Rendering static_pages/about.html.erb within layouts/application
+  Rendered static_pages/about.html.erb within layouts/application (27.3ms)
+Completed 200 OK in 469ms (Views: 397.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home" for ::1 at 2017-03-31 06:51:13 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 409ms (Views: 374.5ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (60.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2910607026052086900);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to Indexa (20170331122223)
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (83.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170331122223"]]
+  [1m[35m (46.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (61.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(2910607026052086900)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
