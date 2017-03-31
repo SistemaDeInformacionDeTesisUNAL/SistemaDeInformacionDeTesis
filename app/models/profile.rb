@@ -7,7 +7,7 @@ class Profile < ApplicationRecord
   	validates :URL, :uniqueness => true
 	
    def self.load_profiles(**args)
-	 includes(:entity, :URL).paginate(:page => page,:per_page => per_page)
+	 includes(:entity, :URL)
    end
    
    def self.profiles_by_id(id)

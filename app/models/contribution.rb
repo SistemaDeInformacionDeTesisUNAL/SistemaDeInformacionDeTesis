@@ -39,7 +39,7 @@ class Contribution < ApplicationRecord
  
    def self.load_contributions(**args)
      
-	 includes(:name, :description, :state, :publication_date).paginate(:page => page,:per_page => per_page)
+	 includes(:name, :description, :state, :publication_date)
    end 
    
    def self.contribution_by_id(id)

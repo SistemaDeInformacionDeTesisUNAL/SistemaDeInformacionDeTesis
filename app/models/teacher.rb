@@ -31,7 +31,7 @@ class Teacher < ActiveRecord::Base
    def self.load_teachers(**args)
      
 	 #includes(:name,:lastname,:institutional_user).paginate(:page => args[:page],:per_page => args[:per_page])
-	 #includes(:name,:lastname,:institutional_user).where(teachers: {id: id})
+	 includes(:name,:lastname,:institutional_user)
    end 
    
    def self.teacher_by_id(id)
@@ -45,9 +45,9 @@ class Teacher < ActiveRecord::Base
 
  # end
    
-   def self.teachers_by_ids(ids,page = 1 ,per_page = 10)
+   #def self.teachers_by_ids(ids,page = 1 ,per_page = 10)
 	#load_teachers_page(page,per_page).where(teachers: {id: ids})
-   end
+   #end
    
    def self.teachers_by_ids(ids,**args)
      
