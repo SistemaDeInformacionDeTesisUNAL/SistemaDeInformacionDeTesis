@@ -1,15 +1,15 @@
 class Student < ActiveRecord::Base
   belongs_to :investigation_group
 
-  has_many :profiles
+  has_many :profiles, as: :profileable, dependent: :destroy
 
   has_many :event_students
 	has_many :events, through: :event_students
 
-	has_many :user_contributions
+	has_many :user_contributions, as: :userable, dependent: :destroy
 	has_many :contributions, through: :user_contributions
 
-	has_many :history_groups
+	has_many :history_groups, as: :historable, dependent: :destroy
 
   # Include default devise modules.
   devise :database_authenticatable, :registerable,

@@ -1,5 +1,4 @@
 class UserContribution < ApplicationRecord
-  belongs_to :student
-  belongs_to :teacher
+  belongs_to :userable, polymorphic: true
   belongs_to :contribution
 end

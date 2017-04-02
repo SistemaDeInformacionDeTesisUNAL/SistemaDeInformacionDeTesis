@@ -1,7 +1,6 @@
 class Profile < ApplicationRecord
 
-  	belongs_to :student
-  	belongs_to :teacher
+    belongs_to :profileable, polymorphic: true
 
   	validates :entity, :URL, :presence => true
   	validates :URL, :uniqueness => true
