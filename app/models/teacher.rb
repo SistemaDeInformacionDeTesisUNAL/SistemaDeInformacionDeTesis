@@ -20,7 +20,9 @@ class Teacher < ActiveRecord::Base
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
 
-  validates :name, :lastname, :institutional_user, :presence => true
+  validates :name, :presence => true
+  validates :lastname, :presence => true
+  validates :institutional_user, :presence => true
   validates :name, :lastname, :length => { :maximum => 25, :too_long => "%{count} Demasiados caracteres" }
   validates :institutional_user, :uniqueness => true
   
@@ -36,7 +38,8 @@ class Teacher < ActiveRecord::Base
    
    def self.teacher_by_id(id)
 	
-	includes(:name,:lastname,:institutional_user).find_by_id(:id)
+	#includes(:name,:lastname,:institutional_user).find_by_id(:id)
+	includes(:event_teachers).find_by_id(:id)
    end
   
   #by id numero 2 

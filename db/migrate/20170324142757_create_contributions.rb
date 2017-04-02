@@ -8,8 +8,6 @@ class CreateContributions < ActiveRecord::Migration[5.0]
 
       t.integer :state, :null => false, default: 2
 
-      t.integer :state
-
       t.timestamps
     end
   end

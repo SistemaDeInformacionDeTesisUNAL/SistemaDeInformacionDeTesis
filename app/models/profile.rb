@@ -1,5 +1,5 @@
 class Profile < ApplicationRecord
-	#attr_accessor :entity, :URL
+
   	belongs_to :student
   	belongs_to :teacher
 

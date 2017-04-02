@@ -1,8 +1,12 @@
+
 class Contribution < ApplicationRecord
-  #attr_accessor :name, :publication_date, :state, :description
+
   
   default_scope {order("contributions.publication_date ASC")}
   scope :order_by_publication_date, -> (type) {order("contributions.publication_date #{type}")}
+
+#  class Contribution < ActiveRecord::Base
+
 
   has_many :user_contributions
   has_many :students, through: :user_contributions
@@ -17,21 +21,22 @@ class Contribution < ApplicationRecord
 
   enum state: {Aproved: 0, Rejected: 1, Progress: 2}
 
-  validates :name, :publication_date, :state, :presence => true
+  #validates :name, :publication_date, :state, :presence => true
+  validates :name, :presence => true
   validates :name, :length => { :maximum => 100, :too_long => "%{count} Demasiados caracteres" }
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
-  validates :state, :numericality { :only_integer => true }
-  validates :state, :numericality { :greater_than_or_equal_to => 0 }
-  validates :state, :numericality { :less_than_or_equal_to => 2 }
-  validates :comprobar_fecha
+  validates_inclusion_of :state, in: 0..2
+  #validates :comprobar_fecha
 
   #Fecha de la contribución no puede ser mayor que la del día actual
   def comprobar_fecha
-    if publication_date > Date.today
+    if :publication_date > Date.today
       #Añadimos error
       errors.add(:publication_date, "Fecha incorrecta")
+    end
   end
+
   
   def self.load_contributions_page(page = 1, per_page = 10)
 	includes(:tag_contributions,:investigation_group,:ubications,:user_contributions).paginate(:page => page,:per_page => per_page) 
@@ -45,8 +50,13 @@ class Contribution < ApplicationRecord
    def self.contribution_by_id(id)
 	#includes(:ubications,:investigation_group,:user_contributions,:tag_contributions).find_by_id(id)
 	includes(:name,:description,:state,:publication_date).find_by_id(:id)
+	#InvestigationGroup.find_by_id( Contribution.find_by_id(contribution_id).investigation_group_id)
    end
   
+	def self.investigationGroup_by_contibution(contribution_id)
+		InvestigationGroup.find_by_id( Contribution.find_by_id(contribution_id).investigation_group_id)
+	end
+	
    def self.contribution_by_teacher(teacher_id,**args)
 	load_teachers(**args).where("contributions.teacher_id LIKE ?", "#{teacher_id}%")
    end
@@ -62,3 +72,6 @@ class Contribution < ApplicationRecord
    
   
 end
+
+end
+
