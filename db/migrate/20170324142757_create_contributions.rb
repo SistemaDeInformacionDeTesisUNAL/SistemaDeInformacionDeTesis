@@ -4,9 +4,9 @@ class CreateContributions < ActiveRecord::Migration[5.0]
       t.string :name, :null => false, :limit => 100
       t.date :publication_date, :null => false
       t.text :description, :limit => 200
-      t.references :investigation_group, foreign_key: true, :null => false
-
       t.integer :state, :null => false, default: 2
+
+      t.references :investigation_group, foreign_key: true
 
       t.timestamps
     end

@@ -1,16 +1,8 @@
-
-class Contribution < ApplicationRecord
-
-  
-  default_scope {order("contributions.publication_date ASC")}
-  scope :order_by_publication_date, -> (type) {order("contributions.publication_date #{type}")}
-
-#  class Contribution < ActiveRecord::Base
-
+class Contribution < ActiveRecord::Base
 
   has_many :user_contributions
   has_many :students, through: :user_contributions
-  has_many :teachers, through: :user_contributions
+	has_many :teachers, through: :user_contributions
 
   belongs_to :investigation_group
 
@@ -19,10 +11,10 @@ class Contribution < ApplicationRecord
   has_many :tag_contributions
   has_many :tags, through: :tag_contributions
 
-  enum state: {Aproved: 0, Rejected: 1, Progress: 2}
+  enum status: [ :Aproved, :Rejected, :Progress ]
 
-  #validates :name, :publication_date, :state, :presence => true
-  validates :name, :presence => true
+  validates :name, :publication_date, :presence => true
+  validates :state, :presence => true
   validates :name, :length => { :maximum => 100, :too_long => "%{count} Demasiados caracteres" }
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
@@ -36,42 +28,4 @@ class Contribution < ApplicationRecord
       errors.add(:publication_date, "Fecha incorrecta")
     end
   end
-
-  
-  def self.load_contributions_page(page = 1, per_page = 10)
-	includes(:tag_contributions,:investigation_group,:ubications,:user_contributions).paginate(:page => page,:per_page => per_page) 
- end
- 
-   def self.load_contributions(**args)
-     
-	 includes(:name, :description, :state, :publication_date)
-   end 
-   
-   def self.contribution_by_id(id)
-	#includes(:ubications,:investigation_group,:user_contributions,:tag_contributions).find_by_id(id)
-	includes(:name,:description,:state,:publication_date).find_by_id(:id)
-	#InvestigationGroup.find_by_id( Contribution.find_by_id(contribution_id).investigation_group_id)
-   end
-  
-	def self.investigationGroup_by_contibution(contribution_id)
-		InvestigationGroup.find_by_id( Contribution.find_by_id(contribution_id).investigation_group_id)
-	end
-	
-   def self.contribution_by_teacher(teacher_id,**args)
-	load_teachers(**args).where("contributions.teacher_id LIKE ?", "#{teacher_id}%")
-   end
-   
-   def self.contribution_by_investigation_group(group_id,**args)
-	load_groups(**args).where("contributions.group_id LIKE ?","#{group_id}%")
-   end
-   
-   
-   def self.contribution_by_ubications(page = 1, per_page = 10)
-	includes(:ubications,:name,:description,:state).paginate(:page => page,:per_page => per_page)
-   end
-   
-  
 end
-
-end
-
