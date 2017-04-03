@@ -27,6 +27,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'rack-cors', :require => 'rack/cors'
 
+gem 'carrierwave', '~> 0.10.0'
 
 #gem 'wdm', '>= 0.1.0'
 # Use jquery as the JavaScript library

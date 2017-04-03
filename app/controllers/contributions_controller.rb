@@ -69,6 +69,6 @@ class ContributionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contribution_params
-      params.require(:contribution).permit(:name, :publication_date, :description, :investigation_group_id)
+      params.require(:contribution).permit(:name, :publication_date, :description, :investigation_group_id, :file)
     end
 end
