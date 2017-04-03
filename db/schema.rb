@@ -47,8 +47,7 @@ ActiveRecord::Schema.define(version: 20170407032035) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name",                   limit: 45, null: false
-    t.time     "date_time",                         null: false
-    t.time     "timeEvent"
+    t.datetime "date_time",                         null: false
     t.text     "description"
     t.integer  "investigation_group_id"
     t.datetime "created_at",                        null: false
