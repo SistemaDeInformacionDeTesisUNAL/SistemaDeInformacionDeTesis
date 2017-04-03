@@ -2,14 +2,28 @@
 <html>
   <head>
     <title>Sistema de información de tesis :: Universidad Nacional de Colombia</title>
-    <link rel="shortcut icon" href="/assets/favicon.ico"/>
+    <link rel="shortcut icon" href="assets/unal/favicon.ico" type="image/x-icon">
     <%= csrf_meta_tags %>
+    <%=stylesheet_link_tag 'css/bootstrap.min', media="all" %>
+    <%=stylesheet_link_tag 'css/bootstrap-theme.min', media="all"%>
+    <%=stylesheet_link_tag 'css/reset', media="all"%>
+    <%=stylesheet_link_tag 'css/unal', media="all"%>
+    <%#=stylesheet_link_tag 'css/base', media="all"%>
+    <%#=stylesheet_link_tag 'css/tablet', media="all"%>
+    <%#=stylesheet_link_tag 'css/phone', media="all"%>
+    <%#=stylesheet_link_tag 'css/small', media="all"%>
+    <%#=stylesheet_link_tag 'css/printer', media="print"%>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#<%= javascript_include_tag 'js/jquery' %>
+    <%#<%= javascript_include_tag 'js/unal' %>
   </head>
 
   <body>
+    <%= render 'layouts/header_unal' %>
+    <%= render 'layouts/services_unal' %>
     <%= yield %>
+    <%= render 'layouts/footer_unal' %>
   </body>
 </html>
