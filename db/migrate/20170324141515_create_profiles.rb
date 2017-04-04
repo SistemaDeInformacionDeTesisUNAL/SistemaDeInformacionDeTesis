@@ -3,8 +3,7 @@ class CreateProfiles < ActiveRecord::Migration[5.0]
     create_table :profiles do |t|
       t.string :entity, :null => false
       t.text :URL, :null => false, unique: true
-      t.references :student, foreign_key: true
-      t.references :teacher, foreign_key: true
+      t.references :profileable, polymorphic: true
 
       t.timestamps
     end

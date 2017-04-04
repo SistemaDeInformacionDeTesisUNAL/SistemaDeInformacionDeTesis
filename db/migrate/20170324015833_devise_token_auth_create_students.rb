@@ -37,7 +37,7 @@ class DeviseTokenAuthCreateStudents < ActiveRecord::Migration[5.0]
       t.string :name, :null => false, :limit => 25
       t.string :lastname, :null => false, :limit => 25
       t.string :institutional_user, :null => false, unique: true
-      t.references :investigation_group, foreign_key: true, :null => true
+      t.references :investigation_group, foreign_key: true
 
       ## Tokens
       t.json :tokens
