@@ -66,9 +66,9 @@ class InvestigationGroup < ApplicationRecord
  end
 
  #error
-  def self.groups_by_ids(ids,**args)
-    load_groups(args).where(investigation_groups: {id: ids})
-  end
+#  def self.groups_by_ids(ids,**args)
+ #   load_groups(args).where(investigation_groups: {id: ids})
+ # end
   
   
 #muestra el id y nombre del evento corresponiente a un grupo de investigación 
@@ -130,4 +130,41 @@ end
 		
 	end
   end
+  #Muestra el historial de un grupo de investigacion
+  def self.history_by_group(group_id,page=1, per_page=3)
+    InvestigationGroup.find_by_id(group_id).history_group_ids.each do |hist|
+		puts "Id History Group:" + hist.to_s
+		puts "Type user:" + HistoryGroup.find_by_id(hist).historable_type
+		puts "Id user:" + HistoryGroup.find_by_id(hist).historable_id.to_s
+		puts "bonding date:" + HistoryGroup.find_by_id(hist).bonding_date.to_s
+		puts "exit date:" + HistoryGroup.find_by_id(hist).exit_date.to_s
+		puts "state:" + HistoryGroup.find_by_id(hist).state
+		puts "Investigation Group:" + HistoryGroup.find_by_id(hist).investigation_group_id.to_s
+		
+	end
+  end
+  #estudiantes grupo de investigacion
+  def self.students_by_group(group_id,page=1, per_page=3)
+    InvestigationGroup.find_by_id(group_id).student_ids.each do |c|
+		puts "Id student:" + c.to_s
+		#puts "Id user:" + UserContribution.find_by_id(c).userable_id.to_s
+		puts "Name user:" + Student.find_by_id(c).name
+		puts "Email user:" + Student.find_by_id(c).institutional_user
+		
+	end
+  end
+ 
+#profesores grupo de investigacion
+ def self.teachers_by_group(group_id,page=1, per_page=3)
+    InvestigationGroup.find_by_id(group_id).teacher_ids.each do |c|
+		puts "Id teacher:" + c.to_s
+		#puts "Id user:" + UserContribution.find_by_id(c).userable_id.to_s
+		puts "Name Teacher:" + Teacher.find_by_id(c).name
+		puts "Lastname Teacher:" + Teacher.find_by_id(c).lastname
+		puts "Email Teacher:" + Teacher.find_by_id(c).institutional_user
+		puts "Rol Teacher:" + TeacherInvestigationGroup.find_by_id(Teacher.find_by_id(c)).rol
+		
+	end
+  end 
+  
 end
