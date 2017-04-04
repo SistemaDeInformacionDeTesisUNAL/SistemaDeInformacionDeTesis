@@ -41,7 +41,7 @@ class Contribution < ActiveRecord::Base
   def self.user_by_contribution(contribution_id,page=1, per_page=3)
     Contribution.find_by_id(contribution_id).user_contribution_ids.each do |c|
 		puts "Id user contribution:" + c.to_s
-		puts "Id user:" + UserContribution.find_by_id(c).userable_id.to_s
+		#puts "Id user:" + UserContribution.find_by_id(c).userable_id.to_s
 		puts "Name user:" + UserContribution.find_by_id(c).userable_type
 		
 	end
