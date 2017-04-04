@@ -20,7 +20,7 @@ class Teacher < ActiveRecord::Base
   validates :name, :lastname, :institutional_user, :presence => true
   validates :name, :lastname, :length => { :maximum => 25, :too_long => "%{count} Demasiados caracteres" }
   validates :institutional_user, :uniqueness => true
-  
+
   #muestra todos los eventos de todos los profesores
   def self.allTeachersEvents
 
@@ -31,7 +31,7 @@ class Teacher < ActiveRecord::Base
 		puts "--------\n"
 	end
   end
-  
+
   #muestra todas las contribuciones de los profesores
   def self.allTeachersContributions
 
@@ -42,7 +42,7 @@ class Teacher < ActiveRecord::Base
 		puts "--------\n"
 	end
   end
-  
+
 	#muestra todos los grupos de investigacion por profesor
   def self.allTeachersGroups
 
@@ -53,7 +53,7 @@ class Teacher < ActiveRecord::Base
 		puts "--------\n"
 	end
   end
-  
+
   #muestra el id y nombre del evento corresponiente a un profesor
   def self.event_by_Teacher(teacher_id,page=1, per_page=3)
     Teacher.find_by_id(teacher_id).event_ids.each do |evento|
@@ -61,15 +61,15 @@ class Teacher < ActiveRecord::Base
 		puts "Nombre de Evento:" + Event.find_by_id(evento).name
 	end
   end
-  
+
 	 #muestra el id y nombre de la contribucion corresponiente a un profesor
   def self.contribution_by_Teacher(teacher_id,page=1, per_page=3)
     Teacher.find_by_id(teacher_id).contribution_ids.each do |contrib|
 		puts "Id Contribucion:" + contrib.to_s
 		puts "Nombre contribucion:" + Contribution.find_by_id(contrib).name
 	end
-  end 
-  
+  end
+
 	 #muestra el id y nombre del grupo de investigacion corresponiente a un profesor
   def self.group_by_Teacher(teacher_id,page=1, per_page=3)
     Teacher.find_by_id(teacher_id).investigation_group_ids.each do |group|
@@ -77,7 +77,7 @@ class Teacher < ActiveRecord::Base
 		puts "Nombre Grupo investigacion:" + InvestigationGroup.find_by_id(group).name
 	end
   end
-  
+
 	#muestra el id y URL del perfil de un profesor
 	def self.profile_by_Teacher(teacher_id,page=1, per_page=3)
     Teacher.find_by_id(teacher_id).profile_ids.each do |prof|
@@ -85,7 +85,7 @@ class Teacher < ActiveRecord::Base
 		puts "URL profile:" + Profile.find_by_id(prof).URL
 	end
   end
-  
+
   #muestra el id y datos del history group de un profesor
 	def self.history_by_Teacher(teacher_id,page=1, per_page=3)
     Teacher.find_by_id(teacher_id).history_group_ids.each do |hist|
@@ -96,13 +96,13 @@ class Teacher < ActiveRecord::Base
 		puts "Investigation Group:" + HistoryGroup.find_by_id(hist).investigation_group_id.to_s
 	end
   end
-  
+
   #busca relaciones de teacher
   def self.teacher_by_id(teacher_id)
 	#includes(:events,:history_groups,:contributions,:investigation_groups,:profiles).find_by_id(teacher_id).paginate(:page => 1,:per_page =>10 )
 	includes(:events,:history_groups,:contributions,:investigation_groups,:profiles).find_by_id(teacher_id)
  end
-	
+
 	#Devuelve el rol del profesor  por grupo de investigacion
 	def self.teacher_rol(teacher_id)
 		Teacher.find_by_id(teacher_id).teacher_investigation_group_ids.each do |r|
@@ -111,7 +111,7 @@ class Teacher < ActiveRecord::Base
 			puts "teacher rol:" + TeacherInvestigationGroup.find_by_id(r).rol
 		end
 	end
- 
 
- 
+
+
 end
