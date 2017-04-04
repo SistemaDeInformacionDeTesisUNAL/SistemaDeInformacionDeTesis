@@ -36,15 +36,17 @@ class InvestigationGroup < ApplicationRecord
       errors.add(:create_date, "Fecha incorrecta")
     end
   end
+  
+  
   #no funciona al llamar el metodo pero si al poner una por una las lineas en la consola
   #imprime los eventos correspondientes a un grupo de investigacion usando includes
-  def allEvents(groupId)
-	grupos=InvestigationGroup.includes(:events)
-	idsEventos=grupos.find_by_id(groupId).event_ids
-	idsEventos.each do |idEvento|
-		puts "Nombre evento: " + Event.find(idEvento).name
-	end
-  end
+  #def allEvents(groupId)
+	#grupos=InvestigationGroup.includes(:events)
+	#idsEventos=grupos.find_by_id(groupId).event_ids
+	#idsEventos.each do |idEvento|
+	#	puts "Nombre evento: " + Event.find(idEvento).name
+	#end
+  #end
 
   #sirve tambien
   #def self.load_groups(**args)
@@ -52,31 +54,12 @@ class InvestigationGroup < ApplicationRecord
   #end
   
   
-  #def self.load_groups(page = 1, per_page = 10)
-    #includes(:name,:create_date,:description).paginate(:page => args[:page],:per_page => args[:per_page])
-	#includes(:events).paginate(:page => args[:page],:per_page => args[:per_page])
   
   def self.load_groups(id)
-	includes(:events).where(investigation_groups: {id: id})
-	
-	#includes(:events).paginate(:page => page,:per_page => per_page)
+	includes(:events).paginate(:page => page,:per_page => per_page)
   end
 
-    #def self.groups_by_name(name,**args)
-    #load_groups(args).where("investigation_groups.name LIKE ?", "#{name.downcase}%")
-  #end
-	
-	#def self.event_by_investigation_group(event_id)
-	def self.event_by_investigation_group(id)
-	#	includes(:events).select("investigation_groups.*").where("investigation:group.event_id LIKE ?", "#{event_id}%")
-	#includes(:events).find_by_id(id)
-	end
-	
-    #def self.group_by_id(investigation_group_id)
-    #includes(:name,:create_date,:description).find_by_id(:id)
-	#includes(:events).find_by_id(:investigation_group_id)
-  #end
-  
+   
   #muestra relaciones de eventos, tags, contribuciones de un grupo pero no als muestra
   def self.group_by_id(group_id)
 	includes(:events,:tag_investigation_groups,:contributions).find_by_id(group_id).paginate(:page => 1,:per_page =>10 )
@@ -87,10 +70,7 @@ class InvestigationGroup < ApplicationRecord
     load_groups(args).where(investigation_groups: {id: ids})
   end
   
-  def self.groups_by_id(ids,page =1, per_page=10)
-	#load_groups(page,per_page).where(investigation_groups:{id: ids})
-  end
- 
+  
 #muestra el id y nombre del evento corresponiente a un grupo de investigación 
   def self.event_by_investigationGroup(group_id,page=1, per_page=3)
     InvestigationGroup.find_by_id(group_id).event_ids.each do |evento|
@@ -98,6 +78,8 @@ class InvestigationGroup < ApplicationRecord
 		puts "Nombre de Evento:" + Event.find_by_id(evento).name
 	end
 end
+
+
 
 #	def self.event_by_ig(group_id)
 #		Elementos = InvestigationGroup.includes(:events,:tag_investigation_groups,:contributions).where(investigation_groups:{id: group_id})
@@ -126,4 +108,26 @@ end
 	end
   end
   
+    #Devuelve las contribuciones de un grupo de investigacion, nombre estado y descripcion
+  def self.contribution_by_group(group_id,page=1, per_page=3)
+    InvestigationGroup.find_by_id(group_id).contribution_ids.each do |t|
+		puts "Id contribution:" + t.to_s
+		#puts "Id contribution:" + Contribution.find_by_id(t).id.to_s
+		puts "name contribution:" + Contribution.find_by_id(t).name
+		puts "description:" + Contribution.find_by_id(t).description
+		puts "state contribution:" + Contribution.find_by_id(t).state
+		
+	end
+  end
+  
+    #Devuelve los tags de un grupo de investigacion
+  def self.tag_by_group(group_id,page=1, per_page=3)
+    InvestigationGroup.find_by_id(group_id).tag_ids.each do |t|
+		puts "Id tag:" + t.to_s
+		#puts "Tag id:" + Tag.find_by_id(t).id.to_s
+		puts "Tag name:" + Tag.find_by_id(t).name
+		puts "description:" + Tag.find_by_id(t).description
+		
+	end
+  end
 end
