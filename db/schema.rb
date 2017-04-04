@@ -72,9 +72,11 @@ ActiveRecord::Schema.define(version: 20170331122223) do
 
   create_table "investigation_groups", force: :cascade do |t|
     t.string   "name",        limit: 25, null: false
+    t.date     "create_date",            null: false
     t.text     "description"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["create_date"], name: "index_investigation_groups_on_create_date", using: :btree
     t.index ["name"], name: "index_investigation_groups_on_name", using: :btree
   end
 

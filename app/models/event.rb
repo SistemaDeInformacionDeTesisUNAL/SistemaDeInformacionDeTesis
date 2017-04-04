@@ -48,7 +48,9 @@ class Event < ApplicationRecord
 	
   end
   
-  #def self.
+  def self.ig_by_event(eventId)
+	grupoInvest=InvestigationGroup.includes(:event).where('investigation_group.event.id=?','eventId')
+  end
 
   def self.events_by_ids(ids,**args)
     #load_groups(args).where(event: {id: ids })
