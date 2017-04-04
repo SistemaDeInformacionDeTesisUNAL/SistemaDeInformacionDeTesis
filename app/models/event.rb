@@ -47,7 +47,7 @@ class Event < ApplicationRecord
 	InvestigationGroup.find_by_id( Event.find_by_id(event_id).investigation_group_id)
 	
   end
-  
+  #falla
   def self.ig_by_event(eventId)
 	grupoInvest=InvestigationGroup.includes(:event).where('investigation_group.event.id=?','eventId')
   end

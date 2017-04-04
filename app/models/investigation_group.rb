@@ -79,12 +79,12 @@ class InvestigationGroup < ApplicationRecord
   
   #muestra relaciones de eventos, tags, contribuciones de un grupo pero no als muestra
   def self.group_by_id(group_id)
-	includes(:events,:tag_investigation_groups,:contributions).find_by_id(group_id)
+	includes(:events,:tag_investigation_groups,:contributions).find_by_id(group_id).paginate(:page => 1,:per_page =>10 )
  end
 
- 
-  def self.groups_by_ids(id,**args)
-    load_groups(args).where(investigation_groups: {id: id})
+ #error
+  def self.groups_by_ids(ids,**args)
+    load_groups(args).where(investigation_groups: {id: ids})
   end
   
   def self.groups_by_id(ids,page =1, per_page=10)
