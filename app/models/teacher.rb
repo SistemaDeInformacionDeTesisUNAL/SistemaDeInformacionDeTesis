@@ -59,6 +59,9 @@ class Teacher < ActiveRecord::Base
     Teacher.find_by_id(teacher_id).event_ids.each do |evento|
 		puts "Id de Evento:" + evento.to_s
 		puts "Nombre de Evento:" + Event.find_by_id(evento).name
+		puts "descripcion:" + Event.find_by_id(evento).description
+		puts "Fecha creacion de Evento:" + Event.find_by_id(evento).created_at.to_s
+		puts "Fecha actualizacion de Evento:" + Event.find_by_id(evento).updated_at.to_s
 	end
   end
   
@@ -67,6 +70,10 @@ class Teacher < ActiveRecord::Base
     Teacher.find_by_id(teacher_id).contribution_ids.each do |contrib|
 		puts "Id Contribucion:" + contrib.to_s
 		puts "Nombre contribucion:" + Contribution.find_by_id(contrib).name
+		puts "description:" + Contribution.find_by_id(contrib).description
+		puts "state Contribucion:" + Contribution.find_by_id(contrib).state
+		puts "Fecha creacion:" + Contribution.find_by_id(contrib).created_at.to_s
+		puts "Fecha actualizacion:" + Contribution.find_by_id(contrib).updated_at.to_s
 	end
   end 
   
@@ -99,7 +106,7 @@ class Teacher < ActiveRecord::Base
   
   #busca relaciones de teacher
   def self.teacher_by_id(teacher_id)
-	#includes(:events,:history_groups,:contributions,:investigation_groups,:profiles).find_by_id(teacher_id).paginate(:page => 1,:per_page =>10 )
+	
 	includes(:events,:history_groups,:contributions,:investigation_groups,:profiles).find_by_id(teacher_id)
  end
 	
