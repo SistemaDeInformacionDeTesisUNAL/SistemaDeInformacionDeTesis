@@ -103,11 +103,11 @@ class Teacher < ActiveRecord::Base
 	includes(:events,:history_groups,:contributions,:investigation_groups,:profiles).find_by_id(teacher_id)
  end
 	
-	#Devuelve el rol del profesor 
+	#Devuelve el rol del profesor  por grupo de investigacion
 	def self.teacher_rol(teacher_id)
 		Teacher.find_by_id(teacher_id).teacher_investigation_group_ids.each do |r|
 			puts "Id teacher investigationGroup:" + r.to_s
-			puts "teacher id:" + TeacherInvestigationGroup.find_by_id(r).teacher_id.to_s
+			#puts "teacher id:" + TeacherInvestigationGroup.find_by_id(r).teacher_id.to_s
 			puts "teacher rol:" + TeacherInvestigationGroup.find_by_id(r).rol
 		end
 	end

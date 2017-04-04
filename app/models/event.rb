@@ -30,29 +30,17 @@ class Event < ApplicationRecord
     includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
-  def self.events_by_name(name,**args)
-    #load_groups(args).where("event.name LIKE ?", "#{name.downcase}%")
-  end
 
   def self.event_by_id(id,**args)
-    #includes(:name,:date_time,:description).find_by_id(:id)
-	load_events(args).where(events: {id: ids})
+    includes(:name,:date_time,:description).find_by_id(id)
+	
   end
 
-  #def self.event_by_investigationGroup(event_id)
+
   def self.investigationGroup_by_event(event_id)
-    #load_groups(group_id).where("event.investigation_group_id LIKE ?", "#{group_id}%")
-	#includes(:investigation_group).select("events.*").where("event.investigation_group_id LIKE ?", "#{group_id}%")
-	#includes(:event).where("event.investigation_group_id LIKE ?", "#{event_id}%")
+
 	InvestigationGroup.find_by_id( Event.find_by_id(event_id).investigation_group_id)
 	
   end
-  #falla
-  def self.ig_by_event(eventId)
-	grupoInvest=InvestigationGroup.includes(:event).where('investigation_group.event.id=?','eventId')
-  end
 
-  def self.events_by_ids(ids,**args)
-    #load_groups(args).where(event: {id: ids })
-  end
 end
