@@ -21,6 +21,18 @@ class Teacher < ActiveRecord::Base
   validates :name, :lastname, :length => { :maximum => 25, :too_long => "%{count} Demasiados caracteres" }
   validates :institutional_user, :uniqueness => true
 
+  #Carga todas las contribuciones
+  def self.load_contributions(**args)
+    includes(:contributions).paginate(:page => args[:page],:per_page => args[:per_page])
+  end
+
+  #Contribuciones del profesor
+  def self.teachers_by_contribution(**args)
+    load_contributions.where( contributions: { id: args[:ids] } )
+  end
+
+
+  #No se ha probado
   #muestra todos los eventos de todos los profesores
   def self.allTeachersEvents
 
@@ -106,7 +118,7 @@ class Teacher < ActiveRecord::Base
 
   #busca relaciones de teacher
   def self.teacher_by_id(teacher_id)
-	
+
 	includes(:events,:history_groups,:contributions,:investigation_groups,:profiles).find_by_id(teacher_id)
  end
 

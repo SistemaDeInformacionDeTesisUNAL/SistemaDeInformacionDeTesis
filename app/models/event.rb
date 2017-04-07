@@ -15,6 +15,8 @@ class Event < ApplicationRecord
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
 
+
+  #No se han probado
   def self.load_events(**args)
     includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
   end

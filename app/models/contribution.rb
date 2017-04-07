@@ -21,29 +21,29 @@ class Contribution < ActiveRecord::Base
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
   validates :state, inclusion: { in: states.keys }
 
-  def self.load_contributions(**args)
-    includes(:ubication).paginate(:page => args[:page],:per_page => args[:per_page])
+  def self.load_contributions_tags(**args)
+    includes(:tags).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
   #Muestra las ubicaciones de una contribucion
-	def self.ubication_by_contribution(ids,page = 1, per_page = 10)
-		load_contributions(page,per_page).where(contributions:{ id: ids})
+	def self.ubication_by_contribution(**args)
+		Ubication.load_ubications.where( contributions: { id: args[:ids] } )
 	end
 
+  #Muestra las contribuciones que contienen un tag
+  def self.contribution_by_tag_name(name)
+    tag = Tag.find_by_name( name ).id.to_s
+    load_contributions_tags.where( tags: { id: tag } )
+  end
+
   #Devuelve los colaboradores de una contribucion
-  def self.user_by_contribution(contribution_id,page=1, per_page=3)
-    Contribution.find_by_id(contribution_id).user_contribution_ids
+  def self.user_by_contribution(**args)
+    stud = Student.load_contributions.where( contributions: { id: args[:ids] } )
+    teach = Teacher.load_contributions.where( contributions: { id: args[:ids] } )
+    return stud + teach
   end
 
-  #Devuelve los tags de una contribucion
-  def self.tags_by_contribution(contribution_id, page=1, per_page=3)
-    Contribution.find_by_id(contribution_id).tag_ids.each do |t|
-  		puts "Id tag:" + t.to_s
-  		puts "Tag name:" + Tag.find_by_id(t).name
-  		puts "description:" + Tag.find_by_id(t).description
-  	end
-  end
-
+  #No se ha probado
   def self.contribution_by_id(contribution_id)
     includes(:investigation_group).find_by_id(contribution_id)
   end
