@@ -4,7 +4,13 @@ class InvestigationGroupsController < ApplicationController
   # GET /investigation_groups
   # GET /investigation_groups.json
   def index
-    @investigation_groups = InvestigationGroup.all
+    @page=1
+    @per_page=10
+    @totalPages=InvestigationGroup.count/@per_page
+    if (1..@totalPages)===params[:page].to_i
+      @page= params[:page].to_i
+    end
+    @investigation_groups = InvestigationGroup.load_groups(:page=> @page ,:per_page=>@per_page)
   end
 
   # GET /investigation_groups/1

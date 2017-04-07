@@ -36,8 +36,8 @@ class InvestigationGroup < ApplicationRecord
       errors.add(:create_date, "Fecha incorrecta")
     end
   end
-  
-  
+
+
   #no funciona al llamar el metodo pero si al poner una por una las lineas en la consola
   #imprime los eventos correspondientes a un grupo de investigacion usando includes
   #def allEvents(groupId)
@@ -49,17 +49,17 @@ class InvestigationGroup < ApplicationRecord
   #end
 
   #sirve tambien
-  #def self.load_groups(**args)
-  #includes(:name,:create_date,:description).paginate(:page => args[:page],:per_page => args[:per_page])
-  #end
-  
-  
-  
-  def self.load_groups(id)
-	includes(:events).paginate(:page => page,:per_page => per_page)
+  def self.load_groups(**args)
+    includes(:events).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
-   
+
+
+  #def self.load_groups()
+	#includes(:events).paginate(:page => page,:per_page => per_page)
+  #end
+
+
   #muestra relaciones de eventos, tags, contribuciones de un grupo pero no als muestra
   def self.group_by_id(group_id)
 	includes(:events,:tag_investigation_groups,:contributions).find_by_id(group_id).paginate(:page => 1,:per_page =>10 )
@@ -69,9 +69,9 @@ class InvestigationGroup < ApplicationRecord
 #  def self.groups_by_ids(ids,**args)
  #   load_groups(args).where(investigation_groups: {id: ids})
  # end
-  
-  
-#muestra el id y nombre del evento corresponiente a un grupo de investigación 
+
+
+#muestra el id y nombre del evento corresponiente a un grupo de investigación
   def self.event_by_investigationGroup(group_id,page=1, per_page=3)
     InvestigationGroup.find_by_id(group_id).event_ids.each do |evento|
 		puts "Id de Evento:" + evento.to_s
@@ -96,7 +96,7 @@ end
 #			puts "--------\n"
 #		end
 #	end
-  
+
   #metodo para mostrar todos los grupos en consola y un arreglo de ids de sus eventos
   def self.allGroupsConsole
 
@@ -107,7 +107,7 @@ end
 		puts "--------\n"
 	end
   end
-  
+
     #Devuelve las contribuciones de un grupo de investigacion, nombre estado y descripcion
   def self.contribution_by_group(group_id,page=1, per_page=3)
     InvestigationGroup.find_by_id(group_id).contribution_ids.each do |t|
@@ -116,10 +116,10 @@ end
 		puts "name contribution:" + Contribution.find_by_id(t).name
 		puts "description:" + Contribution.find_by_id(t).description
 		puts "state contribution:" + Contribution.find_by_id(t).state
-		
+
 	end
   end
-  
+
     #Devuelve los tags de un grupo de investigacion
   def self.tag_by_group(group_id,page=1, per_page=3)
     InvestigationGroup.find_by_id(group_id).tag_ids.each do |t|
@@ -127,7 +127,7 @@ end
 		#puts "Tag id:" + Tag.find_by_id(t).id.to_s
 		puts "Tag name:" + Tag.find_by_id(t).name
 		puts "description:" + Tag.find_by_id(t).description
-		
+
 	end
   end
   #Muestra el historial de un grupo de investigacion
@@ -140,7 +140,7 @@ end
 		puts "exit date:" + HistoryGroup.find_by_id(hist).exit_date.to_s
 		puts "state:" + HistoryGroup.find_by_id(hist).state
 		puts "Investigation Group:" + HistoryGroup.find_by_id(hist).investigation_group_id.to_s
-		
+
 	end
   end
   #estudiantes grupo de investigacion
@@ -150,10 +150,10 @@ end
 		#puts "Id user:" + UserContribution.find_by_id(c).userable_id.to_s
 		puts "Name user:" + Student.find_by_id(c).name
 		puts "Email user:" + Student.find_by_id(c).institutional_user
-		
+
 	end
   end
- 
+
 #profesores grupo de investigacion
  def self.teachers_by_group(group_id,page=1, per_page=3)
     InvestigationGroup.find_by_id(group_id).teacher_ids.each do |c|
@@ -163,8 +163,8 @@ end
 		puts "Lastname Teacher:" + Teacher.find_by_id(c).lastname
 		puts "Email Teacher:" + Teacher.find_by_id(c).institutional_user
 		puts "Rol Teacher:" + TeacherInvestigationGroup.find_by_id(Teacher.find_by_id(c)).rol
-		
+
 	end
-  end 
-  
+  end
+
 end

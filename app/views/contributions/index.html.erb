@@ -1,4 +1,3 @@
-<div class="contributions-content">
   <p id="notice"><%= notice %></p>
 
   <h1>Contributions</h1>
@@ -11,6 +10,7 @@
         <th>Description</th>
         <th>State</th>
         <th>Investigation group</th>
+        <th>File<th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -25,6 +25,7 @@
           <td><%= contribution.state %></td>
           <td><%= contribution.investigation_group.name %></td>
   <!--
+
           <td><%= link_to 'Show', contribution %></td>
           <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
           <td><%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -39,5 +40,3 @@
   </table>
   <br>
   <%= link_to 'New Contribution', new_contribution_path %>
-
-</div>

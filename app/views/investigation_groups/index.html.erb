@@ -2,7 +2,7 @@
 
 <h1>Investigation Groups</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,7 +16,7 @@
     <% @investigation_groups.each do |investigation_group| %>
       <tr>
         <td><%= investigation_group.name %></td>
-        <td><%= investigation_group.createDate %></td>
+        <td><%= investigation_group.create_date %></td>
         <td><%= investigation_group.description %></td>
         <td><%= link_to 'Show', investigation_group %></td>
         <td><%= link_to 'Edit', edit_investigation_group_path(investigation_group) %></td>
@@ -25,7 +25,9 @@
     <% end %>
   </tbody>
 </table>
-
+<%= link_to_if( @page>1, '<', investigation_groups_path(:page=>@page-1)) %>
+<%= @page %> de <%= @totalPages %>
+<%= link_to_if( @page<@totalPages, '>', investigation_groups_path(:page=>@page+1)) %>
 <br>
 
 <%= link_to 'New Investigation Group', new_investigation_group_path %>
