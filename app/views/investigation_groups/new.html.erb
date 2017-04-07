@@ -1,5 +1,21 @@
-<h1>New Investigation Group</h1>
+<!DOCTYPEW html>
+<html>
+  <head>
+    <title>Investigation Groups</title>
 
-<%= render 'form', investigation_group: @investigation_group %>
 
-<%= link_to 'Back', investigation_groups_path %>
+  </head>
+  <body>
+      	<%= stylesheet_link_tag 'css/style' %>
+    <form class='Group'>
+      <div><label>Name Investigation Group:</label><input type='text' value=''></div>
+      <div><label>Name teacher owner:</label><input type='text' value=''></div>
+	  <div><label>Lastname teacher owner:</label><input type='text' value=''></div>
+	  <div><label>Institutional user teacher owner:</label><input type='text' value=''></div>
+      <div><label>Descripcion Group:</label><textarea rows='6' cols ='50'></textarea></div>
+      <div><input type= 'submit' value= 'Register'></div>
+    </form>
+
+  </body>
+
+</html>

@@ -34,6 +34,9 @@ body {
   overflow-y: scroll;
 }
 
+.contributions-content{
+  margin: 50px 25px 15px 25px;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Ancizar serif", "MS Serif", "New York", serif;
@@ -1042,4 +1045,3 @@ footer .logos {
   padding: 0;
 }
 }
-

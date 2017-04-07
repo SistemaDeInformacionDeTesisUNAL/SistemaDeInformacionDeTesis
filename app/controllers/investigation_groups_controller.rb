@@ -5,6 +5,10 @@ class InvestigationGroupsController < ApplicationController
   # GET /investigation_groups.json
   def index
     @investigation_groups = InvestigationGroup.all
+    #@page=1
+    #@per_page=10
+    #@totalPages=InvestigationGroup.count/@per_page
+    #@contributions = InvestigationGroup.load_investigation_group(:pag=> @page,:per_page=>@per_page)
   end
 
   # GET /investigation_groups/1

@@ -20,7 +20,7 @@ Rails.application.config.assets.precompile += %w( css/unal.css )
 
 Rails.application.config.assets.precompile += %w( js/jquery.js )
 Rails.application.config.assets.precompile += %w( js/unal.js )
-
+Rails.application.config.assets.precompile += %w( css/style.css )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
