@@ -33,6 +33,9 @@
         </tr>
       <% end %>
     </tbody>
+    <%= link_to_if( @page>1, '<', contributions_path(:page=>@page-1)) %>
+    <%= @page %> de <%= @totalPages %>
+    <%= link_to_if( @page<@totalPages, '>', contributions_path(:page=>@page+1)) %>
   </table>
   <br>
   <%= link_to 'New Contribution', new_contribution_path %>

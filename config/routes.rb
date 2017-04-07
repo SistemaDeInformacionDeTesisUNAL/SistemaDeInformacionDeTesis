@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'about', to: "static_pages#about", as: "contacto"
   get 'home', to: "static_pages#home", as: "home"
-
+  post 'contribution/index'
   resources :tag_investigation_groups
   resources :tag_contributions
   resources :tags

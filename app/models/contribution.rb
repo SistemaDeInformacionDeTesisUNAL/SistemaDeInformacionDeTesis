@@ -31,10 +31,10 @@ class Contribution < ActiveRecord::Base
   def self.count
     Contribution.all.count
   end
-  #lista las contribuciones
-  def self.load_contributions(**args)    
-    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
-  end
+  #lista las contribuciones orden de fechas
+  def self.load_contributions(**args)
+    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page]).order("publication_date DESC")
+    end
   #Muestra la ubicacion dada una contribucion
 	def self.ubication_by_contribution(contribution_id)
 		Contribution.find_by_id(contribution_id).ubication_ids.each do |u|

@@ -7,7 +7,10 @@ class ContributionsController < ApplicationController
     @page=1
     @per_page=10
     @totalPages=Contribution.count/@per_page
-    @contributions = Contribution.load_contributions(:pag=> @page,:per_page=>@per_page)
+    if (1..@totalPages)===params[:page].to_i
+      @page= params[:page].to_i
+    end
+      @contributions = Contribution.load_contributions(:page=> @page ,:per_page=>@per_page)
   end
 
 
