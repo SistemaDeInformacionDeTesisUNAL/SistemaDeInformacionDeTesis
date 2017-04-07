@@ -1,24 +1,31 @@
+<div class="contributions-content">
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Name: </strong>
   <%= @contribution.name %>
 </p>
-
+<br>
 <p>
-  <strong>Publication date:</strong>
+  <strong>Publication date: </strong>
   <%= @contribution.publication_date %>
 </p>
-
+<br>
 <p>
-  <strong>Description:</strong>
+  <strong>Description: </strong>
   <%= @contribution.description %>
 </p>
-
+<br>
 <p>
-  <strong>Investigation group:</strong>
-  <%= @contribution.investigation_group %>
+  <strong>State: </strong>
+  <%= @contribution.state %>
 </p>
-
+<br>
+<p>
+  <strong>Investigation group (<%= @contribution.investigation_group.id %>): </strong>
+  <%= @contribution.investigation_group.name %>
+</p>
+<br>
 <%= link_to 'Edit', edit_contribution_path(@contribution) %> |
 <%= link_to 'Back', contributions_path %>
+</div>

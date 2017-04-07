@@ -1,33 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="contributions-content">
+  <p id="notice"><%= notice %></p>
 
-<h1>Contributions</h1>
+  <h1>Contributions</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Publication date</th>
-      <th>Description</th>
-      <th>Investigation group</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @contributions.each do |contribution| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= contribution.name %></td>
-        <td><%= contribution.publication_date %></td>
-        <td><%= contribution.description %></td>
-        <td><%= contribution.investigation_group %></td>
-        <td><%= link_to 'Show', contribution %></td>
-        <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
-        <td><%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Publication date</th>
+        <th>Description</th>
+        <th>State</th>
+        <th>Investigation group</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @contributions.each do |contribution| %>
 
-<%= link_to 'New Contribution', new_contribution_path %>
+        <tr>
+          <td><%= link_to contribution.name, contribution %></td>
+          <td><%= contribution.publication_date %></td>
+          <td><%= contribution.description %></td>
+          <td><%= contribution.state %></td>
+          <td><%= contribution.investigation_group.name %></td>
+  <!--
+          <td><%= link_to 'Show', contribution %></td>
+          <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
+          <td><%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+-->
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New Contribution', new_contribution_path %>
+
+</div>

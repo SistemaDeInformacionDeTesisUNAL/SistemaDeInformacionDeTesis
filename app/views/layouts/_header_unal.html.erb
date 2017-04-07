@@ -8,7 +8,7 @@
 
             <!--<![endif]-->
             <!--[if lt IE 9]>
-                <img src="images/escudoUnal.png" width="93%" height="auto" class="hidden-print"/> 
+                <img src="images/escudoUnal.png" width="93%" height="auto" class="hidden-print"/>
                 <![endif]-->
                 <img src="<%= image_url('unal/escudoUnal_black')%>" class="visible-print" />
             </a>
@@ -71,6 +71,7 @@
                     <ul class="dropdown-menu dropItem-16">
                         <li><%= link_to "Inicio", home_path %></li>
                         <li><%= link_to "Acerca de nosotros", contacto_path %></li>
+                        <li><%= link_to "Contribuciones", :controller=>"contributions",:action=>"index" %></li>
                     </ul>
                 </div>
                 <div class="btn-group">

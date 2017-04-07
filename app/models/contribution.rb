@@ -27,7 +27,14 @@ class Contribution < ActiveRecord::Base
       errors.add(:publication_date, "Fecha incorrecta")
     end
   end
-  
+#Cuenta cuantas contribuciones hay en total
+  def self.count
+    Contribution.all.count
+  end
+  #lista las contribuciones
+  def self.load_contributions(**args)    
+    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+  end
   #Muestra la ubicacion dada una contribucion
 	def self.ubication_by_contribution(contribution_id)
 		Contribution.find_by_id(contribution_id).ubication_ids.each do |u|
@@ -36,14 +43,14 @@ class Contribution < ActiveRecord::Base
 			puts "link" + Ubication.find_by_id(u).link
 		end
 	end
-  
+
   #Devuelve el usuario dueño dada una contribucion
   def self.user_by_contribution(contribution_id,page=1, per_page=3)
     Contribution.find_by_id(contribution_id).user_contribution_ids.each do |c|
 		puts "Id user contribution:" + c.to_s
 		#puts "Id user:" + UserContribution.find_by_id(c).userable_id.to_s
 		puts "Name user:" + UserContribution.find_by_id(c).userable_type
-		
+
 	end
   end
 
@@ -53,14 +60,14 @@ class Contribution < ActiveRecord::Base
 		puts "Id tag:" + t.to_s
 		puts "Tag name:" + Tag.find_by_id(t).name
 		puts "description:" + Tag.find_by_id(t).description
-		
+
 	end
   end
-	
+
 	 def self.contribution_by_id(contribution_id)
 
 	includes(:investigation_group).find_by_id(contribution_id)
   end
-	
-  
+
+
 end
