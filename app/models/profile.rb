@@ -4,12 +4,9 @@ class Profile < ApplicationRecord
 
   	validates :entity, :URL, :presence => true
   	validates :URL, :uniqueness => true
-	
-	#retorna relacion de un perfil con un teacher o student
-  def self.profiles_by_id(profile_id)
 
-	includes(:profileable).find_by_id(profile_id)
+  def self.load_profiles(**args)
+    includes(:profileable).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
-  
 end
