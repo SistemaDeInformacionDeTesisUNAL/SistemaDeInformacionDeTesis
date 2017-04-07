@@ -4,8 +4,15 @@ class ContributionsController < ApplicationController
   # GET /contributions
   # GET /contributions.json
   def index
-    @contributions = Contribution.all
+    @page=1
+    @per_page=10
+    @totalPages=Contribution.count/@per_page
+    if (1..@totalPages)===params[:page].to_i
+      @page= params[:page].to_i
+    end
+      @contributions = Contribution.load_contributions(:page=> @page ,:per_page=>@per_page)
   end
+
 
   # GET /contributions/1
   # GET /contributions/1.json
@@ -69,6 +76,6 @@ class ContributionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contribution_params
-      params.require(:contribution).permit(:name, :publication_date, :description, :investigation_group_id)
+      params.require(:contribution).permit(:name, :publication_date, :description, :investigation_group_id, :file)
     end
 end
