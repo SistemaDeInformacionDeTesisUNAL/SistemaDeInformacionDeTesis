@@ -8,9 +8,4 @@ class HistoryGroup < ApplicationRecord
   validates :bonding_date, :presence => true
   validates :state, inclusion: { in: states.keys }
 
-  #relaciones historyGroup
-  def self.history_by_id(historable_id)
-	  includes(:investigation_group).find_by_id(historable_id)
-  end
-
 end
