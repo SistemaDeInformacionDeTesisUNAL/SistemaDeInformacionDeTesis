@@ -16,7 +16,7 @@
     <% @investigation_groups.each do |investigation_group| %>
       <tr>
         <td><%= investigation_group.name %></td>
-        <td><%= investigation_group.createDate %></td>
+        <td><%= investigation_group.create_date %></td>
         <td><%= investigation_group.description %></td>
         <td><%= link_to 'Show', investigation_group %></td>
         <td><%= link_to 'Edit', edit_investigation_group_path(investigation_group) %></td>

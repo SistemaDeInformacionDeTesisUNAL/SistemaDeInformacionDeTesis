@@ -48,4 +48,17 @@ class Contribution < ActiveRecord::Base
     ids = find_by_id( args[:ids] ).investigation_group_id
     InvestigationGroup.find_by_id( ids )
   end
+
+  #Cuenta cuantas contribuciones hay en total, necesaria para hacer el indice para separar por paginas
+  def self.count
+    Contribution.all.count
+  end
+
+  #lista las contribuciones por grupo de investigacion
+   def self.load_contributions(**args)
+     includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+     #grpc= InvestigationGroup.contribution_by_group.where(contributions: {id: args[:ids]})
+   end
+
+
 end
