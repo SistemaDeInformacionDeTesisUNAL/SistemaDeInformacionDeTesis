@@ -31,9 +31,12 @@ class Contribution < ActiveRecord::Base
 	end
 
   #Muestra las contribuciones que contienen un tag
-  def self.contribution_by_tag_name(name)
-    tag = Tag.find_by_name( name ).id.to_s
-    load_contributions_tags.where( tags: { id: tag } )
+  def self.contribution_by_tag_name(**args)
+    tag = Tag.find_by_name( args[:name] )
+    if tag then
+      idTag = tag.id.to_s
+      load_contributions_tags.where( tags: { id: idTag } ).paginate(:page => args[:page],:per_page => args[:per_page])
+    end
   end
 
   #Devuelve los colaboradores de una contribucion

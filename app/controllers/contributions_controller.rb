@@ -11,9 +11,13 @@ class ContributionsController < ApplicationController
     if (1..@totalPages)===params[:page].to_i
       @page= params[:page].to_i
     end
-      @contributions = Contribution.load_contributions(:page=> @page ,:per_page=>@per_page)
-    end
-
+    #Esta variable retorna todas las contribuciones
+    @contributions = Contribution.load_contributions( :page => @page ,:per_page => @per_page)
+    #Esta variable retorna las contribuciones despues de buscarlas por un tag
+    @contributions_by_tag = Contribution.contribution_by_tag_name(:name => @name, :page => @page, :per_page => @per_page)
+    #Esta variable retorna una lista con los tags
+    @tags = Tag.load_tag_names
+  end
 
   # GET /contributions/1
   # GET /contributions/1.json
