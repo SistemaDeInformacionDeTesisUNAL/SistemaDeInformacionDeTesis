@@ -880,6 +880,7 @@ body footer .logos {
   height: auto !important;
   width: 100%;
   background: #333333;
+  background-repeat: repeat;
   border-color: #222222;
   padding: 0;
 }
