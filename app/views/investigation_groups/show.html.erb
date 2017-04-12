@@ -1,24 +1,37 @@
 <p id="notice"><%= notice %></p>
+<div class="toppad" >
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">  <%= @investigation_group.name %></h3>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Image:</strong>
-  <%= image_tag(@investigation_group.image) %>
-</p>
+<div class="container">
+    <div class="col-lg-3">
+        <%= image_tag(@investigation_group.image_url.to_s,:class=>"img-circle img-responsive",:atl=>"Investigation Group Image") %>
+    </div>
+    <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-striped">
+                    <tbody>
+                      <tr>
+                        <td>  <strong>Createdate:</strong> </td>
+                        <td> <%= @investigation_group.create_date %> </td>
+                      </tr>
+                      <tr>
+                        <td> <strong>Description:</strong> </td>
+                        <td> <%= @investigation_group.description %> </td>
+                      </tr>
+                      <tr>
+                        <td> <strong>Events:</strong> </td>
+                       <% @investigation_group.events.each do |event| %>
+                         <td> <%=link_to event.name, :controller => "events", :action =>"show" %> </td>
+                         <%end%>
+                      </tr>
+                    </tbody>
+                  </table>
+      </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @investigation_group.name %>
-</p>
-
-<p>
-  <strong>Createdate:</strong>
-  <%= @investigation_group.create_date %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @investigation_group.description %>
-</p>
-
+    </div>
 <%= link_to 'Edit', edit_investigation_group_path(@investigation_group) %> |
 <%= link_to 'Back', investigation_groups_path %>

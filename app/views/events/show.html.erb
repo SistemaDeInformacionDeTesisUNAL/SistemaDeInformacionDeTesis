@@ -7,12 +7,7 @@
 
 <p>
   <strong>Date:</strong>
-  <%= @event.date %>
-</p>
-
-<p>
-  <strong>Time:</strong>
-  <%= @event.time %>
+  <%= @event.date_time %>
 </p>
 
 <p>
@@ -22,7 +17,7 @@
 
 <p>
   <strong>Investigation group:</strong>
-  <%= @event.investigation_group %>
+  <%= <@event class="investigation_group name">                      </@event> %>
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |

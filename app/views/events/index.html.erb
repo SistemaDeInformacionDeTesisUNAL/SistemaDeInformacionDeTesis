@@ -6,8 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Date</th>
-      <th>Time</th>
+      <th>Date time</th>
       <th>Description</th>
       <th>Investigation group</th>
       <th colspan="3"></th>
@@ -18,8 +17,7 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
-        <td><%= event.date %></td>
-        <td><%= event.time %></td>
+        <td><%= event.date_time %></td>
         <td><%= event.description %></td>
         <td><%= event.investigation_group %></td>
         <td><%= link_to 'Show', event %></td>
