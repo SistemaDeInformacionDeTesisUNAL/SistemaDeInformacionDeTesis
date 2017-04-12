@@ -30,8 +30,8 @@ class InvestigationGroup < ApplicationRecord
  mount_uploader :image, ImageUploader
 
 #busca grupos de investigacion por eventos
-  def self.load_groups(id)
-	   includes(:events).paginate(:page => page,:per_page => per_page)
+  def self.load_groups(**args)
+	   includes(:events).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 #busca grupos de investigacion por tags
   def self.load_investigation_groups_tags(**args)
@@ -41,6 +41,11 @@ class InvestigationGroup < ApplicationRecord
   def self.investigation_group_by_tag_name(name)
     tag = Tag.find_by_name( name ).id.to_s
     load_investigation_groups_tags.where( tags: { id: tag } )
+  end
+
+  #Cuenta cuantos grupos de investigacion hay en total, necesaria para hacer el indice para separar por paginas
+  def self.countGroups
+    InvestigationGroup.all.count
   end
 
 end
