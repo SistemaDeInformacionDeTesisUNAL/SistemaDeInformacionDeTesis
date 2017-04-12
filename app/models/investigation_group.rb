@@ -27,8 +27,20 @@ class InvestigationGroup < ApplicationRecord
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
 
+ mount_uploader :image, ImageUploader
+
+#busca grupos de investigacion por eventos
   def self.load_groups(id)
 	   includes(:events).paginate(:page => page,:per_page => per_page)
+  end
+#busca grupos de investigacion por tags
+  def self.load_investigation_groups_tags(**args)
+    includes(:tags).paginate(:page => args[:page],:per_page => args[:per_page])
+  end
+#busca grupo d einvestigacion por un tag en especifico
+  def self.investigation_group_by_tag_name(name)
+    tag = Tag.find_by_name( name ).id.to_s
+    load_investigation_groups_tags.where( tags: { id: tag } )
   end
 
 end
