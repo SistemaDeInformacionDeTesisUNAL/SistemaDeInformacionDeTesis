@@ -1,9 +1,4 @@
 class InvestigationGroup < ApplicationRecord
-#<<<<<<< HEAD
-	#attr_accessor :name, :create_date, :description
-#=======
-
-#>>>>>>> 793ab9efb00af13e2b7d3a6d0b8228970e5a42a3
   has_many :students
 
 	has_many :teacher_investigation_groups
@@ -27,8 +22,12 @@ class InvestigationGroup < ApplicationRecord
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
 
-  def self.load_groups(id)
-	   includes(:events).paginate(:page => page,:per_page => per_page)
+  def self.count
+    InvestigationGroup.all.count
+  end
+
+  def self.load_groups(**args)
+	   includes(:events).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
 end
