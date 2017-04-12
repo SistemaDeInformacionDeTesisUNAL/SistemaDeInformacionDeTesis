@@ -69,6 +69,6 @@ class InvestigationGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def investigation_group_params
-      params.require(:investigation_group).permit(:name, :createDate, :description,:image)
+      params.require(:investigation_group).permit(:name, :create_date, :description,:image)
     end
 end
