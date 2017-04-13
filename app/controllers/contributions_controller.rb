@@ -3,21 +3,42 @@ class ContributionsController < ApplicationController
 
   # GET /contributions
   # GET /contributions.json
+
   def index
   #  @contributions = Contribution.all
     @page=1
     @per_page=10
-    @totalPages=Contribution.count/@per_page
-    if (1..@totalPages)===params[:page].to_i
-      @page= params[:page].to_i
+
+    #recibe el id de tag
+    @tag=params[:tag]
+
+    #recibe el id del grupo
+    @group=params[:group]
+
+    #almacena todos los tags
+    @tags = Tag.all
+
+    #almacena todos los grupos
+    @groups = InvestigationGroup.all
+
+    #almacena todas las contribuciones por tags
+    @contributions = Contribution.contribution_by_tag_name(:group => @group,:tag => @tag, :page => @page, :per_page => @per_page)
+
+    if @contributions.count < @per_page then
+      @totalPages=1
+    else
+      @totalPages=@contributions.count/@per_page
     end
 
-    #1)
-    #Esta variable retorna una lista con los tags
-    @tags = Tag.load_tag_names
+    if (1..@totalPages)===params[:page].to_i
+      @page= params[:page].to_i
+      @contributions = Contribution.contribution_by_tag_name(:tag => @tag, :page => @page, :per_page => @per_page)
+    end
+    #Esta variable retorna todas las contribuciones
+    #@contributions = Contribution.load_contributions( :page => @page ,:per_page => @per_page)
     #Esta variable retorna las contribuciones despues de buscarlas por un tag
-    @contributions_by_tag = Contribution.contribution_tag_name(:name => @name, :page => @page, :per_page => @per_page)
-
+    #@contributions = Contribution.contribution_by_tag_name(:name => @name, :page => @page, :per_page => @per_page)
+    #Esta variable retorna una lista con los tags
     #2)
     #Retorna los colaboradores de una contribucion
     @collaborators = Contribution.user_by_contribution(:ids => @ids)
@@ -25,6 +46,7 @@ class ContributionsController < ApplicationController
     #3)
     #Esta variable retorna las ubicaciones de una contribucion
     @ubications = Contribution.ubications(:ids => @ids, :page => @page, :per_page => @per_page)
+
   end
 
   # GET /contributions/1
@@ -40,7 +62,6 @@ class ContributionsController < ApplicationController
   # GET /contributions/1/edit
   def edit
   end
-
   # POST /contributions
   # POST /contributions.json
   def create

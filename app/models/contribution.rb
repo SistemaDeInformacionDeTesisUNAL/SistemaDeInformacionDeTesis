@@ -26,12 +26,29 @@ class Contribution < ActiveRecord::Base
     includes(:tags).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
+  def self.lodad_contribution_groups(**args)
+    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+  end
+
+  #Muestra las ubicaciones de una contribucion
+	def self.ubication_by_contribution(**args)
+		Ubication.load_ubications.where( contributions: { id: args[:ids] } )
+	end
+
   #Muestra las contribuciones que contienen un tag
-  def self.contribution_tag_name(**args)
-    tag = Tag.find_by_name( args[:name] )
-    if tag then
-      idTag = tag.id.to_s
-      load_contributions_tags.where( tags: { id: idTag } ).paginate(:page => args[:page],:per_page => args[:per_page])
+  def self.contribution_by_tag_name(**args)
+    if !args[:tag].blank? && !args[:group].blank? then
+      includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+    else
+      if !args[:tag].blank? then
+        load_contributions_tags.where( tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+      else
+        if !args[:group].blank? then
+          includes(:investigation_group).where( investigation_groups: { id: args[:group]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+        else
+          includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+        end
+      end
     end
   end
 

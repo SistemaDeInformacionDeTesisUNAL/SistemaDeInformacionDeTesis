@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= f.label :investigation_group_id %>
-    <%= f.text_field :investigation_group_id %>
+      <%= f.select(:investigation_group_id,options_from_collection_for_select(InvestigationGroup.all, "id", "name"), prompt: "All groups")%>
   </div>
 
   <div class="field">
