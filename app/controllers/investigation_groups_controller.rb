@@ -4,7 +4,19 @@ class InvestigationGroupsController < ApplicationController
   # GET /investigation_groups
   # GET /investigation_groups.json
   def index
-    @investigation_groups = InvestigationGroup.all
+  #  @investigation_groups = InvestigationGroup.all
+    @page=1
+    @per_page=10
+    @totalPages=InvestigationGroup.countGroups/@per_page
+    if (1..@totalPages)===params[:page].to_i
+      @page= params[:page].to_i
+    end
+    #lista de tags
+    @tags_list= Tag.load_tag_names
+    #listar grupos por eventos
+    @investigation_groups = InvestigationGroup.load_groups(:page=> @page ,:per_page=>@per_page)
+    #listar grupos por tag en especifico
+    @investigation_tags = InvestigationGroup.investigation_group_by_tag_name(:name=> @name,:page=> @page ,:per_page=>@per_page)
   end
 
   # GET /investigation_groups/1

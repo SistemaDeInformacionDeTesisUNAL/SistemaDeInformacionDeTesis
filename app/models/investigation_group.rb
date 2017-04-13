@@ -37,10 +37,13 @@ class InvestigationGroup < ApplicationRecord
   def self.load_investigation_groups_tags(**args)
     includes(:tags).paginate(:page => args[:page],:per_page => args[:per_page])
   end
-#busca grupo d einvestigacion por un tag en especifico
-  def self.investigation_group_by_tag_name(name)
-    tag = Tag.find_by_name( name ).id.to_s
-    load_investigation_groups_tags.where( tags: { id: tag } )
+#busca grupo de investigacion por un tag en especifico
+  def self.investigation_group_by_tag_name(**args)
+    tag = Tag.find_by_name( args[:name] )
+    if tag then
+      idt = tag.id.to_s
+      load_investigation_groups_tags.where( tags: { id: idt } ).paginate(:page=>args[:page],:per_page=>args[:per_page])
+    end
   end
 
   #Cuenta cuantos grupos de investigacion hay en total, necesaria para hacer el indice para separar por paginas
