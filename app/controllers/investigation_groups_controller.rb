@@ -17,6 +17,8 @@ class InvestigationGroupsController < ApplicationController
     @investigation_groups = InvestigationGroup.load_groups(:page=> @page ,:per_page=>@per_page)
     #listar grupos por tag en especifico
     @investigation_tags = InvestigationGroup.investigation_group_by_tag_name(:name=> @name,:page=> @page ,:per_page=>@per_page)
+    #Listar las contribuciones de un grupo de investigacion
+    @investigation_contr = InvestigationGroup.contributions_group(:ids => @ids, :page=> @page ,:per_page=>@per_page)
   end
 
   # GET /investigation_groups/1
