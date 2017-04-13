@@ -51,4 +51,12 @@ class InvestigationGroup < ApplicationRecord
     InvestigationGroup.all.count
   end
 
+
+  #Busca las contribuciones de un grupo de investigacion
+  def self.contributions_group(**args)
+    contr= Contribution.load_contributions.where( investigation_groups: {id: args[:ids]})
+    return contr
+
+  end
+
 end
