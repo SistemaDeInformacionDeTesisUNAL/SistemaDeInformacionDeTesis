@@ -12,4 +12,13 @@ class Tag < ApplicationRecord
 	validates :name, :uniqueness => true
 	validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
 
+	#Retorna una lista con todos los nombres de los tags
+	def self.load_tag_names
+		list = []
+		Tag.all.each do |x|
+			list.push( x.name )
+		end
+		return list
+	end
+
 end
