@@ -23,10 +23,36 @@
                         <td> <%= @investigation_group.description %> </td>
                       </tr>
                       <tr>
+                        <td> <strong>Tags:</strong> </td>
+                        <% myTags=''
+                          @investigation_group.tags.each do |tag|
+                            myTags<<tag.name
+                            if tag != @investigation_group.tags.last
+                              myTags<<', '
+                            end
+                        end %>
+                      <td> <%=myTags.to_s%></td>
+                      </tr>
+                      <tr>
                         <td> <strong>Events:</strong> </td>
+                    <td>
                        <% @investigation_group.events.each do |event| %>
-                         <td> <%=link_to event.name, :controller => "events", :action =>"show" %> </td>
-                         <%end%>
+                         <%=link_to event.name, :controller => "events", :action =>"show", :id=>event.id %>
+                         <%  if event != @investigation_group.events.last%>,
+                           <%end
+                       end %>
+                         </td>
+                      </tr>
+                      <tr>
+                        <td> <strong>Contributions:</strong> </td>
+                      <td>
+                    <% @allContributions =InvestigationGroup.contributions_group(:group_id => @investigation_group.id)
+                    @allContributions.each do |contribution|%>
+                      <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
+                          <%  if contribution != @allContributions.last %>,
+                            <%end
+                        end %>
+                      </td>
                       </tr>
                     </tbody>
                   </table>

@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170412170908) do
 
   create_table "contributions", force: :cascade do |t|
     t.string   "name",                   limit: 100,             null: false
-    t.date     "publication_date",                               null: false
+    t.datetime "publication_date",                               null: false
     t.text     "description"
     t.integer  "state",                              default: 2, null: false
     t.integer  "investigation_group_id"
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   end
 
   create_table "history_groups", force: :cascade do |t|
-    t.date     "bonding_date",                       null: false
-    t.date     "exit_date"
+    t.datetime "bonding_date",                       null: false
+    t.datetime "exit_date"
     t.integer  "state",                  default: 0, null: false
     t.integer  "investigation_group_id",             null: false
     t.string   "historable_type"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20170412170908) do
 
   create_table "investigation_groups", force: :cascade do |t|
     t.string   "name",        limit: 25, null: false
-    t.date     "create_date",            null: false
+    t.datetime "create_date",            null: false
     t.text     "description"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

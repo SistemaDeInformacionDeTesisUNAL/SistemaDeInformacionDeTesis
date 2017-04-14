@@ -8,17 +8,28 @@ class InvestigationGroupsController < ApplicationController
     @page=1
     @per_page=10
     @totalPages=InvestigationGroup.countGroups/@per_page
+
+    #recibe el id de tag
+    @tag=params[:tag]
+    #lista de tags
+    @tags_list= Tag.all
+
+    #listar grupos por eventos
+    #@investigation_groups = InvestigationGroup.load_groups(:page=> @page ,:per_page=>@per_page)
+
+    #listar grupos por tag en especifico
+    @investigation_groups = InvestigationGroup.investigation_group_by_tag_name(:tag=> @tag,:page=> @page ,:per_page=>@per_page)
+
+    if @investigation_groups.count < @per_page then
+      @totalPages=1
+    else
+      @totalPages=@investigation_groups.count/@per_page
+    end
     if (1..@totalPages)===params[:page].to_i
       @page= params[:page].to_i
+      @investigation_groups = InvestigationGroup.investigation_group_by_tag_name(:page=> @page ,:per_page=>@per_page)
     end
-    #lista de tags
-    @tags_list= Tag.load_tag_names
-    #listar grupos por eventos
-    @investigation_groups = InvestigationGroup.load_groups(:page=> @page ,:per_page=>@per_page)
-    #listar grupos por tag en especifico
-    @investigation_tags = InvestigationGroup.investigation_group_by_tag_name(:name=> @name,:page=> @page ,:per_page=>@per_page)
-    #Listar las contribuciones de un grupo de investigacion
-    @investigation_contr = InvestigationGroup.contributions_group(:ids => @ids, :page=> @page ,:per_page=>@per_page)
+
   end
 
   # GET /investigation_groups/1

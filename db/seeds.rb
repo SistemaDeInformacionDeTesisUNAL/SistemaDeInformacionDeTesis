@@ -18,7 +18,7 @@ for i in (1..100)
 
 	contra = random_string(10)
 	Teacher.create!( provider: "unal.edu.co", uid: i, name: random_string(10), lastname: random_string(10), institutional_user: random_string(10), password: contra, password_confirmation: contra)
-	InvestigationGroup.create!( name: random_string(10), create_date: DateTime.new, description: random_string(30) )
+	InvestigationGroup.create!( name: random_string(10), create_date: Date.today, description: random_string(30) )
 	Tag.create!(  name: random_string(10), description: random_string(30) )
 
 end
@@ -36,19 +36,19 @@ for i in (1..100)
 	TeacherInvestigationGroup.create!( teacher_id: teach, investigation_group_id: i, rol: 2 )
 	TeacherInvestigationGroup.create!( teacher_id: rand(1..100), investigation_group_id: rand(1..100), rol: rand(1) )
 
-	HistoryGroup.create!( bonding_date: DateTime.new, investigation_group_id: group, historable_type: Student, historable_id: i, state: 0 )
-	HistoryGroup.create!( bonding_date: DateTime.new, investigation_group_id: i, historable_type: Teacher, historable_id: teach, state: 0 )
+	HistoryGroup.create!( bonding_date: Date.today, investigation_group_id: group, historable_type: Student, historable_id: i, state: 0 )
+	HistoryGroup.create!( bonding_date: Date.today, investigation_group_id: i, historable_type: Teacher, historable_id: teach, state: 0 )
 
-	Contribution.create!( name: random_string(15), publication_date: DateTime.new, description: random_string(50), investigation_group_id: rand(1..100), state: rand(2) )
-	Contribution.create!( name: random_string(15), publication_date: DateTime.new, description: random_string(50), investigation_group_id: rand(1..100), state: rand(2) )
-	Contribution.create!( name: random_string(15), publication_date: DateTime.new, description: random_string(50), investigation_group_id: rand(1..100), state: rand(2) )
+	Contribution.create!( name: random_string(15), publication_date: Date.today, description: random_string(50), investigation_group_id: rand(1..100), state: rand(2) )
+	Contribution.create!( name: random_string(15), publication_date: Date.today, description: random_string(50), investigation_group_id: rand(1..100), state: rand(2) )
+	Contribution.create!( name: random_string(15), publication_date: Date.today, description: random_string(50), investigation_group_id: rand(1..100), state: rand(2) )
 
 end
 
 for i in (1..50)
 
-	HistoryGroup.create!( bonding_date: DateTime.new, investigation_group_id: rand(1..100), historable_type: Student, historable_id: rand(1..100), state: 1 )
-	HistoryGroup.create!( bonding_date: DateTime.new, investigation_group_id: rand(1..100), historable_type: Teacher, historable_id: rand(1..100), state: 1 )
+	HistoryGroup.create!( bonding_date: Date.today, investigation_group_id: rand(1..100), historable_type: Student, historable_id: rand(1..100), state: 1 )
+	HistoryGroup.create!( bonding_date: Date.today, investigation_group_id: rand(1..100), historable_type: Teacher, historable_id: rand(1..100), state: 1 )
 
 	Profile.create!( entity: random_string(5), URL: random_string(30), profileable_type: Student, profileable_id: rand(1..100))
 	Profile.create!( entity: random_string(5), URL: random_string(30), profileable_type: Teacher, profileable_id: rand(1..100))
