@@ -21,6 +21,8 @@ class Contribution < ActiveRecord::Base
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
   validates :state, inclusion: { in: states.keys }
 
+
+
   #Carga todos las contribuciones de acuerdo a sus tags
   def self.load_contributions_tags(**args)
     includes(:tags).paginate(:page => args[:page],:per_page => args[:per_page])
@@ -68,5 +70,9 @@ class Contribution < ActiveRecord::Base
   def self.count
     Contribution.all.count
   end
-
+  #lista las contribuciones por grupo de investigacion
+   def self.load_contributions(**args)
+     includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+     #grpc= InvestigationGroup.contribution_by_group.where(contributions: {id: args[:ids]})
+ end
 end
