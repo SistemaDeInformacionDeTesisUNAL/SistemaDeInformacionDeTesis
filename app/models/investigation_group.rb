@@ -59,4 +59,28 @@ class InvestigationGroup < ApplicationRecord
 
   end
 
+  #Buscar el profesor owner del grupo buscando por id del grupo (usar ids page y per_page)
+  def self.teacher_group_owner(**args)
+
+      list =[]
+      s2="owner"
+      rolt=TeacherInvestigationGroup.load_group_teachers.where(investigation_groups:{id: args[:ids]})
+      rolt.each do |r|
+          if r.rol.downcase ==s2
+              list.push(r.teacher_id)
+          end
+      end
+      a=list.pop
+      #return list
+      Teacher.find(a)
+
+
+  end
+
+#listar los profesores del grupo de investigacion (usar ids page y per_page)
+def self.teachers_group(**args)
+  rolt=TeacherInvestigationGroup.load_group_teachers.where(investigation_groups:{id: args[:ids]})
+end
+
+
 end

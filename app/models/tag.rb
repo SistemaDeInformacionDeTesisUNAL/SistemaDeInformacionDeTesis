@@ -20,5 +20,4 @@ class Tag < ApplicationRecord
  		end
  		return list
  	end
-
 end

@@ -36,4 +36,8 @@ class Teacher < ActiveRecord::Base
     Profile.load_profiles.where( profiles: { profileable_type: "Teacher", profileable_id: args[:ids] } )
   end
 
+#Carga todos los grupos de investigacion
+  def self.load_investigation_groups(**args)
+    includes(:investigation_groups).paginate(:page=>args[:page],:per_page=>args[:per_page])
+  end
 end
