@@ -1,6 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Investigation Groups</h1>
+<div class="Search">
+<%= form_tag investigation_groups_path, :method => 'get' do %>
+  <%= select_tag 'tag', options_from_collection_for_select(@tags_list, "id", "name"), prompt: "All tags"%>
+  <%= submit_tag "Search", :name => nil %>
+<%end%>
+</div>
+
+<div class="paginate">
+   <td>
+   <%= link_to_if @page > 1 , "<" , :action => "index", :page => @page-1 %>
+    <%=@page%> de <%= @totalPages %>
+    <%=link_to_if @page < @totalPages,">",:action => "index",:page => @page+1
+    %>
+ </td>
+ </div>
 
 <table class="table table-striped">
   <thead>
@@ -8,24 +23,35 @@
       <th>Name</th>
       <th>Createdate</th>
       <th>Description</th>
+      <th>Tags</th>
+<!--
       <th colspan="3"></th>
+-->
     </tr>
   </thead>
 
   <tbody>
     <% @investigation_groups.each do |investigation_group| %>
       <tr>
-        <td><%= investigation_group.name %></td>
+        <td><%= link_to investigation_group.name, investigation_group %></td>
         <td><%= investigation_group.create_date %></td>
         <td><%= investigation_group.description %></td>
+        <!--
         <td><%= link_to 'Show', investigation_group %></td>
         <td><%= link_to 'Edit', edit_investigation_group_path(investigation_group) %></td>
         <td><%= link_to 'Destroy', investigation_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+-->
+        <% myTags=''
+        investigation_group.tags.each do |tag|
+          myTags<<tag.name
+          if tag != investigation_group.tags.last
+            myTags<<', '
+          end
+        end %>
+        <td> <%=myTags.to_s%></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
 
 <%= link_to 'New Investigation Group', new_investigation_group_path %>

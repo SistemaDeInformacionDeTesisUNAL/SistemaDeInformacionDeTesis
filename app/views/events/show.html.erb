@@ -1,24 +1,30 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @event.date_time %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Investigation group:</strong>
-  <%= <@event class="investigation_group name">                      </@event> %>
-</p>
-
+<div class="toppad" >
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">  <%= @event.name %></h3>
+    </div>
+  </div>
+</div>
+<div class="container">
+    <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-striped">
+                    <tbody>
+                      <tr>
+                        <td> <strong>Date:</strong> </td>
+                        <td><%= @event.date_time %></td>
+                      </tr>
+                      <tr>
+  <td><strong>Description:</strong></td>
+      <td><%= @event.description %></td>
+    </tr>
+<tr>
+  <td><strong>Investigation group:</strong></td>
+  <td>  <%= link_to @event.investigation_group.name, :controller =>"investigation_groups", :action  => "show", :id => @event.investigation_group.id %></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

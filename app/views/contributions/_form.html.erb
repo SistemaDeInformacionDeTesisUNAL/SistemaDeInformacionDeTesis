@@ -11,34 +11,51 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="container">
+      <table class="table table-striped">
+                      <tbody>
+                        <tr>
+                          <td> <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
-
-  <div class="field">
+</td>
+</tr>
+<tr>
+<td>  <div class="field">
     <%= f.label :publication_date %>
     <%= f.date_select :publication_date %>
   </div>
-
+  </td>
+  </tr>
+  <td>
   <div class="field">
     <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
-
+  </td>
+  <tr>
+  <td>
   <div class="field">
     <%= f.label :investigation_group_id %>
-    <%= f.text_field :investigation_group_id %>
-  </div>
-
-
+      <%= f.select(:investigation_group_id,options_from_collection_for_select(InvestigationGroup.all, "id", "name"), prompt: "All groups")%>
+    </div>
+      </td>
+      </tr>
+      <td>
   <div class="field">
   <%= f.label :file %>
   <%= f.file_field :file%>
-
 </div>
-
+  </td>
+  </tr>
+  <td>
+</div>
   <div class="actions">
     <%= f.submit %>
   </div>
+</td>
+</tbody>
+</table>
+</div>
 <% end %>

@@ -1,9 +1,4 @@
 class InvestigationGroup < ApplicationRecord
-#<<<<<<< HEAD
-	#attr_accessor :name, :create_date, :description
-#=======
-
-#>>>>>>> 793ab9efb00af13e2b7d3a6d0b8228970e5a42a3
   has_many :students
 
 	has_many :teacher_investigation_groups
@@ -39,10 +34,10 @@ class InvestigationGroup < ApplicationRecord
   end
 #busca grupo de investigacion por un tag en especifico
   def self.investigation_group_by_tag_name(**args)
-    tag = Tag.find_by_name( args[:name] )
-    if tag then
-      idt = tag.id.to_s
-      load_investigation_groups_tags.where( tags: { id: idt } ).paginate(:page=>args[:page],:per_page=>args[:per_page])
+    if !args[:tag].blank? then
+        load_investigation_groups_tags.where( tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+      else
+        load_groups(:page => args[:page],:per_page => args[:per_page])
     end
   end
 
@@ -51,12 +46,13 @@ class InvestigationGroup < ApplicationRecord
     InvestigationGroup.all.count
   end
 
-
   #Busca las contribuciones de un grupo de investigacion
   def self.contributions_group(**args)
-    contr= Contribution.load_contributions.where( investigation_groups: {id: args[:ids]})
-    return contr
+    Contribution.load_contributions.where( investigation_groups: {id: args[:group_id]})
+  end
 
+  def self.load_groups(**args)
+	   includes(:events).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
   #Buscar el profesor owner del grupo buscando por id del grupo (usar ids page y per_page)

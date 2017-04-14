@@ -10,33 +10,48 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="container">
+      <table class="table table-striped">
+                      <tbody>
+                        <tr>
+<td>
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
-
+</td>
+</tr>
+<tr>
+  <td>
   <div class="field">
-    <%= f.label :date %>
-    <%= f.date_select :date %>
+    <%= f.label :date_time %>
+    <%= f.date_select :date_time %>
   </div>
-
-  <div class="field">
-    <%= f.label :time %>
-    <%= f.time_select :time %>
-  </div>
-
+</td>
+</tr>
+<tr>
+  <td>
   <div class="field">
     <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
-
+</td>
+</tr>
+<tr>
+  <td>
   <div class="field">
     <%= f.label :investigation_group_id %>
-    <%= f.text_field :investigation_group_id %>
+    <%= f.select(:investigation_group_id,options_from_collection_for_select(InvestigationGroup.all, "id", "name"), prompt: "All groups")%>
   </div>
-
+</td>
+</tr>
+<tr>
+  <td>
   <div class="actions">
     <%= f.submit %>
   </div>
+</td>
+</tbody>
+</table>
+</div>
 <% end %>

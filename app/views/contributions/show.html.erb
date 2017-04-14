@@ -1,24 +1,33 @@
 <p id="notice"><%= notice %></p>
+<div class="toppad" >
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= @contribution.name %></h3>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @contribution.name %>
-</p>
+<div class="container">
+    <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-striped">
+                    <tbody>
+                      <tr>
+                        <td><strong>Publication date:</strong></td>
+                        <td><%= @contribution.publication_date %></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Description:</strong></td>
+                        <td><%= @contribution.description %></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Investigation group:</strong></td>
+                        <td><%= link_to @contribution.investigation_group.name, :controller => "investigation_groups", :action => "show", :id => @contribution.investigation_group.id %></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
 
-<p>
-  <strong>Publication date:</strong>
-  <%= @contribution.publication_date %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @contribution.description %>
-</p>
-
-<p>
-  <strong>Investigation group:</strong>
-  <%= @contribution.investigation_group %>
-</p>
+                  </div>
 
 <%= link_to 'Edit', edit_contribution_path(@contribution) %> |
 <%= link_to 'Back', contributions_path %>
