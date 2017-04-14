@@ -21,8 +21,13 @@ class Contribution < ActiveRecord::Base
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
   validates :state, inclusion: { in: states.keys }
 
+  #Carga todos las contribuciones de acuerdo a sus tags
   def self.load_contributions_tags(**args)
     includes(:tags).paginate(:page => args[:page],:per_page => args[:per_page])
+  end
+
+  def self.lodad_contribution_groups(**args)
+    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
   #Muestra las ubicaciones de una contribucion
@@ -31,9 +36,20 @@ class Contribution < ActiveRecord::Base
 	end
 
   #Muestra las contribuciones que contienen un tag
-  def self.contribution_by_tag_name(name)
-    tag = Tag.find_by_name( name ).id.to_s
-    load_contributions_tags.where( tags: { id: tag } )
+  def self.contribution_by_tag_name(**args)
+    if !args[:tag].blank? && !args[:group].blank? then
+      includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+    else
+      if !args[:tag].blank? then
+        load_contributions_tags.where( tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+      else
+        if !args[:group].blank? then
+          includes(:investigation_group).where( investigation_groups: { id: args[:group]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+        else
+          includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+        end
+      end
+    end
   end
 
   #Devuelve los colaboradores de una contribucion
@@ -43,21 +59,14 @@ class Contribution < ActiveRecord::Base
     return stud + teach
   end
 
-  #Retorna el grupo de investigacion de una contribucion
-  def self.investigation_group_by_contribution(**args)
-    ids = find_by_id( args[:ids] ).investigation_group_id
-    InvestigationGroup.find_by_id( ids )
+  #Muestra las ubicaciones de una contribucion
+  def self.ubications(**args)
+  	Ubication.load_ubications.where( contributions: { id: args[:ids] } ).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
   #Cuenta cuantas contribuciones hay en total, necesaria para hacer el indice para separar por paginas
   def self.count
     Contribution.all.count
-  end
-
-  #lista las contribuciones por grupo de investigacion
-  def self.load_contributions(**args)
-    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
-    #grpc= InvestigationGroup.contribution_by_group.where(contributions: {id: args[:ids]})
   end
 
 end
