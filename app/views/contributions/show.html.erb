@@ -23,6 +23,10 @@
                         <td><strong>Investigation group:</strong></td>
                         <td><%= link_to @contribution.investigation_group.name, :controller => "investigation_groups", :action => "show", :id => @contribution.investigation_group.id %></td>
                       </tr>
+                      <tr>
+                        <td><strong>Files:</strong></td>
+                        <td><%= link_to @contribution.file ,@contribution.file_url.to_s %></td>
+                      </tr>
                     </tbody>
                   </table>
                   </div>
