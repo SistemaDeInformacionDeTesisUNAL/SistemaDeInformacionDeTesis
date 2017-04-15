@@ -39,16 +39,33 @@ class Contribution < ActiveRecord::Base
 
   #Muestra las contribuciones que contienen un tag
   def self.contribution_by_tag_name(**args)
-    if !args[:tag].blank? && !args[:group].blank? then
-      includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+    if !args[:tag].blank? && !args[:group].blank? && !args[:state].blank? then
+      includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]}, :state => args[:state] ).paginate(:page => args[:page],:per_page => args[:per_page])
     else
+        if !args[:tag].blank? && !args[:group].blank? && args[:state].blank?  then
+          includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+        else
+          if !args[:tag].blank? && !args[:state].blank? && args[:group].blank? then
+            includes(:tags).where( tags: { id: args[:tag]},:state => args[:state] ).paginate(:page => args[:page],:per_page => args[:per_page])
+          else
+            if !args[:group].blank? && !args[:state].blank? && args[:tag].blank?then
+              includes(:investigation_group ).where( investigation_groups: { id: args[:group]}, :state => args[:state] ).paginate(:page => args[:page],:per_page => args[:per_page])
+            else
       if !args[:tag].blank? then
         load_contributions_tags.where( tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
       else
         if !args[:group].blank? then
           includes(:investigation_group).where( investigation_groups: { id: args[:group]} ).paginate(:page => args[:page],:per_page => args[:per_page])
         else
-          includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+          if !args[:state].blank? then
+            load_contributions.where(:state => args[:state])
+
+          else
+              includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+            end
+          end
+        end
+          end
         end
       end
     end

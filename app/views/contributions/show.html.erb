@@ -20,12 +20,30 @@
                         <td><%= @contribution.description %></td>
                       </tr>
                       <tr>
+                        <td><strong>State:</strong></td>
+                        <td><%= @contribution.state %></td>
+                      </tr>
+                      <tr>
                         <td><strong>Investigation group:</strong></td>
                         <td><%= link_to @contribution.investigation_group.name, :controller => "investigation_groups", :action => "show", :id => @contribution.investigation_group.id %></td>
                       </tr>
                       <tr>
                         <td><strong>Files:</strong></td>
                         <td><%= link_to @contribution.file ,@contribution.file_url.to_s %></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Ubications:</strong></td>
+                        <td>
+                        <table class="table table-striped">
+                          <tbody>
+                            <tr>
+                              <% @contribution.ubications.each do |ubication| %>
+                              <tr><td><%=ubication.link%><td></tr>
+                              <%end%>
+                            </tr>
+                          </tbody>
+                        </table>
+
                       </tr>
                     </tbody>
                   </table>

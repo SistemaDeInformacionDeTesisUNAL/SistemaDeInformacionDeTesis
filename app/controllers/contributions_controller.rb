@@ -15,14 +15,16 @@ class ContributionsController < ApplicationController
     #recibe el id del grupo
     @group=params[:group]
 
+    @state=params[:state]
+
     #almacena todos los tags
-    @tags = Tag.all
+    @tags = Tag.all.order("name ASC")
 
     #almacena todos los grupos
-    @groups = InvestigationGroup.all
+    @groups = InvestigationGroup.all.order("name ASC")
 
     #almacena todas las contribuciones por tags
-    @contributions = Contribution.contribution_by_tag_name(:group => @group,:tag => @tag, :page => @page, :per_page => @per_page)
+    @contributions = Contribution.contribution_by_tag_name(:state=>@state,:group => @group,:tag => @tag, :page => @page, :per_page => @per_page)
 
     if @contributions.count < @per_page then
       @totalPages=1

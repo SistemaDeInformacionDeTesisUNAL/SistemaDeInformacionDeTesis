@@ -34,6 +34,14 @@
     <%= f.text_area :description %>
   </div>
   </td>
+<tr>
+  <td>
+    <div class="field">
+      <%= f.label :state %>
+      <%= f.select(:state, options_for_select(["Aproved","Progress","Rejected"]))%>
+    </div>
+  </td>
+</tr>
   <tr>
   <td>
   <div class="field">

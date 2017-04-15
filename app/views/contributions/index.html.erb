@@ -4,6 +4,7 @@
 
 <div class="Search">
 <%= form_tag contributions_path, :method => 'get' do %>
+  <%= select_tag 'state',options_for_select(["Aproved","Progress","Rejected"]) , prompt: "All states"%>
   <%= select_tag 'tag', options_from_collection_for_select(@tags, "id", "name"), prompt: "All tags"%>
   <%= select_tag 'group', options_from_collection_for_select(@groups, "id", "name"), prompt: "All groups"%>
   <%= submit_tag "Search", :name => nil %>
@@ -25,6 +26,7 @@
       <th>Name</th>
       <th>Publication date</th>
       <th>Description</th>
+      <th>State</th>
       <th>Investigation group</th>
       <th>Tags</th>
 <!--
@@ -38,6 +40,7 @@
         <td><%= link_to contribution.name, contribution %></td>
         <td><%= contribution.publication_date %></td>
         <td><%= contribution.description %></td>
+        <td><%= contribution.state %></td>
         <td><%= link_to contribution.investigation_group.name, :controller => "investigation_groups", :action => "show", :id => contribution.investigation_group.id%></td>
 <!--
         <td><%= link_to 'Show', contribution %></td>
