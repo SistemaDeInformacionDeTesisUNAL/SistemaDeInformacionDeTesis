@@ -2,14 +2,12 @@
 
 one:
   name: MyString
-  date: 2017-03-24
-  time: 2017-03-24 09:17:56
+  date_time: 2017-03-24 09:17:56
   description: MyText
   investigation_group: one
 
 two:
   name: MyString
-  date: 2017-03-24
-  time: 2017-03-24 09:17:56
+  date_time: 2017-03-24 09:17:56
   description: MyText
   investigation_group: two

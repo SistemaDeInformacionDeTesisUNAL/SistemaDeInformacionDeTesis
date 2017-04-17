@@ -37,7 +37,7 @@ class ContributionsControllerTest < ActionDispatch::IntegrationTest
     patch contribution_url(@contribution), params: { contribution: { description: @contribution.description, investigation_group_id: @contribution.investigation_group_id, name: @contribution.name, publication_date: @contribution.publication_date } }
     assert_redirected_to contribution_url(@contribution)
   end
-
+=begin
   test "should destroy contribution" do
     assert_difference('Contribution.count', -1) do
       delete contribution_url(@contribution)
@@ -45,4 +45,5 @@ class ContributionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to contributions_url
   end
+=end
 end

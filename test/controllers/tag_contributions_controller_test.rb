@@ -37,7 +37,7 @@ class TagContributionsControllerTest < ActionDispatch::IntegrationTest
     patch tag_contribution_url(@tag_contribution), params: { tag_contribution: { contribution_id: @tag_contribution.contribution_id, tag_id: @tag_contribution.tag_id } }
     assert_redirected_to tag_contribution_url(@tag_contribution)
   end
-
+=begin
   test "should destroy tag_contribution" do
     assert_difference('TagContribution.count', -1) do
       delete tag_contribution_url(@tag_contribution)
@@ -45,4 +45,5 @@ class TagContributionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to tag_contributions_url
   end
+=end
 end

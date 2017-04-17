@@ -24,26 +24,62 @@
                         <td><%= @contribution.state %></td>
                       </tr>
                       <tr>
+                        <td> <strong>Tags:</strong> </td>
+                      <% myTags=''
+                        @contribution.tags.each do |tag|
+                          myTags<<tag.name
+                          if tag != @contribution.tags.last
+                            myTags<<', '
+                          end
+                      end %>
+                    <td> <%=myTags.to_s%></td>
+                  </tr>
+                      <tr>
                         <td><strong>Investigation group:</strong></td>
                         <td><%= link_to @contribution.investigation_group.name, :controller => "investigation_groups", :action => "show", :id => @contribution.investigation_group.id %></td>
                       </tr>
-                      <tr>
+                      <% myStudents = Contribution.students(:contribution_id=>@contribution.id)
+                      if !myStudents.blank? then%>
+                        <tr>
+                          <td><strong>Students:</strong></td>
+                            <td>
+                          <%  myStudents.each do |student| %>
+                                <%=student.institutional_user%>
+                                <%if student != myStudents.last then %> ,
+                                <%end%>
+                              <%end%>
+                              </td>
+                        </tr>
+                        <%end%>
+                        <% myTeachers=Contribution.teachers(:contribution_id=>@contribution.id)
+                        if !myTeachers.blank? then %>
+                        <tr>
+                            <td><strong>Teachers:</strong></td>
+                            <td>
+                          <%  myTeachers.each do |teacher| %>
+                            <%=teacher.institutional_user %>
+                            <%if teacher != myTeachers.last then %> ,
+                            <%end%>
+                            <%end%>
+                            </td>
+                          </tr>
+                                                <% end %>
+                          <tr>
                         <td><strong>Files:</strong></td>
                         <td><%= link_to @contribution.file ,@contribution.file_url.to_s %></td>
                       </tr>
                       <tr>
                         <td><strong>Ubications:</strong></td>
                         <td>
-                        <table class="table table-striped">
+                        <table class="table table-bordered">
                           <tbody>
                             <tr>
                               <% @contribution.ubications.each do |ubication| %>
-                              <tr><td><%=ubication.link%><td></tr>
+                              <tr><td><%=ubication.link%></td></tr>
                               <%end%>
                             </tr>
                           </tbody>
                         </table>
-
                       </tr>
                     </tbody>
                   </table>

@@ -11,6 +11,8 @@ class Contribution < ActiveRecord::Base
   has_many :tag_contributions
   has_many :tags, through: :tag_contributions
 
+  before_destroy :destroyContributionFromTag
+
   enum state: {Aproved: 0, Rejected: 1, Progress: 2}
 
   mount_uploader :file, FileUploader
@@ -20,8 +22,10 @@ class Contribution < ActiveRecord::Base
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
   validates :state, inclusion: { in: states.keys }
-
-
+#aún en prueba
+def destroyContributionFromTag
+  TagContribution.where(contribution_id: :id).destroy_all
+end
 
   #Carga todos las contribuciones de acuerdo a sus tags
   def self.load_contributions_tags(**args)
@@ -73,10 +77,20 @@ class Contribution < ActiveRecord::Base
 
   #Devuelve los colaboradores de una contribucion
   def self.user_by_contribution(**args)
-    stud = Student.load_contributions.where( contributions: { id: args[:ids] } )
-    teach = Teacher.load_contributions.where( contributions: { id: args[:ids] } )
+    stud = Student.load_contributions.where( contributions: { id: args[:contribution_id] } )
+    teach = Teacher.load_contributions.where( contributions: { id: args[:contribution_id] } )
     return stud + teach
   end
+#Estudiantes de una contribución
+  def self.students(**args)
+    Student.load_contributions.where( contributions: { id: args[:contribution_id] } )
+  end
+  #Profesores de una contribución
+  def self.teachers(**args)
+    Teacher.load_contributions.where( contributions: { id: args[:contribution_id] } )
+  end
+
+
 
   #Muestra las ubicaciones de una contribucion
   def self.ubications(**args)

@@ -38,11 +38,12 @@ class EventStudentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to event_student_url(@event_student)
   end
 
-  test "should destroy event_student" do
+=begin  test "should destroy event_student" do
     assert_difference('EventStudent.count', -1) do
       delete event_student_url(@event_student)
     end
 
     assert_redirected_to event_students_url
   end
+=end
 end
