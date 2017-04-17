@@ -12,7 +12,7 @@ class InvestigationGroupsController < ApplicationController
     #recibe el id de tag
     @tag=params[:tag]
     #lista de tags
-    @tags_list= Tag.all
+    @tags_list= Tag.all.order("name ASC")
 
     #listar grupos por eventos
     #@investigation_groups = InvestigationGroup.load_groups(:page=> @page ,:per_page=>@per_page)
@@ -46,6 +46,8 @@ class InvestigationGroupsController < ApplicationController
   # GET /investigation_groups/1
   # GET /investigation_groups/1.json
   def show
+    #Owner
+    @Owner=InvestigationGroup.teacher_group_owner(:id => params[:id])
   end
 
   # GET /investigation_groups/new

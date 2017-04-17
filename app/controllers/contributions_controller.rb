@@ -15,14 +15,16 @@ class ContributionsController < ApplicationController
     #recibe el id del grupo
     @group=params[:group]
 
+    @state=params[:state]
+
     #almacena todos los tags
-    @tags = Tag.all
+    @tags = Tag.all.order("name ASC")
 
     #almacena todos los grupos
-    @groups = InvestigationGroup.all
+    @groups = InvestigationGroup.all.order("name ASC")
 
     #almacena todas las contribuciones por tags
-    @contributions = Contribution.contribution_by_tag_name(:group => @group,:tag => @tag, :page => @page, :per_page => @per_page)
+    @contributions = Contribution.contribution_by_tag_name(:state=>@state,:group => @group,:tag => @tag, :page => @page, :per_page => @per_page)
 
     if @contributions.count < @per_page then
       @totalPages=1
@@ -34,15 +36,6 @@ class ContributionsController < ApplicationController
       @page= params[:page].to_i
       @contributions = Contribution.contribution_by_tag_name(:tag => @tag, :page => @page, :per_page => @per_page)
     end
-    #Esta variable retorna todas las contribuciones
-    #@contributions = Contribution.load_contributions( :page => @page ,:per_page => @per_page)
-    #Esta variable retorna las contribuciones despues de buscarlas por un tag
-    #@contributions = Contribution.contribution_by_tag_name(:name => @name, :page => @page, :per_page => @per_page)
-    #Esta variable retorna una lista con los tags
-    #2)
-    #Retorna los colaboradores de una contribucion
-    @collaborators = Contribution.user_by_contribution(:ids => @ids)
-
     #3)
     #Esta variable retorna las ubicaciones de una contribucion
     @ubications = Contribution.ubications(:ids => @ids, :page => @page, :per_page => @per_page)

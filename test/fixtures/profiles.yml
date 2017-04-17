@@ -3,11 +3,11 @@
 one:
   entity: MyString
   URL: MyText
-  student: one
-  teacher: one
+  profileable_type: Student
+  profileable_id: one
 
 two:
   entity: MyString
   URL: MyText
-  student: two
-  teacher: two
+  profileable_type: Teacher
+  profileable_id: two

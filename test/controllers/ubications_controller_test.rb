@@ -45,4 +45,5 @@ class UbicationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to ubications_url
   end
+
 end

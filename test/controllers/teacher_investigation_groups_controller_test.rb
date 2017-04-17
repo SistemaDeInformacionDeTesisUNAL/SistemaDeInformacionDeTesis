@@ -45,4 +45,5 @@ class TeacherInvestigationGroupsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to teacher_investigation_groups_url
   end
+
 end

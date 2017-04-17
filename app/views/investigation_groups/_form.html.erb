@@ -22,8 +22,11 @@
                         </tr>
                         <tr>
                             <td>  <div class="field">
-                                    <%= f.label :createDate %>
-                                    <%= f.date_select :create_date %>
+                                    <%= f.label :"Create date " %>
+                                    <% if @investigation_group.create_date.blank? then
+                                      @investigation_group.create_date = Date.today
+                                    end %>
+                                    <%= f.label @investigation_group.create_date.to_s%>
                                   </div>
                                 </td>
                           </tr>

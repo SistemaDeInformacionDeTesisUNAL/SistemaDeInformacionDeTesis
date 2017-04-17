@@ -39,9 +39,9 @@ for i in (1..100)
 	HistoryGroup.create!( bonding_date: Date.today, investigation_group_id: group, historable_type: Student, historable_id: i, state: 0 )
 	HistoryGroup.create!( bonding_date: Date.today, investigation_group_id: i, historable_type: Teacher, historable_id: teach, state: 0 )
 
-	Contribution.create!( name: random_string(15), publication_date: Date.today, description: random_string(50), investigation_group_id: rand(1..100), state: rand(2) )
-	Contribution.create!( name: random_string(15), publication_date: Date.today, description: random_string(50), investigation_group_id: rand(1..100), state: rand(2) )
-	Contribution.create!( name: random_string(15), publication_date: Date.today, description: random_string(50), investigation_group_id: rand(1..100), state: rand(2) )
+	Contribution.create!( name: random_string(15), publication_date: Date.today, description: random_string(50), investigation_group_id: rand(1..100), state: rand(3) )
+	Contribution.create!( name: random_string(15), publication_date: Date.today, description: random_string(50), investigation_group_id: rand(1..100), state: rand(3) )
+	Contribution.create!( name: random_string(15), publication_date: Date.today, description: random_string(50), investigation_group_id: rand(1..100), state: rand(3) )
 
 end
 

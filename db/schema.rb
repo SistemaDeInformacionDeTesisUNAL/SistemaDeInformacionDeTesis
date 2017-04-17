@@ -17,12 +17,12 @@ ActiveRecord::Schema.define(version: 20170412170908) do
 
   create_table "contributions", force: :cascade do |t|
     t.string   "name",                   limit: 100,             null: false
-    t.datetime "publication_date",                               null: false
+    t.datetime "publication_date"
     t.text     "description"
-    t.integer  "investigation_group_id",             null: false
-    t.integer  "state"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.integer  "state",                              default: 2, null: false
+    t.integer  "investigation_group_id"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "file"
     t.index ["investigation_group_id"], name: "index_contributions_on_investigation_group_id", using: :btree
   end
@@ -47,12 +47,14 @@ ActiveRecord::Schema.define(version: 20170412170908) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name",                   limit: 45, null: false
-    t.datetime "datetime",                          null: false
+    t.datetime "date_time",                         null: false
     t.text     "description"
     t.integer  "investigation_group_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.index ["date_time"], name: "index_events_on_date_time", using: :btree
     t.index ["investigation_group_id"], name: "index_events_on_investigation_group_id", using: :btree
+    t.index ["name"], name: "index_events_on_name", using: :btree
   end
 
   create_table "history_groups", force: :cascade do |t|
@@ -66,8 +68,6 @@ ActiveRecord::Schema.define(version: 20170412170908) do
     t.datetime "updated_at",                         null: false
     t.index ["historable_type", "historable_id"], name: "index_history_groups_on_historable_type_and_historable_id", using: :btree
     t.index ["investigation_group_id"], name: "index_history_groups_on_investigation_group_id", using: :btree
-    t.index ["student_id"], name: "index_history_groups_on_student_id", using: :btree
-    t.index ["teacher_id"], name: "index_history_groups_on_teacher_id", using: :btree
   end
 
   create_table "investigation_groups", force: :cascade do |t|
@@ -82,14 +82,13 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "entity",     null: false
-    t.text     "URL",        null: false
-    t.integer  "student_id"
-    t.integer  "teacher_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["student_id"], name: "index_profiles_on_student_id", using: :btree
-    t.index ["teacher_id"], name: "index_profiles_on_teacher_id", using: :btree
+    t.string   "entity",           null: false
+    t.text     "URL",              null: false
+    t.string   "profileable_type"
+    t.integer  "profileable_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable_type_and_profileable_id", using: :btree
   end
 
   create_table "students", force: :cascade do |t|
@@ -148,9 +147,9 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   end
 
   create_table "teacher_investigation_groups", force: :cascade do |t|
+    t.integer  "rol",                    default: 0, null: false
     t.integer  "teacher_id"
     t.integer  "investigation_group_id"
-    t.integer  "rol",                    default: 2, null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.index ["investigation_group_id"], name: "index_teacher_investigation_groups_on_investigation_group_id", using: :btree
@@ -194,14 +193,13 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   end
 
   create_table "user_contributions", force: :cascade do |t|
-    t.integer  "student_id"
-    t.integer  "teacher_id"
-    t.integer  "contribution_id", null: false
+    t.string   "userable_type"
+    t.integer  "userable_id"
+    t.integer  "contribution_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["contribution_id"], name: "index_user_contributions_on_contribution_id", using: :btree
-    t.index ["student_id"], name: "index_user_contributions_on_student_id", using: :btree
-    t.index ["teacher_id"], name: "index_user_contributions_on_teacher_id", using: :btree
+    t.index ["userable_type", "userable_id"], name: "index_user_contributions_on_userable_type_and_userable_id", using: :btree
   end
 
   add_foreign_key "contributions", "investigation_groups"
@@ -211,10 +209,6 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   add_foreign_key "event_teachers", "teachers"
   add_foreign_key "events", "investigation_groups"
   add_foreign_key "history_groups", "investigation_groups"
-  add_foreign_key "history_groups", "students"
-  add_foreign_key "history_groups", "teachers"
-  add_foreign_key "profiles", "students"
-  add_foreign_key "profiles", "teachers"
   add_foreign_key "students", "investigation_groups"
   add_foreign_key "tag_contributions", "contributions"
   add_foreign_key "tag_contributions", "tags"
@@ -224,6 +218,4 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   add_foreign_key "teacher_investigation_groups", "teachers"
   add_foreign_key "ubications", "contributions"
   add_foreign_key "user_contributions", "contributions"
-  add_foreign_key "user_contributions", "students"
-  add_foreign_key "user_contributions", "teachers"
 end

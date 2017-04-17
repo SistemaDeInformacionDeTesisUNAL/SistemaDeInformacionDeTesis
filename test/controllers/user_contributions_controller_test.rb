@@ -17,7 +17,7 @@ class UserContributionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create user_contribution" do
     assert_difference('UserContribution.count') do
-      post user_contributions_url, params: { user_contribution: { contribution_id: @user_contribution.contribution_id, student_id: @user_contribution.student_id, teacher_id: @user_contribution.teacher_id } }
+      post user_contributions_url, params: { user_contribution: { contribution_id: @user_contribution.contribution_id, userable_type: @user_contribution.userable_type, userable_id: @user_contribution.userable_id } }
     end
 
     assert_redirected_to user_contribution_url(UserContribution.last)
@@ -34,7 +34,7 @@ class UserContributionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update user_contribution" do
-    patch user_contribution_url(@user_contribution), params: { user_contribution: { contribution_id: @user_contribution.contribution_id, student_id: @user_contribution.student_id, teacher_id: @user_contribution.teacher_id } }
+    patch user_contribution_url(@user_contribution), params: { user_contribution: { contribution_id: @user_contribution.contribution_id, userable_type: @user_contribution.userable_type, userable_id: @user_contribution.userable_id } }
     assert_redirected_to user_contribution_url(@user_contribution)
   end
 
@@ -45,4 +45,5 @@ class UserContributionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to user_contributions_url
   end
+
 end
