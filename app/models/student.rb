@@ -1,4 +1,5 @@
-class Student < ActiveRecord::Base
+class Student < ApplicationRecord
+
   belongs_to :investigation_group
 
   has_many :profiles, as: :profileable, dependent: :destroy
@@ -11,34 +12,26 @@ class Student < ActiveRecord::Base
 
   has_many :history_groups, as: :historable, dependent: :destroy
 
-  # Include default devise modules.
-  devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable, :omniauthable
-  include DeviseTokenAuth::Concerns::User
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :ldap_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, :lastname, :institutional_user, :presence => true
-  validates :name, :lastname, :length => { :maximum => 25, :too_long => "%{count} Demasiados caracteres" }
-  validates :institutional_user, :uniqueness => true
+  validates :username, presence: true, uniqueness: true
 
-  #Carga todos los estudiantes en grupos de investigacion
-  def self.load_students(**args)
-    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+  before_validation :get_ldap_email
+  def get_ldap_email
+    self.email = Devise::LDAP::Adapter.get_ldap_param(self.username,"mail").first
   end
 
-  #Carga todas las contribuciones hechas por estuadiantes
-  def self.load_contributions(**args)
-    includes(:contributions).paginate(:page => args[:page],:per_page => args[:per_page])
+  # use ldap uid as primary key
+  before_validation :get_ldap_id
+  def get_ldap_id
+    self.id = Devise::LDAP::Adapter.get_ldap_param(self.username,"uidnumber").first
   end
 
-  #Contribuciones del estudiante
-  def self.students_by_contribution(**args)
-    load_contributions.where( contributions: { id: args[:ids] } )
+  # hack for remember_token
+  def authenticatable_token
+    Digest::SHA1.hexdigest(email)[0,29]
   end
-
-  #Perfiles del estudiante
-  def self.students_profiles(**args)
-    Profile.load_profiles.where( profiles: { profileable_type: "Student", profileable_id: args[:ids] } )
-  end
-
 end
