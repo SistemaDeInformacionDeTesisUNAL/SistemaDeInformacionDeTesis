@@ -37,7 +37,7 @@ class EventTeachersControllerTest < ActionDispatch::IntegrationTest
     patch event_teacher_url(@event_teacher), params: { event_teacher: { event_id: @event_teacher.event_id, teacher_id: @event_teacher.teacher_id } }
     assert_redirected_to event_teacher_url(@event_teacher)
   end
-=begin
+
   test "should destroy event_teacher" do
     assert_difference('EventTeacher.count', -1) do
       delete event_teacher_url(@event_teacher)
@@ -45,5 +45,5 @@ class EventTeachersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to event_teachers_url
   end
-=end
+
 end

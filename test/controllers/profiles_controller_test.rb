@@ -34,11 +34,10 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update profile" do
-    patch profile_url(@profile), params: { profile: { URL: @profile.URL, entity: @profile.entity, student_id: @profile.student_id, teacher_id: @profile.teacher_id } }
+    patch profile_url(@profile), params: { profile: { URL: @profile.URL, entity: @profile.entity, profileable_type: @profile.profileable_type, profileable_id: @profile.profileable_id } }
     assert_redirected_to profile_url(@profile)
   end
 
-=begin
   test "should destroy profile" do
     assert_difference('Profile.count', -1) do
       delete profile_url(@profile)
@@ -46,5 +45,5 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to profiles_url
   end
-=end
+
 end

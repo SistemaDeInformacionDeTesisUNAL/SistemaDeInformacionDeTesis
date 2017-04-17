@@ -4,12 +4,12 @@ one:
   bonding_date: 2017-03-24
   exit_date: 2017-03-24
   investigation_group: one
-  historable_type: one
+  historable_type: Student
   historable_id: one
 
 two:
   bonding_date: 2017-03-24
   exit_date: 2017-03-24
   investigation_group: two
-  historable_type: two
+  historable_type: Teacher
   historable_id: two

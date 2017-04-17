@@ -60,7 +60,7 @@ class InvestigationGroup < ApplicationRecord
 
       list =[]
       s2="owner"
-      rolt=TeacherInvestigationGroup.load_group_teachers.where(investigation_groups:{id: args[:ids]})
+      rolt=TeacherInvestigationGroup.load_group_teachers.where(investigation_groups:{id: args[:id]})
       rolt.each do |r|
           if r.rol.downcase ==s2
               list.push(r.teacher_id)

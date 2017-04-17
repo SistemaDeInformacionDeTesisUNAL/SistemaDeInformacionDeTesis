@@ -37,7 +37,6 @@ class TagInvestigationGroupsControllerTest < ActionDispatch::IntegrationTest
     patch tag_investigation_group_url(@tag_investigation_group), params: { tag_investigation_group: { investigation_group_id: @tag_investigation_group.investigation_group_id, tag_id: @tag_investigation_group.tag_id } }
     assert_redirected_to tag_investigation_group_url(@tag_investigation_group)
   end
-=begin
   test "should destroy tag_investigation_group" do
     assert_difference('TagInvestigationGroup.count', -1) do
       delete tag_investigation_group_url(@tag_investigation_group)
@@ -45,5 +44,4 @@ class TagInvestigationGroupsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to tag_investigation_groups_url
   end
-=end
 end

@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  userable_type: one
+  userable_type: Student
   userable_id: one
   contribution: one
 
 two:
-  userable_type: two
+  userable_type: Teacher
   userable_id: two
   contribution: two

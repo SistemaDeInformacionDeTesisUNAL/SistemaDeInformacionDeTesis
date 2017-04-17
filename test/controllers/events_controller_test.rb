@@ -37,7 +37,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     patch event_url(@event), params: { event: { date_time: @event.date_time, description: @event.description, investigation_group_id: @event.investigation_group_id, name: @event.name } }
     assert_redirected_to event_url(@event)
   end
-
 =begin
   test "should destroy event" do
     assert_difference('Event.count', -1) do

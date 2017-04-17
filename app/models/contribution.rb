@@ -17,7 +17,7 @@ class Contribution < ActiveRecord::Base
 
   mount_uploader :file, FileUploader
 
-  validates :name, :publication_date, :presence => true
+  validates :name, :presence => true
   validates :name, :length => { :maximum => 100, :too_long => "%{count} Demasiados caracteres" }
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
@@ -75,13 +75,7 @@ end
     end
   end
 
-  #Devuelve los colaboradores de una contribucion
-  def self.user_by_contribution(**args)
-    stud = Student.load_contributions.where( contributions: { id: args[:contribution_id] } )
-    teach = Teacher.load_contributions.where( contributions: { id: args[:contribution_id] } )
-    return stud + teach
-  end
-#Estudiantes de una contribución
+  #Estudiantes de una contribución
   def self.students(**args)
     Student.load_contributions.where( contributions: { id: args[:contribution_id] } )
   end

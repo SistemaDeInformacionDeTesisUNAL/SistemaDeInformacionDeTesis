@@ -37,8 +37,6 @@ class HistoryGroupsControllerTest < ActionDispatch::IntegrationTest
     patch history_group_url(@history_group), params: { history_group: { bonding_date: @history_group.bonding_date, exit_date: @history_group.exit_date, investigation_group_id: @history_group.investigation_group_id, historable_type: @history_group.historable_type, historable_id: @history_group.historable_id } }
     assert_redirected_to history_group_url(@history_group)
   end
-
-=begin
   test "should destroy history_group" do
     assert_difference('HistoryGroup.count', -1) do
       delete history_group_url(@history_group)
@@ -46,6 +44,5 @@ class HistoryGroupsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to history_groups_url
   end
-=end
 
 end

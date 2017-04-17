@@ -37,7 +37,7 @@ class UbicationsControllerTest < ActionDispatch::IntegrationTest
     patch ubication_url(@ubication), params: { ubication: { contribution_id: @ubication.contribution_id, link: @ubication.link } }
     assert_redirected_to ubication_url(@ubication)
   end
-=begin
+
   test "should destroy ubication" do
     assert_difference('Ubication.count', -1) do
       delete ubication_url(@ubication)
@@ -45,5 +45,5 @@ class UbicationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to ubications_url
   end
-=end
+
 end

@@ -37,7 +37,7 @@ class UserContributionsControllerTest < ActionDispatch::IntegrationTest
     patch user_contribution_url(@user_contribution), params: { user_contribution: { contribution_id: @user_contribution.contribution_id, userable_type: @user_contribution.userable_type, userable_id: @user_contribution.userable_id } }
     assert_redirected_to user_contribution_url(@user_contribution)
   end
-=begin
+
   test "should destroy user_contribution" do
     assert_difference('UserContribution.count', -1) do
       delete user_contribution_url(@user_contribution)
@@ -45,5 +45,5 @@ class UserContributionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to user_contributions_url
   end
-=end
+
 end
