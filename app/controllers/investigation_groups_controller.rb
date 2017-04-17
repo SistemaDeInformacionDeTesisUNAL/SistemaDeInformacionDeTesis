@@ -46,6 +46,8 @@ class InvestigationGroupsController < ApplicationController
   # GET /investigation_groups/1
   # GET /investigation_groups/1.json
   def show
+    #Owner
+    @Owner=InvestigationGroup.teacher_group_owner(:id => params[:id])
   end
 
   # GET /investigation_groups/new
