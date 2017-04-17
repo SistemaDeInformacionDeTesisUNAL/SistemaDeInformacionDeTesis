@@ -1,43 +1,38 @@
-class Teacher < ActiveRecord::Base
+class Teacher < ApplicationRecord
+
   has_many :profiles, as: :profileable, dependent: :destroy
 
   has_many :event_teachers
   has_many :events, through: :event_teachers
 
   has_many :user_contributions, as: :userable, dependent: :destroy
-	has_many :contributions, through: :user_contributions
-
-  has_many :teacher_investigation_groups
-	has_many :investigation_groups, through: :teacher_investigation_groups
+  has_many :contributions, through: :user_contributions
 
   has_many :history_groups, as: :historable, dependent: :destroy
-  # Include default devise modules.
-  devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable, :omniauthable
-  include DeviseTokenAuth::Concerns::User
 
-  validates :name, :lastname, :institutional_user, :presence => true
-  validates :name, :lastname, :length => { :maximum => 25, :too_long => "%{count} Demasiados caracteres" }
-  validates :institutional_user, :uniqueness => true
+  has_many :teacher_investigation_groups
+  has_many :investigation_groups, through: :teacher_investigation_groups
+  
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :ldap_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
-  #Carga todas las contribuciones
-  def self.load_contributions(**args)
-    includes(:contributions).paginate(:page => args[:page],:per_page => args[:per_page])
+  validates :username, presence: true, uniqueness: true
+
+  before_validation :get_ldap_email
+  def get_ldap_email
+    self.email = Devise::LDAP::Adapter.get_ldap_param(self.username,"mail").first
   end
 
-  #Contribuciones del profesor
-  def self.teachers_by_contribution(**args)
-    load_contributions.where( contributions: { id: args[:ids] } )
+  # use ldap uid as primary key
+  before_validation :get_ldap_id
+  def get_ldap_id
+    self.id = Devise::LDAP::Adapter.get_ldap_param(self.username,"uidnumber").first
   end
 
-  #Perfiles del profesor
-  def self.teachers_profiles(**args)
-    Profile.load_profiles.where( profiles: { profileable_type: "Teacher", profileable_id: args[:ids] } )
-  end
-
-#Carga todos los grupos de investigacion
-  def self.load_investigation_groups(**args)
-    includes(:investigation_groups).paginate(:page=>args[:page],:per_page=>args[:per_page])
+  # hack for remember_token
+  def authenticatable_token
+    Digest::SHA1.hexdigest(email)[0,29]
   end
 end
