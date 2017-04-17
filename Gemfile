@@ -21,14 +21,6 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-
-gem 'devise_token_auth'
-gem 'devise'
-gem 'omniauth'
-gem 'rack-cors', :require => 'rack/cors'
-
-gem 'carrierwave', '~> 0.10.0'
-
 #gem 'wdm', '>= 0.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -41,8 +33,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', platforms: :ruby
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -64,3 +54,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+#ldap
+#gem 'net-ldap', '~> 0.3.1'
+gem 'devise'
+gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
+
+gem 'will_paginate', '~> 3.1.0'
+gem 'carrierwave', '~> 0.10.0'

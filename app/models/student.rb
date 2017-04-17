@@ -1,4 +1,5 @@
 class Student < ActiveRecord::Base
+
   belongs_to :investigation_group
 
   has_many :profiles, as: :profileable, dependent: :destroy
@@ -11,15 +12,19 @@ class Student < ActiveRecord::Base
 
   has_many :history_groups, as: :historable, dependent: :destroy
 
-  # Include default devise modules.
-  devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable, :omniauthable
-  include DeviseTokenAuth::Concerns::User
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :ldap_authenticatable, :rememberable, :trackable, :validatable,
+         :authentication_keys => [:username]
+  validates :username,:presence => true,:uniqueness => {
+    :case_sensitive => false
+  }
 
-  validates :name, :lastname, :institutional_user, :presence => true
-  validates :name, :lastname, :length => { :maximum => 25, :too_long => "%{count} Demasiados caracteres" }
-  validates :institutional_user, :uniqueness => true
+  def ldap_before_save
+     self.email = Devise::LDAP::Adapter.get_ldap_param(self.username,"mail").first
+     self.name = Devise::LDAP::Adapter.get_ldap_param(self.username,"givenname").first
+     self.lastname = Devise::LDAP::Adapter.get_ldap_param(self.username,"sn").first
+  end
 
   #Carga todos los estudiantes en grupos de investigacion
   def self.load_students(**args)

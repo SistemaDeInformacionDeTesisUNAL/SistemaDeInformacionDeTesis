@@ -92,33 +92,25 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.string   "provider",                          default: "institutional_user", null: false
-    t.string   "uid",                               default: "",                   null: false
-    t.string   "encrypted_password",                default: "",                   null: false
+    t.string   "email",                  default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,                    null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.string   "name",                   limit: 25,                                null: false
-    t.string   "lastname",               limit: 25,                                null: false
-    t.string   "institutional_user",                                               null: false
+    t.string   "name",                   default: ""
+    t.string   "lastname",               default: ""
+    t.string   "username"
     t.integer  "investigation_group_id"
-    t.json     "tokens"
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
-    t.index ["confirmation_token"], name: "index_students_on_confirmation_token", unique: true, using: :btree
-    t.index ["institutional_user"], name: "index_students_on_institutional_user", unique: true, using: :btree
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_students_on_email", unique: true, using: :btree
     t.index ["investigation_group_id"], name: "index_students_on_investigation_group_id", using: :btree
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true, using: :btree
-    t.index ["uid", "provider"], name: "index_students_on_uid_and_provider", unique: true, using: :btree
+    t.index ["username"], name: "index_students_on_username", unique: true, using: :btree
   end
 
   create_table "tag_contributions", force: :cascade do |t|
@@ -157,31 +149,23 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.string   "provider",                                  default: "institutional_user", null: false
-    t.string   "uid",                                       default: "",                   null: false
-    t.string   "encrypted_password",                        default: "",                   null: false
+    t.string   "email",                  default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                             default: 0,                    null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_institutional_user"
-    t.string   "lastname",                       limit: 25,                                null: false
-    t.string   "institutional_user",                                                       null: false
-    t.string   "name",                           limit: 25,                                null: false
-    t.json     "tokens"
-    t.datetime "created_at",                                                               null: false
-    t.datetime "updated_at",                                                               null: false
-    t.index ["confirmation_token"], name: "index_teachers_on_confirmation_token", unique: true, using: :btree
-    t.index ["institutional_user"], name: "index_teachers_on_institutional_user", unique: true, using: :btree
+    t.string   "name",                   default: ""
+    t.string   "lastname",               default: ""
+    t.string   "username"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_teachers_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
-    t.index ["uid", "provider"], name: "index_teachers_on_uid_and_provider", unique: true, using: :btree
+    t.index ["username"], name: "index_teachers_on_username", unique: true, using: :btree
   end
 
   create_table "ubications", force: :cascade do |t|

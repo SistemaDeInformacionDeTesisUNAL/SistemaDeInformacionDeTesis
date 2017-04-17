@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  
+
   root to: 'static_pages#home'
 
   get 'about', to: "static_pages#about", as: "contacto"
@@ -19,11 +19,7 @@ Rails.application.routes.draw do
   resources :profiles
   resources :teacher_investigation_groups
   resources :investigation_groups
-  mount_devise_token_auth_for 'Student', at: 'student_auth'
-
-  mount_devise_token_auth_for 'Teacher', at: 'teacher_auth'
-  as :teacher do
-    # Define routes for Teacher within this block.
-  end
+  devise_for :students
+  devise_for :teachers
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
