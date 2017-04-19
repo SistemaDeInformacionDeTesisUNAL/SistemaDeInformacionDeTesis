@@ -12,6 +12,9 @@ Rails.application.config.assets.precompile += %w( css/bootstrap.min.css )
 Rails.application.config.assets.precompile += %w( css/bootstrap-theme.min.css )
 Rails.application.config.assets.precompile += %w( css/reset.css )
 Rails.application.config.assets.precompile += %w( css/unal.css )
+
+Rails.application.config.assets.precompile += %w( css/session.css )
+
 #Rails.application.config.assets.precompile += %w( css/base.css )
 #Rails.application.config.assets.precompile += %w( css/tablet.css )
 #Rails.application.config.assets.precompile += %w( css/phone.css )

@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
-  root to: 'static_pages#home'
+  root to: 'static_pages#about'
 
   #Redireccion del boton de deslogearse
   get 'Log out', to: "students#sing_in", as: "login"
 
   get 'about', to: "static_pages#about", as: "contacto"
-  get 'home', to: "static_pages#home", as: "home"
+  #get 'home', to: "static_pages#home", as: "home"
+  get 'teacher', to: "teachers#index"
 
   resources :tag_contributions
   resources :tags
