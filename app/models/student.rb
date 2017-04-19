@@ -11,7 +11,7 @@ class Student < ApplicationRecord
   has_many :contributions, through: :user_contributions
 
   has_many :history_groups, as: :historable, dependent: :destroy
-
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :ldap_authenticatable, :registerable,
