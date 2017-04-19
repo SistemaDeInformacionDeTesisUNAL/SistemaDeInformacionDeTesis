@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   #get 'home', to: "static_pages#home", as: "home"
   get 'teacher', to: "teachers#index"
 
+  get 'teacher', to: "teachers#show", as: "teacher"
+
   resources :tag_contributions
   resources :tags
   resources :ubications
