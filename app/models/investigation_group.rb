@@ -68,7 +68,11 @@ class InvestigationGroup < ApplicationRecord
       end
       a=list.pop
       #return list
-      TeacherInvestigationGroup.find(a)
+      c=TeacherInvestigationGroup.find(a)
+      #puts c
+      d= c.id
+      #puts d
+      Teacher.find(d)
 
   end
 
