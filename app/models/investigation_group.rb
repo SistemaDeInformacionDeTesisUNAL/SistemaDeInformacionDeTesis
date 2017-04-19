@@ -68,8 +68,7 @@ class InvestigationGroup < ApplicationRecord
       end
       a=list.pop
       #return list
-      Teacher.find(a)
-
+      TeacherInvestigationGroup.find(a)
 
   end
 

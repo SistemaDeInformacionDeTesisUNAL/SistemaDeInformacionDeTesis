@@ -14,7 +14,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resources)
-    root_path
+    if authenticate_student!
+      root_path
+    else
+      teachers_path
+    end
   end
 
 end

@@ -12,12 +12,11 @@ def random_string(length=10)
 	length.times { password << chars[rand(chars.size)] }
 	return password
 end
-InvestigationGroup.create!( name: random_string(10), create_date: Date.today, description: random_string(30) )
-=begin
+
 for i in (1..100)
 
 	us = random_string(10)
-	Teacher.create!( first_name: random_string(10), last_name: random_string(10), email: "#{us}@unal.edu.co", username: us )
+	Teacher.create!( first_name: random_string(10), last_name: random_string(10), email: "#{us}@unal.edu.co", username: us, password: random_string(10) )
 	InvestigationGroup.create!( name: random_string(10), create_date: Date.today, description: random_string(30) )
 	Tag.create!(  name: random_string(10), description: random_string(30) )
 
@@ -28,7 +27,7 @@ for i in (1..100)
 	us = random_string(10)
 	group = rand(1..100)
 
-	Student.create!( first_name: random_string(10), last_name: random_string(10), email: "#{us}@unal.edu.co", username: us, investigation_group_id: group )
+	Student.create!( first_name: random_string(10), last_name: random_string(10), email: "#{us}@unal.edu.co", username: us, investigation_group_id: group, password: random_string(10) )
 	Event.create!( name: random_string(10), date_time: Date.today, description: random_string(40), investigation_group_id: rand(1..100))
 
 	teach = rand(1..100)
@@ -78,4 +77,3 @@ for i in (1..300)
 	EventTeacher.create!( event_id: rand(1..100), teacher_id: rand(1..100) )
 
 end
-=end
