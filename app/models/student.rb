@@ -28,4 +28,25 @@ class Student < ApplicationRecord
      #demas campos del modelo
      #self.autorize = false
   end
+
+  #Carga todos los estudiantes en grupos de investigacion
+  def self.load_students(**args)
+    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+  end
+
+  #Carga todas las contribuciones hechas por estuadiantes
+  def self.load_contributions(**args)
+    includes(:contributions).paginate(:page => args[:page],:per_page => args[:per_page])
+  end
+
+  #Contribuciones del estudiante
+  def self.students_by_contribution(**args)
+    load_contributions.where( contributions: { id: args[:ids] } )
+  end
+
+  #Perfiles del estudiante
+  def self.students_profiles(**args)
+    Profile.load_profiles.where( profiles: { profileable_type: "Student", profileable_id: args[:ids] } )
+  end
+  
 end
