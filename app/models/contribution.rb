@@ -32,7 +32,7 @@ end
     includes(:tags).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
-  def self.lodad_contribution_groups(**args)
+  def self.load_contribution_groups(**args)
     includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
@@ -83,7 +83,6 @@ end
   def self.teachers(**args)
     Teacher.load_contributions.where( contributions: { id: args[:contribution_id] } )
   end
-
 
 
   #Muestra las ubicaciones de una contribucion

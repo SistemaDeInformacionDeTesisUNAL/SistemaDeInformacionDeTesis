@@ -4,21 +4,11 @@ class InvestigationGroupsController < ApplicationController
   # GET /investigation_groups
   # GET /investigation_groups.json
   def index
-  #  @investigation_groups = InvestigationGroup.all
+    @investigation_groups = InvestigationGroup.all
     @page=1
     @per_page=10
     @totalPages=InvestigationGroup.countGroups/@per_page
 
-    #recibe el id de tag
-    @tag=params[:tag]
-    #lista de tags
-    @tags_list= Tag.all.order("name ASC")
-
-    #listar grupos por eventos
-    #@investigation_groups = InvestigationGroup.load_groups(:page=> @page ,:per_page=>@per_page)
-
-    #listar grupos por tag en especifico
-    @investigation_groups = InvestigationGroup.investigation_group_by_tag_name(:tag=> @tag,:page=> @page ,:per_page=>@per_page)
 
     if @investigation_groups.count < @per_page then
       @totalPages=1
@@ -27,27 +17,16 @@ class InvestigationGroupsController < ApplicationController
     end
     if (1..@totalPages)===params[:page].to_i
       @page= params[:page].to_i
-      @investigation_groups = InvestigationGroup.investigation_group_by_tag_name(:page=> @page ,:per_page=>@per_page)
+
+      @investigation_groups = InvestigationGroup.all
     end
-    #lista de tags
-  #  @tags_list= Tag.load_tag_names
-    #listar grupos por eventos
-  #  @investigation_groups = InvestigationGroup.load_groups(:page=> @page ,:per_page=>@per_page)
-    #listar grupos por tag en especifico
-  #  @investigation_tags = InvestigationGroup.investigation_group_by_tag_name(:name=> @name,:page=> @page ,:per_page=>@per_page)
-    #Listar las contribuciones de un grupo de investigacion
-  #  @investigation_contr = InvestigationGroup.contributions_group(:ids => @ids, :page=> @page ,:per_page=>@per_page)
-    #listar el profesor owner del grupo
-  #  @owner_teacher = InvestigationGroup.teacher_group_owner(:ids => @ids, :page=> @page ,:per_page=>@per_page)
-    #Listar profesores del grupo
-  #  @teachers_group = InvestigationGroup.teachers_group(:ids => @ids, :page=> @page ,:per_page=>@per_page)
+
   end
 
   # GET /investigation_groups/1
   # GET /investigation_groups/1.json
   def show
-    #Owner
-    @Owner=InvestigationGroup.teacher_group_owner(:id => params[:id])
+    
   end
 
   # GET /investigation_groups/new
@@ -99,9 +78,58 @@ class InvestigationGroupsController < ApplicationController
     end
   end
 
+  #Listar las contribuciones de un grupo de investigacion
+  def contribution_inv_group
+    @page=1
+    @per_page=10
+    @ids=params[:ids]
+    @investigation_contr = InvestigationGroup.contributions_group(:ids => @ids, :page=> @page ,:per_page=>@per_page)
+  end
+
+  #listar el profesor owner del grupo
+  def owner_group_inv
+    @page=1
+    @per_page=10
+    @ids=params[:ids]
+    @owner_teacher = InvestigationGroup.teacher_group_owner(:ids => @ids, :page=> @page ,:per_page=>@per_page)
+  end
+
+  #Listar profesores del grupo
+  def teachers_group_inv
+    @page=1
+    @per_page=10
+    @ids=params[:ids]
+    @teachers_group = InvestigationGroup.teachers_group(:ids => @ids, :page=> @page ,:per_page=>@per_page)
+  end
+
+  def tags_group_inv
+    @page=1
+    @per_page=10
+    @totalPages=InvestigationGroup.countGroups/@per_page
+    #recibe el id de tag
+    @tag=params[:tag]
+    #lista de tags
+    @tags_list= Tag.all.order("name ASC")
+
+    #listar grupos por tag en especifico
+    @investigation_groups = InvestigationGroup.investigation_group_by_tag_name(:tag=> @tag,:page=> @page ,:per_page=>@per_page)
+
+
+    if @investigation_groups.count < @per_page then
+      @totalPages=1
+    else
+      @totalPages=@investigation_groups.count/@per_page
+    end
+    if (1..@totalPages)===params[:page].to_i
+      @page= params[:page].to_i
+      @investigation_groups = InvestigationGroup.investigation_group_by_tag_name(:page=> @page ,:per_page=>@per_page)
+    end
+
+  end
+
   private
+  def set_investigation_group
     # Use callbacks to share common setup or constraints between actions.
-    def set_investigation_group
       @investigation_group = InvestigationGroup.find(params[:id])
     end
 
