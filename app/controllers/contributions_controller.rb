@@ -1,6 +1,7 @@
 class ContributionsController < ApplicationController
   before_action :set_contribution, only: [:show, :edit, :update, :destroy]
 
+  before_action :authenticate_student!
   # GET /contributions
   # GET /contributions.json
 

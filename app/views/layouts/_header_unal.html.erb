@@ -71,11 +71,12 @@
                 <div class="btn-group">
                     <div class="btn btn-default dropdown-toggle" data-toggle="dropdown">Inicio<span class="caret"></span></div>
                     <ul class="dropdown-menu dropItem-16">
-                        <li><%= link_to "Inicio", home_path %></li>
+                        <%# <li><%= link_to "Inicio", home_path %><%#/li> %>
                         <li><%= link_to "Acerca de nosotros", contacto_path %></li>
                         <li><%= link_to "Contributions", contributions_path %></li>
                         <li><%= link_to "Investigation Groups", investigation_groups_path %></li>
                         <li><%= link_to "Events", events_path %></li>
+                        <li><%= link_to('Log out', destroy_student_session_path, :method => :delete) %></li>
                     </ul>
                 </div>
                 <div class="btn-group">
