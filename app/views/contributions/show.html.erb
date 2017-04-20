@@ -44,7 +44,7 @@
                           <td><strong>Students:</strong></td>
                             <td>
                           <%  myStudents.each do |student| %>
-                                <%=student.institutional_user%>
+                                <%=student.username%>
                                 <%if student != myStudents.last then %> ,
                                 <%end%>
                               <%end%>
@@ -57,7 +57,7 @@
                             <td><strong>Teachers:</strong></td>
                             <td>
                           <%  myTeachers.each do |teacher| %>
-                            <%=teacher.institutional_user %>
+                            <%=teacher.username %>
                             <%if teacher != myTeachers.last then %> ,
                             <%end%>
                             <%end%>

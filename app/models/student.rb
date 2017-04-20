@@ -1,4 +1,5 @@
-class Student < ActiveRecord::Base
+class Student < ApplicationRecord
+
   belongs_to :investigation_group
 
   has_many :profiles, as: :profileable, dependent: :destroy
@@ -11,15 +12,22 @@ class Student < ActiveRecord::Base
 
   has_many :history_groups, as: :historable, dependent: :destroy
 
-  # Include default devise modules.
-  devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable, :omniauthable
-  include DeviseTokenAuth::Concerns::User
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :ldap_authenticatable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :authentication_keys => [:username]
 
-  validates :name, :lastname, :institutional_user, :presence => true
-  validates :name, :lastname, :length => { :maximum => 25, :too_long => "%{count} Demasiados caracteres" }
-  validates :institutional_user, :uniqueness => true
+  validates :username, presence: true, uniqueness: true
+
+  def ldap_before_save
+     self.email = Devise::LDAP::Adapter.get_ldap_param(self.username,"mail").first
+     self.first_name = Devise::LDAP::Adapter.get_ldap_param(self.username,"givenname").first
+     self.last_name = Devise::LDAP::Adapter.get_ldap_param(self.username,"sn").first
+     self.investigation_group_id = 1
+     #demas campos del modelo
+     #self.autorize = false
+  end
 
   #Carga todos los estudiantes en grupos de investigacion
   def self.load_students(**args)
@@ -40,5 +48,5 @@ class Student < ActiveRecord::Base
   def self.students_profiles(**args)
     Profile.load_profiles.where( profiles: { profileable_type: "Student", profileable_id: args[:ids] } )
   end
-
+  
 end

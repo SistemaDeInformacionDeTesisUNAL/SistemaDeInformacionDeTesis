@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-aleatorio = Random.new
 
 def random_string(length=10)
 	chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'
@@ -16,8 +15,8 @@ end
 
 for i in (1..100)
 
-	contra = random_string(10)
-	Teacher.create!( provider: "unal.edu.co", uid: i, name: random_string(10), lastname: random_string(10), institutional_user: random_string(10), password: contra, password_confirmation: contra)
+	us = random_string(10)
+	Teacher.create!( first_name: random_string(10), last_name: random_string(10), email: "#{us}@unal.edu.co", username: us, password: random_string(10) )
 	InvestigationGroup.create!( name: random_string(10), create_date: Date.today, description: random_string(30) )
 	Tag.create!(  name: random_string(10), description: random_string(30) )
 
@@ -25,10 +24,10 @@ end
 
 for i in (1..100)
 
-	contra = random_string(10)
+	us = random_string(10)
 	group = rand(1..100)
 
-	Student.create!( provider: "unal.edu.co", uid: i, name: random_string(10), lastname: random_string(10), institutional_user: random_string(10), investigation_group_id: group, password: contra, password_confirmation: contra)
+	Student.create!( first_name: random_string(10), last_name: random_string(10), email: "#{us}@unal.edu.co", username: us, investigation_group_id: group, password: random_string(10) )
 	Event.create!( name: random_string(10), date_time: Date.today, description: random_string(40), investigation_group_id: rand(1..100))
 
 	teach = rand(1..100)
