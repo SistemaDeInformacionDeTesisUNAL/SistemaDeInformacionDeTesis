@@ -63,3 +63,5 @@ gem "devise_ldap_authenticatable"
 
 gem 'will_paginate', '~> 3.1.0'
 gem 'carrierwave', '~> 0.10.0'
+gem 'jquery-datatables-rails', '~> 3.4.0'
+gem 'bootstrap-sass'
