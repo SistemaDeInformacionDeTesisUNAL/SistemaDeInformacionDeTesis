@@ -61,6 +61,23 @@ class StudentsController < ApplicationController
     end
   end
 
+  #perfiles de los estudiantes
+  def profile_student
+    @profileable_type = params[:profileable_type]
+    @page=1
+    @per_page=10
+    @ids=params[:ids]
+    @Prof_student =Student.students_profiles(:profileable_type=>@profileable_type, :ids => @ids, :page=> @page ,:per_page=>@per_page)
+  end
+
+  #contribuciones del estudiante
+  def contributions_student
+    @page=1
+    @per_page=10
+    @ids=params[:ids]
+    @contr_student =Student.students_by_contribution(:ids => @ids, :page=> @page ,:per_page=>@per_page)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student

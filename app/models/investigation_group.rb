@@ -81,5 +81,9 @@ def self.teachers_group(**args)
   rolt=TeacherInvestigationGroup.load_group_teachers.where(investigation_groups:{id: args[:ids]})
 end
 
+#listar los estudiantes del grupo de investigacion (usar ids page y per_page)
+def self.students_group(**args)
+  Student.load_students.where(investigation_groups:{id: args[:ids]})
+end
 
 end

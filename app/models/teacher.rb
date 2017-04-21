@@ -34,9 +34,19 @@ class Teacher < ApplicationRecord
     includes(:contributions).paginate(:page => args[:page],:per_page => args[:per_page])
   end
 
+  def self.load_user_contributions(**args)
+    includes(:user_contributions).paginate(:page => args[:page],:per_page => args[:per_page])
+  end
+
   #Contribuciones del profesor
   def self.teachers_by_contribution(**args)
     load_contributions.where( contributions: { id: args[:ids] } )
+  end
+
+  #Listar Contribuciones del profesor
+  def self.contributions_by_teacher(**args)
+    #load_user_contributions.where( teachers: { id: args[:ids] } )
+    UserContribution.load_contributions_users.where(contributions: { id: args[:ids] })
   end
 
   #Perfiles del profesor

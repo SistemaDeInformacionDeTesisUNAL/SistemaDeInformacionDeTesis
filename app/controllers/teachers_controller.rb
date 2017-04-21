@@ -61,6 +61,23 @@ class TeachersController < ApplicationController
     end
   end
 
+  #perfiles de los profesores
+  def profile_teacher
+    @profileable_type = params[:profileable_type]
+    @page=1
+    @per_page=10
+    @ids=params[:ids]
+    @prof_teacher =Teacher.teachers_profiles(:profileable_type=>@profileable_type, :ids => @ids, :page=> @page ,:per_page=>@per_page)
+  end
+
+  #contribuciones del profesor
+  def contributions_teacher
+    @page=1
+    @per_page=10
+    @ids=params[:ids]
+    @contr_teacher =Teacher.teachers_by_contribution(:ids => @ids, :page=> @page ,:per_page=>@per_page)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher

@@ -26,7 +26,7 @@ class InvestigationGroupsController < ApplicationController
   # GET /investigation_groups/1
   # GET /investigation_groups/1.json
   def show
-    
+
   end
 
   # GET /investigation_groups/new
@@ -102,6 +102,15 @@ class InvestigationGroupsController < ApplicationController
     @teachers_group = InvestigationGroup.teachers_group(:ids => @ids, :page=> @page ,:per_page=>@per_page)
   end
 
+  #listar estudiantes del grupo de investigacion
+  def students_group_inv
+    @page=1
+    @per_page=10
+    @ids=params[:ids]
+    @students_group = InvestigationGroup.students_group(:ids => @ids, :page=> @page ,:per_page=>@per_page)
+  end
+
+#Busqueda por tags de grupos de investigacion 
   def tags_group_inv
     @page=1
     @per_page=10
