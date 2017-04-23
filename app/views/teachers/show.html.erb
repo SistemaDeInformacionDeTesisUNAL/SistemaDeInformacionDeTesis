@@ -1,24 +1,61 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @teacher.first_name %>
-</p>
+<%= stylesheet_link_tag 'css/profile' %>
+<div class="container">
 
-<p>
-  <strong>Last name:</strong>
-  <%= @teacher.last_name %>
-</p>
+  <div class="col-md-4 col-md-offset-4">
+    <div class="profile-sidebar">
+      <!--div class="profile-userpic">
+      <img src="https://pbs.twimg.com/profile_images/828436452748951554/0Zi7F0Kc.jpg" class="img-responsive" alt="">
+    </div-->
+    <div class="profile-usertitle">
+      <div class="profile-usertitle-name">
+        <p> <%= @teacher.first_name %> <%= @teacher.last_name %> </p>
+      </div>
+      <div class="profile-usertitle-job">
+        <p>TEACHER</p>
+      </div>
+      <div class="profile-usertitle-job">
+        <strong style="color: black;">Username:</strong>
+        <%= @teacher.username %>
+      </div>
+      <div class="profile-usertitle-job">
+        <strong style="color: black;">Email:</strong>
+        <%= @teacher.email %>
+      </div>
+      <div class="profile-usertitle-job">
+        <strong style="color: black;">Investigation groups:</strong>
+        <%@teacher.investigation_groups.each do |groupe|%>
+        <%= link_to groupe.name, :controller => "investigation_groups", :action => "show", :id => groupe.id%>
+        <%  if groupe != @teacher.investigation_groups.last %>,
+        <%end
+      end %>
+      </div>
+      <strong style="color: black;">Contributions:</strong>
+      <div class="profile-usertitle-job">
+        <%@teacher.contributions.each do |contribution|%>
+        <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
+        <%  if contribution != @teacher.contributions.last %>,
+        <%end
+      end %>
 
-<p>
-  <strong>Username:</strong>
-  <%= @teacher.username %>
-</p>
+    </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @teacher.email %>
-</p>
+    <div class="profile-userbuttons">
+      <% if teacher_signed_in? %>
+        <% if current_teacher.id == @teacher.id %>
+          <%= link_to 'Edit', edit_teacher_path(@teacher), :class=>"btn btn-success btn-sm" %> |
+        <% end %>
+      <% end %>
+      <%= link_to 'Back', teachers_path, :class=>"btn btn-success btn-sm" %>
+      <% if teacher_signed_in? %>
+        <% if current_teacher.id == @teacher.id %>
+        | <%= link_to('Log out', destroy_teacher_session_path, :method => :delete, :class=>"btn btn-success btn-sm") %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
 
-<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
-<%= link_to 'Back', teachers_path %>
+</div>

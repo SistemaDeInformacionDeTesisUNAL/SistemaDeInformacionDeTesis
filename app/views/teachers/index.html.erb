@@ -10,8 +10,6 @@
       <th>Username</th>
       <th>Email</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -23,13 +21,9 @@
         <td><%= teacher.username %></td>
         <td><%= teacher.email %></td>
         <td><%= link_to 'Show', teacher, :class=>"btn btn-success" %></td>
-        <td><%= link_to 'Edit', edit_teacher_path(teacher), :class=>"btn btn-default" %></td>
-        <td><%= link_to 'Destroy', teacher, :class=>" btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Teacher', new_teacher_path %>

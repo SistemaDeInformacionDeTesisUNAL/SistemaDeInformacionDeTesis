@@ -3,12 +3,9 @@ Rails.application.routes.draw do
   root to: 'static_pages#about'
 
   #Redireccion del boton de deslogearse
-  get 'Log out', to: "students#sing_in", as: "login"
+  get 'Log out', to: "students#sing_in", as: "estudiante"
 
   get 'about', to: "static_pages#about", as: "contacto"
-  #get 'home', to: "static_pages#home", as: "home"
-  get 'teacher', to: "teachers#show", as: "teacher"
-  get 'student', to: "students#show", as: "student"
 
   resources :tag_contributions
   resources :tags
@@ -24,7 +21,7 @@ Rails.application.routes.draw do
   resources :investigation_groups
   devise_for :students
   devise_for :teachers
-  resources :students
-  resources :teachers
+  resources :students, except:[:new,:create]
+  resources :teachers, except:[:new,:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
