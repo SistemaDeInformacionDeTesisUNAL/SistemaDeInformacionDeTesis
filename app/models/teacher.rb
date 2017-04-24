@@ -31,7 +31,7 @@ class Teacher < ApplicationRecord
 
   #Carga todas las contribuciones
   def self.load_contributions(**args)
-    includes(:contributions).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:contributions)
   end
 
   #Contribuciones del profesor
@@ -46,6 +46,6 @@ class Teacher < ApplicationRecord
 
   #Carga todos los grupos de investigacion
   def self.load_investigation_groups(**args)
-    includes(:investigation_groups).paginate(:page=>args[:page],:per_page=>args[:per_page])
+    includes(:investigation_groups)
   end
 end

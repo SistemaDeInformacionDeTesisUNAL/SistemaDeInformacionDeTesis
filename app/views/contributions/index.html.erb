@@ -2,25 +2,9 @@
 
 <h1>Contributions</h1>
 
-<div class="Search">
-<%= form_tag contributions_path, :method => 'get' do %>
-  <%= select_tag 'state',options_for_select(["Aproved","Progress","Rejected"]) , prompt: "All states"%>
-  <%= select_tag 'tag', options_from_collection_for_select(@tags, "id", "name"), prompt: "All tags"%>
-  <%= select_tag 'group', options_from_collection_for_select(@groups, "id", "name"), prompt: "All groups"%>
-  <%= submit_tag "Search", :name => nil %>
-<%end%>
-</div>
+<div class="container">
+    <table id="data-table" class="table table-striped table-bordered dataTables_wrapper order-column form-inline dt-bootstrap nowrap" width="100%" cellspacing="0" >
 
-<div class="paginate">
-  <td>
-  <%= link_to_if @page > 1 , "<" , :action => "index", :page => @page-1 %>
-   <%=@page%> de <%= @totalPages %>
-   <%=link_to_if @page < @totalPages,">",:action => "index",:page => @page+1
-   %>
-</td>
-</div>
-
-<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -29,16 +13,13 @@
       <th>State</th>
       <th>Investigation group</th>
       <th>Tags</th>
-<!--
-      <th colspan="3"></th>
-    -->
     </tr>
   </thead>
   <tbody>
     <% @contributions.each do |contribution| %>
       <tr>
         <td><%= link_to contribution.name, contribution %></td>
-        <td><%= contribution.publication_date %></td>
+        <td><%= Date.parse(contribution.publication_date.to_s).to_formatted_s(:rfc822) %></td>
         <td><%= contribution.description %></td>
         <td><%= contribution.state %></td>
         <td><%= link_to contribution.investigation_group.name, :controller => "investigation_groups", :action => "show", :id => contribution.investigation_group.id%></td>
@@ -60,5 +41,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
+
 
 <%= link_to 'New Contribution', new_contribution_path %>

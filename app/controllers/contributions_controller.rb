@@ -7,16 +7,7 @@ class ContributionsController < ApplicationController
 
   def index
   #  @contributions = Contribution.all
-    @page=1
-    @per_page=10
 
-    #recibe el id de tag
-    @tag=params[:tag]
-
-    #recibe el id del grupo
-    @group=params[:group]
-
-    @state=params[:state]
 
     #almacena todos los tags
     @tags = Tag.all.order("name ASC")
@@ -25,21 +16,11 @@ class ContributionsController < ApplicationController
     @groups = InvestigationGroup.all.order("name ASC")
 
     #almacena todas las contribuciones por tags
-    @contributions = Contribution.contribution_by_tag_name(:state=>@state,:group => @group,:tag => @tag, :page => @page, :per_page => @per_page)
+    @contributions = Contribution.contribution_by_tag_name(:page => params[:page], :per_page => params[:per_page])
 
-    if @contributions.count < @per_page then
-      @totalPages=1
-    else
-      @totalPages=@contributions.count/@per_page
-    end
-
-    if (1..@totalPages)===params[:page].to_i
-      @page= params[:page].to_i
-      @contributions = Contribution.contribution_by_tag_name(:tag => @tag, :page => @page, :per_page => @per_page)
-    end
     #3)
     #Esta variable retorna las ubicaciones de una contribucion
-    @ubications = Contribution.ubications(:ids => @ids, :page => @page, :per_page => @per_page)
+    @ubications = Contribution.ubications(:ids => params[:ids])
 
   end
 
