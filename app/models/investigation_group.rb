@@ -26,18 +26,18 @@ class InvestigationGroup < ApplicationRecord
 
 #busca grupos de investigacion por eventos
   def self.load_groups(**args)
-	   includes(:events).paginate(:page => args[:page],:per_page => args[:per_page])
+	   includes(:events)
   end
 #busca grupos de investigacion por tags
   def self.load_investigation_groups_tags(**args)
-    includes(:tags).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:tags)
   end
 #busca grupo de investigacion por un tag en especifico
   def self.investigation_group_by_tag_name(**args)
     if !args[:tag].blank? then
-        load_investigation_groups_tags.where( tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+        load_investigation_groups_tags.where( tags: { id: args[:tag]} )
       else
-        load_groups(:page => args[:page],:per_page => args[:per_page])
+        load_groups()
     end
   end
 
@@ -52,7 +52,7 @@ class InvestigationGroup < ApplicationRecord
   end
 
   def self.load_groups(**args)
-	   includes(:events).paginate(:page => args[:page],:per_page => args[:per_page])
+	   includes(:events)
   end
 
   #Buscar el profesor owner del grupo buscando por id del grupo (usar ids page y per_page)

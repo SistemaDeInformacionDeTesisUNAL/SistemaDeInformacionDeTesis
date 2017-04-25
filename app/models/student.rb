@@ -24,19 +24,19 @@ class Student < ApplicationRecord
      self.email = Devise::LDAP::Adapter.get_ldap_param(self.username,"mail").first
      self.first_name = Devise::LDAP::Adapter.get_ldap_param(self.username,"givenname").first
      self.last_name = Devise::LDAP::Adapter.get_ldap_param(self.username,"sn").first
-     self.investigation_group_id = 1
+     self.investigation_group_id = 0
      #demas campos del modelo
      #self.autorize = false
   end
 
   #Carga todos los estudiantes en grupos de investigacion
   def self.load_students(**args)
-    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:investigation_group)
   end
 
   #Carga todas las contribuciones hechas por estuadiantes
   def self.load_contributions(**args)
-    includes(:contributions).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:contributions)
   end
 
   #Contribuciones del estudiante
@@ -48,5 +48,5 @@ class Student < ApplicationRecord
   def self.students_profiles(**args)
     Profile.load_profiles.where( profiles: { profileable_type: "Student", profileable_id: args[:ids] } )
   end
-  
+
 end

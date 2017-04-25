@@ -12,6 +12,8 @@ class Contribution < ActiveRecord::Base
   has_many :tags, through: :tag_contributions
 
   before_destroy :destroyContributionFromTag
+  after_create :create_user_contribution
+
 
   enum state: {Aproved: 0, Rejected: 1, Progress: 2}
 
@@ -22,6 +24,10 @@ class Contribution < ActiveRecord::Base
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
   validates :state, inclusion: { in: states.keys }
+
+  def create_user_contribution
+    UserContribution.create!( userable_type: Student, userable_id: Student.last, contribution_id: Contribution.last.id+1 )
+  end
 #aún en prueba
 def destroyContributionFromTag
   TagContribution.where(contribution_id: :id).destroy_all
@@ -29,11 +35,11 @@ end
 
   #Carga todos las contribuciones de acuerdo a sus tags
   def self.load_contributions_tags(**args)
-    includes(:tags).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:tags)
   end
 
   def self.lodad_contribution_groups(**args)
-    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:investigation_group)
   end
 
   #Muestra las ubicaciones de una contribucion
@@ -44,28 +50,28 @@ end
   #Muestra las contribuciones que contienen un tag
   def self.contribution_by_tag_name(**args)
     if !args[:tag].blank? && !args[:group].blank? && !args[:state].blank? then
-      includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]}, :state => args[:state] ).paginate(:page => args[:page],:per_page => args[:per_page])
+      includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]}, :state => args[:state] )
     else
         if !args[:tag].blank? && !args[:group].blank? && args[:state].blank?  then
-          includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+          includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]} )
         else
           if !args[:tag].blank? && !args[:state].blank? && args[:group].blank? then
-            includes(:tags).where( tags: { id: args[:tag]},:state => args[:state] ).paginate(:page => args[:page],:per_page => args[:per_page])
+            includes(:tags).where( tags: { id: args[:tag]},:state => args[:state] )
           else
             if !args[:group].blank? && !args[:state].blank? && args[:tag].blank?then
-              includes(:investigation_group ).where( investigation_groups: { id: args[:group]}, :state => args[:state] ).paginate(:page => args[:page],:per_page => args[:per_page])
+              includes(:investigation_group ).where( investigation_groups: { id: args[:group]}, :state => args[:state] )
             else
       if !args[:tag].blank? then
-        load_contributions_tags.where( tags: { id: args[:tag]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+        load_contributions_tags.where( tags: { id: args[:tag]} )
       else
         if !args[:group].blank? then
-          includes(:investigation_group).where( investigation_groups: { id: args[:group]} ).paginate(:page => args[:page],:per_page => args[:per_page])
+          includes(:investigation_group).where( investigation_groups: { id: args[:group]} )
         else
           if !args[:state].blank? then
             load_contributions.where(:state => args[:state])
 
           else
-              includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+              includes(:investigation_group)
             end
           end
         end
@@ -88,7 +94,7 @@ end
 
   #Muestra las ubicaciones de una contribucion
   def self.ubications(**args)
-  	Ubication.load_ubications.where( contributions: { id: args[:ids] } ).paginate(:page => args[:page],:per_page => args[:per_page])
+  	Ubication.load_ubications.where( contributions: { id: args[:ids] } )
   end
 
   #Cuenta cuantas contribuciones hay en total, necesaria para hacer el indice para separar por paginas
@@ -97,7 +103,7 @@ end
   end
   #lista las contribuciones por grupo de investigacion
    def self.load_contributions(**args)
-     includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+     includes(:investigation_group)
      #grpc= InvestigationGroup.contribution_by_group.where(contributions: {id: args[:ids]})
  end
 end

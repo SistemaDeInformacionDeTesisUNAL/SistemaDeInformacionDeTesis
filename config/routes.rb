@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
 
   root to: 'static_pages#about'
-
-  #Redireccion del boton de deslogearse
-  get 'Log out', to: "students#sing_in", as: "login"
-
+  devise_scope :student do
+    get "sign_in", :to => "students/sessions#new"
+    get 'students/sign_out', :to =>"devise/sessions#destroy"
+  end
+  devise_scope :teacher do
+    get "sign_in", :to => "teachers/sessions#new"
+    get 'teachers/sign_out', :to =>"devise/sessions#destroy"
+  end
   get 'about', to: "static_pages#about", as: "contacto"
   #get 'home', to: "static_pages#home", as: "home"
-  get 'teacher', to: "teachers#show", as: "teacher"
-  get 'student', to: "students#show", as: "student"
 
   resources :tag_contributions
   resources :tags
@@ -24,7 +26,7 @@ Rails.application.routes.draw do
   resources :investigation_groups
   devise_for :students
   devise_for :teachers
-  resources :students
-  resources :teachers
+  resources :students, except:[:new,:create]
+  resources :teachers, except:[:new,:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

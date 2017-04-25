@@ -2,32 +2,60 @@
 <html>
   <head>
     <title>Sistema de información de tesis :: Universidad Nacional de Colombia</title>
-    <link rel="shortcut icon" href="assets/unal/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/images/unal/favicon.ico" type="image/x-icon">
     <%= csrf_meta_tags %>
-    <%=stylesheet_link_tag 'css/bootstrap.min', media="all" %>
-    <%=stylesheet_link_tag 'css/bootstrap-theme.min', media="all"%>
     <%=stylesheet_link_tag 'css/reset', media="all"%>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
+
+<!--
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+-->
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/dot-luv/jquery-ui.css">
+
     <%=stylesheet_link_tag 'css/unal', media="all"%>
+
     <%#=stylesheet_link_tag 'css/base', media="all"%>
     <%#=stylesheet_link_tag 'css/tablet', media="all"%>
     <%#=stylesheet_link_tag 'css/phone', media="all"%>
     <%#=stylesheet_link_tag 'css/small', media="all"%>
     <%#=stylesheet_link_tag 'css/printer', media="print"%>
 
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script  type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
     <%#= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%#=javascript_include_tag '/javascripts/application.js' %>
     <%#<%= javascript_include_tag 'js/jquery' %>
-    <%#<%= javascript_include_tag 'js/unal' %>
+  
+      <%= javascript_include_tag 'js/unal' %>
+
   </head>
 
   <body>
     <%= render 'layouts/header_unal' %>
     <%= render 'layouts/services_unal' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    </div>
     <div class="contributions-content">
     <%= yield %>
     </div>
     <%= render 'layouts/footer_unal' %>
+<script type="text/javascript">
+  //$('#data-table').DataTable( );
+  $(document).ready(function() {
+    $('#data-table').DataTable({
+      "lengthChange":   false,
+      fixedHeader: true,
+      "jQueryUI": true
+    });
+
+    });
+</script>
   </body>
 </html>

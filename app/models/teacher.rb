@@ -31,12 +31,17 @@ class Teacher < ApplicationRecord
 
   #Carga todas las contribuciones
   def self.load_contributions(**args)
-    includes(:contributions).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:contributions)
   end
 
-  #Contribuciones del profesor
+  #Profesores de una contribucion
   def self.teachers_by_contribution(**args)
     load_contributions.where( contributions: { id: args[:ids] } )
+  end
+
+  #Contribuciones del estudiante
+  def self.contributions_by_teachers(**args)
+    UserContribution.load_users.where( userable_type: "Teacher", userable_id: args[:ids] )
   end
 
   #Perfiles del profesor
@@ -46,6 +51,6 @@ class Teacher < ApplicationRecord
 
   #Carga todos los grupos de investigacion
   def self.load_investigation_groups(**args)
-    includes(:investigation_groups).paginate(:page=>args[:page],:per_page=>args[:per_page])
+    includes(:investigation_groups)
   end
 end

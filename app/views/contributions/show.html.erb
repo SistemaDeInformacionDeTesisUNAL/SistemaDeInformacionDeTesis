@@ -44,7 +44,7 @@
                           <td><strong>Students:</strong></td>
                             <td>
                           <%  myStudents.each do |student| %>
-                                <%=student.username%>
+                                <%=link_to student.username, student%>
                                 <%if student != myStudents.last then %> ,
                                 <%end%>
                               <%end%>
@@ -57,7 +57,7 @@
                             <td><strong>Teachers:</strong></td>
                             <td>
                           <%  myTeachers.each do |teacher| %>
-                            <%=teacher.username %>
+                            <%=link_to teacher.username, teacher %>
                             <%if teacher != myTeachers.last then %> ,
                             <%end%>
                             <%end%>
@@ -86,6 +86,7 @@
                   </div>
 
                   </div>
-
+<% if teacher_signed_in? %>
 <%= link_to 'Edit', edit_contribution_path(@contribution) %> |
+<% end %>
 <%= link_to 'Back', contributions_path %>

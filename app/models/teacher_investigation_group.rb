@@ -8,7 +8,7 @@ class TeacherInvestigationGroup < ApplicationRecord
   validates :rol, inclusion: { in: rols.keys }
 
   def self.load_group_teachers(**args)
-    includes(:investigation_group).paginate(:page=>args[:page],:per_page=>args[:per_page])
+    includes(:investigation_group)
   end
 
 end
