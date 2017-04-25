@@ -79,15 +79,13 @@
                         <li><%= link_to "Registrarse", new_student_session_path %></li>
                         <% end %>
                         <li><%= link_to "Acerca de nosotros", contacto_path %></li>
-                        <li><%= link_to "Contributions", contributions_path %></li>
-                        <li><%= link_to "Investigation Groups", investigation_groups_path %></li>
-                        <li><%= link_to "Events", events_path %></li>
-                        <% if !current_student.nil? then%>
-                          <li><%= link_to 'Student Log out', destroy_student_session_path, :method => :delete %></li>
-                      <% end %>
-                      <% if !current_teacher.nil? then%>
-                        <li><%= link_to 'Teacher Log out', destroy_teacher_session_path, :method => :delete %></li>
-                    <% end %>
+                        <li><%= link_to "Contribuciones", contributions_path %></li>
+                        <li><%= link_to "Grupos de Investigacion", investigation_groups_path %></li>
+                        <% if student_signed_in? || teacher_signed_in? %>
+                        <li><%= link_to "Eventos", events_path %></li>
+                        <li><%= link_to "Estudiantes", students_path %></li>
+                        <li><%= link_to "Profesores", teachers_path %></li>
+                        <% end %> 
                     </ul>
                 </div>
                 <div class="btn-group">

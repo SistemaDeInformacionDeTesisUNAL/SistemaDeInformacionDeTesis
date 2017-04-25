@@ -30,4 +30,6 @@
   </tbody>
 </table>
 </div>
+<% if teacher_signed_in? %>
 <%= link_to 'New Event', new_event_path %>
+<% end %>
