@@ -31,12 +31,12 @@ class Student < ApplicationRecord
 
   #Carga todos los estudiantes en grupos de investigacion
   def self.load_students(**args)
-    includes(:investigation_group).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:investigation_group)
   end
 
   #Carga todas las contribuciones hechas por estuadiantes
   def self.load_contributions(**args)
-    includes(:contributions).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:contributions)
   end
 
   #Contribuciones del estudiante

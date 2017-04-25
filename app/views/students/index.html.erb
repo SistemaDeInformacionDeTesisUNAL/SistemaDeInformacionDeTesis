@@ -2,15 +2,16 @@
 
 <h1>Students</h1>
 
-<table class="table table-striped">
+<div class="container">
+    <table id="data-table" class="table table-striped table-bordered dataTables_wrapper order-column form-inline dt-bootstrap nowrap" width="100%" cellspacing="0" >
+
   <thead>
-    <tr style="background-color: black; color: white;">
+    <tr>
       <th>First name</th>
       <th>Last name</th>
       <th>Username</th>
       <th>Email</th>
       <th>Investigation group</th>
-      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -21,15 +22,16 @@
         <td><%= student.last_name %></td>
         <td><%= student.username %></td>
         <td><%= student.email %></td>
-        <% if student.investigation_group.id != 0 %>
-        <td><%= link_to student.investigation_group.name, investigation_group_path(student.investigation_group) %></td>
-        <% else %>
-        <td><%= "" %></td>
-        <% end %>
+        <td><%= student.investigation_group %></td>
+        <!--
         <td><%= link_to 'Show', student, :class=>"btn btn-success" %></td>
-     </tr>
+        <td><%= link_to 'Edit', edit_student_path(student), :class=>"btn btn-default" %></td>
+        <td><%= link_to 'Destroy', student, :class=>" btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+-->
+      </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
-<br>
+<%= link_to 'New Student', new_student_path %>

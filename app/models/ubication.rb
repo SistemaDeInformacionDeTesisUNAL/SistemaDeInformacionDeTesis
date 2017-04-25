@@ -7,7 +7,7 @@ class Ubication < ApplicationRecord
 
   #carga todas las contribuciones
   def self.load_ubications(**args)
-    includes(:contribution).paginate(:page => args[:page],:per_page => args[:per_page])
+    includes(:contribution)
   end
 
 end
