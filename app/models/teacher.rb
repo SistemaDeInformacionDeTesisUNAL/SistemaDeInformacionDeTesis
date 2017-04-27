@@ -34,9 +34,14 @@ class Teacher < ApplicationRecord
     includes(:contributions)
   end
 
-  #Contribuciones del profesor
+  #Profesores de una contribucion
   def self.teachers_by_contribution(**args)
     load_contributions.where( contributions: { id: args[:ids] } )
+  end
+
+  #Contribuciones del estudiante
+  def self.contributions_by_teachers(**args)
+    UserContribution.load_users.where( userable_type: "Teacher", userable_id: args[:ids] )
   end
 
   #Perfiles del profesor

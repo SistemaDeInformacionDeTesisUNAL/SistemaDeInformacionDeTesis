@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :investigation_groups
   devise_for :students
   devise_for :teachers
-  resources :students
-  resources :teachers
+  resources :students, except:[:new,:create]
+  resources :teachers, except:[:new,:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
