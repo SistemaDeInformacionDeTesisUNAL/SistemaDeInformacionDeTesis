@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :exception
 
   # GET /events
   # GET /events.json

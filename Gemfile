@@ -34,6 +34,21 @@ gem 'bcrypt', platforms: :ruby
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#jqueryui
+gem 'jquery-ui-rails'
+
+#gem service worker for web push notifications
+gem 'serviceworker-rails'
+gem "webpush"
+
+#fullCalendar
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
+#Faker
+gem 'faker'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

@@ -47,14 +47,15 @@ ActiveRecord::Schema.define(version: 20170412170908) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name",                   limit: 45, null: false
-    t.datetime "date_time",                         null: false
+    t.datetime "start_time",                        null: false
+    t.datetime "end_time"
     t.text     "description"
     t.integer  "investigation_group_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
-    t.index ["date_time"], name: "index_events_on_date_time", using: :btree
     t.index ["investigation_group_id"], name: "index_events_on_investigation_group_id", using: :btree
     t.index ["name"], name: "index_events_on_name", using: :btree
+    t.index ["start_time"], name: "index_events_on_start_time", using: :btree
   end
 
   create_table "history_groups", force: :cascade do |t|
@@ -71,8 +72,8 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   end
 
   create_table "investigation_groups", force: :cascade do |t|
-    t.string   "name",        limit: 25, null: false
-    t.datetime "create_date",            null: false
+    t.string   "name",        limit: 50, null: false
+    t.date     "create_date",            null: false
     t.text     "description"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -129,7 +130,7 @@ ActiveRecord::Schema.define(version: 20170412170908) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name",        limit: 15, null: false
+    t.string   "name",        limit: 30, null: false
     t.text     "description"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
