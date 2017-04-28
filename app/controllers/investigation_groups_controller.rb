@@ -4,31 +4,18 @@ class InvestigationGroupsController < ApplicationController
   # GET /investigation_groups
   # GET /investigation_groups.json
   def index
-  #  @investigation_groups = InvestigationGroup.all
-
-
     #listar grupos por tag en especifico
-    @investigation_groups = InvestigationGroup.investigation_group_by_tag_name(:tag=> params[:tag])
-
-    #lista de tags
-  #  @tags_list= Tag.load_tag_names
-    #listar grupos por eventos
-  #  @investigation_groups = InvestigationGroup.load_groups()
-    #listar grupos por tag en especifico
-  #  @investigation_tags = InvestigationGroup.investigation_group_by_tag_name(:name=> params[:name])
-    #Listar las contribuciones de un grupo de investigacion
-  #  @investigation_contr = InvestigationGroup.contributions_group(:ids => params[:ids])
-    #listar el profesor owner del grupo
-  #  @owner_teacher = InvestigationGroup.teacher_group_owner(:ids => params[:ids])
-    #Listar profesores del grupo
-  #  @teachers_group = InvestigationGroup.teachers_group(:ids => params[:ids])
+    @investigation_groups = InvestigationGroup.load_groups
   end
 
   # GET /investigation_groups/1
   # GET /investigation_groups/1.json
   def show
     #Owner
-    @Owner=InvestigationGroup.teacher_group_owner(:id => params[:id])
+    @allContributions=InvestigationGroup.contributions_group(:group_id => @investigation_group.id)
+    @Owner=InvestigationGroup.teacher_group_owner(:id => @investigation_group.id)
+    @Teachers=InvestigationGroup.teachers_group(:id => @investigation_group.id)
+    @Students=InvestigationGroup.students_group(:id => @investigation_group.id)
   end
 
   # GET /investigation_groups/new
@@ -44,9 +31,10 @@ class InvestigationGroupsController < ApplicationController
   # POST /investigation_groups.json
   def create
     @investigation_group = InvestigationGroup.new(investigation_group_params)
-
+    @investigation_group.create_date = DateTime.now
     respond_to do |format|
       if @investigation_group.save
+        TeacherInvestigationGroup.create!( teacher_id: current_teacher.id, investigation_group_id: @investigation_group.id, rol: 2 )
         format.html { redirect_to @investigation_group, notice: 'Investigation group was successfully created.' }
         format.json { render :show, status: :created, location: @investigation_group }
       else

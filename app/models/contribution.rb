@@ -11,10 +11,6 @@ class Contribution < ActiveRecord::Base
   has_many :tag_contributions
   has_many :tags, through: :tag_contributions
 
-  before_destroy :destroyContributionFromTag
-  after_create :create_user_contribution
-
-
   enum state: {Aproved: 0, Rejected: 1, Progress: 2}
 
   mount_uploader :file, FileUploader
@@ -25,60 +21,17 @@ class Contribution < ActiveRecord::Base
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
   validates :state, inclusion: { in: states.keys }
 
-  def create_user_contribution
-    UserContribution.create!( userable_type: Student, userable_id: Student.last, contribution_id: Contribution.last.id+1 )
-  end
-#aún en prueba
-def destroyContributionFromTag
-  TagContribution.where(contribution_id: :id).destroy_all
-end
-
   #Carga todos las contribuciones de acuerdo a sus tags
   def self.load_contributions_tags(**args)
     includes(:tags)
   end
 
-  def self.lodad_contribution_groups(**args)
-    includes(:investigation_group)
+  def self.contributions(**args)
+    includes(:investigation_group, :tags)
   end
 
-  #Muestra las ubicaciones de una contribucion
-	def self.ubication_by_contribution(**args)
-		Ubication.load_ubications.where( contributions: { id: args[:ids] } )
-	end
-
-  #Muestra las contribuciones que contienen un tag
-  def self.contribution_by_tag_name(**args)
-    if !args[:tag].blank? && !args[:group].blank? && !args[:state].blank? then
-      includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]}, :state => args[:state] )
-    else
-        if !args[:tag].blank? && !args[:group].blank? && args[:state].blank?  then
-          includes(:investigation_group, :tags).where( investigation_groups: { id: args[:group]}, tags: { id: args[:tag]} )
-        else
-          if !args[:tag].blank? && !args[:state].blank? && args[:group].blank? then
-            includes(:tags).where( tags: { id: args[:tag]},:state => args[:state] )
-          else
-            if !args[:group].blank? && !args[:state].blank? && args[:tag].blank?then
-              includes(:investigation_group ).where( investigation_groups: { id: args[:group]}, :state => args[:state] )
-            else
-      if !args[:tag].blank? then
-        load_contributions_tags.where( tags: { id: args[:tag]} )
-      else
-        if !args[:group].blank? then
-          includes(:investigation_group).where( investigation_groups: { id: args[:group]} )
-        else
-          if !args[:state].blank? then
-            load_contributions.where(:state => args[:state])
-
-          else
-              includes(:investigation_group)
-            end
-          end
-        end
-          end
-        end
-      end
-    end
+  def self.lodad_contribution_groups(**args)
+    includes(:investigation_group)
   end
 
   #Estudiantes de una contribución
@@ -89,8 +42,6 @@ end
   def self.teachers(**args)
     Teacher.load_contributions.where( contributions: { id: args[:contribution_id] } )
   end
-
-
 
   #Muestra las ubicaciones de una contribucion
   def self.ubications(**args)

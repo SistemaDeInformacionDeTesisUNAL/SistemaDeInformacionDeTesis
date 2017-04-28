@@ -10,6 +10,16 @@ class TeachersController < ApplicationController
   # GET /teachers/1
   # GET /teachers/1.json
   def show
+    groupsOwner = TeacherInvestigationGroup.load_group_owner(:ids => params[:id])
+    groups = TeacherInvestigationGroup.load_group_not_owner(:ids => params[:id])
+    @groupsOwner = []
+    groupsOwner.each do |group|
+      @groupsOwner.push(InvestigationGroup.find(group.investigation_group_id))
+    end
+    @groups = []
+    groups.each do |group|
+      @groups.push(InvestigationGroup.find(group.investigation_group_id))
+    end
   end
 
   # GET /teachers/new

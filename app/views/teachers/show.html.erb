@@ -23,24 +23,39 @@
         <strong style="color: black;">Email:</strong>
         <%= @teacher.email %>
       </div>
-      <div class="profile-usertitle-job">
+      <%if !@groupsOwner.empty? || !@groups.empty? then%>
         <strong style="color: black;">Investigation groups:</strong>
-        <%@teacher.investigation_groups.each do |groupe|%>
-        <%= link_to groupe.name, :controller => "investigation_groups", :action => "show", :id => groupe.id%>
-        <%  if groupe != @teacher.investigation_groups.last %>,
-        <%end
-      end %>
-      </div>
-      <strong style="color: black;">Contributions:</strong>
-      <div class="profile-usertitle-job">
-        <%@teacher.contributions.each do |contribution|%>
-        <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
-        <%  if contribution != @teacher.contributions.last %>,
-        <%end
-      end %>
-
-    </div>
-
+        <% if !@groupsOwner.empty? then %>
+          <div class="profile-usertitle-job">
+            <strong style="color: black;">Owner:</strong>
+            <%@groupsOwner.each do |group|%>
+              <%= link_to group.name, :controller => "investigation_groups", :action => "show", :id => group.id%>
+              <%if group != @groupsOwner.last %>,
+              <%end%>
+            <%end%>
+          </div>
+        <%end%>
+        <%if !@groups.empty? then%>
+          <div class="profile-usertitle-job">
+            <strong style="color: black;">Menber:</strong>
+            <%@groups.each do |groupe|%>
+              <%= link_to groupe.name, :controller => "investigation_groups", :action => "show", :id => groupe.id%>
+              <%  if groupe != @groups.last %>,
+              <%end%>
+            <%end%>
+          </div>
+        <%end%>
+      <%end%>
+      <%if !@teacher.contributions.empty? then %>
+        <strong style="color: black;">Contributions:</strong>
+        <div class="profile-usertitle-job">
+          <%@teacher.contributions.each do |contribution|%>
+            <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
+            <%  if contribution != @teacher.contributions.last %>,
+            <%end%>
+          <%end%>
+        </div>
+      <%end%>
     <div class="profile-userbuttons">
       <% if teacher_signed_in? %>
         <% if current_teacher.id == @teacher.id %>

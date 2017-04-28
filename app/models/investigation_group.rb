@@ -13,32 +13,20 @@ class InvestigationGroup < ApplicationRecord
 
 	has_many :history_groups
 
-  default_scope {order("investigation_groups.name ASC")}
-  scope :sort_by_name, -> (ord) {order("investigation_groups.name #{ord}")}
-  scope :sort_by_create_date, -> (ord) {order("investigation_groups.created_at #{ord}")}
-
   validates :name, :create_date, :presence => true
   validates :name, :length => { :maximum => 100, :too_long => "%{count} Demasiados caracteres" }
   validates :name, :length => { :minimum => 5, :too_short => "%{count} Muy pocos caracteres" }
   validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
 
- mount_uploader :image, ImageUploader
+  mount_uploader :image, ImageUploader
 
-#busca grupos de investigacion por eventos
+  #busca grupos de investigacion por eventos
   def self.load_groups(**args)
-	   includes(:events)
+	   includes(:events,:tags)
   end
-#busca grupos de investigacion por tags
+  #busca grupos de investigacion por tags
   def self.load_investigation_groups_tags(**args)
     includes(:tags)
-  end
-#busca grupo de investigacion por un tag en especifico
-  def self.investigation_group_by_tag_name(**args)
-    if !args[:tag].blank? then
-        load_investigation_groups_tags.where( tags: { id: args[:tag]} )
-      else
-        load_groups()
-    end
   end
 
   #Cuenta cuantos grupos de investigacion hay en total, necesaria para hacer el indice para separar por paginas
@@ -57,29 +45,30 @@ class InvestigationGroup < ApplicationRecord
 
   #Buscar el profesor owner del grupo buscando por id del grupo (usar ids page y per_page)
   def self.teacher_group_owner(**args)
-
-      list =[]
-      s2="owner"
-      rolt=TeacherInvestigationGroup.load_group_teachers.where(investigation_groups:{id: args[:id]})
-      rolt.each do |r|
-          if r.rol.downcase ==s2
-              list.push(r.teacher_id)
-          end
+    list =[]
+    s2="owner"
+    rolt=TeacherInvestigationGroup.load_group_teachers.where(investigation_groups:{id: args[:id]})
+    rolt.each do |r|
+      if r.rol.downcase ==s2
+        list.push(r.teacher_id)
       end
-      a=list.pop
-      #return list
-      c=TeacherInvestigationGroup.find(a)
-      #puts c
-      d= c.id
-      #puts d
-      Teacher.find(d)
-
+    end
+    a=list.pop
+    #return list
+    c=TeacherInvestigationGroup.find(a)
+    #puts c
+    d= c.id
+    #puts d
+    Teacher.find(d)
   end
 
-#listar los profesores del grupo de investigacion (usar ids page y per_page)
-def self.teachers_group(**args)
-  rolt=TeacherInvestigationGroup.load_group_teachers.where(investigation_groups:{id: args[:ids]})
-end
+  #listar los profesores del grupo de investigacion (usar ids page y per_page)
+  def self.teachers_group(**args)
+    Teacher.load_investigation_groups.where(investigation_groups:{id: args[:id]})
+  end
 
+  def self.students_group(**args)
+    Student.load_investigation_group.where(investigation_group_id: args[:id])
+  end
 
 end

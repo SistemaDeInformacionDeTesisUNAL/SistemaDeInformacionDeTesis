@@ -49,4 +49,8 @@ class Student < ApplicationRecord
     Profile.load_profiles.where( profiles: { profileable_type: "Student", profileable_id: args[:ids] } )
   end
 
+  #Carga todos los grupos de investigacion
+  def self.load_investigation_group(**args)
+    includes(:investigation_group)
+  end
 end

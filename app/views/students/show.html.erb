@@ -23,27 +23,22 @@
         <strong style="color: black;">Email:</strong>
         <%= @student.email %>
       </div>
-      <% if student_signed_in? %>
-        <% if current_student.investigation_group_id != 0 %>
+      <% if @student.investigation_group_id != 0 %>
       <div class="profile-usertitle-job">
         <strong style="color: black;">Investigation group:</strong>
         <%= link_to @student.investigation_group.name, :controller=>"investigation_groups" , :action=>"show", :id=>@student.investigation_group.id %>
       </div>
       <%end%>
-      <%end%>
+    <%if !@student.contributions.empty? then %>
       <strong style="color: black;">Contributions:</strong>
       <div class="profile-usertitle-job">
-
-
-
         <%@student.contributions.each do |contribution|%>
-        <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
-        <%  if contribution != @student.contributions.last %>,
-        <%end
-      end %>
-
-    </div>
-
+          <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
+          <%  if contribution != @student.contributions.last %>,
+          <%end%>
+        <%end%>
+      </div>
+    <%end%>
     <div class="profile-userbuttons">
       <% if student_signed_in? %>
         <% if current_student.id == @student.id %>

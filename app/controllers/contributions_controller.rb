@@ -14,11 +14,7 @@ class ContributionsController < ApplicationController
     @groups = InvestigationGroup.all.order("name ASC")
 
     #almacena todas las contribuciones por tags
-    @contributions = Contribution.contribution_by_tag_name(:page => params[:page], :per_page => params[:per_page])
-
-    #3)
-    #Esta variable retorna las ubicaciones de una contribucion
-    @ubications = Contribution.ubications(:ids => params[:ids])
+    @contributions = Contribution.contributions
 
   end
 
@@ -39,7 +35,6 @@ class ContributionsController < ApplicationController
   # POST /contributions.json
   def create
     @contribution = Contribution.new(contribution_params)
-
     respond_to do |format|
       if @contribution.save
         format.html { redirect_to @contribution, notice: 'Contribution was successfully created.' }
