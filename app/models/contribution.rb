@@ -26,7 +26,7 @@ class Contribution < ActiveRecord::Base
   validates :state, inclusion: { in: states.keys }
 
   def create_user_contribution
-    UserContribution.create!( userable_type: Student, userable_id: Student.last, contribution_id: Contribution.last.id+1 )
+    UserContribution.create_with( userable_type: Student, userable_id: Student.last, contribution_id: Contribution.last.id+1 ).find_or_create_by(id: Contribution.last.id+1)
   end
 #aún en prueba
 def destroyContributionFromTag

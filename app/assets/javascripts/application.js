@@ -12,4 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require ./events
+//= require dataTables/jquery.dataTables
+//= require moment
+//= require fullcalendar

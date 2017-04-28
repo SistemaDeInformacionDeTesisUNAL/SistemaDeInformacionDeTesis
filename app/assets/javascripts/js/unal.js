@@ -58,7 +58,3 @@ jQuery(document).ready(function($) {
   $('#services').css({ 'right': parseInt($('#services').width()) * -1 })
   serviceMenuStatus();
 });
-$('#sandbox-container .input-group.date').datepicker({
-    autoclose: true,
-    todayHighlight: true
-});

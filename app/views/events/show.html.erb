@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
 <div class="toppad" >
   <div class="panel panel-info">
     <div class="panel-heading">
@@ -6,13 +7,17 @@
     </div>
   </div>
 </div>
-<div class="container">
+
     <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-striped">
                     <tbody>
                       <tr>
-                        <td> <strong>Date:</strong> </td>
-                        <td><%= @event.date_time %></td>
+                        <td> <strong>Start:</strong> </td>
+                        <td><%= @event.start_time.to_formatted_s(:rfc822) %></td>
+                      </tr>
+                      <tr>
+                        <td> <strong>End:</strong> </td>
+                        <td><%= @event.end_time.to_formatted_s(:rfc822) %></td>
                       </tr>
                       <tr>
   <td><strong>Description:</strong></td>
@@ -22,9 +27,28 @@
   <td><strong>Investigation group:</strong></td>
   <td>  <%= link_to @event.investigation_group.name, :controller =>"investigation_groups", :action  => "show", :id => @event.investigation_group.id %></td>
 </tr>
+<td><strong>Students:</strong></td>
+  <td><% @event.students.each do |estudiante|%>
+    <%=link_to estudiante.username, :controller => "students", :action => "show", :id => estudiante.id%>
+    <% if estudiante != @event.students.last %>, <%end%>
+    <%end%>
+  </td>
+  </tr>
+  <td><strong>Teachers:</strong></td>
+    <td><% @event.teachers.each do |profesor|%>
+      <%=link_to profesor.username, :controller => "teachers", :action => "show", :id => profesor.id%>
+      <% if profesor != @event.teachers.last %>, <%end%>
+      <%end%>
+    </td>
+    </tr>
+<tr>
 </tbody>
 </table>
 </div>
 </div>
+<div class="">
+<button>Ir al evento</button>  
+</div>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
