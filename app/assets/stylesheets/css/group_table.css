@@ -1,0 +1,10 @@
+.table{
+  background-color:white;
+}
+
+th {
+  background-color: #2BBCDE;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}

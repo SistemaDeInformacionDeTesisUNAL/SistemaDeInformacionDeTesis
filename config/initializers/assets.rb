@@ -15,6 +15,7 @@ Rails.application.config.assets.precompile += %w( css/unal.css )
 
 Rails.application.config.assets.precompile += %w( css/session.css )
 Rails.application.config.assets.precompile += %w( css/profile.css )
+Rails.application.config.assets.precompile += %w( css/group_table.css )
 
 #Rails.application.config.assets.precompile += %w( css/base.css )
 #Rails.application.config.assets.precompile += %w( css/tablet.css )

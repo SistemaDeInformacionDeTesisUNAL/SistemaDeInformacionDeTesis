@@ -1,80 +1,69 @@
 <p id="notice"><%= notice %></p>
-<div class="toppad" >
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h3 class="panel-title">  <%= @investigation_group.name %></h3>
-    </div>
-  </div>
-</div>
+
+<%= stylesheet_link_tag 'css/group_table' %>
 
 <div class="container">
-    <div class="col-lg-3">
-        <%= image_tag(@investigation_group.image_url.to_s,:class=>"img-circle img-responsive",:atl=>"Investigation Group Image") %>
-    </div>
-    <div class=" col-md-9 col-lg-9 ">
-                  <table class="table table-striped">
-                    <tbody>
-                      <tr>
-                        <td>  <strong>Createdate:</strong> </td>
-                        <td> <%= @investigation_group.create_date %> </td>
-                      </tr>
-                      <tr>
-                        <td><strong>Owner:</strong></td>
-                        <td>
-                          <table class="table table-bordered">
-                            <tbody>
-                              <tr>
-                                <td><strong>Name: </strong></td>
-                                <td><%= @Owner.first_name%> <%=@Owner.last_name%></td>
-                        <tr>
-                        <td><strong>Username: </strong></td>
-                        <td><%= @Owner.username%></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                      </tr>
-                      <tr>
-                        <td> <strong>Description:</strong> </td>
-                        <td> <%= @investigation_group.description %> </td>
-                      </tr>
-                      <tr>
-                        <td> <strong>Tags:</strong> </td>
-                        <% myTags=''
-                          @investigation_group.tags.each do |tag|
-                            myTags<<tag.name
-                            if tag != @investigation_group.tags.last
-                              myTags<<', '
-                            end
-                        end %>
-                      <td> <%=myTags.to_s%></td>
-                      </tr>
-                      <tr>
-                        <td> <strong>Events:</strong> </td>
-                    <td>
-                       <% @investigation_group.events.each do |event| %>
-                         <%=link_to event.name, :controller => "events", :action =>"show", :id=>event.id %>
-                         <%  if event != @investigation_group.events.last%>,
-                           <%end
-                       end %>
-                         </td>
-                      </tr>
-                      <tr>
-                        <td> <strong>Contributions:</strong> </td>
-                      <td>
-                    <% @allContributions =InvestigationGroup.contributions_group(:group_id => @investigation_group.id)
-                    @allContributions.each do |contribution|%>
-                      <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
-                          <%  if contribution != @allContributions.last %>,
-                            <%end
-                        end %>
-                      </td>
-                      </tr>
-                    </tbody>
-                  </table>
-      </div>
-
-    </div>
+  <div class="col-lg-3">
+    <%= image_tag(@investigation_group.image_url.to_s,:class=>"img-circle img-responsive",:atl=>"Investigation Group Image") %>
+  </div>
+  <div class=" col-md-9 col-lg-9 ">
+    <table class="table">
+      <tbody>
+        <th colspan="2">
+          <%= @investigation_group.name %>
+        </th>
+        <tr>
+          <td>  <strong>Createdate:</strong> </td>
+          <td> <%= @investigation_group.create_date %> </td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>Owner:</strong></td>
+          <td><%= @Owner.first_name%> <%=@Owner.last_name%> </td>
+          <tr>
+            <td><%= @Owner.username%> </td>
+          </tr>
+        </tr>
+        <tr>
+          <td> <strong>Description:</strong> </td>
+          <td> <%= @investigation_group.description %> </td>
+        </tr>
+        <tr>
+          <td> <strong>Tags:</strong> </td>
+          <% myTags=''
+          @investigation_group.tags.each do |tag|
+            myTags<<tag.name
+            if tag != @investigation_group.tags.last
+              myTags<<', '
+            end
+          end %>
+          <td> <%=myTags.to_s%></td>
+        </tr>
+        <tr>
+          <td> <strong>Events:</strong> </td>
+          <td>
+            <% @investigation_group.events.each do |event| %>
+            <%=link_to event.name, :controller => "events", :action =>"show", :id=>event.id %>
+            <%  if event != @investigation_group.events.last%>,
+            <%end
+          end %>
+        </td>
+      </tr>
+      <tr>
+        <td> <strong>Contributions:</strong> </td>
+        <td>
+          <% @allContributions =InvestigationGroup.contributions_group(:group_id => @investigation_group.id)
+          @allContributions.each do |contribution|%>
+          <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
+          <%  if contribution != @allContributions.last %>,
+          <%end
+        end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
 <% if teacher_signed_in? %>
-<%= link_to 'Edit', edit_investigation_group_path(@investigation_group) %> |
-<% end %>
-<%= link_to 'Back', investigation_groups_path %>
+  <%= link_to 'Edit', edit_investigation_group_path(@investigation_group) %> |
+  <% end %>
+  <%= link_to 'Back', investigation_groups_path %>
