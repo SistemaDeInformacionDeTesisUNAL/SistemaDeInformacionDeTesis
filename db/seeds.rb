@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+InvestigationGroup.create!( id: 0, name: "Grupo creado", create_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence, image: Faker::LoremPixel.image )
 
 for i in (1..100)
 	us = Faker::Internet.unique.user_name+rand(1..10000).to_s
@@ -21,7 +21,7 @@ for i in (1..100)
 	group = rand(1..100)
 
 	eventStart=Faker::Time.between(2.days.ago, Date.today, :day)
-	Student.create!( first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: "#{us}@unal.edu.co", username: us, investigation_group_id: group, password: Faker::Internet.password(8) )
+	Student.create!( first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: "#{us}@unal.edu.co", username: us, investigation_group_id: group, state: 2, password: Faker::Internet.password(8) )
 	Event.create!( name:Faker::Zelda.game+rand(1..10000).to_s, start_time: eventStart, end_time: eventStart+rand(1000..800000), description: Faker::Lorem.sentence, investigation_group_id: rand(1..100))
 end
 
@@ -35,8 +35,8 @@ end
 
 for i in (1..100)
 	teach = rand(1..100)
-	TeacherInvestigationGroup.create!( teacher_id: teach, investigation_group_id: i, rol: 2 )
-	TeacherInvestigationGroup.create!( teacher_id: rand(1..100), investigation_group_id: rand(1..100), rol: rand(1) )
+	TeacherInvestigationGroup.create!( teacher_id: teach, investigation_group_id: i, rol: 2, state: 2 )
+	TeacherInvestigationGroup.create!( teacher_id: rand(1..100), investigation_group_id: rand(1..100), rol: rand(1), state: 2 )
 
 
 	HistoryGroup.create!( bonding_date: Faker::Date.backward(2000), investigation_group_id: i, historable_type: Teacher, historable_id: teach, state: 0 )

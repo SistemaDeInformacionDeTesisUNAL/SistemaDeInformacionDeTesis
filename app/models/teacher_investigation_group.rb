@@ -4,8 +4,10 @@ class TeacherInvestigationGroup < ApplicationRecord
   belongs_to :investigation_group
 
   enum rol: {Teacher: 0, Admin: 1, Owner: 2}
+  enum state: {Rejected: 0, Process: 1, Admitted: 2}
 
   validates :rol, inclusion: { in: rols.keys }
+  validates :state, inclusion: { in: states.keys }
 
   def self.load_group_teachers(**args)
     includes(:investigation_group)

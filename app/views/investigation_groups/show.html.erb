@@ -93,6 +93,8 @@
       </div>
     </div>
 <%if teacher_signed_in?%>
-<%=link_to 'Edit', edit_investigation_group_path(@investigation_group)%> |
+  <%if current_teacher == @Owner%>
+    <%=link_to 'Edit', edit_investigation_group_path(@investigation_group)%> |
+  <%end%>
 <%end%>
 <%=link_to 'Back', investigation_groups_path%>

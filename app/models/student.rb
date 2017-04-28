@@ -12,12 +12,15 @@ class Student < ApplicationRecord
 
   has_many :history_groups, as: :historable, dependent: :destroy
 
+  enum state: {Rejected: 0, Process: 1, Admitted: 2}
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :ldap_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:username]
 
+  validates :state, inclusion: { in: states.keys }
   validates :username, presence: true, uniqueness: true
 
   def ldap_before_save
@@ -25,6 +28,7 @@ class Student < ApplicationRecord
      self.first_name = Devise::LDAP::Adapter.get_ldap_param(self.username,"givenname").first
      self.last_name = Devise::LDAP::Adapter.get_ldap_param(self.username,"sn").first
      self.investigation_group_id = 0
+     self.state = 0
      #demas campos del modelo
      #self.autorize = false
   end

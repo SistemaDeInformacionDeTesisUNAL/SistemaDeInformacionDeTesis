@@ -34,7 +34,7 @@ class InvestigationGroupsController < ApplicationController
     @investigation_group.create_date = DateTime.now
     respond_to do |format|
       if @investigation_group.save
-        TeacherInvestigationGroup.create!( teacher_id: current_teacher.id, investigation_group_id: @investigation_group.id, rol: 2 )
+        TeacherInvestigationGroup.create!( teacher_id: current_teacher.id, investigation_group_id: @investigation_group.id, rol: 2, state: 2 )
         format.html { redirect_to @investigation_group, notice: 'Investigation group was successfully created.' }
         format.json { render :show, status: :created, location: @investigation_group }
       else

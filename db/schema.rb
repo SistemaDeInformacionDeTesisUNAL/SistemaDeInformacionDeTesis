@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20170412170908) do
     t.string   "last_name"
     t.string   "username"
     t.string   "email"
+    t.integer  "state",                  default: 0, null: false
     t.integer  "investigation_group_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
@@ -138,6 +139,7 @@ ActiveRecord::Schema.define(version: 20170412170908) do
 
   create_table "teacher_investigation_groups", force: :cascade do |t|
     t.integer  "rol",                    default: 0, null: false
+    t.integer  "state",                  default: 1, null: false
     t.integer  "teacher_id"
     t.integer  "investigation_group_id"
     t.datetime "created_at",                         null: false

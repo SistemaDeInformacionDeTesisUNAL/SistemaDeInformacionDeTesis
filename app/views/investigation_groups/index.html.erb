@@ -17,11 +17,6 @@
             <td><%= link_to investigation_group.name, investigation_group %></td>
             <td><%= Date.parse(investigation_group.create_date.to_s).to_formatted_s(:rfc822) %></td>
             <td><%= investigation_group.description %></td>
-            <!--
-            <td><%= link_to 'Show', investigation_group %></td>
-            <td><%= link_to 'Edit', edit_investigation_group_path(investigation_group) %></td>
-            <td><%= link_to 'Destroy', investigation_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    -->
             <% myTags=''
             investigation_group.tags.each do |tag|
               myTags<<tag.name

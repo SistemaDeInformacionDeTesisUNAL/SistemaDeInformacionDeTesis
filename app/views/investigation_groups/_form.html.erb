@@ -20,17 +20,6 @@
                                 </div>
                           </td>
                         </tr>
-                        <tr>
-                            <td>
-                              <div class="field">
-                                <%= f.label :"Create date " %>
-                                <% if @investigation_group.create_date.blank? then
-                                  @investigation_group.create_date = Date.today
-                                end %>
-                                <%= f.label @investigation_group.create_date.to_s%>
-                              </div>
-                            </td>
-                          </tr>
                             <td>  <div class="field">
                                     <%= f.label :description %>
                                     <%= f.text_area :description %>
