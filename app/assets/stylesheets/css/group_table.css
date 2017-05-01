@@ -1,10 +1,33 @@
+body{
+  background-color: white;
+}
 .table{
-  background-color:white;
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+  border: 1px solid #cccccc;
 }
 
 th {
-  background-color: #2BBCDE;
+  background-color: #95b33b;
   color: white;
   text-align: center;
   font-weight: bold;
+}
+
+td {
+  border: 1px solid #cccccc;
+}
+
+.btn1 {
+  background-color: #95b33b;
+  color: white;
+  margin-left: 10px;
+}
+
+.btn1:hover{
+  background-color: #383838;
+  color: white;
+  font-weight: bold;
+  padding: 10px 15px 10px 15px;
 }
