@@ -33,14 +33,14 @@ body {
 }
 
 .profile-usertitle-name {
-  color: #5a7391;
+  color: #6e852c;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 7px;
 }
 
 .profile-usertitle-job {
-  color: #5b9bd1;
+  color: #95b33b;
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 15px;
@@ -68,4 +68,17 @@ body {
   padding: 20px;
   background: #fff;
   min-height: 460px;
+}
+
+.btn1 {
+  background-color: #95b33b;
+  color: white;
+  margin-left: 10px;
+}
+
+.btn1:hover{
+  background-color: #383838;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px 10px 20px;
 }
