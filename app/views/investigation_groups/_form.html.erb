@@ -1,52 +1,50 @@
-<%= form_for(investigation_group) do |f| %>
-  <% if investigation_group.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(investigation_group.errors.count, "error") %> prohibited this investigation_group from being saved:</h2>
+<%= stylesheet_link_tag 'css/form' %>
 
-      <ul>
-      <% investigation_group.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for(investigation_group) do |f| %>
+<% if investigation_group.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(investigation_group.errors.count, "error") %> prohibited this investigation_group from being saved:</h2>
+
+  <ul>
+    <% investigation_group.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<section id="form">
   <div class="container">
-      <table class="table table-striped">
-                      <tbody>
-                        <tr>
-                          <td> <div class="field">
-                                <%= f.label :name %>
-                                <%= f.text_field :name %>
-                                </div>
-                          </td>
-                        </tr>
-                        <tr>
-                            <td>  <div class="field">
-                                    <%= f.label :"Create date " %>
-                                    <% if @investigation_group.create_date.blank? then
-                                      @investigation_group.create_date = Date.today
-                                    end %>
-                                    <%= f.label @investigation_group.create_date.to_s%>
-                                  </div>
-                                </td>
-                          </tr>
-                            <td>  <div class="field">
-                                    <%= f.label :description %>
-                                    <%= f.text_area :description %>
-                                  </div>
-                            </td>
-                            <tr>
-                              <td> <div class="field">
-                                      <%= f.label "Image: " %>
-                                      <%= f.file_field :image %>
-                                  </div>
-                              </td>
-                            </tr>
-                                <td> <div class="actions">
-                                        <%= f.submit %>
-                                    </div>
-                                </td>
-                              </tbody>
-                            </table>
-                          </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-wrap">
+          <!--h1>New Contribution</h1-->
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, :class=>"form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :"Create date " %>
+            <% if @investigation_group.create_date.blank? then
+              @investigation_group.create_date = Date.today
+            end %>
+            <%= f.label @investigation_group.create_date.to_s%>
+          </div>
+          <div class="form-group">
+            <%= f.label :description %>
+            <%= f.text_area :description, :class=>"form-control", :rows=>"3" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label "Image: " %>
+            <%= f.file_field :image %>
+          </div>
+          <div class="form-group">
+            <%= f.submit 'Create Investigation group', :class => 'btn btn-custom btn-lg btn-block' %>
+          </div>
+        </div>
+      </div> <!-- /.col-xs-12 -->
+    </div> <!-- /.row -->
+  </div> <!-- /.container -->
+</section>
 <% end %>

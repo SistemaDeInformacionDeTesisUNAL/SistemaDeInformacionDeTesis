@@ -1,6 +1,8 @@
+<%= stylesheet_link_tag 'css/group_table' %>
+
 <h1>Editing Contribution</h1>
 
 <%= render 'form', contribution: @contribution %>
 
-<%= link_to 'Show', @contribution %> |
-<%= link_to 'Back', contributions_path %>
+<%= link_to 'Show', @contribution, :class=>"btn btn1" %>
+<%= link_to 'Back', contributions_path, :class=>"btn btn1" %>

@@ -1,5 +1,7 @@
+<%= stylesheet_link_tag 'css/group_table' %>
+
 <h1>New Teacher</h1>
 
-<%= render 'form', teacher: @teacher %>
+<%= render 'form', teacher: @teacher, :class=>"btn btn1" %>
 
-<%= link_to 'Back', teachers_path %>
+<%= link_to 'Back', teachers_path, :class=>"btn btn1" %>
