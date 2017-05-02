@@ -2,68 +2,57 @@
   <% if contribution.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(contribution.errors.count, "error") %> prohibited this contribution from being saved:</h2>
-
       <ul>
-      <% contribution.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% contribution.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
   <div class="container">
-      <table class="table table-striped">
-                      <tbody>
-                        <tr>
-                          <td> <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.label :publication_date %>
+              <%= f.date_select :publication_date %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.label :description %>
+              <%= f.text_area :description %>
+            </div>
+            <div hidden>
+              <%= f.hidden_field :investigation_group_id %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.label :file %>
+              <%= f.file_field :file%>
+            </div>
+          </td>
+        </tr>
+        <td>
+          <div class="actions">
+            <%= f.submit %>
+          </div>
+        </td>
+      </tbody>
+    </table>
   </div>
-</td>
-</tr>
-<tr>
-<td>  <div class="field">
-    <%= f.label :publication_date %>
-    <%= f.date_select :publication_date %>
-  </div>
-  </td>
-  </tr>
-  <td>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  </td>
-<tr>
-  <td>
-    <div class="field">
-      <%= f.label :state %>
-      <%= f.select(:state, options_for_select(["Aproved","Progress","Rejected"]))%>
-    </div>
-  </td>
-</tr>
-  <tr>
-  <td>
-  <div class="field">
-    <%= f.label :investigation_group_id %>
-      <%= f.select(:investigation_group_id,options_from_collection_for_select(InvestigationGroup.all, "id", "name"), prompt: "All groups")%>
-    </div>
-      </td>
-      </tr>
-      <td>
-  <div class="field">
-  <%= f.label :file %>
-  <%= f.file_field :file%>
-</div>
-  </td>
-  </tr>
-  <td>
-</div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-</td>
-</tbody>
-</table>
-</div>
 <% end %>

@@ -1,21 +1,17 @@
 class ContributionsController < ApplicationController
   before_action :set_contribution, only: [:show, :edit, :update, :destroy]
+
   # GET /contributions
   # GET /contributions.json
 
   def index
   #  @contributions = Contribution.all
-
-
     #almacena todos los tags
     @tags = Tag.all.order("name ASC")
-
     #almacena todos los grupos
     @groups = InvestigationGroup.all.order("name ASC")
-
     #almacena todas las contribuciones por tags
     @contributions = Contribution.contributions
-
   end
 
   # GET /contributions/1
@@ -25,6 +21,7 @@ class ContributionsController < ApplicationController
 
   # GET /contributions/new
   def new
+    @contribution_group = InvestigationGroup.find(params[:investigation_group_id])
     @contribution = Contribution.new
   end
 
@@ -36,9 +33,10 @@ class ContributionsController < ApplicationController
   def create
     @contribution = Contribution.new(contribution_params)
     respond_to do |format|
+      @contribution.state = 2
       if @contribution.save
-        format.html { redirect_to @contribution, notice: 'Contribution was successfully created.' }
-        format.json { render :show, status: :created, location: @contribution }
+        format.html { redirect_to contributionsGroup_investigation_groups_path, notice: 'Contribution was successfully updated.' }
+        format.json { render :show, status: :ok, location: @contribution }
       else
         format.html { render :new }
         format.json { render json: @contribution.errors, status: :unprocessable_entity }

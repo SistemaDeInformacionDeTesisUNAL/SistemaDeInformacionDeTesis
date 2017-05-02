@@ -1,5 +1,5 @@
 class InvestigationGroupsController < ApplicationController
-  before_action :set_investigation_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_investigation_group, only: [:show, :edit, :update, :destroy, :member, :updateMemberState, :updateMemberRol, :join, :contributionsGroup]
 
   # GET /investigation_groups
   # GET /investigation_groups.json
@@ -14,8 +14,22 @@ class InvestigationGroupsController < ApplicationController
     #Owner
     @allContributions=InvestigationGroup.contributions_group(:group_id => @investigation_group.id)
     @Owner=InvestigationGroup.teacher_group_owner(:id => @investigation_group.id)
+    @Admins=InvestigationGroup.admins_group(:id => @investigation_group.id)
     @Teachers=InvestigationGroup.teachers_group(:id => @investigation_group.id)
     @Students=InvestigationGroup.students_group(:id => @investigation_group.id)
+    if teacher_signed_in?
+    @relation=InvestigationGroup.relationTeacherInvestigationGroup(:teacher_id => current_teacher.id,:investigation_group_id => @investigation_group.id)
+      puts "Hey hey hey esta imprimiendo aquiiiiiiiiiiiiiiiiii"
+      puts @relation.rol
+    end
+  end
+
+  def contributionsGroup
+  #  @contributions = Contribution.all
+    #almacena todos los tags
+    @tags = Tag.all.order("name ASC")
+    #almacena todas las contribuciones por tags
+    @contributions = InvestigationGroup.contributions_group(:group_id => @investigation_group.id)
   end
 
   # GET /investigation_groups/new
@@ -68,6 +82,56 @@ class InvestigationGroupsController < ApplicationController
     end
   end
 
+  def join
+    if student_signed_in?
+      @student = Student.find(current_student.id)
+      @student.investigation_group_id = @investigation_group.id
+      @student.state = 'Process'
+      if @student.save!
+        puts @student.state
+        puts @student.investigation_group_id
+        redirect_to investigation_group_path(@investigation_group), notice: 'Student investigation group was successfully updated, Join.'
+      end
+    else
+      if TeacherInvestigationGroup.create!( teacher_id: current_teacher.id, investigation_group_id: @investigation_group.id, rol: 0, state: 1 )
+        puts "Yeay"
+        redirect_to investigation_group_path(@investigation_group), notice: 'Teacher investigation group was successfully updated, Join.'
+      end
+    end
+  end
+
+  def member
+    @students=InvestigationGroup.students_group(:id => @investigation_group.id)
+    @teacherMembers=TeacherInvestigationGroup.load_teachers(:ids => @investigation_group.id)
+  end
+
+  def updateMemberState
+    puts "hola, State #{params[:id]}"
+    @state = params[:member_investigation_group_param];
+    if params[:type] == 'Student'
+      @memState = Student.find(params[:id])
+    else
+      @memState = TeacherInvestigationGroup.find(params[:id])
+    end
+    @memState.state = @state
+    if @memState.save!
+      puts @memState.state
+      redirect_to member_investigation_groups_path(@investigation_group), notice: 'Member investigation group was successfully updated, State.'
+    end
+  end
+
+  def updateMemberRol
+    puts "holalalala #{params[:id]}"
+    @rol = params[:member_investigation_group_param];
+    @memRol = TeacherInvestigationGroup.find(params[:id])
+    @memRol.rol = @rol
+    if @memRol.save!
+      puts @memRol.rol
+      redirect_to member_investigation_groups_path(@investigation_group), notice: 'Teacher investigation group was successfully updated, Rol.'
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_investigation_group
@@ -76,6 +140,6 @@ class InvestigationGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def investigation_group_params
-      params.require(:investigation_group).permit(:name, :create_date, :description,:image)
+      params.require(:investigation_group).permit(:name, :create_date, :description,:image,:member_investigation_group_param,:type)
     end
 end

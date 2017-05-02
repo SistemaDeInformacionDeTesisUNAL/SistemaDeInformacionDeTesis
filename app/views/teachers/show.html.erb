@@ -23,9 +23,9 @@
         <strong style="color: black;">Email:</strong>
         <%= @teacher.email %>
       </div>
-      <%if !@groupsOwner.empty? || !@groups.empty? then%>
+      <%if !@groupsOwner.empty? || !@groups.empty?%>
         <strong style="color: black;">Investigation groups:</strong>
-        <% if !@groupsOwner.empty? then %>
+        <% if !@groupsOwner.empty?%>
           <div class="profile-usertitle-job">
             <strong style="color: black;">Owner:</strong>
             <%@groupsOwner.each do |group|%>
@@ -35,7 +35,7 @@
             <%end%>
           </div>
         <%end%>
-        <%if !@groups.empty? then%>
+        <%if !@groups.empty?%>
           <div class="profile-usertitle-job">
             <strong style="color: black;">Menber:</strong>
             <%@groups.each do |groupe|%>
@@ -46,7 +46,7 @@
           </div>
         <%end%>
       <%end%>
-      <%if !@teacher.contributions.empty? then %>
+      <%if !@teacher.contributions.empty?%>
         <strong style="color: black;">Contributions:</strong>
         <div class="profile-usertitle-job">
           <%@teacher.contributions.each do |contribution|%>
@@ -59,13 +59,13 @@
     <div class="profile-userbuttons">
       <% if teacher_signed_in? %>
         <% if current_teacher.id == @teacher.id %>
-          <%= link_to 'Edit', edit_teacher_path(@teacher), :class=>"btn btn-success btn-sm" %> |
+          <%= link_to 'Edit', edit_teacher_path(@teacher), :class=>"btn btn-success btn-sm" %>
         <% end %>
       <% end %>
       <%= link_to 'Back', teachers_path, :class=>"btn btn-success btn-sm" %>
       <% if teacher_signed_in? %>
         <% if current_teacher.id == @teacher.id %>
-        | <%= link_to('Log out', destroy_teacher_session_path, :method => :delete, :class=>"btn btn-success btn-sm") %>
+          <%= link_to('Log out', destroy_teacher_session_path, :method => :delete, :class=>"btn btn-success btn-sm") %>
         <% end %>
       <% end %>
     </div>

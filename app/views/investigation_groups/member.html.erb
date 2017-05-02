@@ -1,0 +1,161 @@
+<%= stylesheet_link_tag 'css/request' %>
+
+<div class="container">
+  <div class="row">
+    <section class="content">
+      <h1>Requests</h1>
+      <div class="col-md-8 col-md-offset-2">
+        <table class="table table-filter">
+          <% @students.each do |student| %>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <h4 class="title">
+                      <%= link_to student.username, student %>
+                    </h4>
+                    <p class="summary">
+                      <%= student.first_name + " " + student.last_name %>
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn1 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Student</button>
+                  </div>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn1 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    <%=student.state%>
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                      <li role="presentation">
+                        <a role="menuitem" tabindex="-1" onclick="updateMemberState('<%=student.id%>','<%=updateMemberState_investigation_groups_path%>','Rejected','Student')">
+                          Rejected
+                        </a>
+                      </li>
+                      <li role="presentation">
+                        <a role="menuitem" tabindex="-1" onclick="updateMemberState('<%=student.id%>','<%=updateMemberState_investigation_groups_path%>','Process','Student')">
+                          Process
+                        </a>
+                      </li>
+                      <li role="presentation">
+                        <a role="menuitem" tabindex="-1" onclick="updateMemberState('<%=student.id%>','<%=updateMemberState_investigation_groups_path%>','Admitted','Student')">
+                        Admitted
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          <%end%>
+          <% @teacherMembers.each do |teacher| %>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <h4 class="title">
+                      <%= link_to teacher.teacher.username, teacher.teacher %>
+                    </h4>
+                    <p class="summary"><%= teacher.teacher.first_name + " " + teacher.teacher.last_name %></p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn1 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    <%= teacher.rol%>
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" onclick="updateMemberRol('<%=teacher.id%>','<%=updateMemberRol_investigation_groups_path%>','Teacher')" >
+                        Teacher
+                      </a>
+                    </li>
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" onclick="updateMemberRol('<%=teacher.id%>','<%=updateMemberRol_investigation_groups_path%>','Admin')" >
+                        Admin
+                      </a>
+                    </li>
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" onclick="updateMemberRol('<%=teacher.id%>','<%=updateMemberRol_investigation_groups_path%>','Owner')" >
+                        Owner
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn1 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    <%=teacher.state%>
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                      <li role="presentation">
+                        <a role="menuitem" tabindex="-1" onclick="updateMemberState('<%=teacher.id%>','<%=updateMemberState_investigation_groups_path%>','Rejected','Teacher')">
+                          Rejected
+                        </a>
+                      </li>
+                      <li role="presentation">
+                        <a role="menuitem" tabindex="-1" onclick="updateMemberState('<%=teacher.id%>','<%=updateMemberState_investigation_groups_path%>','Process','Teacher')">
+                          Process
+                        </a>
+                      </li>
+                      <li role="presentation">
+                        <a role="menuitem" tabindex="-1" onclick="updateMemberState('<%=teacher.id%>','<%=updateMemberState_investigation_groups_path%>','Admitted','Teacher')">
+                        Admitted
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+              </td>
+            </tr>
+          <%end%>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+  function updateMemberState(id, url, state, type){
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {"id": id,"member_investigation_group_param": state,"type": type},
+      success: function(){alert("OH SI, ESTADO")}
+    });
+  }
+  function updateMemberRol(id, url, rol){
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {"id": id,"member_investigation_group_param": rol},
+      success: function(){alert("OH SI, ROL")}
+    });
+  }
+</script>
+<!--
+<script>
+  function updateRolTeacher(){
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: data,
+      success: success,
+      dataType: dataType
+    });
+  }
+</script>
+-->
+<%= link_to 'Back', investigation_group_path %>

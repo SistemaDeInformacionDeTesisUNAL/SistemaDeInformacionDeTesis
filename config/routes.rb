@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get 'teachers/sign_out', :to =>"devise/sessions#destroy"
   end
   get 'about', to: "static_pages#about", as: "contacto"
+
   #get 'home', to: "static_pages#home", as: "home"
 
   #Post the subscription to our app
@@ -31,7 +32,16 @@ Rails.application.routes.draw do
   resources :events
   resources :profiles
   resources :teacher_investigation_groups
-  resources :investigation_groups
+  resources :investigation_groups do
+    collection do
+      get  ':id/member',            to: "investigation_groups#member",              as: "member"
+      post ':id/member/state',      to: "investigation_groups#updateMemberState",   as: "updateMemberState"
+      post ':id/member/rol',        to: "investigation_groups#updateMemberRol",     as: "updateMemberRol"
+      get  ':id/join',              to: "investigation_groups#join",                as: "join"
+      get  ':id/contributionsGroup',to: "investigation_groups#contributionsGroup",  as: "contributionsGroup"
+    end
+    resources :contributions, only:[:new,:create,:show]
+  end
   devise_for :students
   devise_for :teachers
   resources :students, except:[:new,:create]

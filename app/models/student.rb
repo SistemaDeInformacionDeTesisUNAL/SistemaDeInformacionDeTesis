@@ -27,7 +27,7 @@ class Student < ApplicationRecord
      self.email = Devise::LDAP::Adapter.get_ldap_param(self.username,"mail").first
      self.first_name = Devise::LDAP::Adapter.get_ldap_param(self.username,"givenname").first
      self.last_name = Devise::LDAP::Adapter.get_ldap_param(self.username,"sn").first
-     self.investigation_group_id = 0
+     self.investigation_group_id = 1
      self.state = 0
      #demas campos del modelo
      #self.autorize = false

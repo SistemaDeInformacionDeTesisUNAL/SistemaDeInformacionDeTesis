@@ -69,6 +69,6 @@ class TeacherInvestigationGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_investigation_group_params
-      params.require(:teacher_investigation_group).permit(:teacher_id, :investigation_group_id)
+      params.require(:teacher_investigation_group).permit(:teacher_id, :investigation_group_id, :rol, :state, :teacher_investigation_group_param)
     end
 end

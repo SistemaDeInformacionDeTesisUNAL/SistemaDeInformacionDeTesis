@@ -97,4 +97,21 @@
     <%=link_to 'Edit', edit_investigation_group_path(@investigation_group)%> |
   <%end%>
 <%end%>
-<%=link_to 'Back', investigation_groups_path%>
+<%if student_signed_in?%>
+  <%if current_student.investigation_group_id != @investigation_group.id%>
+    <%=link_to 'Join', join_investigation_groups_path%> |
+  <%end%>
+<%end%>
+<%if teacher_signed_in?%>
+  <%if @relation == nil %>
+    <%=link_to 'Join', join_investigation_groups_path%> |
+  <%elsif @relation.rol == 'Admin' || @relation.rol == 'Owner' %>
+    <%=link_to 'Edit Members', member_investigation_groups_path(@investigation_group)%> |
+    <%=link_to 'Contributions', contributionsGroup_investigation_groups_path %> |
+  <%end%>
+<%end%>
+<%=link_to 'Back', investigation_groups_path %>
+
+<% if teacher_signed_in? %>
+| <%= link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group) %>
+<% end %>

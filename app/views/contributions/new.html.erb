@@ -1,5 +1,7 @@
 <h1>New Contribution</h1>
 
-<%= render 'form', contribution: @contribution %>
+<% @contribution.investigation_group_id = @contribution_group.id %>
 
-<%= link_to 'Back', contributions_path %>
+<%= render 'form', contribution: @contribution  %>
+
+<%= link_to 'Back', contributionsGroup_investigation_groups_path(@contribution_group) %>
