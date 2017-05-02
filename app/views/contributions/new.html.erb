@@ -1,7 +1,10 @@
+<%= stylesheet_link_tag 'css/group_table' %>
+
 <h1>New Contribution</h1>
 
 <% @contribution.investigation_group_id = @contribution_group.id %>
+<%= render 'form', contribution: @contribution, :class=>"btn btn1" %>
 
-<%= render 'form', contribution: @contribution  %>
+<%= link_to 'Back', contributions_path, :class=>"btn btn1" %>
 
 <%= link_to 'Back', contributionsGroup_investigation_groups_path(@contribution_group) %>

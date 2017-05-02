@@ -1,5 +1,8 @@
+<%= stylesheet_link_tag 'css/group_table' %>
+
 <h1>Editing Investigation Group</h1>
 
 <%= render 'form', investigation_group: @investigation_group %>
 
-<%= link_to 'Back', investigation_group_path %>
+<%= link_to 'Show', @investigation_group, :class=>"btn btn1" %>
+<%= link_to 'Back', investigation_groups_path, :class=>"btn btn1" %>

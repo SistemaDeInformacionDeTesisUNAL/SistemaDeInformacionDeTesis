@@ -1,5 +1,7 @@
+<%= stylesheet_link_tag 'css/group_table' %>
+
 <h1>New Investigation Group</h1>
 
-<%= render 'form', investigation_group: @investigation_group %>
+<%= render 'form', investigation_group: @investigation_group, :class=>"btn btn1" %>
 
-<%= link_to 'Back', investigation_groups_path %>
+<%= link_to 'Back', investigation_groups_path, :class=>"btn btn1" %>

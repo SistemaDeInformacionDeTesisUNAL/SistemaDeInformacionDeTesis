@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'css/form' %>
+
 <%= form_for(contribution) do |f| %>
   <% if contribution.errors.any? %>
     <div id="error_explanation">
@@ -9,50 +11,43 @@
       </ul>
     </div>
   <% end %>
-  <div class="container">
-    <table class="table table-striped">
-      <tbody>
-        <tr>
-          <td>
-            <div class="field">
+
+  <section id="form">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-wrap">
+            <!--h1>New Contribution</h1-->
+            <div class="form-group">
               <%= f.label :name %>
-              <%= f.text_field :name %>
+              <%= f.text_field :name, :class=>"form-control" %>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="field">
+            <div class="form-group">
               <%= f.label :publication_date %>
-              <%= f.date_select :publication_date %>
+              <%= f.date_select :publication_date%>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="field">
+            <div class="form-group">
               <%= f.label :description %>
-              <%= f.text_area :description %>
+              <%= f.text_area :description, :class=>"form-control", :rows=>"3" %>
             </div>
-            <div hidden>
-              <%= f.hidden_field :investigation_group_id %>
+            <div class="form-group">
+              <%= f.label :state %>
+              <%= f.select(:state, options_for_select(["Aproved","Progress","Rejected"]))%>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="field">
+            <div class="form-group">
+              <%= f.label :investigation_group_id %>
+              <%= f.select(:investigation_group_id,options_from_collection_for_select(InvestigationGroup.all, "id", "name"), prompt: "All groups")%>
+            </div>
+            <div class="form-group">
               <%= f.label :file %>
               <%= f.file_field :file%>
             </div>
-          </td>
-        </tr>
-        <td>
-          <div class="actions">
-            <%= f.submit %>
+            <div class="form-group">
+              <%= f.submit 'Create Contribution', :class => 'btn btn-custom btn-lg btn-block' %>
+            </div>
           </div>
-        </td>
-      </tbody>
-    </table>
-  </div>
-<% end %>
+        </div> <!-- /.col-xs-12 -->
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+  </section>
+  <% end %>

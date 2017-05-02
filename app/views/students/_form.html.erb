@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'css/form' %>
+
 <%= form_for(student) do |f| %>
   <% if student.errors.any? %>
     <div id="error_explanation">
@@ -10,6 +12,43 @@
       </ul>
     </div>
   <% end %>
+
+  <section id="form">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-wrap">
+            <!--h1>New Contribution</h1-->
+            <div class="form-group">
+              <%= f.label :first_name %>
+              <%= f.text_field :first_name, :class=>"form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :last_name %>
+              <%= f.text_field :last_name, :class=>"form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :username %>
+              <%= f.text_field :username, :class=>"form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.text_field :email, :class=>"form-control" %>
+            </div>
+            <div>
+              <%= f.label :investigation_group_id %>
+              <%= f.text_field :investigation_group_id, :class=>"form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.submit 'Update Student', :class => 'btn btn-custom btn-lg btn-block' %>
+            </div>
+          </div>
+        </div> <!-- /.col-xs-12 -->
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+  </section>
+  <% end %>
+
 
   <div class="field">
     <%= f.label :first_name %>
