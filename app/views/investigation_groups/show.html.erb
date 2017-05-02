@@ -20,7 +20,7 @@
           <td rowspan="2"><strong>Owner:</strong></td>
           <td><%= @Owner.first_name%> <%=@Owner.last_name%> </td>
           <tr>
-            <td><%= @Owner.username%> </td>
+            <td><%=link_to @Owner.username, :controller => "teachers", :action => "show", :id => @Owner.id%> </td>
           </tr>
         </tr>
         <tr>
@@ -57,6 +57,26 @@
           <%  if contribution != @allContributions.last %>,
           <%end
         end %>
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Teachers:</strong> </td>
+      <td>
+        <%@Teachers.each do |teacher|%>
+          <%=link_to teacher.username, :controller => "teachers", :action => "show", :id => teacher.id%>
+          <%if teacher != @Teachers.last %>,
+          <%end%>
+        <%end%>
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Students:</strong> </td>
+      <td>
+        <%@Students.each do |student|%>
+          <%=link_to student.username, :controller => "students", :action => "show", :id => student.id%>
+          <%if student != @Students.last %>,
+          <%end%>
+        <%end%>
       </td>
     </tr>
   </tbody>
