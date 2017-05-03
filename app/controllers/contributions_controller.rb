@@ -35,7 +35,7 @@ class ContributionsController < ApplicationController
     respond_to do |format|
       @contribution.state = 2
       if @contribution.save
-        format.html { redirect_to contributionsGroup_investigation_groups_path, notice: 'Contribution was successfully updated.' }
+        format.html { redirect_to contributionsGroup_investigation_groups_path(@contribution.investigation_group_id), notice: 'Contribution was successfully updated.' }
         format.json { render :show, status: :ok, location: @contribution }
       else
         format.html { render :new }

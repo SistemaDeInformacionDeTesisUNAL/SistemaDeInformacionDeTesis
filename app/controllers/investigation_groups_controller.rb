@@ -106,7 +106,6 @@ class InvestigationGroupsController < ApplicationController
   end
 
   def updateMemberState
-    puts "hola, State #{params[:id]}"
     @state = params[:member_investigation_group_param];
     if params[:type] == 'Student'
       @memState = Student.find(params[:id])
@@ -115,18 +114,15 @@ class InvestigationGroupsController < ApplicationController
     end
     @memState.state = @state
     if @memState.save!
-      puts @memState.state
       redirect_to member_investigation_groups_path(@investigation_group), notice: 'Member investigation group was successfully updated, State.'
     end
   end
 
   def updateMemberRol
-    puts "holalalala #{params[:id]}"
     @rol = params[:member_investigation_group_param];
     @memRol = TeacherInvestigationGroup.find(params[:id])
     @memRol.rol = @rol
     if @memRol.save!
-      puts @memRol.rol
       redirect_to member_investigation_groups_path(@investigation_group), notice: 'Teacher investigation group was successfully updated, Rol.'
     end
   end
