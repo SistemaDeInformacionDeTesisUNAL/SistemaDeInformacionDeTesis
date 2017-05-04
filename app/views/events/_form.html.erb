@@ -25,11 +25,11 @@
                 <tr>
                   <td>
                     <%= f.label :start_time %>
-                    <%= f.text_field :start_time, class:"form-control",  id: 'datetimepicker1'%>
+                    <%= f.datetime_field :start_time, class:"form-control",  id: 'datetimepicker1'%>
                   </td>
                   <td>
                     <%= f.label :end_time %>
-                    <%= f.text_field :end_time,class:"form-control", id: 'datetimepicker2'%>
+                    <%= f.datetime_field :end_time,class:"form-control", id: 'datetimepicker2'%>
                   </td>
                 </tr>
                 <script type="text/javascript">
@@ -58,7 +58,7 @@
             </tbody>
           </table>
           <div class="actions">
-            <%= f.submit  :class =>  "btn btn-info",:style=>"display: block; margin: auto;"%>
+            <%= f.submit :class =>  "btn btn-info",:style=>"display: block; margin: auto;"%>
           </div>
         </div>
       </div>
