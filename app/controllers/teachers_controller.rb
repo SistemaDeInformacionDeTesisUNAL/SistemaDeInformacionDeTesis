@@ -14,7 +14,7 @@ class TeachersController < ApplicationController
     groups = TeacherInvestigationGroup.load_group_not_owner(:ids => params[:id])
     @groupsOwner = []
     groupsOwner.each do |group|
-      @groupsOwner.push(InvestigationGroup.find(group.investigation_group_id))
+    @groupsOwner.push(InvestigationGroup.find(group.investigation_group_id))
     end
     @groups = []
     groups.each do |group|

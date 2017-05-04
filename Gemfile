@@ -44,7 +44,8 @@ gem "webpush"
 #fullCalendar
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-
+#DateTimePicker
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 #Faker
 gem 'faker'
 

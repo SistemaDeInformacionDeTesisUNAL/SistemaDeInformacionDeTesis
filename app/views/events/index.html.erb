@@ -1,13 +1,32 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Events</h1>
-
-
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+<br>
 <div class="container">
   <div id="calendar">
   </div>
 </div>
-
-<% if teacher_signed_in? %>
-<%= link_to 'New Event', new_event_path %>
-<% end %>
+<script type="text/javascript">
+$('#calendar').fullCalendar({
+  theme: true,
+  height: "auto",
+  selectable: true,
+  selectHelper: true,
+  editable:true,
+  eventLimit: 3,
+  header: {
+    left: 'title',
+    center: 'prevYear,month,agendaWeek,agendaDay,nextYear',
+    right:  'today prev,next'
+  },
+  views: {
+      agendaFourDay: {
+          type: 'agenda',
+          duration: { days: 4 },
+          buttonText: '4 day'
+      }
+  },
+  events: '/events.json'
+});
+</script>
+<br>
+<%= link_to_if teacher_signed_in?, 'New Event', new_event_path, :class=>"btn btn-success" %>

@@ -23,6 +23,9 @@ class TeacherInvestigationGroup < ApplicationRecord
     g = load_investigation_groups.where( teachers: { id: args[:ids] } )
     g.where.not( rol: "Owner" )
   end
+  def self.load_groups_belong(**args)
+    load_investigation_groups.where( teachers: { id: args[:ids] } )
+  end
   def self.load_teachers(**args)
     load_investigation_groups.where( investigation_groups:{ id: args[:ids] } )
   end

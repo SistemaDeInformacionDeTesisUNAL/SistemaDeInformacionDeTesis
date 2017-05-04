@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412170908) do
+ActiveRecord::Schema.define(version: 20170504040726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170412170908) do
     t.integer  "investigation_group_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.string   "localization"
     t.index ["investigation_group_id"], name: "index_events_on_investigation_group_id", using: :btree
     t.index ["name"], name: "index_events_on_name", using: :btree
     t.index ["start_time"], name: "index_events_on_start_time", using: :btree
