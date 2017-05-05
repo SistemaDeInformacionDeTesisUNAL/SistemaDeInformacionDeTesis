@@ -72,6 +72,18 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
+
+        #Send mail to all teachers in the group
+        @event.teachers do |teacher|
+          EventMailer.updateEmail(:user=>current_teacher,:event=>@event).deliver!
+        end
+        #Send mail to all students in the group
+        @students=@event.students
+        if @students!=nil
+          @students.each do |student|
+            EventMailer.updateEmail(:user=>current_student,:event=>@event).deliver!
+          end
+        end
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
@@ -86,7 +98,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to events_path, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
