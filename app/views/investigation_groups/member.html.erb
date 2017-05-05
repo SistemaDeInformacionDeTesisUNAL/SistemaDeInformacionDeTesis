@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <section class="content">
-      <h1>Requests</h1>
+      <h1>Members</h1>
       <div class="col-md-8 col-md-offset-2">
         <table class="table table-filter">
           <% @students.each do |student| %>
@@ -145,17 +145,4 @@
     });
   }
 </script>
-<!--
-<script>
-  function updateRolTeacher(){
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: data,
-      success: success,
-      dataType: dataType
-    });
-  }
-</script>
--->
 <%= link_to 'Back', investigation_group_path %>
