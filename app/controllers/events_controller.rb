@@ -34,12 +34,31 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @groups=[]
+    TeacherInvestigationGroup.load_groups_belong(:ids => current_teacher.id).each do |grupo|
+      @groups.push(grupo.investigation_group)
+    end
+
+    @event = Event.create!(event_params)
+
     respond_to do |format|
       if @event.save
+        EventTeacher.create!( event_id: @event.id, teacher_id: current_teacher.id )
+
+        #Send mail to all teachers in the group
+        InvestigationGroup.teachers_group(:id => @event.investigation_group.id).each do |teacher|
+          EventMailer.emailCreated(teacher).deliver_now
+        end
+
+        #Send mail to all students in the group
+        @students=InvestigationGroup.students_group(:id => @event.investigation_group.id)
+        if @students!=nil
+          @students.each do |student|
+            EventMailer.emailCreated(student).deliver_now
+          end
+        end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
-        EventTeacher.create!( event_id: @event.id, teacher_id: current_teacher.id )
       else
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }
