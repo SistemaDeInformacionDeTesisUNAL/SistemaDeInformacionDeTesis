@@ -2,6 +2,20 @@
 
 class ImageUploader < CarrierWave::Uploader::Base
 
+  include CarrierWave::MiniMagick
+
+  process :square
+
+  def square #Corta la imagen a su menor dimensión (ancho o alto)
+    image = ::MiniMagick::Image::read(File.binread(@file.file))
+
+    if image[:width] > image[:height]
+      resize_to_fill image[:height], image[:height]
+    else
+      resize_to_fill image[:width], image[:width]
+    end
+  end
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
