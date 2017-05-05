@@ -40,6 +40,10 @@
               <%= f.text_field :investigation_group_id, :class=>"form-control" %>
             </div>
             <div class="form-group">
+              <%= f.label "Image: " %>
+              <%= f.file_field :image %>
+            </div>
+            <div class="form-group">
               <%= f.submit 'Update Student', :class => 'btn btn-custom btn-lg btn-block' %>
             </div>
           </div>

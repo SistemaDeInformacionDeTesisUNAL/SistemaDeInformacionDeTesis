@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412170908) do
+ActiveRecord::Schema.define(version: 20170505041804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20170412170908) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "image"
     t.index ["email"], name: "index_students_on_email", unique: true, using: :btree
     t.index ["investigation_group_id"], name: "index_students_on_investigation_group_id", using: :btree
     t.index ["username"], name: "index_students_on_username", unique: true, using: :btree
@@ -161,6 +162,7 @@ ActiveRecord::Schema.define(version: 20170412170908) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "image"
     t.index ["email"], name: "index_teachers_on_email", unique: true, using: :btree
     t.index ["username"], name: "index_teachers_on_username", unique: true, using: :btree
   end
