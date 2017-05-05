@@ -29,9 +29,10 @@ default from: 'sigit_Events@unal.edu.co'
   #
   #   en.event_mailer.updateEmail.subject
   #
-  def updateEmail(user)
-    @user = user
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: "Event has changed")
+  def updateEmail(**args)
+    @event= args[:event]
+    @user = args[:user]
+    @url  = 'http://localhost:3000/events/'+@event.id.to_s+'.html'
+    mail(to: @user.email, subject: "Event: "+@event.name)
   end
 end
