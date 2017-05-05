@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= en.event_mailer.greeting%>, <%= @user.name %></h1>
+    <p>
+      <%= en.event_mailer.updateEmail.mail_part1 %>
+      <br>
+    </p>
+    <p>
+      <%=en.event_mailer.mail_part2%> <%= @url %>.
+    </p>
+    <p><%=en.event_mailer.mail_goodbye%></p>
+  </body>
+</html>

@@ -11,29 +11,58 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @Owner=InvestigationGroup.teacher_group_owner(:id => @event.investigation_group.id)
   end
 
   # GET /events/new
   def new
+    @groups=[]
+    TeacherInvestigationGroup.load_groups_belong(:ids => current_teacher.id).each do |grupo|
+      @groups.push(grupo.investigation_group)
+    end
     @event = Event.new
   end
 
   # GET /events/1/edit
   def edit
+    @groups=[]
+    TeacherInvestigationGroup.load_groups_belong(:ids => current_teacher.id).each do |grupo|
+      @groups.push(grupo.investigation_group)
+    end
   end
 
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @groups=[]
+    TeacherInvestigationGroup.load_groups_belong(:ids => current_teacher.id).each do |grupo|
+      @groups.push(grupo.investigation_group)
+    end
+
+    @event = Event.create!(event_params)
 
     respond_to do |format|
       if @event.save
+        EventTeacher.create!( event_id: @event.id, teacher_id: current_teacher.id )
+
+        #Send mail to all teachers in the group
+        InvestigationGroup.teachers_group(:id => @event.investigation_group.id).each do |teacher|
+          EventMailer.emailCreated(:user=>current_teacher,:event=>@event).deliver!
+        end
+
+        #Send mail to all students in the group
+        @students=InvestigationGroup.students_group(:id => @event.investigation_group.id)
+        if @students!=nil
+          @students.each do |student|
+            EventMailer.emailCreated(:user=>current_student,:event=>@event).deliver!
+          end
+        end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -62,14 +91,28 @@ class EventsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
+  def join
+    @event=Event.find(params[:id])
+    if student_signed_in?
+      EventStudent.create!( event_id: params[:id], student_id: current_student.id )
+      EventMailer.joinEmail(:user=>current_student,:event=>@event).deliver!
+      redirect_to events_path
     end
+    if teacher_signed_in?
+      EventTeacher.create!( event_id: params[:id], teacher_id: current_teacher.id )
+      EventMailer.joinEmail(:user=>current_teacher,:event=>@event).deliver!
+      redirect_to events_path
+    end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:name, :date_time, :description, :investigation_group_id)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:name, :start_time, :end_time, :localization, :description, :investigation_group_id)
+  end
 end

@@ -29,7 +29,11 @@ Rails.application.routes.draw do
   resources :history_groups
   resources :event_teachers
   resources :event_students
-  resources :events
+  resources :events do
+    collection do
+      get  ':id/join',              to: "events#join",                as: "join"
+    end
+  end
   resources :profiles
   resources :teacher_investigation_groups
   resources :investigation_groups do
