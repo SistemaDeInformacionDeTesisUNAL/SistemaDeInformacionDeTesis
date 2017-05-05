@@ -53,6 +53,24 @@
                   </ul>
                 </div>
               </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <h3 class="title">
+                      <%=link_to 'Edit', edit_investigation_group_contribution_path(:investigation_group_id=>@investigation_group.id), :class=>"btn btn1"%>
+                    </h3>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <h3 class="title">
+                      <%=link_to 'Users', investigation_group_contribution_users_path(:contribution_id=>:id,:investigation_group_id=>@investigation_group.id), :class=>"btn btn1"%>
+                    </h3>
+                  </div>
+                </div>
+              </td>
             </tr>
           <%end%>
         </table>
@@ -63,7 +81,7 @@
 
 <%=link_to 'Back', investigation_group_path %>
 <% if teacher_signed_in? %>
-| <%= link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group) %>
+  <%= link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"btn btn1" %>
 <% end %>
 
 <script>

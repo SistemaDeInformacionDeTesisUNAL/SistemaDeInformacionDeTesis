@@ -1,5 +1,5 @@
 class ContributionsController < ApplicationController
-  before_action :set_contribution, only: [:show, :edit, :update, :destroy]
+  before_action :set_contribution, only: [:show, :edit, :update, :destroy, :users]
 
   # GET /contributions
   # GET /contributions.json
@@ -49,7 +49,7 @@ class ContributionsController < ApplicationController
   def update
     respond_to do |format|
       if @contribution.update(contribution_params)
-        format.html { redirect_to @contribution, notice: 'Contribution was successfully updated.' }
+        format.html { redirect_to contributionsGroup_investigation_groups_path, notice: 'Contribution was successfully updated.' }
         format.json { render :show, status: :ok, location: @contribution }
       else
         format.html { render :edit }
@@ -66,6 +66,10 @@ class ContributionsController < ApplicationController
       format.html { redirect_to contributions_url, notice: 'Contribution was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def users
+    @users = Contribution.students(:id => params[:id])
   end
 
   private

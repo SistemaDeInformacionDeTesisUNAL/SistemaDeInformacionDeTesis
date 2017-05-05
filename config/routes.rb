@@ -24,14 +24,13 @@ Rails.application.routes.draw do
   resources :tag_contributions
   resources :tags
   resources :ubications
-  resources :user_contributions
   resources :contributions
   resources :history_groups
   resources :event_teachers
   resources :event_students
   resources :events do
     collection do
-      get  ':id/join',              to: "events#join",                as: "join"
+      get  ':id/join',               to: "events#join",                as: "join"
     end
   end
   resources :profiles
@@ -44,8 +43,11 @@ Rails.application.routes.draw do
       get  ':id/join',                to: "investigation_groups#join",                      as: "join"
       get  ':id/contributionsGroup',  to: "investigation_groups#contributionsGroup",        as: "contributionsGroup"
       post ':id/contributions/state', to: "investigation_groups#updateContributionState",   as: "updateContributionState"
-    end 
-    resources :contributions, only:[:new,:create,:show]
+    end
+    resources :contributions, only:[:new,:create,:show,:edit,:users] do
+      get ':id/users',               to: "contributions#users",                             as: "users"
+      resources :user_contributions
+    end
   end
   devise_for :students
   devise_for :teachers

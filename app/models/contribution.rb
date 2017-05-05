@@ -36,7 +36,7 @@ class Contribution < ActiveRecord::Base
 
   #Estudiantes de una contribución
   def self.students(**args)
-    Student.load_contributions.where( contributions: { id: args[:contribution_id] } )
+    Student.load_contributions.where( contributions: { id: args[:id] } )
   end
   #Profesores de una contribución
   def self.teachers(**args)
