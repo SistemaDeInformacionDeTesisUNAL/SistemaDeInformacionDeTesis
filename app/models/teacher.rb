@@ -20,6 +20,7 @@ class Teacher < ApplicationRecord
          :authentication_keys => [:username]
 
   validates :username, presence: true, uniqueness: true
+ mount_uploader :image, ImageUploader
 
   def ldap_before_save
      self.email = Devise::LDAP::Adapter.get_ldap_param(self.username,"mail").first
