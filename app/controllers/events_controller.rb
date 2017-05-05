@@ -47,14 +47,14 @@ class EventsController < ApplicationController
 
         #Send mail to all teachers in the group
         InvestigationGroup.teachers_group(:id => @event.investigation_group.id).each do |teacher|
-          EventMailer.emailCreated(teacher).deliver_now
+          EventMailer.emailCreated(:user=>current_teacher,:event=>@event).deliver!
         end
 
         #Send mail to all students in the group
         @students=InvestigationGroup.students_group(:id => @event.investigation_group.id)
         if @students!=nil
           @students.each do |student|
-            EventMailer.emailCreated(student).deliver_now
+            EventMailer.emailCreated(:user=>current_student,:event=>@event).deliver!
           end
         end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -92,12 +92,15 @@ class EventsController < ApplicationController
   end
 
   def join
+    @event=Event.find(params[:id])
     if student_signed_in?
-      EventStudent.create!( event_id: params[:id], teacher_id: current_student.id )
+      EventStudent.create!( event_id: params[:id], student_id: current_student.id )
+      EventMailer.joinEmail(:user=>current_student,:event=>@event).deliver!
       redirect_to events_path
     end
     if teacher_signed_in?
       EventTeacher.create!( event_id: params[:id], teacher_id: current_teacher.id )
+      EventMailer.joinEmail(:user=>current_teacher,:event=>@event).deliver!
       redirect_to events_path
     end
   end

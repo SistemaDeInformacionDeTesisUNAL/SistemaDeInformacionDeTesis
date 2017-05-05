@@ -10,11 +10,11 @@
         <tbody>
           <tr>
             <td> <strong>Start:</strong> </td>
-            <td><%= @event.start_time.to_formatted_s(:long_ordinal) %></td>
+            <td><%= @event.start_time.to_formatted_s(:long) %></td>
           </tr>
           <tr>
             <td> <strong>End:</strong> </td>
-            <td><%= @event.end_time.to_formatted_s(:long_ordinal) %></td>
+            <td><%= @event.end_time.to_formatted_s(:long) %></td>
           </tr>
           <tr>
             <td><strong>Description:</strong></td>
@@ -42,7 +42,6 @@
           <%end%>
         </td>
       </tr>
-      <tr>
       </tbody>
     </table>
   </div>
