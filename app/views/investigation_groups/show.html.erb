@@ -89,15 +89,14 @@
   <%end%>
 <%end%>
 <%if teacher_signed_in?%>
-  <%if @relation == nil %>
+  <%if @relation == [] %>
     <%=link_to 'Join', join_investigation_groups_path, :class=>"btn btn1"%>
+  <%elsif @relation.rol == 'Teacher' && @relation.state == 'Admitted' %>
+    <%=link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"btn btn1" %>
   <%elsif @relation.rol == 'Admin' || @relation.rol == 'Owner' %>
+    <%=link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"btn btn1" %>
     <%=link_to 'Edit Members', member_investigation_groups_path(@investigation_group), :class=>"btn btn1"%>
     <%=link_to 'Contributions', contributionsGroup_investigation_groups_path, :class=>"btn btn1" %>
   <%end%>
 <%end%>
 <%=link_to 'Back', investigation_groups_path, :class=>"btn btn1" %>
-
-<% if teacher_signed_in? %>
-<%= link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"btn btn1" %>
-<% end %>

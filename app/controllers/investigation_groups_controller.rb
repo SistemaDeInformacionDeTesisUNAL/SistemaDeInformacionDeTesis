@@ -18,9 +18,7 @@ class InvestigationGroupsController < ApplicationController
     @Teachers=InvestigationGroup.teachers_group(:id => @investigation_group.id)
     @Students=InvestigationGroup.students_group(:id => @investigation_group.id)
     if teacher_signed_in?
-    @relation=InvestigationGroup.relationTeacherInvestigationGroup(:teacher_id => current_teacher.id,:investigation_group_id => @investigation_group.id)
-      puts "Hey hey hey esta imprimiendo aquiiiiiiiiiiiiiiiiii"
-      puts @relation.rol
+      @relation=InvestigationGroup.relationTeacherInvestigationGroup(:teacher_id => current_teacher.id,:investigation_group_id => @investigation_group.id)
     end
   end
 
@@ -88,13 +86,10 @@ class InvestigationGroupsController < ApplicationController
       @student.investigation_group_id = @investigation_group.id
       @student.state = 'Process'
       if @student.save!
-        puts @student.state
-        puts @student.investigation_group_id
         redirect_to investigation_group_path(@investigation_group), notice: 'Student investigation group was successfully updated, Join.'
       end
     else
       if TeacherInvestigationGroup.create!( teacher_id: current_teacher.id, investigation_group_id: @investigation_group.id, rol: 0, state: 1 )
-        puts "Yeay"
         redirect_to investigation_group_path(@investigation_group), notice: 'Teacher investigation group was successfully updated, Join.'
       end
     end
@@ -106,27 +101,44 @@ class InvestigationGroupsController < ApplicationController
   end
 
   def updateMemberState
-    @state = params[:member_investigation_group_param];
+    @state = params[:member_investigation_group_param]
+    puts params[:type]
+    puts
+    puts
+    puts
+    puts
     if params[:type] == 'Student'
-      @memState = Student.find(params[:id])
+      puts params[:type]
+      puts params[:ids]
+      puts @state
+      @memState = Student.find(params[:ids])
     else
-      @memState = TeacherInvestigationGroup.find(params[:id])
+      @memState = TeacherInvestigationGroup.find(params[:ids])
     end
     @memState.state = @state
     if @memState.save!
+      puts @memState.username
       redirect_to member_investigation_groups_path(@investigation_group), notice: 'Member investigation group was successfully updated, State.'
     end
   end
 
   def updateMemberRol
     @rol = params[:member_investigation_group_param];
-    @memRol = TeacherInvestigationGroup.find(params[:id])
+    @memRol = TeacherInvestigationGroup.find(params[:ids])
     @memRol.rol = @rol
     if @memRol.save!
       redirect_to member_investigation_groups_path(@investigation_group), notice: 'Teacher investigation group was successfully updated, Rol.'
     end
   end
 
+  def updateContributionState
+    @state = params[:contribution_state]
+    @contribution = Contribution.find(params[:ids])
+    @contribution.state = @state
+    if @contribution.save!
+      redirect_to contributionsGroup_investigation_groups_path(@investigation_group), notice: 'Contribution was successfully updated, State.'
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -136,6 +148,6 @@ class InvestigationGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def investigation_group_params
-      params.require(:investigation_group).permit(:name, :create_date, :description,:image,:member_investigation_group_param,:type)
+      params.require(:investigation_group).permit(:name, :create_date, :description,:image,:member_investigation_group_param,:type,:contribution_state,:ids)
     end
 end

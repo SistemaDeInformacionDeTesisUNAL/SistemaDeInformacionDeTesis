@@ -34,12 +34,13 @@ Rails.application.routes.draw do
   resources :teacher_investigation_groups
   resources :investigation_groups do
     collection do
-      get  ':id/member',            to: "investigation_groups#member",              as: "member"
-      post ':id/member/state',      to: "investigation_groups#updateMemberState",   as: "updateMemberState"
-      post ':id/member/rol',        to: "investigation_groups#updateMemberRol",     as: "updateMemberRol"
-      get  ':id/join',              to: "investigation_groups#join",                as: "join"
-      get  ':id/contributionsGroup',to: "investigation_groups#contributionsGroup",  as: "contributionsGroup"
-    end
+      get  ':id/member',              to: "investigation_groups#member",                    as: "member"
+      post ':id/member/state',        to: "investigation_groups#updateMemberState",         as: "updateMemberState"
+      post ':id/member/rol',          to: "investigation_groups#updateMemberRol",           as: "updateMemberRol"
+      get  ':id/join',                to: "investigation_groups#join",                      as: "join"
+      get  ':id/contributionsGroup',  to: "investigation_groups#contributionsGroup",        as: "contributionsGroup"
+      post ':id/contributions/state', to: "investigation_groups#updateContributionState",   as: "updateContributionState"
+    end 
     resources :contributions, only:[:new,:create,:show]
   end
   devise_for :students

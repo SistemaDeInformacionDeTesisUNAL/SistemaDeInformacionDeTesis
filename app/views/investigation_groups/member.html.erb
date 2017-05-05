@@ -128,19 +128,19 @@
   </div>
 </div>
 <script>
-  function updateMemberState(id, url, state, type){
+  function updateMemberState(ids, url, state, type){
     $.ajax({
       type: "POST",
       url: url,
-      data: {"id": id,"member_investigation_group_param": state,"type": type},
+      data: {"ids": ids,"member_investigation_group_param": state,"type": type},
       success: function(){alert("OH SI, ESTADO")}
     });
   }
-  function updateMemberRol(id, url, rol){
+  function updateMemberRol(ids, url, rol){
     $.ajax({
       type: "POST",
       url: url,
-      data: {"id": id,"member_investigation_group_param": rol},
+      data: {"ids": ids,"member_investigation_group_param": rol},
       success: function(){alert("OH SI, ROL")}
     });
   }
