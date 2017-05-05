@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'css/group_table' %>
 
-<h1>New Contribution</h1>
+<h1 style="color: #95b33b; text-align: center; margin-top: 5%">New Contribution</h1>
 
 <% @contribution.investigation_group_id = @contribution_group.id %>
 <%= render 'form', contribution: @contribution, :class=>"btn btn1" %>
