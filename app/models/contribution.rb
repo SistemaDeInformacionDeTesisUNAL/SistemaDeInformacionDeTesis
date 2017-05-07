@@ -40,7 +40,7 @@ class Contribution < ActiveRecord::Base
   end
   #Profesores de una contribución
   def self.teachers(**args)
-    Teacher.load_contributions.where( contributions: { id: args[:contribution_id] } )
+    Teacher.load_contributions.where( contributions: { id: args[:id] } )
   end
 
   #Muestra las ubicaciones de una contribucion

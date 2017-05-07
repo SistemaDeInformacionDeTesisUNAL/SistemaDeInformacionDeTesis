@@ -1,5 +1,8 @@
-<h1>New User Contribution</h1>
+<%= stylesheet_link_tag 'css/group_table' %>
 
+<h1 style="color: #95b33b; text-align: center; margin-top: 5%">New User Contribution</h1>
+
+<% @user_contribution.contribution_id = @contribution.id %>
 <%= render 'form', user_contribution: @user_contribution %>
 
-<%= link_to 'Back', user_contributions_path %>
+<%= link_to 'Back', investigation_group_contribution_users_path %>

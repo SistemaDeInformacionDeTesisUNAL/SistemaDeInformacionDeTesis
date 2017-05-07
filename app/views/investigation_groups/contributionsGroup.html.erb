@@ -5,7 +5,7 @@
       <!--h1>ContributionsGroup</h1-->
       <div class="col-md-8 col-md-offset-2">
         <table class="table table-filter">
-          <th colspan="6"><h2>Contributions Group</h2></th>
+          <th colspan="8"><h2>Contributions Group</h2></th>
           <% @contributions.each do |contribution| %>
           <tr>
             <td>
@@ -58,7 +58,7 @@
                 <div class="media">
                   <div class="media-body">
                     <h3 class="title">
-                      <%=link_to 'Edit', edit_investigation_group_contribution_path(:investigation_group_id=>@investigation_group.id), :class=>"btn btn1"%>
+                      <%=link_to 'Edit', edit_investigation_group_contribution_path(contribution.id,:investigation_group_id=>@investigation_group.id), :class=>"btn btn1"%>
                     </h3>
                   </div>
                 </div>
@@ -67,7 +67,7 @@
                 <div class="media">
                   <div class="media-body">
                     <h3 class="title">
-                      <%=link_to 'Users', investigation_group_contribution_users_path(:contribution_id=>:id,:investigation_group_id=>@investigation_group.id), :class=>"btn btn1"%>
+                      <%=link_to 'Users', investigation_group_contribution_users_path(contribution.id,:investigation_group_id=>@investigation_group.id), :class=>"btn btn1"%>
                     </h3>
                   </div>
                 </div>

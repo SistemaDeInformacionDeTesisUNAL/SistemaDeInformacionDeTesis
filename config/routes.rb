@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :history_groups
   resources :event_teachers
   resources :event_students
+  resources :user_contributions
   resources :events do
     collection do
       get  ':id/join',               to: "events#join",                as: "join"
@@ -45,7 +46,7 @@ Rails.application.routes.draw do
       post ':id/contributions/state', to: "investigation_groups#updateContributionState",   as: "updateContributionState"
     end
     resources :contributions, only:[:new,:create,:show,:edit,:users] do
-      get ':id/users',               to: "contributions#users",                             as: "users"
+      get 'users',               to: "contributions#users",                             as: "users"
       resources :user_contributions
     end
   end

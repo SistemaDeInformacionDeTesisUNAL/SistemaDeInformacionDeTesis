@@ -1,51 +1,23 @@
 class UserContributionsController < ApplicationController
-  before_action :set_user_contribution, only: [:show, :edit, :update, :destroy]
-
-  # GET /user_contributions
-  # GET /user_contributions.json
-  def index
-    @user_contributions = UserContribution.all
-  end
-
-  # GET /user_contributions/1
-  # GET /user_contributions/1.json
-  def show
-  end
+  before_action :set_user_contribution, only: [:destroy]
 
   # GET /user_contributions/new
   def new
+    @contribution = Contribution.find(params[:contribution_id])
     @user_contribution = UserContribution.new
-  end
-
-  # GET /user_contributions/1/edit
-  def edit
   end
 
   # POST /user_contributions
   # POST /user_contributions.json
   def create
     @user_contribution = UserContribution.new(user_contribution_params)
-
+    @contribution = Contribution.find(@user_contribution.contribution_id)
     respond_to do |format|
       if @user_contribution.save
-        format.html { redirect_to @user_contribution, notice: 'User contribution was successfully created.' }
+        format.html { redirect_to investigation_group_contribution_users_path(@contribution.investigation_group_id,@contribution.id), notice: 'User contribution was successfully created.' }
         format.json { render :show, status: :created, location: @user_contribution }
       else
         format.html { render :new }
-        format.json { render json: @user_contribution.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /user_contributions/1
-  # PATCH/PUT /user_contributions/1.json
-  def update
-    respond_to do |format|
-      if @user_contribution.update(user_contribution_params)
-        format.html { redirect_to @user_contribution, notice: 'User contribution was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user_contribution }
-      else
-        format.html { render :edit }
         format.json { render json: @user_contribution.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +41,6 @@ class UserContributionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_contribution_params
-      params.require(:user_contribution).permit(:student_id, :teacher_id, :contribution_id)
+      params.require(:user_contribution).permit(:userable_type, :userable_id, :contribution_id)
     end
 end

@@ -37,32 +37,26 @@
           <td><strong>Investigation group:</strong></td>
           <td><%= link_to @contribution.investigation_group.name, :controller => "investigation_groups", :action => "show", :id => @contribution.investigation_group.id %></td>
         </tr>
-        <% myStudents = Contribution.students(:contribution_id=>@contribution.id)
-        if !myStudents.blank? then%>
         <tr>
           <td><strong>Students:</strong></td>
           <td>
-            <%  myStudents.each do |student| %>
-            <%=link_to student.username, student%>
-            <%if student != myStudents.last then %> ,
-            <%end%>
+            <%@Students.each do |student| %>
+              <%=link_to student.username, student%>
+              <%if student != @Students.last then %> ,
+              <%end%>
             <%end%>
           </td>
         </tr>
-        <%end%>
-        <% myTeachers=Contribution.teachers(:contribution_id=>@contribution.id)
-        if !myTeachers.blank? then %>
         <tr>
           <td><strong>Teachers:</strong></td>
           <td>
-            <%  myTeachers.each do |teacher| %>
-            <%=link_to teacher.username, teacher %>
-            <%if teacher != myTeachers.last then %> ,
-            <%end%>
+            <%@Teachers.each do |teacher| %>
+              <%=link_to teacher.username, teacher %>
+              <%if teacher != @Teachers.last then %> ,
+              <%end%>
             <%end%>
           </td>
         </tr>
-        <% end %>
         <tr>
           <td><strong>Files:</strong></td>
           <td><%= link_to @contribution.file ,@contribution.file_url.to_s %></td>

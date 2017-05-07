@@ -1,5 +1,6 @@
 class ContributionsController < ApplicationController
-  before_action :set_contribution, only: [:show, :edit, :update, :destroy, :users]
+  before_action :set_contribution, only: [:show, :edit, :update, :destroy]
+  before_action :set_contribution_id, only: [:users]
 
   # GET /contributions
   # GET /contributions.json
@@ -17,6 +18,8 @@ class ContributionsController < ApplicationController
   # GET /contributions/1
   # GET /contributions/1.json
   def show
+    @Students = Contribution.students(:id => params[:id])
+    @Teachers = Contribution.teachers(:id => params[:id])
   end
 
   # GET /contributions/new
@@ -69,13 +72,18 @@ class ContributionsController < ApplicationController
   end
 
   def users
-    @users = Contribution.students(:id => params[:id])
+    @Students = Contribution.students(:id => params[:contribution_id])
+    @Teachers = Contribution.teachers(:id => params[:contribution_id])
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contribution
       @contribution = Contribution.find(params[:id])
+    end
+
+    def set_contribution_id
+      @contribution = Contribution.find(params[:contribution_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
