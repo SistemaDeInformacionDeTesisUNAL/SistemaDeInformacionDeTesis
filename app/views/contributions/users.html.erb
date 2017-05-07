@@ -71,5 +71,5 @@
     });
   }
 </script>
-<%= link_to 'Add', new_investigation_group_contribution_user_contribution_path(:contribution_id=>@contribution.id) %>
-<%= link_to 'Back', contributionsGroup_investigation_groups_path(:id=>params[:investigation_group_id]) %>
+<%= link_to 'Add', investigation_group_contribution_newUser_path(:contribution_id=>@contribution.id), :class=>"btn btn2" %>
+<%= link_to 'Back', contributionsGroup_investigation_groups_path(:id=>params[:investigation_group_id]), :class=>"btn btn2" %>

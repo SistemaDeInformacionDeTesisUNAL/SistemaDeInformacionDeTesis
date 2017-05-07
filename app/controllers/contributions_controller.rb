@@ -1,6 +1,6 @@
 class ContributionsController < ApplicationController
   before_action :set_contribution, only: [:show, :edit, :update, :destroy]
-  before_action :set_contribution_id, only: [:users]
+  before_action :set_contribution_id, only: [:users, :newUser]
 
   # GET /contributions
   # GET /contributions.json
@@ -76,6 +76,23 @@ class ContributionsController < ApplicationController
     @Teachers = Contribution.teachers(:id => params[:contribution_id])
   end
 
+  def newUser
+    @Teachers=TeacherInvestigationGroup.load_teachers(:ids => params[:investigation_group_id])
+    @Students=InvestigationGroup.students_group(:id => params[:investigation_group_id])
+  end
+
+  def createUser
+    @user_contribution = UserContribution.new
+    @user_contribution.contribution_id = params[:contr]
+    @user_contribution.userable_type = params[:type]
+    @user_contribution.userable_id = params[:ids]
+    if @user_contribution.save
+      redirect_to investigation_group_contribution_users_path, notice: 'Contribution was successfully updated.'
+    else
+      render :root
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contribution
@@ -88,6 +105,6 @@ class ContributionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contribution_params
-      params.require(:contribution).permit(:name, :publication_date, :description, :investigation_group_id, :file)
+      params.require(:contribution).permit(:name, :publication_date, :description, :investigation_group_id, :file, :ids, :type, :contr)
     end
 end

@@ -46,8 +46,9 @@ Rails.application.routes.draw do
       post ':id/contributions/state', to: "investigation_groups#updateContributionState",   as: "updateContributionState"
     end
     resources :contributions, only:[:new,:create,:show,:edit,:users] do
-      get 'users',               to: "contributions#users",                             as: "users"
-      resources :user_contributions
+      get 'users',                    to: "contributions#users",                            as: "users"
+      get 'newUser',                  to: "contributions#newUser",                          as: "newUser"
+      post 'createUser',              to: "contributions#createUser",                       as: "createUser"
     end
   end
   devise_for :students
