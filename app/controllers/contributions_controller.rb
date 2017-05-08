@@ -93,6 +93,14 @@ class ContributionsController < ApplicationController
     end
   end
 
+  def deleteUser
+    @user_contribution = Contribution.user_contribution( :type=>params[:type], :ids=>params[:ids], :contr=>params[:contr] )
+    @user_contribution.each do |us|
+      us.destroy
+    end
+    redirect_to investigation_group_contribution_users_path, notice: 'Contribution was successfully destroyed.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contribution

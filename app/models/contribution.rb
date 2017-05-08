@@ -48,13 +48,16 @@ class Contribution < ActiveRecord::Base
   	Ubication.load_ubications.where( contributions: { id: args[:ids] } )
   end
 
+  def self.user_contribution(**args)
+    UserContribution.where(userable_type: args[:type], userable_id: args[:ids], contribution_id: args[:contr] )
+  end
   #Cuenta cuantas contribuciones hay en total, necesaria para hacer el indice para separar por paginas
   def self.count
     Contribution.all.count
   end
   #lista las contribuciones por grupo de investigacion
-   def self.load_contributions(**args)
-     includes(:investigation_group)
-     #grpc= InvestigationGroup.contribution_by_group.where(contributions: {id: args[:ids]})
- end
+  def self.load_contributions(**args)
+    includes(:investigation_group)
+    #grpc= InvestigationGroup.contribution_by_group.where(contributions: {id: args[:ids]})
+  end
 end

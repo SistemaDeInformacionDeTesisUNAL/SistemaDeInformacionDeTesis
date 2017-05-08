@@ -22,7 +22,7 @@
           <td><%= student.last_name %></td>
           <td><%= link_to student.username, student %></td>
           <td>Student</td>
-          <td><button onclick="createUser('<%=student.id%>','<%=investigation_group_contribution_createUser_path%>','<%=@contribution.id%>','Student')">+</button></td>
+          <td><button class="btn btn1" onclick="createUser('<%=student.id%>','<%=investigation_group_contribution_createUser_path%>','<%=@contribution.id%>','Student')">+</button></td>
         </tr>
       <%end%>
       <%@Teachers.each do |teacher| %>
@@ -31,7 +31,7 @@
           <td><%= teacher.teacher.last_name %></td>
           <td><%= link_to teacher.teacher.username, teacher.teacher %></td>
           <td><%= teacher.rol %></td>
-          <td><button onclick="createUser('<%=teacher.teacher.id%>','<%=investigation_group_contribution_createUser_path%>','<%=@contribution.id%>','Teacher')">+</button></td>
+          <td><button class="btn btn1" onclick="createUser('<%=teacher.teacher.id%>','<%=investigation_group_contribution_createUser_path%>','<%=@contribution.id%>','Teacher')">+</button></td>
         <%end%>
     </tbody>
   </table>

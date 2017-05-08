@@ -26,8 +26,15 @@
               </td>
               <td>
                 <div class="dropdown">
-                  <button class="btn btn1 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Student</button>
+                  <button class="btn btn1">Student</button>
+                </div>
+              </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <button class="btn btn1" onclick="deleteUser('<%=student.id%>','<%=investigation_group_contribution_deleteUser_path%>','<%=@contribution.id%>','Student')">X</button>
                   </div>
+                </div>
               </td>
             </tr>
           <%end%>
@@ -51,8 +58,15 @@
               </td>
               <td>
                 <div class="dropdown">
-                  <button class="btn btn1 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Teacher</button>
+                  <button class="btn btn1">Teacher</button>
+                </div>
+              </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <button class="btn btn1" onclick="deleteUser('<%=teacher.id%>','<%=investigation_group_contribution_deleteUser_path%>','<%=@contribution.id%>','Teacher')">X</button>
                   </div>
+                </div>
               </td>
             </tr>
           <%end%>
@@ -62,12 +76,12 @@
   </div>
 </div>
 <script>
-  function updateMemberState(ids, url, state, type){
+  function deleteUser(ids, url, contr, type){
     $.ajax({
-      type: "POST",
+      type: "DELETE",
       url: url,
-      data: {"ids": ids,"member_investigation_group_param": state,"type": type},
-      success: function(){alert("OH SI, ESTADO")}
+      data: {"ids": ids,"type": type, "contr": contr },
+      success: function(){alert("OH SI, ELIMINO EL USUARIO DE LA CONTRIBUCION")}
     });
   }
 </script>
