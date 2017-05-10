@@ -77,8 +77,23 @@ class ContributionsController < ApplicationController
   end
 
   def newUser
-    @Teachers=TeacherInvestigationGroup.load_teachers(:ids => params[:investigation_group_id])
-    @Students=InvestigationGroup.students_group(:id => params[:investigation_group_id])
+    studentsContr = Contribution.students(:id => params[:contribution_id])
+    students = InvestigationGroup.students_group(:id => params[:investigation_group_id])
+    @Students=[]
+    students.each do |stud|
+      unless studentsContr.include? stud
+        @Students.push(stud)
+      end
+    end
+    teachersContr = Contribution.teachers(:id => params[:contribution_id])
+    teachers = TeacherInvestigationGroup.load_teachers(:ids => params[:investigation_group_id])
+    @Teachers=[]
+    teachers.each do |teach|
+      tea = Teacher.find( teach.teacher.id )
+      unless teachersContr.include? tea
+        @Teachers.push(teach)
+      end
+    end
   end
 
   def createUser
