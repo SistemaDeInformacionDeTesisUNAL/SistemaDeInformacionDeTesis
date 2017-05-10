@@ -5,7 +5,7 @@
       <!--h1>ContributionsGroup</h1-->
       <div class="col-md-8 col-md-offset-2">
         <table class="table table-filter">
-          <th colspan="8"><h2>Contributions Group</h2></th>
+          <th colspan="9"><h2>Contributions Group</h2></th>
           <% @contributions.each do |contribution| %>
           <tr>
             <td>
@@ -72,6 +72,15 @@
                   </div>
                 </div>
               </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <h3 class="title">
+                      <%=link_to 'Tags', investigation_group_contribution_tags_path(contribution.id,:investigation_group_id=>@investigation_group.id), :class=>"btn btn1"%>
+                    </h3>
+                  </div>
+                </div>
+              </td>
             </tr>
           <%end%>
         </table>
@@ -80,10 +89,10 @@
   </div>
 </div>
 
-<%=link_to 'Back', investigation_group_path, :class=>"btn btn2" %>
 <% if teacher_signed_in? %>
  <%= link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"btn btn2" %>
 <% end %>
+<%=link_to 'Back', investigation_group_path, :class=>"btn btn2" %>
 
 <script>
   function updateContributionState(ids, url, state){

@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :tag_contributions
   resources :tags
   resources :ubications
-  resources :contributions
+  resources :contributions, only:[:index,:show,:create,:update]
   resources :history_groups
   resources :event_teachers
   resources :event_students
@@ -45,7 +45,8 @@ Rails.application.routes.draw do
       get  ':id/contributionsGroup',  to: "investigation_groups#contributionsGroup",        as: "contributionsGroup"
       post ':id/contributions/state', to: "investigation_groups#updateContributionState",   as: "updateContributionState"
     end
-    resources :contributions, only:[:new,:create,:show,:edit] do
+    resources :contributions, only:[:new,:show,:edit] do
+      get 'tags',                     to: "contributions#tags",                             as: "tags"
       get 'users',                    to: "contributions#users",                            as: "users"
       get 'newUser',                  to: "contributions#newUser",                          as: "newUser"
       post 'createUser',              to: "contributions#createUser",                       as: "createUser"
