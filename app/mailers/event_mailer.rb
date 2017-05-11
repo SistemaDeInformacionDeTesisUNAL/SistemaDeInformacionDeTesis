@@ -35,4 +35,13 @@ default from: 'sigit_Events@unal.edu.co'
     @url  = 'http://localhost:3000/events/'+@event.id.to_s+'.html'
     mail(to: @user.email, subject: "Event: "+@event.name)
   end
+  #Recordatorio
+  def rememberEmail(**args)
+    @event= args[:event]
+    @user = args[:user]
+    @url  = 'http://localhost:3000/events/'+@event.id.to_s+'.html'
+    mail(to: @user.email, subject: "Event: "+@event.name)
+  end
+
+
 end

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :events do
     collection do
       get  ':id/join',               to: "events#join",                as: "join"
+      get  ':id/destroy',               to: "events#destroy",                as: "destroy"
     end
   end
   resources :profiles
