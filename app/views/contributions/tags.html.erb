@@ -6,6 +6,12 @@
       <h1>Tags</h1>
       <div class="col-md-8 col-md-offset-2">
         <table class="table table-filter">
+          <tr>
+            <form accept-charset="UTF-8" action="sendTags" id="tags" method="post">
+              <input type="text_field" name="tags" id="tags" value="<%=@myTags%>" size="100"><br>
+              Separe los tags con una coma "," seguida de un espacio.
+            </form>
+          </tr>
         </table>
       </div>
     </section>

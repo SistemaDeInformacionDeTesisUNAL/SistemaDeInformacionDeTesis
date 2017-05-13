@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     end
     resources :contributions, only:[:new,:show,:edit] do
       get 'tags',                     to: "contributions#tags",                             as: "tags"
+      post 'sendTags',                to: "contributions#sendTags",                         as: "sendTags"
       get 'users',                    to: "contributions#users",                            as: "users"
       get 'newUser',                  to: "contributions#newUser",                          as: "newUser"
       post 'createUser',              to: "contributions#createUser",                       as: "createUser"

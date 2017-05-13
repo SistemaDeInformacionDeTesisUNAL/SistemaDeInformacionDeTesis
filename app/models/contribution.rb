@@ -30,10 +30,6 @@ class Contribution < ActiveRecord::Base
     includes(:investigation_group, :tags)
   end
 
-  def self.lodad_contribution_groups(**args)
-    includes(:investigation_group)
-  end
-
   #Estudiantes de una contribución
   def self.students(**args)
     Student.load_contributions.where( contributions: { id: args[:id] } )

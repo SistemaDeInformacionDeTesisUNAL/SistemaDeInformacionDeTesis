@@ -1,6 +1,6 @@
 class ContributionsController < ApplicationController
   before_action :set_contribution, only: [:show, :edit, :update, :destroy]
-  before_action :set_contribution_id, only: [:users, :newUser]
+  before_action :set_contribution_id, only: [:users, :newUser, :tags, :sendTags]
 
   # GET /contributions
   # GET /contributions.json
@@ -116,6 +116,43 @@ class ContributionsController < ApplicationController
     redirect_to investigation_group_contribution_users_path, notice: 'Contribution was successfully destroyed.'
   end
 
+  def tags
+    tags = Tag.tags_contribution(:contr=>@contribution.id)
+    @myTags=''
+    tags.each do |tag|
+      @myTags<<tag.name
+      if tag != tags.last
+        @myTags<<', '
+      end
+    end
+  end
+
+  def sendTags
+    cadena = params[:tags]
+    arrayTags = cadena.split(', ')
+    puts arrayTags
+    arrayTags.each do |tag|
+      if Tag.find_by(name: tag) == nil
+        Tag.create!( name: tag )
+      end
+      tagId = Tag.find_by(name: tag)
+      if Tag.load_tags_contribution(:ids=>tagId.id,:contr=>@contribution.id) == []
+        TagContribution.create!( tag_id: tagId.id, contribution_id: @contribution.id )
+      end
+      if Tag.load_tags_invGroup(:ids=>tagId.id,:inv=>params[:investigation_group_id]) == []
+        TagInvestigationGroup.create!( tag_id: tagId.id, investigation_group_id: params[:investigation_group_id] )
+      end
+    end
+    tags = Tag.load_tags_contribution(:contr=>@contribution.id)
+    tags.each do |tagContribution|
+      tag = Tag.find(tagContribution.tag_id)
+      unless arrayTags.include? tag.name
+        puts tagContribution
+        tagContribution.destroy
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contribution
@@ -124,10 +161,11 @@ class ContributionsController < ApplicationController
 
     def set_contribution_id
       @contribution = Contribution.find(params[:contribution_id])
+      @invGroup = InvestigationGroup.find(params[:investigation_group_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contribution_params
-      params.require(:contribution).permit(:name, :publication_date, :description, :investigation_group_id, :file, :ids, :type, :contr)
+      params.require(:contribution).permit(:name, :publication_date, :description, :investigation_group_id, :file, :ids, :type, :contr, :tags)
     end
 end
