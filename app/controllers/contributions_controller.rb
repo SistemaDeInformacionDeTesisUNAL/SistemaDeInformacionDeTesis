@@ -143,7 +143,7 @@ class ContributionsController < ApplicationController
         TagInvestigationGroup.create!( tag_id: tagId.id, investigation_group_id: params[:investigation_group_id] )
       end
     end
-    tags = Tag.load_tags_contribution(:contr=>@contribution.id)
+    tags = Tag.tag_in_contribution(:contr=>@contribution.id)
     tags.each do |tagContribution|
       tag = Tag.find(tagContribution.tag_id)
       unless arrayTags.include? tag.name

@@ -10,12 +10,15 @@ class Tag < ApplicationRecord
 	validates :name, :presence => true
 	validates :name, :length => { :maximum => 15, :too_long => "%{count} Demasiados caracteres" }
 	validates :name, :uniqueness => true
-	validates :description, :length => { :maximum => 200, :too_long => "%{count} Demasiados caracteres" }
 
 	def self.load_tags_contribution(**args)
-		TagContribution.where(contribution_id: args[:contr] )
+		TagContribution.where(tag_id: args[:ids], contribution_id: args[:contr] )
 	end
 
+	def self.tag_in_contribution(**args)
+		TagContribution.where(contribution_id: args[:contr] )
+	end
+	
 	def self.tags_contribution(**args)
 		tags = TagContribution.where( contribution_id: args[:contr] )
 		list = []
