@@ -1,15 +1,15 @@
 class Contribution < ActiveRecord::Base
 
-  has_many :user_contributions
-  has_many :students, through: :user_contributions
-  has_many :teachers, through: :user_contributions
+  has_many :user_contributions, dependent: :destroy 
+  has_many :students, through: :user_contributions, dependent: :destroy
+  has_many :teachers, through: :user_contributions, dependent: :destroy
 
   belongs_to :investigation_group
 
-  has_many :ubications
+  has_many :ubications, dependent: :destroy
 
-  has_many :tag_contributions
-  has_many :tags, through: :tag_contributions
+  has_many :tag_contributions, dependent: :destroy
+  has_many :tags, through: :tag_contributions, dependent: :destroy
 
   enum state: {Aproved: 0, Rejected: 1, Progress: 2}
 

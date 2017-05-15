@@ -1,29 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Event Students</h1>
+<h1>My Events</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Student</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @event_students.each do |event_student| %>
-      <tr>
-        <td><%= event_student.event %></td>
-        <td><%= event_student.student %></td>
-        <td><%= link_to 'Show', event_student %></td>
-        <td><%= link_to 'Edit', edit_event_student_path(event_student) %></td>
-        <td><%= link_to 'Destroy', event_student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<p id="notice"><%= notice %></p>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 <br>
-
+<div class="container">
+  <div id="calendar">
+  </div>
+</div>
+<script type="text/javascript">
+$('#calendar').fullCalendar({
+  theme: true,
+  height: "auto",
+  selectable: true,
+  selectHelper: true,
+  editable:true,
+  eventLimit: 3,
+  header: {
+    left: 'title',
+    center: 'prevYear,month,agendaWeek,agendaDay,nextYear',
+    right:  'today prev,next'
+  },
+  views: {
+      agendaFourDay: {
+          type: 'agenda',
+          duration: { days: 4 },
+          buttonText: '4 day'
+      }
+  },
+  events: '/event_students.json'
+});
+</script>
+<br>
 <%= link_to 'New Event Student', new_event_student_path %>

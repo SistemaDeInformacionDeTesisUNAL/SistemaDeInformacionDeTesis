@@ -1,10 +1,9 @@
 class PushNotificationsController < ApplicationController
-  protect_from_forgery with: :exception
   def create
     Rails.logger.info "Sending push notification from #{push_params.inspect}"
     subscription_params = fetch_subscription_params
 
-    WebpushJob.perform_later fetch_message,
+    WebpushJob.perform_now fetch_message,
       endpoint: subscription_params[:endpoint],
       p256dh: subscription_params.dig(:keys, :p256dh),
       auth: subscription_params.dig(:keys, :auth)
@@ -19,7 +18,7 @@ class PushNotificationsController < ApplicationController
   end
 
   def fetch_message
-    push_params.fetch(:message, "Yay, you sent a push notification!")
+    push_params.fetch(:message, "Sigit - Evento!!!!")
   end
 
   def fetch_subscription_params
