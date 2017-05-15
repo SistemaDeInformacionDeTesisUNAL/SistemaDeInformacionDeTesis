@@ -1,10 +1,8 @@
 <p id="notice"><%= notice %></p>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 <br>
-<div class="container">
-  <div id="calendar">
+  <div class="container" id="calendar">
   </div>
-</div>
+
 <script type="text/javascript">
 $('#calendar').fullCalendar({
   theme: true,
@@ -28,5 +26,49 @@ $('#calendar').fullCalendar({
   events: '/events.json'
 });
 </script>
+
 <br>
 <%= link_to_if teacher_signed_in?, 'New Event', new_event_path, :class=>"btn btn-success" %>
+<br>
+
+<!-- a view -->
+<button class="js-push-button">Send a message</button>
+
+<script type="text/javascript">
+  (function() {
+    $('.js-push-button').on("click", function onClick() {
+      $.post("/push");
+    });
+  })();
+</script>
+
+<!--
+<script type="text/javascript">
+var config = {
+  apiKey: "AIzaSyBd16u6nNx4C2QnpiDoP9oEvK5eqJ3rlQk",
+  authDomain: "sigit-165416.firebaseapp.com",
+  databaseURL: "https://sigit-165416.firebaseio.com",
+  projectId: "sigit-165416",
+  storageBucket: "sigit-165416.appspot.com",
+  messagingSenderId: "663648725570"
+};
+firebase.initializeApp(config);
+const messaging = firebase.messaging();
+messaging.requestPermission()
+.then(function(){
+console.log('Have permission');
+return messaging.getToken();
+})
+.then(function(token){
+  console.log(token);
+})
+.catch(function(err){
+console.log('Error occurred: '+err);
+})
+
+messaging.onMessage(function(payload) {
+  console.log('onMessage: ',payload);
+});
+
+</script>
+-->

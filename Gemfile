@@ -40,6 +40,8 @@ gem 'jquery-ui-rails'
 #gem service worker for web push notifications
 gem 'serviceworker-rails'
 gem "webpush"
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+
 
 #fullCalendar
 gem 'fullcalendar-rails'
@@ -83,5 +85,5 @@ gem "devise_ldap_authenticatable"
 gem 'will_paginate', '~> 3.1.0'
 gem 'carrierwave', '~> 0.10.0'
 gem 'jquery-datatables-rails', '~> 3.4.0'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'mini_magick'

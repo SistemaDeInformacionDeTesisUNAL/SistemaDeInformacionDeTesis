@@ -13,7 +13,21 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require ./events
 //= require dataTables/jquery.dataTables
 //= require moment
 //= require fullcalendar
+
+if ('serviceWorker' in navigator) {
+  console.log('Service Worker is supported');
+  navigator.serviceWorker.register('firebase-messaging-sw.js')
+    .then(function(registration) {
+      console.log('Successfully registered!', ':^)', registration);
+      registration.pushManager.subscribe({ userVisibleOnly: true })
+        .then(function(subscription) {
+          $.post("/subscribe", { subscription: subscription.toJSON() });
+          console.log('Subscription: ', subscription);
+        });
+  }).catch(function(error) {
+    console.log('Registration failed', ':^(', error);
+  });
+}

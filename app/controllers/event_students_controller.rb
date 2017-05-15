@@ -4,7 +4,10 @@ class EventStudentsController < ApplicationController
   # GET /event_students
   # GET /event_students.json
   def index
-    @event_students = EventStudent.all
+@event_students=[]
+    EventStudent.where(:student_id=>current_student.id).each do |evento|
+      @event_students<<Event.find(evento.event_id)
+    end
   end
 
   # GET /event_students/1
@@ -64,7 +67,10 @@ class EventStudentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event_student
-      @event_student = EventStudent.find(params[:id])
+      @event_student=[]
+          EventStudent.where(:student_id=>current_student.id).each do |evento|
+            @event_student<<Event.find(evento.event_id)
+          end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

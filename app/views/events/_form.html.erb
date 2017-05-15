@@ -17,18 +17,19 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <%= f.label :name %>
-          <%= f.text_field :name ,:style=>"color:black"%></div>
+          <%= f.text_field :name ,:style=>"color:black; width:68%; display:inline-block; margin-left:2%;",class:"form-control"%>
+        </div>
           <div class="panel-body">
             <table class="table table-striped">
               <tbody>
                 <tr>
                   <td>
                     <%= f.label :start_time %>
-                    <%= f.datetime_field :start_time, class:"form-control",  id: 'datetimepicker1'%>
+                    <%= f.text_field :start_time, class:"form-control",  id: 'datetimepicker1'%>
                   </td>
                   <td>
                     <%= f.label :end_time %>
-                    <%= f.datetime_field :end_time,class:"form-control", id: 'datetimepicker2'%>
+                    <%= f.text_field :end_time,class:"form-control", id: 'datetimepicker2'%>
                   </td>
                 </tr>
                 <script type="text/javascript">
@@ -39,20 +40,19 @@
                 </script>
             <tr>
               <td>
-                <%= f.label :localization %>
-                <%= f.text_field :localization%>
+                <%= f.label :localization%>
+                <%= f.text_field :localization,class:"form-control"%>
               </td>
               <td>
-                <%= f.label :investigation_group_id %>
-                <%= f.select(:investigation_group_id, options_from_collection_for_select( @groups, "id", "name"))%>
+                <%= f.label :investigation_group_id%>
+                <%= f.select :investigation_group_id, options_from_collection_for_select( @groups, "id", "name"),{} ,{required: 'true', autofocus: 'true', class: 'form-control'}  %>
               </td>
             </tr>
             <tr>
-              <td>
-                <%= f.label :description %>
-                <%= f.text_area :description %>
+              <td colspan="2">
+                <%= f.label :description%>
+                <%= f.text_area :description, class:"form-control" %>
               </td>
-              <td></td>
             </tr>
             </tbody>
           </table>
