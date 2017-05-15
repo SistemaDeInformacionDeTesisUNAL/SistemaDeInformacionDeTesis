@@ -32,35 +32,37 @@
         </div>
         <%end%>
         <%end%>
-        <strong style="color: black;">Contributions:</strong>
-        <div class="profile-usertitle-job">
-
-
-
-          <%@student.contributions.each do |contribution|%>
-          <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
-          <%  if contribution != @student.contributions.last %>,
-          <%end
-        end %>
-
-      </div>
-
-      <div class="profile-userbuttons">
-        <% if student_signed_in? %>
-        <% if current_student.id == @student.id %>
-        <%= link_to 'Edit', edit_student_path(@student), :class=>"btn btn1" %>
-        <% end %>
-        <%end%>
-        <% if student_signed_in? || teacher_signed_in? %>
-        <%= link_to 'Back', students_path, :class=>"btn btn1" %>
-        <%end%>
-        <% if student_signed_in? %>
-        <% if current_student.id == @student.id %>
-        <%= link_to('Log out', destroy_student_session_path, :method => :delete, :class=>"btn btn1") %>
-        <% end %>
-        <%end%>
+        <!--strong style="color: black;">Contributions:</strong-->
+        <div class="col-md-8 col-md-offset-2">
+          <table class="table">
+            <tbody>
+              <th>Contibutions</th>
+              <%@student.contributions.each do |contribution|%>
+              <tr>
+                <td>
+                  <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
+                </td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+        <div class="profile-userbuttons", style="margin-top: 5px;">
+          <% if student_signed_in? %>
+          <% if current_student.id == @student.id %>
+          <%= link_to 'Edit', edit_student_path(@student), :class=>"btn btn1" %>
+          <% end %>
+          <%end%>
+          <% if student_signed_in? || teacher_signed_in? %>
+          <%= link_to 'Back', students_path, :class=>"btn btn1" %>
+          <%end%>
+          <% if student_signed_in? %>
+          <% if current_student.id == @student.id %>
+          <%= link_to('Log out', destroy_student_session_path, :method => :delete, :class=>"btn btn1") %>
+          <% end %>
+          <%end%>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

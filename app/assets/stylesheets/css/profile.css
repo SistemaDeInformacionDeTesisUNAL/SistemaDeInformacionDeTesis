@@ -1,7 +1,26 @@
 body {
   background: #F1F3FA;
 }
+.table{
 
+  border-radius: 10px;
+  color: black;
+  border: 1px solid #a3a3a3;
+  /*margin-top: 10px;
+  margin-bottom: 15px;*/
+}
+
+.table th{
+  color: white;
+  background-color: #95b33b;
+  border-color: white;
+  text-align: center;
+  /*padding: 10px 15px 10px 15px;*/
+}
+
+.table td{
+  border: 1px solid #a3a3a3;
+}
 /* Profile container */
 .profile {
   margin: 20px 0;
