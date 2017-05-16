@@ -36,7 +36,7 @@
             <th>Contibutions</th>
             <%@teacher.contributions.each do |contribution|%>
             <tr>
-              <td>
+              <td style="padding-top: 1px; padding-bottom: 1px;">
                 <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
               </td>
             </tr>
