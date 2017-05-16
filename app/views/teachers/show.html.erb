@@ -32,31 +32,35 @@
           <%end
         end %>
       </div>
-      <strong style="color: black;">Contributions:</strong>
-      <div class="profile-usertitle-job">
-        <%@teacher.contributions.each do |contribution|%>
-        <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
-        <%  if contribution != @teacher.contributions.last %>,
-        <%end
-      end %>
-
-    </div>
-
-    <div class="profile-userbuttons">
-      <% if teacher_signed_in? %>
-      <% if current_teacher.id == @teacher.id %>
-      <%= link_to 'Edit', edit_teacher_path(@teacher), :class=>"btn btn1" %>
-      <% end %>
-      <% end %>
-      <%= link_to 'Back', teachers_path, :class=>"btn btn1" %>
-      <% if teacher_signed_in? %>
-      <% if current_teacher.id == @teacher.id %>
-      <%= link_to('Log out', destroy_teacher_session_path, :method => :delete, :class=>"btn btn1") %>
-      <% end %>
-      <% end %>
+      <div class="col-md-8 col-md-offset-2">
+        <table class="table">
+          <tbody>
+            <th>Contibutions</th>
+            <%@teacher.contributions.each do |contribution|%>
+            <tr>
+              <td>
+                <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
+              </td>
+            </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
+      <div class="profile-userbuttons">
+        <% if teacher_signed_in? %>
+        <% if current_teacher.id == @teacher.id %>
+        <%= link_to 'Edit', edit_teacher_path(@teacher), :class=>"btn btn1" %>
+        <% end %>
+        <% end %>
+        <%= link_to 'Back', teachers_path, :class=>"btn btn1" %>
+        <% if teacher_signed_in? %>
+        <% if current_teacher.id == @teacher.id %>
+        <%= link_to('Log out', destroy_teacher_session_path, :method => :delete, :class=>"btn btn1") %>
+        <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 </div>
