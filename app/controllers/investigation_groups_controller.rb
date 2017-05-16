@@ -1,5 +1,5 @@
 class InvestigationGroupsController < ApplicationController
-  before_action :set_investigation_group, only: [:show, :edit, :update, :destroy, :member, :updateMemberState, :updateMemberRol, :join, :contributionsGroup]
+  before_action :set_investigation_group, only: [:show, :edit, :update, :destroy, :member, :updateMemberState, :updateMemberRol, :join, :contributionsGroup, :eventsGroup]
 
   # GET /investigation_groups
   # GET /investigation_groups.json
@@ -28,6 +28,10 @@ class InvestigationGroupsController < ApplicationController
     @tags = Tag.all.order("name ASC")
     #almacena todas las contribuciones por tags
     @contributions = InvestigationGroup.contributions_group(:group_id => @investigation_group.id)
+  end
+
+  def eventsGroup
+    @events = InvestigationGroup.events_group(:group_id => @investigation_group.id)
   end
 
   # GET /investigation_groups/new

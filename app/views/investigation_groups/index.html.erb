@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'css/member' %>
 <p id="notice"><%= notice %></p>
 <h1>Investigation Groups</h1>
   <div class="container">
@@ -33,5 +34,5 @@
 </div>
 
 <% if teacher_signed_in? %>
-<%= link_to 'New Investigation Group', new_investigation_group_path %>
+<%= link_to 'New Investigation Group', new_investigation_group_path, :class=>"btn btn1"%>
 <% end %>

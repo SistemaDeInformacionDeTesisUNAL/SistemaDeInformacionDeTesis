@@ -94,9 +94,9 @@
   <%elsif @relation.rol == 'Teacher' && @relation.state == 'Admitted' %>
     <%=link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"btn btn1" %>
   <%elsif @relation.rol == 'Admin' || @relation.rol == 'Owner' %>
-    <%=link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"btn btn1" %>
     <%=link_to 'Edit Members', member_investigation_groups_path(@investigation_group), :class=>"btn btn1"%>
     <%=link_to 'Contributions', contributionsGroup_investigation_groups_path, :class=>"btn btn1" %>
+    <%=link_to 'Events', eventsGroup_investigation_groups_path, :class=>"btn btn1" %>
     <%=link_to 'Edit', edit_investigation_group_path, :class=>"btn btn1"%>
   <%end%>
 <%end%>

@@ -1,6 +1,6 @@
 class Contribution < ActiveRecord::Base
 
-  has_many :user_contributions, dependent: :destroy 
+  has_many :user_contributions, dependent: :destroy
   has_many :students, through: :user_contributions, dependent: :destroy
   has_many :teachers, through: :user_contributions, dependent: :destroy
 
@@ -54,6 +54,5 @@ class Contribution < ActiveRecord::Base
   #lista las contribuciones por grupo de investigacion
   def self.load_contributions(**args)
     includes(:investigation_group)
-    #grpc= InvestigationGroup.contribution_by_group.where(contributions: {id: args[:ids]})
   end
 end

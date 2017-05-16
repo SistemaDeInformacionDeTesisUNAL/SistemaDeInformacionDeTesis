@@ -16,10 +16,7 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @groups=[]
-    TeacherInvestigationGroup.load_groups_belong(:ids => current_teacher.id).each do |grupo|
-      @groups.push(grupo.investigation_group)
-    end
+    @contribution_group = InvestigationGroup.find(params[:investigation_group_id])
     @event = Event.new
   end
 
@@ -34,23 +31,15 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @groups=[]
-    TeacherInvestigationGroup.load_groups_belong(:ids => current_teacher.id).each do |grupo|
-      @groups.push(grupo.investigation_group)
-    end
-
-    @event = Event.create!(event_params)
-
+    @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
         EventTeacher.create!( event_id: @event.id, teacher_id: current_teacher.id )
         EventMailer.rememberEmail(:user=>current_teacher,:event=>@event).deliver_later!(wait_until: @event.start_time.yesterday.midnight)
-
         #Send mail to all teachers in the group
         InvestigationGroup.teachers_group(:id => @event.investigation_group.id).each do |teacher|
           EventMailer.emailCreated(:user=>teacher,:event=>@event).deliver!
         end
-
         #Send mail to all students in the group
         @students=InvestigationGroup.students_group(:id => @event.investigation_group.id)
         if @students!=nil
@@ -126,5 +115,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  
+  def event_params
+    params.require(:event).permit(:name, :start_time, :end_time, :localization, :investigation_group_id, :description)
+  end
 end

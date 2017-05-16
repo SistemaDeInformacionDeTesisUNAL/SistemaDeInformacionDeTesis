@@ -39,6 +39,10 @@ class InvestigationGroup < ApplicationRecord
     Contribution.load_contributions.where( investigation_groups: {id: args[:group_id]})
   end
 
+  def self.events_group(**args)
+    Event.load_events.where( investigation_groups: {id: args[:group_id]})
+  end
+
   def self.load_groups(**args)
 	   includes(:events)
   end

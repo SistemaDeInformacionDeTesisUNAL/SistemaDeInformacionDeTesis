@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   #Push notification
   post "/push" => "push_notifications#create"
 
-
-  resources :tag_contributions
   resources :tags
   resources :ubications
   resources :contributions, only:[:index,:show,:create,:update]
@@ -29,7 +27,7 @@ Rails.application.routes.draw do
   resources :event_teachers
   resources :event_students
   resources :user_contributions
-  resources :events do
+  resources :events, only:[:index,:show,:create,:update] do
     collection do
       get  ':id/join',               to: "events#join",                as: "join"
       get  ':id/destroy',               to: "events#destroy",                as: "destroy"
@@ -45,6 +43,7 @@ Rails.application.routes.draw do
       get  ':id/join',                to: "investigation_groups#join",                      as: "join"
       get  ':id/contributionsGroup',  to: "investigation_groups#contributionsGroup",        as: "contributionsGroup"
       post ':id/contributions/state', to: "investigation_groups#updateContributionState",   as: "updateContributionState"
+      get ':id/eventsGroup',          to: "investigation_groups#eventsGroup",               as: "eventsGroup"
     end
     resources :contributions, only:[:new,:show,:edit] do
       get 'tags',                     to: "contributions#tags",                             as: "tags"
@@ -53,6 +52,12 @@ Rails.application.routes.draw do
       get 'newUser',                  to: "contributions#newUser",                          as: "newUser"
       post 'createUser',              to: "contributions#createUser",                       as: "createUser"
       delete 'deleteUser',            to: "contributions#deleteUser",                       as: "deleteUser"
+    end
+    resources :events, only:[:new,:show,:edit] do
+      collection do
+        get  ':id/join',               to: "events#join",                as: "join"
+        get  ':id/destroy',               to: "events#destroy",                as: "destroy"
+      end
     end
   end
   devise_for :students

@@ -55,10 +55,6 @@
     <% if !@event.teachers.ids.include? current_teacher.id %>
       <%=link_to 'Join', join_events_path, :class=>"btn btn-info"%>
     <%end%>
-    <%if @Owner.id == current_teacher.id%>
-    <%= link_to 'Edit', edit_event_path(@event), :class=>"btn btn-success" %>
-    <%= link_to 'Destroy', destroy_events_path, :class=>"btn btn-danger" %></td>
-    <%end%>
   <%end%>
 </div>
 </div>
