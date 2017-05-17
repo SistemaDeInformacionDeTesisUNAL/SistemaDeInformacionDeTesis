@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <h1>Hola, <%= @user.first_name %></h1>
+    <p>
+      El estado de tu contribucion <strong><%= @contribution.name%>, en el grupo <strong><%= @group.name%> ha cambiado</strong>
+      <br>
+      Estos son los detalles del nuevo estado:
+    </p>
+    <div class="container">
+      <div class="col-md-2 col-lg-2"></div>
+      <div class="col-md-9 col-lg-9 ">
+        <div class="toppad" >
+          <div class="panel panel-primary">
+            <div class="panel-heading"><h3> Contribucion: <%=@contribution.name %></h3></div>
+            <div class="panel-body">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td> <strong>Deetalles:</strong> </td>
+                td><%= @contribution.description %></td>
+              </tr>
+              <tr>
+                <td> <strong>Estado:</strong> </td>
+                <td><%= @state %></td>
+              </tr>
+              <tr>
+                <td> <strong>Fecha y hora del nuevo estado:</strong> </td>
+                <td><%= @hSolicitud.to_formatted_s(:long_ordinal) %></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      </div>
+    </div>
+    </div>
+    <p>
+      Para más información del grupo vista el siguiente link: <%= @url %>.
+    </p>
+    <p>Que tenga un buen día</p>
+  </body>
+</html>

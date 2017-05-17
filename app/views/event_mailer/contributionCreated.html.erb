@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hola, <%= @Owner.first_name %></h1>
+    <p>Hay una nueva contribucion en tu grupo <%= @group.name%>
+      <br>
+      <strong>Nombre: </strong><%=@contribution.name %>
+      <br>
+      <strong>Descripcion: </strong><%=@contribution.description %>
+<br>
+      <strong>Responsable: </strong><%=@user.first_name %>
+<br>
+      <strong>email: </strong> <%=@user.email %>
+    </p>
+    <p>
+      Para más información visita el siguiente link: <%= @url %>.
+    </p>
+    <p>Buen día!</p>
+  </body>
+</html>
