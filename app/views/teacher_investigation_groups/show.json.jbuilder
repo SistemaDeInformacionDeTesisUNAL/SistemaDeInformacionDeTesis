@@ -1,1 +1,0 @@
-json.partial! "teacher_investigation_groups/teacher_investigation_group", teacher_investigation_group: @teacher_investigation_group

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :update, :destroy]
+  before_action :set_event_id, only: [:edit]
   protect_from_forgery with: :exception
 
   # GET /events
@@ -113,6 +114,11 @@ class EventsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])
+  end
+
+  def set_event_id
+    @event = Event.find(params[:event_id])
+    @invGroup = InvestigationGroup.find(params[:investigation_group_id])
   end
 
   def event_params

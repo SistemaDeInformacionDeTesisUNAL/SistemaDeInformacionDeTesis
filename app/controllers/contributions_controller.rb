@@ -1,6 +1,6 @@
 class ContributionsController < ApplicationController
-  before_action :set_contribution, only: [:show, :edit, :update, :destroy]
-  before_action :set_contribution_id, only: [:users, :newUser, :tags, :sendTags]
+  before_action :set_contribution, only: [:show, :update, :destroy]
+  before_action :set_contribution_id, only: [:users, :newUser, :tags, :sendTags, :edit]
 
   # GET /contributions
   # GET /contributions.json

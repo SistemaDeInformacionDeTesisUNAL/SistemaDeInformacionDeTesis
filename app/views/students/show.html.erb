@@ -52,7 +52,7 @@
           <% end %>
           <%end%>
           <% if student_signed_in? || teacher_signed_in? %>
-          <%= link_to 'Back', students_path, :class=>"btn btn1" %>
+          <%= link_to 'Students', students_path, :class=>"btn btn1" %>
           <%end%>
           <% if student_signed_in? %>
           <% if current_student.id == @student.id %>

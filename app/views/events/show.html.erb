@@ -47,7 +47,7 @@
   </div>
   </div>
   </div>
-  <%= link_to 'Back', events_path, :class=>"btn btn-success"%>
+  <%= link_to 'Events', events_path, :class=>"btn btn-success"%>
   <%if (student_signed_in? and !@event.students.ids.include? current_student.id)%>
       <%=link_to 'Join', join_events_path, :class=>"btn btn-info"%>
   <%end%>

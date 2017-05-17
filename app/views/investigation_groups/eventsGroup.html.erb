@@ -5,7 +5,7 @@
       <!--h1>ContributionsGroup</h1-->
       <div class="col-md-8 col-md-offset-2">
         <table class="table table-filter">
-          <th colspan="8"><h2>Contributions Group</h2></th>
+          <th colspan="8"><h2>Group Events</h2></th>
           <% @events.each do |event| %>
             <tr>
               <td>
@@ -43,7 +43,7 @@
                 <div class="media">
                   <div class="media-body">
                     <h3 class="title">
-                      <%=link_to 'Edit', edit_investigation_group_event_path(event.id,:investigation_group_id=>@investigation_group.id), :class=>"btn btn1"%>
+                      <%=link_to 'Edit', edit_investigation_group_event_path(:event_id=>event.id,:investigation_group_id=>@investigation_group.id), :class=>"btn btn1"%>
                     </h3>
                   </div>
                 </div>
@@ -59,4 +59,4 @@
 <% if teacher_signed_in? %>
  <%= link_to 'New Event', new_investigation_group_event_path(@investigation_group), :class=>"btn btn1" %>
 <% end %>
-<%=link_to 'Back', investigation_group_path, :class=>"btn btn1" %>
+<%=link_to 'Investigation Group', investigation_group_path, :class=>"btn btn1" %>
