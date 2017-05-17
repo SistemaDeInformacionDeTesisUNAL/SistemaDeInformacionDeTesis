@@ -85,15 +85,18 @@ class InvestigationGroupsController < ApplicationController
   end
 
   def join
+    @Owner=InvestigationGroup.teacher_group_owner(:id => @investigation_group.id)
     if student_signed_in?
       @student = Student.find(current_student.id)
       @student.investigation_group_id = @investigation_group.id
       @student.state = 'Process'
       if @student.save!
+        EventMailer.joinInvestigationEmail(:user=>current_student,:owner=>@Owner, :group => @investigation_group).deliver!
         redirect_to investigation_group_path(@investigation_group), notice: 'Student investigation group was successfully updated, Join.'
       end
     else
       if TeacherInvestigationGroup.create!( teacher_id: current_teacher.id, investigation_group_id: @investigation_group.id, rol: 0, state: 1 )
+        EventMailer.joinInvestigationEmail(:user=>current_teacher,:owner=>@Owner, :group => @investigation_group).deliver!
         redirect_to investigation_group_path(@investigation_group), notice: 'Teacher investigation group was successfully updated, Join.'
       end
     end
@@ -113,6 +116,7 @@ class InvestigationGroupsController < ApplicationController
     end
     @memState.state = @state
     if @memState.save!
+      EventMailer.stateChangedInvestigationEmail(:user=>@memState, :group => @investigation_group, :state=>@state).deliver!
       redirect_to member_investigation_groups_path(@investigation_group), notice: 'Member investigation group was successfully updated, State.'
     end
   end
@@ -122,6 +126,7 @@ class InvestigationGroupsController < ApplicationController
     @memRol = TeacherInvestigationGroup.find(params[:ids])
     @memRol.rol = @rol
     if @memRol.save!
+      EventMailer.rolChanged(:user=>@memRol, :group => @investigation_group, :rol=>@rol).deliver!
       redirect_to member_investigation_groups_path(@investigation_group), notice: 'Teacher investigation group was successfully updated, Rol.'
     end
   end
@@ -130,7 +135,17 @@ class InvestigationGroupsController < ApplicationController
     @state = params[:contribution_state]
     @contribution = Contribution.find(params[:ids])
     @contribution.state = @state
+
+    @Students = Contribution.students(:id => @contribution.id)
+    @Teachers = Contribution.teachers(:id => @contribution.id)
+
     if @contribution.save!
+       @Students.each do |user|
+        EventMailer.stateContributionChanged(:user=>user,:contribution=>@contribution, :group => @investigation_group, :state=>@state).deliver!
+      end
+      @Teachers.each do |user|
+       EventMailer.stateContributionChanged(:user=>user,:contribution=>@contribution, :group => @investigation_group, :state=>@state).deliver!
+     end
       redirect_to contributionsGroup_investigation_groups_path(@investigation_group), notice: 'Contribution was successfully updated, State.'
     end
   end

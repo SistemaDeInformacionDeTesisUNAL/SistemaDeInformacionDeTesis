@@ -38,6 +38,14 @@ class ContributionsController < ApplicationController
     respond_to do |format|
       @contribution.state = 2
       if @contribution.save
+         @Owner=InvestigationGroup.teacher_group_owner(:id => @contribution.investigation_group_id)
+         @group=InvestigationGroup.find(@contribution.investigation_group_id)
+         if student_signed_in?
+           @user=current_student
+         else
+           @user=current_teacher
+         end
+         EventMailer.contributionCreated(:contribution=>@contribution,:user=>@user,:owner=>@Owner, :group => @group).deliver!
         format.html { redirect_to contributionsGroup_investigation_groups_path(@contribution.investigation_group_id), notice: 'Contribution was successfully updated.' }
         format.json { render :show, status: :ok, location: @contribution }
       else
