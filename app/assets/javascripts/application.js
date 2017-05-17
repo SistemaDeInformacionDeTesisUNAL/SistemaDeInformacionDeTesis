@@ -17,3 +17,5 @@
 //= require dataTables/jquery.dataTables
 //= require moment
 //= require fullcalendar
+
+//= require chartkick
