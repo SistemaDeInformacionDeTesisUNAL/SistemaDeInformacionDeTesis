@@ -107,13 +107,13 @@
   <!-- Line Chart - Single Series -->
   <div class="col-xs-6">
     <h3>Contributions By week</h3>
-    <%= line_chart @allContributions.group_by_week(:publication_date, format: "%B %d, %Y").count, discrete: true %>
-      <h3>Contributions By Day</h3>
+    <%= column_chart @allContributions.group_by_week(:publication_date, format: "%B %d, %Y").count, discrete: true %>
+      <h3>Contributions By day</h3>
       <%= column_chart   @allContributions.group_by_day(:publication_date, format: "%B %d, %Y").count %>
   </div>
   <div class="col-xs-6">
-    <h3>Contributions By month</h3>
-    <%= pie_chart  @allContributions.group_by_month(:publication_date, format: "%B %d, %Y").count %>
+    <h3>Contributions By week</h3>
+    <%= pie_chart  @allContributions.group_by_week(:publication_date, format: "%B %d, %Y").count %>
       <h3>Contributions By day</h3>
     <%= pie_chart  @allContributions.group_by_day(:publication_date, format: "%B %d, %Y").count %>
   </div>
