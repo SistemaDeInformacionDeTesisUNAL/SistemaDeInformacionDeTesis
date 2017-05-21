@@ -6,6 +6,7 @@
   <div class="col-lg-3", style="margin-top: 2%">
     <%= image_tag(@investigation_group.image_url.to_s,:class=>"img-circle img-responsive",:atl=>"Investigation Group Image") %>
   </div>
+
   <div class=" col-md-9 col-lg-9 ">
     <table class="table">
       <tbody>
@@ -100,4 +101,21 @@
     <%=link_to 'Edit', edit_investigation_group_path, :class=>"btn btn1"%>
   <%end%>
 <%end%>
+
+<div class="row">
+
+  <!-- Line Chart - Single Series -->
+  <div class="col-xs-6">
+    <h3>Contributions By week</h3>
+    <%= column_chart @allContributions.group_by_week(:publication_date, format: "%B %d, %Y").count, discrete: true %>
+      <h3>Contributions By day</h3>
+      <%= column_chart   @allContributions.group_by_day(:publication_date, format: "%B %d, %Y").count %>
+  </div>
+  <div class="col-xs-6">
+    <h3>Contributions By week</h3>
+    <%= pie_chart  @allContributions.group_by_week(:publication_date, format: "%B %d, %Y").count %>
+      <h3>Contributions By day</h3>
+    <%= pie_chart  @allContributions.group_by_day(:publication_date, format: "%B %d, %Y").count %>
+  </div>
+</div>
 <%=link_to 'Investigation Groups', investigation_groups_path, :class=>"btn btn1" %>

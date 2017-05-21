@@ -17,6 +17,8 @@
 //= require moment
 //= require fullcalendar
 
+//= require chartkick
+
 if ('serviceWorker' in navigator) {
   console.log('Service Worker is supported');
   navigator.serviceWorker.register('firebase-messaging-sw.js')
