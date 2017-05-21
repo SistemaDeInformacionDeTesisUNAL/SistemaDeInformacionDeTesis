@@ -51,6 +51,7 @@ class InvestigationGroupsController < ApplicationController
     respond_to do |format|
       if @investigation_group.save
         TeacherInvestigationGroup.create!( teacher_id: current_teacher.id, investigation_group_id: @investigation_group.id, rol: 2, state: 2 )
+        HistoryGroup.create!( bonding_date: DateTime.now, investigation_group_id: @investigation_group.id, historable_type: Teacher, historable_id: current_teacher.id, state: 0 )
         format.html { redirect_to @investigation_group, notice: 'Investigation group was successfully created.' }
         format.json { render :show, status: :created, location: @investigation_group }
       else
@@ -88,8 +89,15 @@ class InvestigationGroupsController < ApplicationController
     @Owner=InvestigationGroup.teacher_group_owner(:id => @investigation_group.id)
     if student_signed_in?
       @student = Student.find(current_student.id)
+      antGroup = @student.investigation_group_id
       @student.investigation_group_id = @investigation_group.id
       @student.state = 'Process'
+      histor = HistoryGroup.load_actives_historys(:type=>"Student", :ids => current_student.id, :group => antGroup)
+      histor.each do |h|
+        h.exit_date = DateTime.now
+        h.state = 1
+        h.save
+      end
       if @student.save!
         EventMailer.joinInvestigationEmail(:user=>current_student,:owner=>@Owner, :group => @investigation_group).deliver!
         redirect_to investigation_group_path(@investigation_group), notice: 'Student investigation group was successfully updated, Join.'
@@ -111,11 +119,23 @@ class InvestigationGroupsController < ApplicationController
     @state = params[:member_investigation_group_param]
     if params[:type] == 'Student'
       @memState = Student.find(params[:ids])
+      id = @memState.id
     else
       @memState = TeacherInvestigationGroup.find(params[:ids])
+      id = @memState.teacher_id
     end
     @memState.state = @state
     if @memState.save!
+      if @state == "Admitted"
+        HistoryGroup.create!( bonding_date: DateTime.now, investigation_group_id: @memState.investigation_group_id, historable_type: params[:type], historable_id: id, state: 0 )
+      else
+        histor = HistoryGroup.load_actives_historys(:type=>params[:type], :ids => id, :group => @memState.investigation_group_id)
+        histor.each do |h|
+          h.exit_date = DateTime.now
+          h.state = 1
+          h.save
+        end
+      end
       EventMailer.stateChangedInvestigationEmail(:user=>@memState, :group => @investigation_group, :state=>@state).deliver!
       redirect_to member_investigation_groups_path(@investigation_group), notice: 'Member investigation group was successfully updated, State.'
     end

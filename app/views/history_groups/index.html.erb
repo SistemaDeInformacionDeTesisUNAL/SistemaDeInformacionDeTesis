@@ -10,7 +10,6 @@
       <th>Investigation group</th>
       <th>Historable type</th>
       <th>Historable id</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -22,14 +21,9 @@
         <td><%= history_group.investigation_group %></td>
         <td><%= history_group.historable_type %></td>
         <td><%= history_group.historable_id %></td>
-        <td><%= link_to 'Show', history_group %></td>
-        <td><%= link_to 'Edit', edit_history_group_path(history_group) %></td>
-        <td><%= link_to 'Destroy', history_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New History Group', new_history_group_path %>
