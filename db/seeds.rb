@@ -47,9 +47,6 @@ for i in (1..50)
 	HistoryGroup.create!( bonding_date: Faker::Date.backward(2000), investigation_group_id: rand(1..100), historable_type: Student, historable_id: rand(1..100), state: 1 )
 	HistoryGroup.create!( bonding_date: Faker::Date.backward(2000), investigation_group_id: rand(1..100), historable_type: Teacher, historable_id: rand(1..100), state: 1 )
 
-	Profile.create!( entity: Faker::Internet.domain_word, URL: Faker::Internet.url, profileable_type: Student, profileable_id: rand(1..100))
-	Profile.create!( entity: Faker::Internet.domain_word, URL: Faker::Internet.url, profileable_type: Teacher, profileable_id: rand(1..100))
-
 	UserContribution.create!( userable_type: Student, userable_id: rand(1..100), contribution_id: ((i-1)*6)+1 )
 	UserContribution.create!( userable_type: Teacher, userable_id: rand(1..100), contribution_id: ((i-1)*6)+2 )
 	UserContribution.create!( userable_type: Student, userable_id: rand(1..100), contribution_id: ((i-1)*6)+3 )

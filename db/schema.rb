@@ -84,16 +84,6 @@ ActiveRecord::Schema.define(version: 20170505041804) do
     t.index ["name"], name: "index_investigation_groups_on_name", using: :btree
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.string   "entity",           null: false
-    t.text     "URL",              null: false
-    t.string   "profileable_type"
-    t.integer  "profileable_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable_type_and_profileable_id", using: :btree
-  end
-
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"

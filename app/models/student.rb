@@ -2,8 +2,6 @@ class Student < ApplicationRecord
 
   belongs_to :investigation_group
 
-  has_many :profiles, as: :profileable, dependent: :destroy
-
   has_many :event_students
   has_many :events, through: :event_students
 
@@ -47,11 +45,6 @@ class Student < ApplicationRecord
   #Contribuciones del estudiante
   def self.students_by_contribution(**args)
     load_contributions.where( contributions: { id: args[:ids] } )
-  end
-
-  #Perfiles del estudiante
-  def self.students_profiles(**args)
-    Profile.load_profiles.where( profiles: { profileable_type: "Student", profileable_id: args[:ids] } )
   end
 
   #Carga todos los grupos de investigacion

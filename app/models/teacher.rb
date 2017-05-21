@@ -1,7 +1,5 @@
 class Teacher < ApplicationRecord
 
-  has_many :profiles, as: :profileable, dependent: :destroy
-
   has_many :event_teachers
   has_many :events, through: :event_teachers
 
@@ -43,11 +41,6 @@ class Teacher < ApplicationRecord
   #Contribuciones del estudiante
   def self.contributions_by_teachers(**args)
     UserContribution.load_users.where( userable_type: "Teacher", userable_id: args[:ids] )
-  end
-
-  #Perfiles del profesor
-  def self.teachers_profiles(**args)
-    Profile.load_profiles.where( profiles: { profileable_type: "Teacher", profileable_id: args[:ids] } )
   end
 
   #Carga todos los grupos de investigacion

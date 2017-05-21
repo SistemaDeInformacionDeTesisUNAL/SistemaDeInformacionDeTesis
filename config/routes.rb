@@ -32,7 +32,6 @@ Rails.application.routes.draw do
       get  ':id/destroy',               to: "events#destroy",                as: "destroy"
     end
   end
-  resources :profiles
   resources :teacher_investigation_groups
   resources :investigation_groups do
     collection do
