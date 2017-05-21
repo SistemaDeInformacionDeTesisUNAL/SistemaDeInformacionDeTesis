@@ -62,18 +62,9 @@
           <td><%= link_to @contribution.file ,@contribution.file_url.to_s %></td>
         </tr>
         <tr>
-          <td><strong>Ubications:</strong></td>
-          <td>
-            <table class="table">
-              <tbody>
-                <tr>
-                  <% @contribution.ubications.each do |ubication| %>
-                  <tr><td><%=ubication.link%></td></tr>
-                  <%end%>
-                </tr>
-              </tbody>
-            </table>
-          </tr>
+          <td><strong>Ubication:</strong></td>
+          <td><%= @contribution.ubication %></td>
+        </tr>
         </tbody>
       </table>
     </div>

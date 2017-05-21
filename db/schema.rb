@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170505041804) do
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.string   "file"
+    t.string   "ubication"
     t.index ["investigation_group_id"], name: "index_contributions_on_investigation_group_id", using: :btree
   end
 
@@ -167,14 +168,6 @@ ActiveRecord::Schema.define(version: 20170505041804) do
     t.index ["username"], name: "index_teachers_on_username", unique: true, using: :btree
   end
 
-  create_table "ubications", force: :cascade do |t|
-    t.text     "link",            null: false
-    t.integer  "contribution_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["contribution_id"], name: "index_ubications_on_contribution_id", using: :btree
-  end
-
   create_table "user_contributions", force: :cascade do |t|
     t.string   "userable_type"
     t.integer  "userable_id"
@@ -199,6 +192,5 @@ ActiveRecord::Schema.define(version: 20170505041804) do
   add_foreign_key "tag_investigation_groups", "tags"
   add_foreign_key "teacher_investigation_groups", "investigation_groups"
   add_foreign_key "teacher_investigation_groups", "teachers"
-  add_foreign_key "ubications", "contributions"
   add_foreign_key "user_contributions", "contributions"
 end

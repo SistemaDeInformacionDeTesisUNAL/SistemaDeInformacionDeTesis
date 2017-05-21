@@ -11,7 +11,7 @@ for i in (1..100)
 	us = Faker::Internet.unique.user_name+rand(1..10000).to_s
 	Teacher.create!( first_name: Faker::Name.unique.first_name, last_name: Faker::Name.last_name, email: "#{us}@unal.edu.co", username: us, password: Faker::Internet.password(8) )
 	InvestigationGroup.create!( name: Faker::Team.unique.name, create_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence, image: Faker::LoremPixel.image )
-	Tag.create!( name: Faker::Pokemon.unique.name+rand(1..10000).to_s, description: Faker::Lorem.sentence )
+	Tag.create!( name: Faker::Pokemon.unique.name+rand(1..10000).to_s )
 end
 
 
@@ -27,9 +27,9 @@ end
 
 for i in (1..100)
 
-	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: rand(1..100), state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf') )
-	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: rand(1..100), state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf') )
-	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: rand(1..100), state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf') )
+	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: rand(1..100), state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf'), ubication: Faker::Internet.url )
+	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: rand(1..100), state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf'), ubication: Faker::Internet.url )
+	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: rand(1..100), state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf'), ubication: Faker::Internet.url )
 
 end
 
@@ -38,9 +38,8 @@ for i in (1..100)
 	TeacherInvestigationGroup.create!( teacher_id: teach, investigation_group_id: i, rol: 2, state: 2 )
 	TeacherInvestigationGroup.create!( teacher_id: rand(1..100), investigation_group_id: rand(1..100), rol: rand(1), state: 2 )
 
-
 	HistoryGroup.create!( bonding_date: Faker::Date.backward(2000), investigation_group_id: i, historable_type: Teacher, historable_id: teach, state: 0 )
-	HistoryGroup.create_with(bonding_date: Faker::Date.backward(2000), investigation_group_id: teach, historable_type: Student, historable_id: i, state: 0 ).find_or_create_by(id: i)
+	HistoryGroup.create_with( bonding_date: Faker::Date.backward(2000), investigation_group_id: teach, historable_type: Student, historable_id: i, state: 0 ).find_or_create_by(id: i)
 end
 
 for i in (1..50)
@@ -61,9 +60,6 @@ for i in (1..50)
 end
 
 for i in (1..300)
-
-	Ubication.create!( link: Faker::Internet.url, contribution_id: i )
-	Ubication.create!( link: Faker::Internet.url, contribution_id: rand(1..300) )
 
 	TagContribution.create!( tag_id: rand(1..100), contribution_id: rand(1..300) )
 	TagContribution.create!( tag_id: rand(1..100), contribution_id: i )

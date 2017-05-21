@@ -140,7 +140,7 @@ class InvestigationGroupsController < ApplicationController
     @Teachers = Contribution.teachers(:id => @contribution.id)
 
     if @contribution.save!
-       @Students.each do |user|
+      @Students.each do |user|
         EventMailer.stateContributionChanged(:user=>user,:contribution=>@contribution, :group => @investigation_group, :state=>@state).deliver!
       end
       @Teachers.each do |user|

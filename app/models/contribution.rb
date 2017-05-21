@@ -6,8 +6,6 @@ class Contribution < ActiveRecord::Base
 
   belongs_to :investigation_group
 
-  has_many :ubications, dependent: :destroy
-
   has_many :tag_contributions, dependent: :destroy
   has_many :tags, through: :tag_contributions, dependent: :destroy
 
@@ -37,11 +35,6 @@ class Contribution < ActiveRecord::Base
   #Profesores de una contribución
   def self.teachers(**args)
     Teacher.load_contributions.where( contributions: { id: args[:id] } )
-  end
-
-  #Muestra las ubicaciones de una contribucion
-  def self.ubications(**args)
-  	Ubication.load_ubications.where( contributions: { id: args[:ids] } )
   end
 
   def self.user_contribution(**args)

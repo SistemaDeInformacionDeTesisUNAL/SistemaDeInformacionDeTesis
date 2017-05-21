@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   post "/push" => "push_notifications#create"
 
   resources :tags
-  resources :ubications
   resources :contributions, only:[:index,:show,:create,:update]
   resources :history_groups
   resources :event_teachers
