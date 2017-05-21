@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+<br>
+  <div class="container" id="calendar">
+  </div>
+
+<script type="text/javascript">
+$('#calendar').fullCalendar({
+  theme: true,
+  height: "auto",
+  selectable: true,
+  selectHelper: true,
+  editable:true,
+  eventLimit: 3,
+  header: {
+    left: 'title',
+    center: 'prevYear,month,agendaWeek,agendaDay,nextYear',
+    right:  'today prev,next'
+  },
+  views: {
+      agendaFourDay: {
+          type: 'agenda',
+          duration: { days: 4 },
+          buttonText: '4 day'
+      }
+  },
+  events: '/events.json'
+});
+</script>

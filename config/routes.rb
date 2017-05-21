@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'about', to: "static_pages#about", as: "contacto"
 
   #get 'home', to: "static_pages#home", as: "home"
-
+  
   #Post the subscription to our app
   post "/subscribe" => "subscriptions#create"
   delete "/unsubscribe" => "subscriptions#destroy"

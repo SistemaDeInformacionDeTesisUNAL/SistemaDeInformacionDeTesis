@@ -47,6 +47,7 @@
         </div>
         <div class="profile-userbuttons", style="margin-top: 5px;">
           <% if student_signed_in? %>
+          <%= link_to 'Mis Eventos', {:controller=>"events",:action=>"index",:id=>current_student.id},:class=>"btn btn1" %>
           <% if current_student.id == @student.id %>
           <%= link_to 'Edit', edit_student_path(@student), :class=>"btn btn1" %>
           <% end %>

@@ -1,32 +1,8 @@
-<p id="notice"><%= notice %></p>
-<br>
-  <div class="container" id="calendar">
-  </div>
-
-<script type="text/javascript">
-$('#calendar').fullCalendar({
-  theme: true,
-  height: "auto",
-  selectable: true,
-  selectHelper: true,
-  editable:true,
-  eventLimit: 3,
-  header: {
-    left: 'title',
-    center: 'prevYear,month,agendaWeek,agendaDay,nextYear',
-    right:  'today prev,next'
-  },
-  views: {
-      agendaFourDay: {
-          type: 'agenda',
-          duration: { days: 4 },
-          buttonText: '4 day'
-      }
-  },
-  events: '/events.json'
-});
-</script>
-
+<% if student_signed_in?%>
+<%= render 'index',@events=> Event.myEvents(:id=>current_student.id) %>
+<% else %>
+<%= render 'index',@events=> Event.myEvents(:id=>current_teacher.id) %>
+<% end %>
 <!-- a view -->
 <button class="js-push-button">Send a message</button>
 
@@ -37,34 +13,3 @@ $('#calendar').fullCalendar({
     });
   })();
 </script>
-
-<!--
-<script type="text/javascript">
-var config = {
-  apiKey: "AIzaSyBd16u6nNx4C2QnpiDoP9oEvK5eqJ3rlQk",
-  authDomain: "sigit-165416.firebaseapp.com",
-  databaseURL: "https://sigit-165416.firebaseio.com",
-  projectId: "sigit-165416",
-  storageBucket: "sigit-165416.appspot.com",
-  messagingSenderId: "663648725570"
-};
-firebase.initializeApp(config);
-const messaging = firebase.messaging();
-messaging.requestPermission()
-.then(function(){
-console.log('Have permission');
-return messaging.getToken();
-})
-.then(function(token){
-  console.log(token);
-})
-.catch(function(err){
-console.log('Error occurred: '+err);
-})
-
-messaging.onMessage(function(payload) {
-  console.log('onMessage: ',payload);
-});
-
-</script>
--->

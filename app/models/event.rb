@@ -21,4 +21,12 @@ class Event < ApplicationRecord
     includes(:investigation_group)
   end
 
+  def self.myEvents(**args)
+    @misEventos=[]
+    EventStudent.where(student_id:args[:id]).each do |eventStu|
+      @misEventos<<Event.find(eventStu.event_id)
+    end
+    return @misEventos
+  end
+
 end
