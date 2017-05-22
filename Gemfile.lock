@@ -57,6 +57,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    chartkick (2.2.4)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -224,6 +225,7 @@ DEPENDENCIES
   bootstrap_form
   byebug
   carrierwave (~> 0.10.0)
+  chartkick
   coffee-rails (~> 4.2)
   devise
   devise_ldap_authenticatable

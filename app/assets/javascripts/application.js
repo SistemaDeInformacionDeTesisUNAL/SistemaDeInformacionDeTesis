@@ -16,6 +16,8 @@
 //= require dataTables/jquery.dataTables
 //= require moment
 //= require fullcalendar
+//= require Chart.bundle
+//= require chartkick
 
 if ('serviceWorker' in navigator) {
   console.log('Service Worker is supported');

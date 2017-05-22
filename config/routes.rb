@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'about', to: "static_pages#about", as: "contacto"
 
   #get 'home', to: "static_pages#home", as: "home"
-  
+
   #Post the subscription to our app
   post "/subscribe" => "subscriptions#create"
   delete "/unsubscribe" => "subscriptions#destroy"
@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       post ':id/member/state',        to: "investigation_groups#updateMemberState",         as: "updateMemberState"
       post ':id/member/rol',          to: "investigation_groups#updateMemberRol",           as: "updateMemberRol"
       get  ':id/join',                to: "investigation_groups#join",                      as: "join"
+      get  ':id/chart',            to: "investigation_groups#chart",                  as: "chart"
       get  ':id/contributionsGroup',  to: "investigation_groups#contributionsGroup",        as: "contributionsGroup"
       post ':id/contributions/state', to: "investigation_groups#updateContributionState",   as: "updateContributionState"
       get ':id/eventsGroup',          to: "investigation_groups#eventsGroup",               as: "eventsGroup"

@@ -150,6 +150,9 @@ class InvestigationGroupsController < ApplicationController
     end
   end
 
+  def chart
+    @investigation_group=InvestigationGroup.find(params[:id])
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_investigation_group

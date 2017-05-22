@@ -83,6 +83,7 @@
 </table>
 </div>
 </div>
+<%=link_to 'Graficos', chart_investigation_groups_path, :class=>"btn btn1"%>
 <%if student_signed_in?%>
   <%if current_student.investigation_group_id != @investigation_group.id%>
     <%=link_to 'Join', join_investigation_groups_path, :class=>"btn btn1"%>

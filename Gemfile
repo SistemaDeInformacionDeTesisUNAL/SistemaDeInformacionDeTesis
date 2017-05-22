@@ -87,3 +87,6 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'mini_magick'
+
+#Charts
+gem "chartkick"
