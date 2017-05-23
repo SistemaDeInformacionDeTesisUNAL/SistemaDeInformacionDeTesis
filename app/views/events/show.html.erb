@@ -3,7 +3,7 @@
   <div class="col-md-2 col-lg-2"></div>
   <div class="col-md-9 col-lg-9 ">
     <div class="toppad" >
-      <div class="panel panel-primary">
+      <div class="panel panel-success">
         <div class="panel-heading"><h3>  <%= @event.name %></h3></div>
         <div class="panel-body">
       <table class="table table-striped">
@@ -47,13 +47,13 @@
   </div>
   </div>
   </div>
-  <%= link_to 'Events', events_path, :class=>"btn btn-success"%>
+  <%= link_to 'Back', events_path, :class=>"ui-button ui-corner-all ui-widget"%>
   <%if (student_signed_in? and !@event.students.ids.include? current_student.id)%>
-      <%=link_to 'Join', join_events_path, :class=>"btn btn-info"%>
+      <%=link_to 'Join', join_events_path, :class=>"ui-button ui-corner-all ui-widget"%>
   <%end%>
   <%if teacher_signed_in? %>
     <% if !@event.teachers.ids.include? current_teacher.id %>
-      <%=link_to 'Join', join_events_path, :class=>"btn btn-info"%>
+      <%=link_to 'Join', join_events_path, :class=>"ui-button ui-corner-all ui-widget"%>
     <%end%>
   <%end%>
 </div>

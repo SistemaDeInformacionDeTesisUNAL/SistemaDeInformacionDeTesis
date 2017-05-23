@@ -18,7 +18,7 @@ class PushNotificationsController < ApplicationController
   end
 
   def fetch_message
-    push_params.fetch(:message, "Sigit - Evento!!!!")
+    push_params.fetch(:message, "Sigit")
   end
 
   def fetch_subscription_params

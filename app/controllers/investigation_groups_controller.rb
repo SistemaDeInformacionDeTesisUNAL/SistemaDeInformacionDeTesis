@@ -6,6 +6,9 @@ class InvestigationGroupsController < ApplicationController
   def index
     #listar grupos por tag en especifico
     @investigation_groups = InvestigationGroup.load_groups
+    @colors=[]
+    InvestigationGroup.all.count.times{    @colors<<'#'+("%06x" % (rand * 0xffffff)).to_s}
+@allContributions=InvestigationGroup.contributions_group(:group_id =>20)
   end
 
   # GET /investigation_groups/1
@@ -170,6 +173,9 @@ class InvestigationGroupsController < ApplicationController
     end
   end
 
+  def chart
+    @investigation_group=InvestigationGroup.find(params[:id])
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_investigation_group

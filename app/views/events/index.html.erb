@@ -1,15 +1,28 @@
-<% if student_signed_in?%>
-<%= render 'index',@events=> Event.myEvents(:id=>current_student.id) %>
-<% else %>
-<%= render 'index',@events=> Event.myEvents(:id=>current_teacher.id) %>
-<% end %>
-<!-- a view -->
-<button class="js-push-button">Send a message</button>
+<br>
 
-<script type="text/javascript">
-  (function() {
-    $('.js-push-button').on("click", function onClick() {
-      $.post("/push");
-    });
-  })();
-</script>
+   <div class="container" id="calendar">
+   </div>
+
+   <script type="text/javascript">
+   $('#calendar').fullCalendar({
+   theme: true,
+   height: "auto",
+   selectable: true,
+   selectHelper: true,
+   editable:true,
+   eventLimit: 3,
+   header: {
+     left: 'title',
+     center: 'prevYear,month,agendaWeek,agendaDay,nextYear',
+     right:  'today prev,next'
+   },
+   views: {
+       agendaFourDay: {
+           type: 'agenda',
+           duration: { days: 4 },
+           buttonText: '4 day'
+       }
+   },
+   events: '/events.json'
+   });
+   </script>

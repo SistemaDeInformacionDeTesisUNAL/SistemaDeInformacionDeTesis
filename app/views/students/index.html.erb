@@ -19,7 +19,7 @@
       <tr>
         <td><%= student.first_name %></td>
         <td><%= student.last_name %></td>
-        <td><%= link_to student.username, student %></td>
+        <td><%= link_to student.username, student%></td>
         <td><%= student.email %></td>
         <%if student.state == "Admitted" then%>
         <td><%= link_to student.investigation_group.name, investigation_group_path(student.investigation_group_id) %></td>

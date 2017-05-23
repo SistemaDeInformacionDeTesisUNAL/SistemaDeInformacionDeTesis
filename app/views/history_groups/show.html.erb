@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bonding date:</strong>
+  <%= @history_group.bonding_date %>
+</p>
+
+<p>
+  <strong>Exit date:</strong>
+  <%= @history_group.exit_date %>
+</p>
+
+<p>
+  <strong>Investigation group:</strong>
+  <%= @history_group.investigation_group %>
+</p>
+
+<p>
+  <strong>Historable type:</strong>
+  <%= @history_group.historable_type %>
+</p>
+
+<p>
+  <strong>Historable id:</strong>
+  <%= @history_group.historable_id %>
+</p>
+
+<%= link_to 'Edit', edit_history_group_path(@history_group) ,:class=>"ui-button ui-corner-all ui-widget"%> |
+<%= link_to 'Back', history_groups_path ,:class=>"ui-button ui-corner-all ui-widget"%>

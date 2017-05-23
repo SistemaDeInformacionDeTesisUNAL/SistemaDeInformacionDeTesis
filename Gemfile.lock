@@ -88,8 +88,8 @@ GEM
       jquery-rails (>= 4.0.5, < 5.0.0)
       jquery-ui-rails (>= 5.0.2)
       momentjs-rails (>= 2.9.0)
-    globalid (0.3.7)
-      activesupport (>= 4.1.0)
+    globalid (0.4.0)
+      activesupport (>= 4.2.0)
     groupdate (2.1.1)
       activerecord (>= 3.0.0)
     hkdf (0.3.0)
@@ -236,7 +236,7 @@ DEPENDENCIES
   devise_ldap_authenticatable
   faker
   fullcalendar-rails
-  groupdate (~> 2.1.1)
+  groupdate
   jbuilder (~> 2.5)
   jquery-datatables-rails (~> 3.4.0)
   jquery-rails
