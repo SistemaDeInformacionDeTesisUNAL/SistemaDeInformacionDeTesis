@@ -92,7 +92,7 @@
 <% if teacher_signed_in? %>
  <%= link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"ui-button ui-corner-all ui-widget" %>
 <% end %>
-<%=link_to 'Back', investigation_group_path,:class=>"ui-button ui-corner-all ui-widget"%>
+<%=link_to 'Investigation Group', investigation_group_path,:class=>"ui-button ui-corner-all ui-widget"%>
 
 <script>
   function updateContributionState(ids, url, state){

@@ -59,11 +59,11 @@
           <% end %>
           <%end%>
           <% if student_signed_in? || teacher_signed_in? %>
-          <th><%= link_to 'Back', students_path, :class=>"ui-button ui-corner-all ui-widget" %></th>
+          <th><%= link_to 'Students', students_path, :class=>"ui-button ui-corner-all ui-widget" %></th>
           <%end%>
           <% if student_signed_in? %>
           <% if current_student.id == @student.id %>
-          <th><%= link_to('Log out', destroy_student_session_path, :method => :delete, :class=>"ui-button ui-corner-all ui-widget") %></th>
+          <th><%= link_to('Log Out', destroy_student_session_path, :method => :delete, :class=>"ui-button ui-corner-all ui-widget") %></th>
           <% end %>
           <%end%>
         </tr>

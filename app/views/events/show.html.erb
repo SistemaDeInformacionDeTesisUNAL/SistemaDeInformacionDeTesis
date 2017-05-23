@@ -47,7 +47,7 @@
   </div>
   </div>
   </div>
-  <%= link_to 'Back', events_path, :class=>"ui-button ui-corner-all ui-widget"%>
+  <%= link_to 'Events', events_path, :class=>"ui-button ui-corner-all ui-widget"%>
   <%if (student_signed_in? and !@event.students.ids.include? current_student.id)%>
       <%=link_to 'Join', join_events_path, :class=>"ui-button ui-corner-all ui-widget"%>
   <%end%>

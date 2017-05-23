@@ -7,7 +7,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Publication Date</th>
+        <th>Publication</th>
         <th>Description</th>
         <th>State</th>
         <th>Investigation Group</th>
@@ -19,16 +19,26 @@
         <tr>
           <td><%= link_to contribution.name, contribution %></td>
           <td><%= Date.parse(contribution.publication_date.to_s).to_formatted_s(:rfc822) %></td>
-          <td><%= contribution.description %></td>
+          <%if contribution.description.length < 25%>
+            <td><%= contribution.description %></td>
+          <%else%>
+            <td><%= contribution.description[0,25] + "..." %></td>
+          <%end%>
           <td><%= contribution.state %></td>
           <td><%= link_to contribution.investigation_group.name, :controller => "investigation_groups", :action => "show", :id => contribution.investigation_group.id%></td>
-          <% myTags=''
-          contribution.tags.each do |tag|
-            myTags<<tag.name
-            if tag != contribution.tags.last
-              myTags<<', '
-            end
-          end %>
+          <%myTags=''
+            cont = 0
+            contribution.tags.each do |tag|
+              myTags<<tag.name
+              cont = cont + 1
+              if tag != contribution.tags.last
+                myTags<<', '
+              end
+              if cont == 6
+                myTags<<'...'
+                break
+              end
+            end%>
           <td> <%=myTags.to_s%></td>
         </tr>
       <% end %>

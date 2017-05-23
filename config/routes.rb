@@ -20,12 +20,7 @@ Rails.application.routes.draw do
   #Push notification
   post "/push" => "push_notifications#create"
 
-  resources :tags
   resources :contributions, only:[:index,:show,:create,:update]
-  resources :history_groups
-  resources :event_teachers
-  resources :event_students
-  resources :user_contributions
   resources :events, only:[:index,:show,:create,:update] do
     collection do
       get  ':id/join',               to: "events#join",                as: "join"

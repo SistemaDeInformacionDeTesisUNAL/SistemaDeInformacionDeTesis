@@ -57,6 +57,6 @@
 </div>
 
 <% if teacher_signed_in? %>
- <%= link_to 'New Event', new_investigation_group_event_path(@investigation_group), :class=>"ui-button ui-corner-all ui-widget" %>
+ <%=link_to 'New Event', new_investigation_group_event_path(@investigation_group), :class=>"ui-button ui-corner-all ui-widget" %>
 <% end %>
-<%=link_to 'Back', investigation_group_path, :class=>"ui-button ui-corner-all ui-widget" %>
+<%=link_to 'Investigation Group', investigation_group_path, :class=>"ui-button ui-corner-all ui-widget" %>

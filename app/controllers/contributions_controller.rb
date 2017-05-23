@@ -1,6 +1,6 @@
 class ContributionsController < ApplicationController
-  before_action :set_contribution, only: [:show, :update, :destroy]
-  before_action :set_contribution_id, only: [:users, :newUser, :tags, :sendTags, :edit]
+  before_action :set_contribution, only: [:show, :update, :destroy, :edit]
+  before_action :set_contribution_id, only: [:users, :newUser, :tags, :sendTags]
 
   # GET /contributions
   # GET /contributions.json
@@ -30,6 +30,7 @@ class ContributionsController < ApplicationController
 
   # GET /contributions/1/edit
   def edit
+    @invGroup = InvestigationGroup.find(params[:investigation_group_id])
   end
   # POST /contributions
   # POST /contributions.json

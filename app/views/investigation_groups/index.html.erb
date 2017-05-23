@@ -2,103 +2,92 @@
 <br>
 <p id="notice"><%= notice %></p>
   <div class="container">
-
     <script>
-     $( function() {
-       $( "#tabs" ).tabs();
-     } );
-     </script>
-   <div id="tabs">
-     <ul>
-       <li><a href="#tabs-1"><strong>Investigation Groups</strong></a></li>
-       <li><a href="#tabs-2">Rankings</a></li>
-     </ul>
-     <div id="tabs-1">
-       <!-- Tab panes -->
-       <div class="tab-content">
-         <div class="tab-pane active" id="home" role="tabpanel">
-           <table id="data-table" class="table table-striped table-bordered dataTables_wrapper order-column form-inline dt-bootstrap nowrap" width="100%" cellspacing="0" >
-           <thead>
-             <tr>
-               <th>Name</th>
-               <th>Createdate</th>
-               <th>Description</th>
-               <th>Tags</th>
-             </tr>
-           </thead>
-           <tbody>
-             <% @investigation_groups.each do |investigation_group| %>
-               <tr>
-                 <td><%= link_to investigation_group.name, investigation_group, :class=>"ui-button ui-corner-all ui-widget" %></td>
-                 <td><%= Date.parse(investigation_group.create_date.to_s).to_formatted_s(:rfc822) %></td>
-                 <td><%= investigation_group.description %></td>
-                 <% myTags=''
-                 if investigation_group.tags.count <=5
-                   investigation_group.tags.each do |tag|
-                     myTags<<tag.name
-                     if tag != investigation_group.tags.last
-                       myTags<<', '
-                     end
-                   end
-                else
-                  (1..5).each do |i|
-                    tag = investigation_group.tags.find(i)
-                    myTags<<tag.name
-                    if tag != investigation_group.tags.find(5)
-                      myTags<<', '
-                    end
-                  end
-                    myTags<<'...'
-                
-                 end%>
-                 <td> <%=myTags.to_s%></td>
-               </tr>
-             <% end %>
-           </tbody>
-         </table>
-         </div>
-     </div>
-     </div>
-     <div id="tabs-2">
-       <table class="table">
-         <tbody>
-         <tr>
-       <%= column_chart Contribution.group(:investigation_group).count.transform_keys { |key| key.name }.sort.to_h,
-title:"Investigation Groups Vs. Contributions",
-       label: "name",
-       bar: {groupWidth: "95%"},
-       xtitle: "Investigation Groups",
-       ytitle: "# Contributions",
-           library: { animation: { easing: 'easeOutQuad' }}%>
-</tr>
-
- <tr>
-       <%= pie_chart Event.group(:investigation_group).count.transform_keys { |key| key.name }.sort.to_h ,
-     title:"Events of Investigation Groups",
-       legend:false,
-       colors:@colors,
-     library: { animation: { easing: 'easeOutQuad' }}
-     %>
-   </tr>
-     <tr>
-       <%= pie_chart Student.group(:investigation_group).count.transform_keys { |key| key.name }.sort.to_h ,
-       title:"Students of Investigation Groups",
-       legend:false,
-       donut:true,
-       colors:@colors,
-       library:{
-         animation: {
-           easing: 'easeOutQuad'
-           }
-           }
-           %>
-
-   </tr>
-   </tbody>
- </table>
-</div>
-   </div>
-   <% if teacher_signed_in? %>
-   <%= link_to 'New Investigation Group', new_investigation_group_path,  :class=>"ui-button ui-corner-all ui-widget"%>
-   <% end %>
+      $( function() {
+        $( "#tabs" ).tabs();
+      } );
+    </script>
+    <div id="tabs">
+      <ul>
+        <li><a href="#tabs-1"><strong>Investigation Groups</strong></a></li>
+        <li><a href="#tabs-2">Rankings</a></li>
+      </ul>
+      <div id="tabs-1">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="home" role="tabpanel">
+            <table id="data-table" class="table table-striped table-bordered dataTables_wrapper order-column form-inline dt-bootstrap nowrap" width="100%" cellspacing="0" >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Tags</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @investigation_groups.each do |investigation_group| %>
+                  <tr>
+                    <td><%= link_to investigation_group.name, investigation_group %></td>
+                    <td><%= Date.parse(investigation_group.create_date.to_s).to_formatted_s(:rfc822) %></td>
+                    <%if investigation_group.description.length < 25%>
+                      <td><%= investigation_group.description %></td>
+                    <%else%>
+                      <td><%= investigation_group.description[0,25] + "..." %></td>
+                    <%end%>
+                    <%myTags=''
+                    cont = 0
+                    investigation_group.tags.each do |tag|
+                      myTags<<tag.name
+                      cont = cont + 1
+                      if tag != investigation_group.tags.last
+                        myTags<<', '
+                      end
+                      if cont == 8
+                        myTags<<'...'
+                        break
+                      end
+                    end%>
+                    <td><%=myTags.to_s%></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <div id="tabs-2">
+      <table class="table">
+        <tbody>
+          <tr>
+            <%= column_chart Contribution.group(:investigation_group).count.transform_keys{ |key| key.name }.sort.to_h,
+            title:"Investigation Groups Vs. Contributions",
+            label: "name", 
+            bar: {groupWidth: "95%"},
+            xtitle: "Investigation Groups",
+            ytitle: "# Contributions",
+            library: { animation: { easing: 'easeOutQuad' }}%>
+          </tr>
+          <tr>
+            <%= pie_chart Event.group(:investigation_group).count.transform_keys { |key| key.name }.sort.to_h ,
+            title:"Events of Investigation Groups",
+            legend: false,
+            colors: @colors,
+            library: { animation: { easing: 'easeOutQuad' } }%>
+          </tr>
+          <tr>
+            <%=pie_chart Student.group(:investigation_group).count.transform_keys { |key| key.name }.sort.to_h ,
+            title:"Students of Investigation Groups",
+            legend:false,
+            donut:true,
+            colors:@colors,
+            library:{ animation: { easing: 'easeOutQuad' } }%>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <% if teacher_signed_in? %>
+    <%= link_to 'New Investigation Group', new_investigation_group_path,  :class=>"ui-button ui-corner-all ui-widget"%>
+  <% end %>
 </div>

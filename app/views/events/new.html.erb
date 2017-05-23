@@ -5,4 +5,4 @@
 <% @event.investigation_group_id = @contribution_group.id %>
 <%= render 'form', event: @event %>
 
-<%= link_to 'Back', eventsGroup_investigation_groups_path(@contribution_group), :class=>"ui-button ui-corner-all ui-widget"%>
+<%= link_to 'Group Events', eventsGroup_investigation_groups_path(@contribution_group), :class=>"ui-button ui-corner-all ui-widget"%>
