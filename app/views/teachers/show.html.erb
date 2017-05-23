@@ -31,12 +31,16 @@
         end %>
       </div>
       <div class="col-md-8 col-md-offset-2">
-        <table class="table">
-          <tbody>
-            <th>Contibutions</th>
-            <%@teacher.contributions.each do |contribution|%>
+        <table class=" table table-bordered dataTables_wrapper form-inline dt-bootstrap nowrap  no-footer">
+          <thead>
+            <tr role="row">
+            <th class="ui-state-default">Contibutions</th>
+          </tr>
+          </thead>
+            <tbody>
             <tr>
-              <td style="padding-top: 1px; padding-bottom: 1px;">
+            <%@teacher.contributions.each do |contribution|%>
+              <td >
                 <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
               </td>
             </tr>
@@ -44,18 +48,25 @@
           </tbody>
         </table>
       </div>
+      <br>
       <div class="profile-userbuttons">
-        <% if teacher_signed_in? %>
-        <% if current_teacher.id == @teacher.id %>
-        <%= link_to 'Edit', edit_teacher_path(@teacher),  :class=>"btn btn1" %>
-        <% end %>
-        <% end %>
-        <%= link_to 'Back', teachers_path,  :class=>"btn btn1" %>
-        <% if teacher_signed_in? %>
-        <% if current_teacher.id == @teacher.id %>
-        <%= link_to('Log out', destroy_teacher_session_path, :method => :delete,  :class=>"btn btn1") %>
-        <% end %>
-        <% end %>
+        <table style="float: none; margin: 0 auto;">
+          <tr>
+              <% if teacher_signed_in? %>
+              <% if current_teacher.id == @teacher.id %>
+                <th><%= link_to 'Edit', edit_teacher_path(@teacher),  :class=>"ui-button ui-corner-all ui-widget" %>  </th>
+              <% end %>
+              <% end %>
+              <th><%= link_to 'Back', teachers_path,  :class=>"ui-button ui-corner-all ui-widget" %>  </th>
+              <% if teacher_signed_in? %>
+              <% if current_teacher.id == @teacher.id %>
+              <th><%= link_to('Log out', destroy_teacher_session_path, :method => :delete,  :class=>"ui-button ui-corner-all ui-widget") %>  </th>
+              <% end %>
+              <% end %>
+
+          </tr>
+        </table>
+
       </div>
     </div>
   </div>

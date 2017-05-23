@@ -7,9 +7,9 @@
     <%= image_tag(@investigation_group.image_url.to_s,:class=>"img-circle img-responsive",:atl=>"Investigation Group Image") %>
   </div>
   <div class=" col-md-9 col-lg-9 ">
-    <table class="table">
+    <table  class=" table table-bordered dataTables_wrapper form-inline dt-bootstrap nowrap  no-footer">
       <tbody>
-        <th colspan="2">
+        <th colspan="2" class="ui-state-default">
           <%= @investigation_group.name %>
         </th>
         <tr>
@@ -83,22 +83,21 @@
 </table>
 </div>
 </div>
-<%=link_to 'Graficos', chart_investigation_groups_path, :class=>"btn btn1"%>
 <%if student_signed_in?%>
   <%if current_student.investigation_group_id != @investigation_group.id%>
-    <%=link_to 'Join', join_investigation_groups_path, :class=>"btn btn1"%>
+    <%=link_to 'Join', join_investigation_groups_path, :class=>"ui-button ui-corner-all ui-widget"%>
   <%end%>
 <%end%>
 <%if teacher_signed_in?%>
   <%if @relation == [] %>
-    <%=link_to 'Join', join_investigation_groups_path, :class=>"btn btn1"%>
+    <%=link_to 'Join', join_investigation_groups_path, :class=>"ui-button ui-corner-all ui-widget"%>
   <%elsif @relation.rol == 'Teacher' && @relation.state == 'Admitted' %>
-    <%=link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"btn btn1" %>
+    <%=link_to 'New Contribution', new_investigation_group_contribution_path(@investigation_group), :class=>"ui-button ui-corner-all ui-widget" %>
   <%elsif @relation.rol == 'Admin' || @relation.rol == 'Owner' %>
-    <%=link_to 'Edit Members', member_investigation_groups_path(@investigation_group), :class=>"btn btn1"%>
-    <%=link_to 'Contributions', contributionsGroup_investigation_groups_path, :class=>"btn btn1" %>
-    <%=link_to 'Events', eventsGroup_investigation_groups_path, :class=>"btn btn1" %>
-    <%=link_to 'Edit', edit_investigation_group_path, :class=>"btn btn1"%>
+    <%=link_to 'Edit Members', member_investigation_groups_path(@investigation_group), :class=>"ui-button ui-corner-all ui-widget"%>
+    <%=link_to 'Contributions', contributionsGroup_investigation_groups_path, :class=>"ui-button ui-corner-all ui-widget" %>
+    <%=link_to 'Events', eventsGroup_investigation_groups_path, :class=>"ui-button ui-corner-all ui-widget" %>
+    <%=link_to 'Edit', edit_investigation_group_path, :class=>"ui-button ui-corner-all ui-widget"%>
   <%end%>
 <%end%>
-<%=link_to 'Back', investigation_groups_path, :class=>"btn btn1" %>
+<%=link_to 'Back', investigation_groups_path, :class=>"ui-button ui-corner-all ui-widget" %>

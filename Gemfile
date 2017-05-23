@@ -90,3 +90,5 @@ gem 'mini_magick'
 
 #Charts
 gem "chartkick"
+gem 'groupdate'
+gem 'active_median', '~> 0.1.0'

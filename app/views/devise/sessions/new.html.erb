@@ -3,7 +3,7 @@
 <div id="login">
   <h2>Log in</h2>
   <hr style="color: white;">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, :html => { :onsubmit => "push()" },url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :username %><br />
     <%= f.text_field :username, autofocus: true %>
@@ -22,9 +22,14 @@
   <% end -%> -->
 
   <div class="actions">
-    <%= f.submit "Submit" %>
+    <%= f.submit "Entrar" %>
   </div>
   <% end %>
 </div>
 
 <%= render "devise/shared/links" %>
+<script type="text/javascript">
+    function push() {
+      $.post("/push");
+    }
+</script>

@@ -41,7 +41,6 @@ Rails.application.routes.draw do
       post ':id/member/state',        to: "investigation_groups#updateMemberState",         as: "updateMemberState"
       post ':id/member/rol',          to: "investigation_groups#updateMemberRol",           as: "updateMemberRol"
       get  ':id/join',                to: "investigation_groups#join",                      as: "join"
-      get  ':id/chart',            to: "investigation_groups#chart",                  as: "chart"
       get  ':id/contributionsGroup',  to: "investigation_groups#contributionsGroup",        as: "contributionsGroup"
       post ':id/contributions/state', to: "investigation_groups#updateContributionState",   as: "updateContributionState"
       get ':id/eventsGroup',          to: "investigation_groups#eventsGroup",               as: "eventsGroup"

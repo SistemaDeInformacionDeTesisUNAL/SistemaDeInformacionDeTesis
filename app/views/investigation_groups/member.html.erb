@@ -5,8 +5,8 @@
     <section class="content">
       <!--h1>Members</h1-->
       <div class="col-md-8 col-md-offset-2">
-        <table class="table table-filter">
-          <th colspan="5"><h2>Members</h2></th>
+        <table class=" table table-filtered table-bordered dataTables_wrapper form-inline dt-bootstrap nowrap  no-footer">
+          <th colspan="5" class="ui-state-default"><h2>Members</h2></th>
           <% @students.each do |student| %>
           <tr>
             <td>
@@ -148,4 +148,4 @@
       });
     }
     </script>
-    <%= link_to 'Back', investigation_group_path, :class=>"btn btn2" %>
+    <%= link_to 'Back', investigation_group_path, :class=>"ui-button ui-corner-all ui-widget" %>

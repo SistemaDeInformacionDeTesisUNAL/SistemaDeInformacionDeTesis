@@ -4,24 +4,28 @@
     <title>Sistema de información de tesis :: Universidad Nacional de Colombia</title>
     <link rel="shortcut icon" href="/assets/unal/favicon.ico" type="image/x-icon">
     <%= csrf_meta_tags %>
-    <%=stylesheet_link_tag 'css/reset', media="all"%>
+    <%=stylesheet_link_tag 'css/reset'%>
 
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
+    <%=stylesheet_link_tag "css/bootstrap.min"%>
+  <%=stylesheet_link_tag "css/bootstrap-theme.min"%>
 
 
 <!--
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
--->
+
 
     <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/south-street/jquery-ui.css">
-      <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css">
-      <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/dataTables.jqueryui.min.css">
+-->
+<%=stylesheet_link_tag "css/jquery-ui"%>
+<%=stylesheet_link_tag "css/jquery-ui.structure"%>
+<%=stylesheet_link_tag "css/jquery-ui.theme"%>
+      <%=stylesheet_link_tag "css/fullcalendar.min"%>
+      <%=stylesheet_link_tag "css/dataTables.jqueryui.min"%>
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+    <%=stylesheet_link_tag "css/bootstrap-datetimepicker"%>
 
-    <%=stylesheet_link_tag 'css/unal', media="all"%>
+    <%=stylesheet_link_tag 'css/unal'%>
 
     <%#=stylesheet_link_tag 'css/base', media="all"%>
     <%#=stylesheet_link_tag 'css/tablet', media="all"%>
@@ -32,23 +36,24 @@
 
 
 
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
-    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.js"></script>
-<script  type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="//www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    <%= javascript_include_tag "js/jquery.min.js"%>
+    <%= javascript_include_tag "js/jquery-ui.min.js"%>
+    <%= javascript_include_tag "js/jquery.dataTables.min"%>
+    <%= javascript_include_tag "js/dataTables.jqueryui.min"%>
+    <%= javascript_include_tag "js/bootstrap.min"%>
+    <%= javascript_include_tag "js/moment"%>
+    <%= javascript_include_tag "js/fullcalendar"%>
+<%= javascript_include_tag "js/bootstrap-select.min"%>
+<%= javascript_include_tag "js/bootstrap-datetimepicker.min"%>
+<%= javascript_include_tag "js/firebase"%>
 
 
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%#<%= javascript_include_tag 'js/jquery' %>
-
-      <%= javascript_include_tag 'js/unal' %>
+<%= javascript_include_tag 'js/loader'%>
+     <%= javascript_include_tag 'js/unal' %>
+      <%= javascript_include_tag 'firebase-messaging-sw' %>
       <link rel="manifest" href="/manifest.json">
 <%= javascript_include_tag 'application' %>
       <%#= javascript_include_tag :defaults %>
@@ -68,15 +73,20 @@
   $(document).ready(function() {
     var table= $('#data-table').DataTable({
       lengthChange: false,
+      ScrollY: "100%",
+      ScrollXInner: "150%",
        scrollCollapse: true,
        fixedHeader: true,
+
        autoFill:true,
       responsive: true,
+      scrollY:true,
       jQueryUI: true,
       pagingType: "full"
     });
     $('#container').css( 'display', 'block' );
 table.columns.adjust().draw();
+$('#data-table').dataTable().fnAdjustColumnSizing();
 
     });
 </script>
