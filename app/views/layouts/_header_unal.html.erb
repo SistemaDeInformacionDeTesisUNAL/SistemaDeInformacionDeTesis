@@ -76,7 +76,8 @@
                         <% elsif teacher_signed_in? %>
                         <li><%= link_to "Profile", teacher_session_path %></li>
                         <% else %>
-                        <li><%= link_to "Log In", new_student_session_path %></li>
+                        <li><%= link_to "Log In Student", new_student_session_path %></li>
+                        <li><%= link_to "Log In Teacher", new_teacher_session_path %></li>
                         <% end %>
                         <li><%= link_to "About Us", contacto_path %></li>
                         <li><%= link_to "Contributions", contributions_path %></li>

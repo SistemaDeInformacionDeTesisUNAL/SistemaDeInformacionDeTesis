@@ -5,67 +5,92 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-InvestigationGroup.create!( id: 0, name: "Grupo creado", create_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence, image: Faker::LoremPixel.image )
 
-for i in (1..100)
+G = {}
+for i in (1..60)
 	us = Faker::Internet.unique.user_name+rand(1..10000).to_s
 	Teacher.create!( first_name: Faker::Name.unique.first_name, last_name: Faker::Name.last_name, email: "#{us}@unal.edu.co", username: us, password: Faker::Internet.password(8) )
 	InvestigationGroup.create!( name: Faker::Team.unique.name, create_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence, image: Faker::LoremPixel.image )
+	G[ i ] = [[],[],[],[]]
+	Tag.create!( name: Faker::Pokemon.unique.name+rand(1..10000).to_s )
 	Tag.create!( name: Faker::Pokemon.unique.name+rand(1..10000).to_s )
 end
 
-
-for i in (1..100)
-
-	us = Faker::Internet.unique.user_name+rand(1..10000).to_s
-	group = rand(1..100)
-
-	eventStart=Faker::Time.between(2.days.ago, Date.today, :day)
-	Student.create!( first_name: Faker::Name.first_name,last_name: Faker::Name.last_name, email: "#{us}@unal.edu.co", username: us, investigation_group_id: group, state: 2, password: Faker::Internet.password(8) )
-	Event.create!( name:Faker::Zelda.game+rand(1..10000).to_s, start_time: eventStart, end_time: eventStart+rand(1000..800000), description: Faker::Lorem.sentence, investigation_group_id: rand(1..100))
-end
-
-for i in (1..100)
-
-	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: rand(1..100), state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf'), ubication: Faker::Internet.url )
-	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: rand(1..100), state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf'), ubication: Faker::Internet.url )
-	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: rand(1..100), state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf'), ubication: Faker::Internet.url )
-
-end
-
-for i in (1..100)
-	teach = rand(1..100)
+for i in (1..60)
+	teach = rand(1..60)
 	TeacherInvestigationGroup.create!( teacher_id: teach, investigation_group_id: i, rol: 2, state: 2 )
-	TeacherInvestigationGroup.create!( teacher_id: rand(1..100), investigation_group_id: rand(1..100), rol: rand(1), state: 2 )
-
 	HistoryGroup.create!( bonding_date: Faker::Date.backward(2000), investigation_group_id: i, historable_type: Teacher, historable_id: teach, state: 0 )
-	HistoryGroup.create_with( bonding_date: Faker::Date.backward(2000), investigation_group_id: teach, historable_type: Student, historable_id: i, state: 0 ).find_or_create_by(id: i)
+	G[ i ][ 4 ].push( teach )
+
+	eventStart=Faker::Time.between(2.year.ago, Date.today, :day)
+	group = rand(1..60)
+	Event.create!( name:Faker::Zelda.game+rand(1..10000).to_s, start_time: eventStart, end_time: eventStart+rand(1000..800000), description: Faker::Lorem.sentence, investigation_group_id: group )
+	G[ group ][2].push(i)
 end
 
-for i in (1..50)
+for i in (1..90)
+	us = Faker::Internet.unique.user_name+rand(1..10000).to_s
+	group = rand(1..60)
+	Student.create!( first_name: Faker::Name.first_name,last_name: Faker::Name.last_name, email: "#{us}@unal.edu.co", username: us, investigation_group_id: , state: 2, password: Faker::Internet.password(8) )
+	HistoryGroup.create!( bonding_date: Faker::Date.backward(2000), investigation_group_id: group, historable_type: Student, historable_id: i, state: 0 )
+	G[ group ][ 0 ].push( i )
 
-	HistoryGroup.create!( bonding_date: Faker::Date.backward(2000), investigation_group_id: rand(1..100), historable_type: Student, historable_id: rand(1..100), state: 1 )
-	HistoryGroup.create!( bonding_date: Faker::Date.backward(2000), investigation_group_id: rand(1..100), historable_type: Teacher, historable_id: rand(1..100), state: 1 )
+	group = rand(1..60)
+	teach = rand(1..60)
+	TeacherInvestigationGroup.create!( teacher_id: teach, investigation_group_id: group, rol: rand(1), state: 2 )
+	HistoryGroup.create!( bonding_date: Faker::Date.backward(2000), investigation_group_id: group, historable_type: Teacher, historable_id: teach, state: 0 )
+	G[ group ][ 3 ].push( teach )
+end
 
-	UserContribution.create!( userable_type: Student, userable_id: rand(1..100), contribution_id: ((i-1)*6)+1 )
-	UserContribution.create!( userable_type: Teacher, userable_id: rand(1..100), contribution_id: ((i-1)*6)+2 )
-	UserContribution.create!( userable_type: Student, userable_id: rand(1..100), contribution_id: ((i-1)*6)+3 )
-	UserContribution.create!( userable_type: Teacher, userable_id: rand(1..100), contribution_id: ((i-1)*6)+4 )
-	UserContribution.create!( userable_type: Student, userable_id: rand(1..100), contribution_id: ((i-1)*6)+5 )
-	UserContribution.create!( userable_type: Teacher, userable_id: rand(1..100), contribution_id: ((i-1)*6)+6 )
+for i in (1..150)
+	group = rand(1..60)
+	list = rand(2)
+	if list == 0
+		user = Student
+		id = G[ group ][ 0 ]
+	else
+		user = Teacher
+		id = G[ group ][ 3 ]
+	end
+	Contribution.create!( name: Faker::Commerce.product_name, publication_date: Faker::Date.backward(2000), description: Faker::Lorem.sentence , investigation_group_id: group, state: rand(3), file: Faker::Internet.url('example.com', '/contribution.pdf'), ubication: Faker::Internet.url )
+	UserContribution.create!( userable_type: user, userable_id: id[ rand( id.size ) ], contribution_id: i )
+	G[ group ][1].push(i)
+end
 
+for i in ( 1..200 )
+	group = rand( 1..60 )
+	contr = G[ group ][ 1 ]
+	list = rand( 2 )
+	if list == 0
+		user = Student
+		id = G[ group ][ 0 ]
+	else
+		user = Teacher
+		id = G[ group ][ 3 ]
+	end
+	UserContribution.create!( userable_type: user, userable_id: id[ rand( id.size ) ], contribution_id: contr[ rand( contr.size ) ] )
 end
 
 for i in (1..300)
+	group = rand( 1..60 )
+	contr = G[ group ][ 1 ]
+	tag = rand( 1..120 )
+	TagContribution.create!( tag_id: tag, contribution_id: contr[ rand( contr.size ) ] )
+	TagInvestigationGroup.create!( tag_id: tag, investigation_group_id: group )
+end
 
-	TagContribution.create!( tag_id: rand(1..100), contribution_id: rand(1..300) )
-	TagContribution.create!( tag_id: rand(1..100), contribution_id: i )
-	TagInvestigationGroup.create!( tag_id: rand(1..100),investigation_group_id: rand(1..100) )
+for i in (1..90)
+	group = rand( 1..60 )
+	event = G[ group ][ 2 ]
+	stud = G[ group ][ 0 ]
+	if event != [] && stud != []
+		EventStudent.create!( event_id: event[ rand( event.size ) ], student_id: stud[ rand( stud.size ) ] )
+	end
 
-	UserContribution.create!( userable_type: Student, userable_id: rand(1..100), contribution_id: rand(1..300) )
-	UserContribution.create!( userable_type: Teacher, userable_id: rand(1..100), contribution_id: rand(1..300) )
-
-	EventStudent.create!( event_id: rand(1..100), student_id: rand(1..100) )
-	EventTeacher.create!( event_id: rand(1..100), teacher_id: rand(1..100) )
-
+	group = rand( 1..60 )
+	even = G[ group ][ 2 ]
+	teach = G[ group ][ 3 ]
+	if even != []
+		EventTeacher.create!( event_id: event[ rand( event.size ) ], teacher_id: teach[ rand( teach.size ) ] )
+	end
 end
