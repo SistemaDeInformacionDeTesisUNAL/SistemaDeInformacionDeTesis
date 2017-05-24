@@ -100,3 +100,30 @@ body {
   font-weight: bold;
   padding: 10px 20px 10px 20px;
 }
+
+.dropbtn {
+  background-color: #95b33b;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  background-color: #6e852c;
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu_2>li>a {
+  background-color: white;
+  color: #95b33b;
+}
+
+.dropdown-menu_2>li>a:hover {
+  color: #6e852c;
+}
