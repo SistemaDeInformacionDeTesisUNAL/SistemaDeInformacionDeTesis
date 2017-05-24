@@ -48,29 +48,29 @@ class FileUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-  version :thumb, if: :image? do
-      process :resize_to_limit => [50, 50]
-   end
+  #version :thumb, if: :image? do
+  #    process :resize_to_limit => [50, 50]
+   #end
 
-   version :thumb, unless: :image? do
-      process :cover
-      process :resize_to_fill => [50, 50]
-      process :convert => 'png'
-   end
+   #version :thumb, unless: :image? do
+    #  process :cover
+    #  process :resize_to_fill => [50, 50]
+    #  process :convert => 'png'
+   #end
 
-   protected
+   #protected
 
-   def image?(new_file)
-      new_file.content_type.start_with? 'image'
-   end
+   #def image?(new_file)
+    #  new_file.content_type.start_with? 'image'
+   #end
 
    #def cover
     #  manipulate! do |frame, index|
     #     frame if index.zero?
     #  end
    #end
- def cover
-   pdf = MiniMagick::Image.open(self.file.path)
-   pdf.pages.first
- end
+ #def cover
+  # pdf = MiniMagick::Image.open(self.file.path)
+   #pdf.pages.first
+ #end
 end
