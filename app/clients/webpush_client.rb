@@ -8,7 +8,7 @@ class WebpushClient
   # @option subscription_params [String] :endpoint url to send encrypted message
   # @option subscription_params [Hash<Symbol, String>] :keys auth keys to send with message for decryption
   # @return true/false
-  def send_notification(message, endpoint: "", p256dh: "", auth: "")
+  def send_notification(message,body,icon, endpoint: "", p256dh: "", auth: "")
     raise ArgumentError, ":endpoint param is required" if endpoint.blank?
     raise ArgumentError, "subscription :keys are missing" if p256dh.blank? || auth.blank?
 
@@ -20,6 +20,8 @@ class WebpushClient
 
     Webpush.payload_send \
       message: message,
+      body: body,
+      icon: icon,
       endpoint: endpoint,
       p256dh: p256dh,
       auth: auth

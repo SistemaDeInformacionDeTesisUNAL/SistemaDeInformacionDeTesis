@@ -1,0 +1,13 @@
+{
+  "name": "Sistema de Informacion, Grupos de Investigacion y Yesis",
+  "short_name": "SIGIT",
+  "start_url": "/",
+  "display": "browser",
+  "orientation": "portrait",
+  "background_color": "#666666",
+   "icons": [{
+     "src": "/assets/unal/escudoUnal-be15d5c7e2b073e9a43b599c223735b96fe7c0902122cabc0b5ca2858bb043f0.png",
+     "sizes": "192x192",
+     "type": "image/png"
+  }]
+}

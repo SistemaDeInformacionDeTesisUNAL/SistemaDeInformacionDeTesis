@@ -2,11 +2,11 @@
   "//": "Some browsers will use this to enable push notifications.",
   "//": "It is the same for all projects, this is not your project's sender ID",
 
-  "name": "Sistema de Grupos de Investigación",
- "short_name": "Sigit",
+  "name": "Sistema de Información de Grupos de Investigación",
+ "short_name": "Sigi",
  "icons": [{
-   "src": "images/unal/escudoUnal.png",
-   "sizes": "192x192",
+   "src": "/assets/unal/escudoUnal_black-f03f4d2e4dacdd5c8569addb53eb0dfe581a30e296a71cdfd5865b00249df3ac.png",
+   "sizes": "234x123",
    "type": "image/png"
  }],
  "start_url": "/",

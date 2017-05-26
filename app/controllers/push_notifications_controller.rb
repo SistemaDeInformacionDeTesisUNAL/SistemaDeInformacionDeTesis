@@ -3,7 +3,7 @@ class PushNotificationsController < ApplicationController
     Rails.logger.info "Sending push notification from #{push_params.inspect}"
     subscription_params = fetch_subscription_params
 
-    WebpushJob.perform_now fetch_message,
+    WebpushJob.perform_now fetch_message,"",push_params.fetch(:icon,"/images/unal/escudoUnal_black.png"),
       endpoint: subscription_params[:endpoint],
       p256dh: subscription_params.dig(:keys, :p256dh),
       auth: subscription_params.dig(:keys, :auth)
@@ -14,11 +14,11 @@ class PushNotificationsController < ApplicationController
   private
 
   def push_params
-    params.permit(:message, { subscription: [:endpoint, keys: [:auth, :p256dh]]})
+    params.permit(:message,:body,:icon, { subscription: [:endpoint, keys: [:auth, :p256dh]]})
   end
 
   def fetch_message
-    push_params.fetch(:message, "Sigit")
+    push_params.fetch(:message, "Bienvenido al Sistema de Información de Tesis de Grupos de Investigación")
   end
 
   def fetch_subscription_params

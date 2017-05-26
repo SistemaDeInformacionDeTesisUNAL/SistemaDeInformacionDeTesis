@@ -129,7 +129,7 @@
   <!-- Line Chart - Single Series -->
   <div class="col-xs-6">
   <h3>Contributions By month</h3>
-  <%= pie_chart  @allContributions.group_by_month(:publication_date, format: "%B %d, %Y").count, legend: false,colors: @colors,library: { animation: { easing: 'easeOutQuad' } }%>
+  <%= pie_chart  @allContributions.group_by_month(:publication_date, format: "%B %d, %Y").count, legend: false,colors: @colors,library: { animation: { easing: 'easeOutQuad' } } %>
 </div>
 <div class="col-xs-6">
     <h3>Contributions By month</h3>
@@ -143,7 +143,7 @@
   <!--div class="col-xs-6">-->
 <div class="col-xs-6">
       <h3>Contributions By day</h3>
-    <%= pie_chart  @allContributions.group_by_day(:publication_date, format: "%B %d, %Y").count, legend: false, colors: @colors, library: { animation: { easing: 'easeOutQuad' } }%>
+    <%= pie_chart  @allContributions.group_by_day(:publication_date, format: "%B %d, %Y").count, legend: false, colors: @colors, library: { animation: { easing: 'easeOutQuad' } }%>%>
     </div>
 <div class="col-xs-6">
     <h3>Contributions By day</h3>

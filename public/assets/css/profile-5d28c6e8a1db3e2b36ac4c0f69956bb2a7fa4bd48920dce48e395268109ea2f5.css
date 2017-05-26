@@ -1,0 +1,129 @@
+body {
+  background: #F1F3FA;
+}
+.table{
+  border-radius: 10px;
+  color: black;
+  border: 1px solid #a3a3a3;
+  /*margin-top: 10px;
+  margin-bottom: 15px;*/
+}
+
+.table th{
+  color: white;
+  background-color: #95b33b;
+  border-color: white;
+  text-align: center;
+  /*padding: 10px 15px 10px 15px;*/
+}
+
+.table td{
+  border: 1px solid #a3a3a3;
+}
+/* Profile container */
+.profile {
+  margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 20px 0 10px 0;
+  background: #fff;
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-usertitle-name {
+  color: #6e852c;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  color: #95b33b;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-userbuttons .btn {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 15px;
+  margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0px;
+}
+
+/* Profile Content */
+.profile-content {
+  padding: 20px;
+  background: #fff;
+  min-height: 460px;
+}
+
+.btn1 {
+  background-color: #95b33b;
+  color: white;
+  margin-left: 10px;
+}
+
+.btn1:hover{
+  background-color: #383838;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px 10px 20px;
+}
+
+.dropbtn {
+  background-color: #95b33b;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  background-color: #6e852c;
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu_2>li>a {
+  background-color: white;
+  color: #95b33b;
+}
+
+.dropdown-menu_2>li>a:hover {
+  color: #6e852c;
+}
