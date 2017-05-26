@@ -4,7 +4,7 @@ class FileUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -48,4 +48,29 @@ class FileUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
+  #version :thumb, if: :image? do
+  #    process :resize_to_limit => [50, 50]
+   #end
+
+   #version :thumb, unless: :image? do
+    #  process :cover
+    #  process :resize_to_fill => [50, 50]
+    #  process :convert => 'png'
+   #end
+
+   #protected
+
+   #def image?(new_file)
+    #  new_file.content_type.start_with? 'image'
+   #end
+
+   #def cover
+    #  manipulate! do |frame, index|
+    #     frame if index.zero?
+    #  end
+   #end
+ #def cover
+  # pdf = MiniMagick::Image.open(self.file.path)
+   #pdf.pages.first
+ #end
 end
