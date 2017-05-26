@@ -1,0 +1,51 @@
+body{
+  background-image: url('/assets/salmona_2.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+#login{
+  color: white;
+  font-weight: bold;
+  height: 260px;
+  width: 250px;
+  background-color: rgba(0,0,0,0.6);
+  padding: 10px;
+  text-align: left;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+}
+#login:hover{
+  background-color: black;
+}
+input[type=text] {
+  color:black;
+  font-weight: lighter;
+  width: 200px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
+}
+input[type=password] {
+  color:black;
+  font-weight: lighter;
+  width: 200px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
+}
+input[type=submit] {
+  width: 81%;
+  background-color: #94b43b;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

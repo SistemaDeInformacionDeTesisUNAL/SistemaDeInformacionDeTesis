@@ -2,8 +2,8 @@
 
 one:
   tag: one
-  investigationGroup: one
+  investigation_group_id: one
 
 two:
   tag: two
-  investigationGroup: two
+  investigation_group_id: two

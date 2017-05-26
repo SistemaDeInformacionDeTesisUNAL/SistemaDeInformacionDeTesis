@@ -1,22 +1,61 @@
 Rails.application.routes.draw do
-  resources :tag_investigation_groups
-  resources :tag_contributions
-  resources :tags
-  resources :ubications
-  resources :user_contributions
-  resources :contributions
-  resources :history_groups
-  resources :event_teachers
-  resources :event_students
-  resources :events
-  resources :profiles
-  resources :teacher_investigation_groups
-  resources :investigation_groups
-  mount_devise_token_auth_for 'Student', at: 'student_auth'
 
-  mount_devise_token_auth_for 'Teacher', at: 'teacher_auth'
-  as :teacher do
-    # Define routes for Teacher within this block.
+  root to: 'static_pages#about'
+  devise_scope :student do
+    get "sign_in", :to => "students/sessions#new"
+    get 'students/sign_out', :to =>"devise/sessions#destroy"
   end
+  devise_scope :teacher do
+    get "sign_in", :to => "teachers/sessions#new"
+    get 'teachers/sign_out', :to =>"devise/sessions#destroy"
+  end
+  get 'about', to: "static_pages#about", as: "contacto"
+
+  #get 'home', to: "static_pages#home", as: "home"
+
+  #Post the subscription to our app
+  post "/subscribe" => "subscriptions#create"
+  delete "/unsubscribe" => "subscriptions#destroy"
+
+  #Push notification
+  post "/push" => "push_notifications#create"
+
+  resources :contributions, only:[:index,:show,:create,:update]
+  resources :events, only:[:index,:show,:create,:update] do
+    collection do
+      get  ':id/join',               to: "events#join",                as: "join"
+      get  ':id/destroy',               to: "events#destroy",                as: "destroy"
+    end
+  end
+  resources :teacher_investigation_groups
+  resources :investigation_groups do
+    collection do
+      get  ':id/member',              to: "investigation_groups#member",                    as: "member"
+      post ':id/member/state',        to: "investigation_groups#updateMemberState",         as: "updateMemberState"
+      post ':id/member/rol',          to: "investigation_groups#updateMemberRol",           as: "updateMemberRol"
+      get  ':id/join',                to: "investigation_groups#join",                      as: "join"
+      get  ':id/contributionsGroup',  to: "investigation_groups#contributionsGroup",        as: "contributionsGroup"
+      post ':id/contributions/state', to: "investigation_groups#updateContributionState",   as: "updateContributionState"
+      get ':id/eventsGroup',          to: "investigation_groups#eventsGroup",               as: "eventsGroup"
+    end
+    resources :contributions, only:[:new,:show,:edit] do
+      get 'tags',                     to: "contributions#tags",                             as: "tags"
+      post 'sendTags',                to: "contributions#sendTags",                         as: "sendTags"
+      get 'users',                    to: "contributions#users",                            as: "users"
+      get 'newUser',                  to: "contributions#newUser",                          as: "newUser"
+      post 'createUser',              to: "contributions#createUser",                       as: "createUser"
+      delete 'deleteUser',            to: "contributions#deleteUser",                       as: "deleteUser"
+    end
+    resources :events, only:[:new,:show,:edit] do
+      collection do
+        get  ':id/join',               to: "events#join",                as: "join"
+        get  ':id/destroy',               to: "events#destroy",                as: "destroy"
+      end
+    end
+  end
+  devise_for :students
+  devise_for :teachers
+  resources :students, except:[:new,:create]
+  resources :teachers, except:[:new,:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

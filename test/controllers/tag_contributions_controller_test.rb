@@ -45,4 +45,5 @@ class TagContributionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to tag_contributions_url
   end
+  
 end

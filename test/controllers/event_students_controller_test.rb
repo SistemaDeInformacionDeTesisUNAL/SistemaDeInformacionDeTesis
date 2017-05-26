@@ -45,4 +45,5 @@ class EventStudentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to event_students_url
   end
+
 end

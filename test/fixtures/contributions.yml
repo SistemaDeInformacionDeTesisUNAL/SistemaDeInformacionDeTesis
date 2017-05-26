@@ -4,10 +4,12 @@ one:
   name: MyString
   publication_date: 2017-03-24
   description: MyText
+  state: one
   investigation_group: one
 
 two:
   name: MyString
   publication_date: 2017-03-24
   description: MyText
+  state: two
   investigation_group: two

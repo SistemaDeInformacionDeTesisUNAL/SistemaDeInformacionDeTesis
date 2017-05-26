@@ -1,13 +1,14 @@
 class CreateEvents < ActiveRecord::Migration[5.0]
   def change
     create_table :events do |t|
-      t.string :name
-      t.date :date
-      t.time :time
-      t.text :description
-      t.references :investigation_group, foreign_key: true
+      t.string :name, :null => false, index: true, unique: true, :limit => 45
+      t.datetime :start_time,:null => false, index: true
+      t.datetime :end_time
+      t.text :description, :limit => 200
+      t.references :investigation_group, index: true, foreign_key: true
 
       t.timestamps
     end
+
   end
 end

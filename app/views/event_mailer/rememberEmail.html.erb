@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script  type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script  type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <h1>Hi, <%= @user.first_name %></h1>
+    <p>
+      Remember, Tomorrow You have an event: <strong><%= @event.name%></strong>
+      <br>
+      Remember the event information:
+    </p>
+    <div class="container">
+      <div class="col-md-2 col-lg-2"></div>
+      <div class="col-md-9 col-lg-9 ">
+        <div class="toppad" >
+          <div class="panel panel-primary">
+            <div class="panel-heading"><h3>  <%= @event.name %></h3></div>
+            <div class="panel-body">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td> <strong>Start:</strong> </td>
+                <td><%= @event.start_time.to_formatted_s(:long_ordinal) %></td>
+              </tr>
+              <tr>
+                <td> <strong>End:</strong> </td>
+                <td><%= @event.end_time.to_formatted_s(:long_ordinal) %></td>
+              </tr>
+              <tr>
+                <td><strong>Description:</strong></td>
+                <td><%= @event.description %></td>
+              </tr>
+              <tr>
+                  <td><strong>localization:</strong></td>
+                  <td><%= @event.localization %></td>
+                </tr>
+                <tr>
+                <td><strong>Investigation group:</strong></td>
+                <td><%=@event.investigation_group.name%></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      </div>
+    </div>
+    </div>
+
+    <p>
+      More information visit this link: <%= @url %>.
+    </p>
+    <p>Have a great day!</p>
+  </body>
+</html>

@@ -1,6 +1,8 @@
-<h1>Editing Contribution</h1>
+<%= stylesheet_link_tag 'css/group_table' %>
+
+<h1 style="color: #95b33b; text-align: center; margin-top: 5%">Editing Contribution</h1>
 
 <%= render 'form', contribution: @contribution %>
 
-<%= link_to 'Show', @contribution %> |
-<%= link_to 'Back', contributions_path %>
+<%= link_to 'Contribution', @contribution, :class=>"ui-button ui-corner-all ui-widget" %>
+<%= link_to 'Group Contributions', contributionsGroup_investigation_groups_path(@invGroup), :class=>"ui-button ui-corner-all ui-widget" %>

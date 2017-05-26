@@ -1,0 +1,46 @@
+body {
+  background-color: white;
+}
+/*    --------------------------------------------------
+	:: form Section
+	-------------------------------------------------- */
+#form {
+    padding-top: 50px;
+
+}
+#form .form-wrap {
+    width: 30%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px 20px 20px 20px;
+    border: solid 10px #95b33b;
+}
+#form h1 {
+    color: #95b33b;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+#form .form-group {
+    margin-bottom: 25px;
+}
+
+#form .btn.btn-custom {
+	margin-bottom: 20px;
+  color: white;
+  background-color: #95b33b;
+}
+
+#form label {
+  color: #95b33b;
+}
+
+#form .btn.btn-custom:hover {
+    color: white;
+    background-color: #383838;
+}
+
+#form .form-control {
+    border-color: #95b33b;
+}

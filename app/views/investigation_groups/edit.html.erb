@@ -1,6 +1,7 @@
-<h1>Editing Investigation Group</h1>
+<%= stylesheet_link_tag 'css/group_table' %>
+
+<h1 style="color: #95b33b; text-align: center; margin-top: 5%">Editing Investigation Group</h1>
 
 <%= render 'form', investigation_group: @investigation_group %>
 
-<%= link_to 'Show', @investigation_group %> |
-<%= link_to 'Back', investigation_groups_path %>
+<%= link_to 'Investigation Group', investigation_group_path, :class=>"ui-button ui-corner-all ui-widget" %>

@@ -1,6 +1,8 @@
-<h1>Editing Event</h1>
+<%= stylesheet_link_tag 'css/group_table' %>
+
+<h1 style="color: #95b33b; text-align: center; margin-top: 5%">Editing Event</h1>
 
 <%= render 'form', event: @event %>
 
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Event', @event, :class=>"ui-button ui-corner-all ui-widget" %>
+<%= link_to 'Group Events', eventsGroup_investigation_groups_path(@invGroup), :class=>"ui-button ui-corner-all ui-widget" %>

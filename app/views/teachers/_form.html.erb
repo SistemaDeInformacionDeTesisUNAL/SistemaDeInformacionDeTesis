@@ -1,0 +1,50 @@
+<%= stylesheet_link_tag 'css/form' %>
+
+<%= form_for(teacher) do |f| %>
+  <% if teacher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
+
+      <ul>
+      <% teacher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <section id="form">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-wrap">
+            <!--h1>New Contribution</h1-->
+            <div class="form-group">
+              <%= f.label :first_name %>
+              <%= f.text_field :first_name, :class=>"form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :last_name %>
+              <%= f.text_field :last_name, :class=>"form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :username %>
+              <%= f.text_field :username, :class=>"form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.text_field :email, :class=>"form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Image: " %>
+              <%= f.file_field :image %>
+            </div>
+            <div class="form-group">
+              <%= f.submit 'Update Teacher', :class=>"ui-button ui-corner-all ui-widget" %>
+            </div>
+          </div>
+        </div> <!-- /.col-xs-12 -->
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+  </section>
+  <% end %>

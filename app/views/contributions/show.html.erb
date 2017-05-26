@@ -1,24 +1,73 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @contribution.name %>
-</p>
+<%= stylesheet_link_tag 'css/group_table' %>
 
-<p>
-  <strong>Publication date:</strong>
-  <%= @contribution.publication_date %>
-</p>
+<div class="container">
+  <div class="col-md-2 col-lg-2"></div>
+  <div class="col-md-9 col-lg-9 ">
+    <table class="table">
+      <tbody>
+        <th colspan="2">
+          <%= @contribution.name %>
+        </th>
+        <tr>
+          <td><strong>Publication date:</strong></td>
+          <td><%= @contribution.publication_date %></td>
+        </tr>
+        <tr>
+          <td><strong>Description:</strong></td>
+          <td><%= @contribution.description %></td>
+        </tr>
+        <tr>
+          <td><strong>State:</strong></td>
+          <td><%= @contribution.state %></td>
+        </tr>
+        <tr>
+          <td> <strong>Tags:</strong> </td>
+          <% myTags=''
+          @contribution.tags.each do |tag|
+            myTags<<tag.name
+            if tag != @contribution.tags.last
+              myTags<<', '
+            end
+          end %>
+          <td> <%=myTags.to_s%></td>
+        </tr>
+        <tr>
+          <td><strong>Investigation group:</strong></td>
+          <td><%= link_to @contribution.investigation_group.name, :controller => "investigation_groups", :action => "show", :id => @contribution.investigation_group.id %></td>
+        </tr>
+        <tr>
+          <td><strong>Students:</strong></td>
+          <td>
+            <%@Students.each do |student| %>
+              <%=link_to student.username, student%>
+              <%if student != @Students.last then %> ,
+              <%end%>
+            <%end%>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Teachers:</strong></td>
+          <td>
+            <%@Teachers.each do |teacher| %>
+              <%=link_to teacher.username, teacher %>
+              <%if teacher != @Teachers.last then %> ,
+              <%end%>
+            <%end%>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Files:</strong></td>
+          <td><%= link_to @contribution.file ,@contribution.file_url.to_s %></td>
+        </tr>
+        <tr>
+          <td><strong>Ubication:</strong></td>
+          <td><%= @contribution.ubication %></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @contribution.description %>
-</p>
-
-<p>
-  <strong>Investigation group:</strong>
-  <%= @contribution.investigation_group %>
-</p>
-
-<%= link_to 'Edit', edit_contribution_path(@contribution) %> |
-<%= link_to 'Back', contributions_path %>
+  </div>
+  <%= link_to 'Contributions', contributions_path, :class=>"ui-button ui-corner-all ui-widget" %>

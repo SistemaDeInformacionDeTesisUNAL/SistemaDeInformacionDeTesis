@@ -1,0 +1,76 @@
+<p id="notice"><%= notice %></p>
+
+<%= stylesheet_link_tag 'css/profile' %>
+<div class="container">
+  <div class="col-md-offset-2 col-md-3", style="margin-top: 2%">
+    <%= image_tag(@teacher.image_url.to_s,:class=>"img-circle img-responsive") %>
+  </div>
+  <div class="col-md-4">
+    <div class="profile-sidebar">
+      <div class="profile-usertitle">
+        <div class="profile-usertitle-name">
+          <p> <%= @teacher.first_name %> <%= @teacher.last_name %> </p>
+        </div>
+        <div class="profile-usertitle-job">
+          <p>TEACHER</p>
+        </div>
+        <div class="profile-usertitle-job">
+          <strong style="color: black;">Username:</strong>
+          <%= @teacher.username %>
+        </div>
+        <div class="profile-usertitle-job">
+          <strong style="color: black;">Email:</strong>
+          <%= @teacher.email %>
+        </div>
+        <div class="profile-usertitle-job">
+          <strong style="color: black;">Investigation groups:</strong>
+          <%@teacher.investigation_groups.each do |groupe|%>
+          <%= link_to groupe.name, :controller => "investigation_groups", :action => "show", :id => groupe.id%>
+          <%  if groupe != @teacher.investigation_groups.last %>,
+          <%end
+        end %>
+      </div>
+      <!--div class="col-md-8 col-md-offset-2">
+      <table class="table">
+      <tbody>
+      <th>Contibutions</th>
+      <%@teacher.contributions.each do |contribution|%>
+      <tr>
+      <td style="padding-top: 1px; padding-bottom: 1px;">
+      <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
+    </td>
+  </tr>
+  <%end%>
+</tbody>
+</table>
+</div-->
+<div class="dropdown">
+  <a role="button" data-toggle="dropdown" class="btn dropbtn">
+    Contributions <span class="caret"></span>
+  </a>
+  <div class="dropdown-menu dropdown-menu_2">
+    <%@teacher.contributions.each do |contribution|%>
+    <li><a>
+      <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%></a>
+    </li>
+    <%end%>
+  </div>
+</div>
+<div class="profile-userbuttons">
+  <% if teacher_signed_in? %>
+  <% if current_teacher.id == @teacher.id %>
+  <%= link_to 'Edit', edit_teacher_path(@teacher),  :class=>"btn btn1" %>
+  <% end %>
+  <% end %>
+  <%= link_to 'Teachers', teachers_path, :class=>"btn btn1" %>
+  <% if teacher_signed_in? %>
+  <% if current_teacher.id == @teacher.id %>
+  <%= link_to('Log out', destroy_teacher_session_path, :method => :delete,  :class=>"btn btn1") %>
+  <% end %>
+  <% end %>
+</div>
+</div>
+</div>
+</div>
+
+</div>

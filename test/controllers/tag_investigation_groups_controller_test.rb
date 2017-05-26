@@ -17,7 +17,7 @@ class TagInvestigationGroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create tag_investigation_group" do
     assert_difference('TagInvestigationGroup.count') do
-      post tag_investigation_groups_url, params: { tag_investigation_group: { investigationGroup_id: @tag_investigation_group.investigationGroup_id, tag_id: @tag_investigation_group.tag_id } }
+      post tag_investigation_groups_url, params: { tag_investigation_group: { investigation_group_id: @tag_investigation_group.investigation_group_id, tag_id: @tag_investigation_group.tag_id } }
     end
 
     assert_redirected_to tag_investigation_group_url(TagInvestigationGroup.last)
@@ -34,10 +34,9 @@ class TagInvestigationGroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update tag_investigation_group" do
-    patch tag_investigation_group_url(@tag_investigation_group), params: { tag_investigation_group: { investigationGroup_id: @tag_investigation_group.investigationGroup_id, tag_id: @tag_investigation_group.tag_id } }
+    patch tag_investigation_group_url(@tag_investigation_group), params: { tag_investigation_group: { investigation_group_id: @tag_investigation_group.investigation_group_id, tag_id: @tag_investigation_group.tag_id } }
     assert_redirected_to tag_investigation_group_url(@tag_investigation_group)
   end
-
   test "should destroy tag_investigation_group" do
     assert_difference('TagInvestigationGroup.count', -1) do
       delete tag_investigation_group_url(@tag_investigation_group)

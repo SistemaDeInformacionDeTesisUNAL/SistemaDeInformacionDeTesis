@@ -1,5 +1,8 @@
-<h1>New Event</h1>
+<%= stylesheet_link_tag 'css/group_table' %>
 
+<h1 style="color: #95b33b; text-align: center; margin-top: 5%">New Contribution</h1>
+
+<% @event.investigation_group_id = @contribution_group.id %>
 <%= render 'form', event: @event %>
 
-<%= link_to 'Back', events_path %>
+<%= link_to 'Group Events', eventsGroup_investigation_groups_path(@contribution_group), :class=>"ui-button ui-corner-all ui-widget"%>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <h1>Hola, <%= @Owner.first_name %></h1>
+    <p>
+      Hay una nueva solicitud para ingresar al grupo <strong><%= @group.name%></strong>
+      <br>
+      Esta es la información de la solicitud:
+    </p>
+    <div class="container">
+      <div class="col-md-2 col-lg-2"></div>
+      <div class="col-md-9 col-lg-9 ">
+        <div class="toppad" >
+          <div class="panel panel-primary">
+            <div class="panel-heading"><h3> Nombre: <%= @user.first_name +' '+@user.last_name %></h3></div>
+            <div class="panel-body">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td> <strong>Correo:</strong> </td>
+                <td><%= @user.email %></td>
+              </tr>
+              <tr>
+                <td> <strong>Fecha y hora de la solicitud:</strong> </td>
+                <td><%= @hSolicitud.to_formatted_s(:long_ordinal) %></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      </div>
+    </div>
+    </div>
+    <p>
+      Para aprobar o rechazar visite el siguiente link: <%= @url %>.
+    </p>
+    <p>Que tenga un buen día</p>
+  </body>
+</html>

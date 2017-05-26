@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324143355) do
+ActiveRecord::Schema.define(version: 20170505041804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "contributions", force: :cascade do |t|
-    t.string   "name"
-    t.date     "publication_date"
+    t.string   "name",                   limit: 100,             null: false
+    t.datetime "publication_date"
     t.text     "description"
+    t.integer  "state",                              default: 2, null: false
     t.integer  "investigation_group_id"
-    t.integer  "state"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "file"
+    t.string   "ubication"
     t.index ["investigation_group_id"], name: "index_contributions_on_investigation_group_id", using: :btree
   end
 
@@ -45,77 +47,62 @@ ActiveRecord::Schema.define(version: 20170324143355) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "name"
-    t.date     "date"
-    t.time     "time"
+    t.string   "name",                   limit: 45, null: false
+    t.datetime "start_time",                        null: false
+    t.datetime "end_time"
     t.text     "description"
     t.integer  "investigation_group_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "localization"
     t.index ["investigation_group_id"], name: "index_events_on_investigation_group_id", using: :btree
+    t.index ["name"], name: "index_events_on_name", using: :btree
+    t.index ["start_time"], name: "index_events_on_start_time", using: :btree
   end
 
   create_table "history_groups", force: :cascade do |t|
-    t.date     "bonding_date"
-    t.date     "exit_date"
-    t.integer  "investigation_group_id"
-    t.integer  "student_id"
-    t.integer  "teacher_id"
-    t.integer  "state"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "bonding_date",                       null: false
+    t.datetime "exit_date"
+    t.integer  "state",                  default: 0, null: false
+    t.integer  "investigation_group_id",             null: false
+    t.string   "historable_type"
+    t.integer  "historable_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.index ["historable_type", "historable_id"], name: "index_history_groups_on_historable_type_and_historable_id", using: :btree
     t.index ["investigation_group_id"], name: "index_history_groups_on_investigation_group_id", using: :btree
-    t.index ["student_id"], name: "index_history_groups_on_student_id", using: :btree
-    t.index ["teacher_id"], name: "index_history_groups_on_teacher_id", using: :btree
   end
 
   create_table "investigation_groups", force: :cascade do |t|
-    t.string   "name"
-    t.date     "createDate"
+    t.string   "name",        limit: 50, null: false
+    t.date     "create_date",            null: false
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "profiles", force: :cascade do |t|
-    t.string   "entity"
-    t.text     "URL"
-    t.integer  "student_id"
-    t.integer  "teacher_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["student_id"], name: "index_profiles_on_student_id", using: :btree
-    t.index ["teacher_id"], name: "index_profiles_on_teacher_id", using: :btree
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "image"
+    t.index ["create_date"], name: "index_investigation_groups_on_create_date", using: :btree
+    t.index ["name"], name: "index_investigation_groups_on_name", using: :btree
   end
 
   create_table "students", force: :cascade do |t|
-    t.string   "provider",               default: "institutional_user", null: false
-    t.string   "uid",                    default: "",                   null: false
-    t.string   "encrypted_password",     default: "",                   null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
+    t.string   "email"
+    t.integer  "state",                  default: 0, null: false
+    t.integer  "investigation_group_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,                    null: false
+    t.integer  "sign_in_count",          default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.string   "name"
-    t.string   "lastname"
-    t.string   "institutional_user"
-    t.integer  "investigation_group_id"
-    t.json     "tokens"
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
-    t.index ["confirmation_token"], name: "index_students_on_confirmation_token", unique: true, using: :btree
-    t.index ["institutional_user"], name: "index_students_on_institutional_user", unique: true, using: :btree
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "image"
+    t.index ["email"], name: "index_students_on_email", unique: true, using: :btree
     t.index ["investigation_group_id"], name: "index_students_on_investigation_group_id", using: :btree
-    t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true, using: :btree
-    t.index ["uid", "provider"], name: "index_students_on_uid_and_provider", unique: true, using: :btree
+    t.index ["username"], name: "index_students_on_username", unique: true, using: :btree
   end
 
   create_table "tag_contributions", force: :cascade do |t|
@@ -137,67 +124,48 @@ ActiveRecord::Schema.define(version: 20170324143355) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",       limit: 30, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "teacher_investigation_groups", force: :cascade do |t|
+    t.integer  "rol",                    default: 0, null: false
+    t.integer  "state",                  default: 1, null: false
     t.integer  "teacher_id"
     t.integer  "investigation_group_id"
-    t.integer  "rol"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["investigation_group_id"], name: "index_teacher_investigation_groups_on_investigation_group_id", using: :btree
     t.index ["teacher_id"], name: "index_teacher_investigation_groups_on_teacher_id", using: :btree
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.string   "provider",                       default: "institutional_user", null: false
-    t.string   "uid",                            default: "",                   null: false
-    t.string   "encrypted_password",             default: "",                   null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
+    t.string   "email"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                  default: 0,                    null: false
+    t.integer  "sign_in_count",       default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_institutional_user"
-    t.string   "name"
-    t.string   "lastname"
-    t.string   "institutional_user"
-    t.json     "tokens"
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
-    t.index ["confirmation_token"], name: "index_teachers_on_confirmation_token", unique: true, using: :btree
-    t.index ["institutional_user"], name: "index_teachers_on_institutional_user", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
-    t.index ["uid", "provider"], name: "index_teachers_on_uid_and_provider", unique: true, using: :btree
-  end
-
-  create_table "ubications", force: :cascade do |t|
-    t.text     "link"
-    t.integer  "contribution_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["contribution_id"], name: "index_ubications_on_contribution_id", using: :btree
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "image"
+    t.index ["email"], name: "index_teachers_on_email", unique: true, using: :btree
+    t.index ["username"], name: "index_teachers_on_username", unique: true, using: :btree
   end
 
   create_table "user_contributions", force: :cascade do |t|
-    t.integer  "student_id"
-    t.integer  "teacher_id"
+    t.string   "userable_type"
+    t.integer  "userable_id"
     t.integer  "contribution_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["contribution_id"], name: "index_user_contributions_on_contribution_id", using: :btree
-    t.index ["student_id"], name: "index_user_contributions_on_student_id", using: :btree
-    t.index ["teacher_id"], name: "index_user_contributions_on_teacher_id", using: :btree
+    t.index ["userable_type", "userable_id"], name: "index_user_contributions_on_userable_type_and_userable_id", using: :btree
   end
 
   add_foreign_key "contributions", "investigation_groups"
@@ -207,10 +175,6 @@ ActiveRecord::Schema.define(version: 20170324143355) do
   add_foreign_key "event_teachers", "teachers"
   add_foreign_key "events", "investigation_groups"
   add_foreign_key "history_groups", "investigation_groups"
-  add_foreign_key "history_groups", "students"
-  add_foreign_key "history_groups", "teachers"
-  add_foreign_key "profiles", "students"
-  add_foreign_key "profiles", "teachers"
   add_foreign_key "students", "investigation_groups"
   add_foreign_key "tag_contributions", "contributions"
   add_foreign_key "tag_contributions", "tags"
@@ -218,8 +182,5 @@ ActiveRecord::Schema.define(version: 20170324143355) do
   add_foreign_key "tag_investigation_groups", "tags"
   add_foreign_key "teacher_investigation_groups", "investigation_groups"
   add_foreign_key "teacher_investigation_groups", "teachers"
-  add_foreign_key "ubications", "contributions"
   add_foreign_key "user_contributions", "contributions"
-  add_foreign_key "user_contributions", "students"
-  add_foreign_key "user_contributions", "teachers"
 end

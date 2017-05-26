@@ -1,0 +1,89 @@
+<%= stylesheet_link_tag 'css/member' %>
+
+<div class="container">
+  <div class="row">
+    <section class="content">
+      <h1>Users</h1>
+      <div class="col-md-8 col-md-offset-2">
+        <table class="table table-filter">
+          <%@Students.each do |student| %>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <h4 class="title">
+                      <%= link_to student.username, student %>
+                    </h4>
+                    <p class="summary">
+                      <%= student.first_name + " " + student.last_name %>
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn1">Student</button>
+                </div>
+              </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <button class="btn btn1" onclick="deleteUser('<%=student.id%>','<%=investigation_group_contribution_deleteUser_path%>','<%=@contribution.id%>','Student')">X</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          <%end%>
+          <%@Teachers.each do |teacher| %>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <h4 class="title">
+                      <%= link_to teacher.username, teacher %>
+                    </h4>
+                    <p class="summary">
+                      <%= teacher.first_name + " " + teacher.last_name %>
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn1">Teacher</button>
+                </div>
+              </td>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <button class="btn btn1" onclick="deleteUser('<%=teacher.id%>','<%=investigation_group_contribution_deleteUser_path%>','<%=@contribution.id%>','Teacher')">X</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          <%end%>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+  function deleteUser(ids, url, contr, type){
+    $.ajax({
+      type: "DELETE",
+      url: url,
+      data: {"ids": ids,"type": type, "contr": contr },
+      success: function(){alert("OH SI, ELIMINO EL USUARIO DE LA CONTRIBUCION")}
+    });
+  }
+</script>
+<%= link_to 'Add User', investigation_group_contribution_newUser_path(:contribution_id=>@contribution.id), :class=>"btn btn2" %>
+<%= link_to 'Group Contributions', contributionsGroup_investigation_groups_path(:id=>params[:investigation_group_id]), :class=>"btn btn2" %>
