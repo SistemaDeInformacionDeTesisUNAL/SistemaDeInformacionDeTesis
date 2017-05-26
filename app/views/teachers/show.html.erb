@@ -56,6 +56,18 @@
     <%end%>
   </div>
 </div>
+<div class="dropdown">
+  <a role="button" data-toggle="dropdown" class="btn dropbtn">
+    My Events <span class="caret"></span>
+  </a>
+  <div class="dropdown-menu dropdown-menu_2">
+    <%@teacher.events.each do |event|%>
+    <li><a>
+      <%= link_to event.name, :controller => "events", :action => "show", :id => event.id%></a>
+    </li>
+    <%end%>
+  </div>
+</div>
 <div class="profile-userbuttons">
   <% if teacher_signed_in? %>
   <% if current_teacher.id == @teacher.id %>
