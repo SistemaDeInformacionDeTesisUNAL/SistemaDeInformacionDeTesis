@@ -23,13 +23,21 @@
           <%= @teacher.email %>
         </div>
         <div class="profile-usertitle-job">
-          <strong style="color: black;">Investigation groups:</strong>
-          <%@teacher.investigation_groups.each do |groupe|%>
+          <strong style="color: black;">Investigation groups Owner:</strong>
+          <%@groupsOwner.each do |groupe|%>
           <%= link_to groupe.name, :controller => "investigation_groups", :action => "show", :id => groupe.id%>
-          <%  if groupe != @teacher.investigation_groups.last %>,
+          <%  if groupe != @groupsOwner.last %>,
           <%end
         end %>
       </div>
+      <div class="profile-usertitle-job">
+        <strong style="color: black;">Investigation groups:</strong>
+        <%@groups.each do |groupe|%>
+        <%= link_to groupe.name, :controller => "investigation_groups", :action => "show", :id => groupe.id%>
+        <%  if groupe != @groups.last %>,
+        <%end
+      end %>
+    </div>
       <!--div class="col-md-8 col-md-offset-2">
       <table class="table">
       <tbody>
