@@ -31,45 +31,49 @@
         <%end%>
         <%end%>
         <!--strong style="color: black;">Contributions:</strong-->
-        <div class="col-md-8 col-md-offset-2">
-          <table class=" table table-bordered dataTables_wrapper form-inline dt-bootstrap nowrap  no-footer">
-            <thead>
-              <tr role="row">
-              <th class="ui-state-default">Contibutions</th>
-            </tr>
-            </thead>
-              <tbody>
-              <tr>
-              <%@student.contributions.each do |contribution|%>
-                <td style="padding-top: 1px; padding-bottom: 1px;">
-                  <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
-                </td>
-              </tr>
-              <%end%>
-            </tbody>
-          </table>
-        </div>
-        <br>
-        <div class="profile-userbuttons">
-          <table style="float: none; margin: 0 auto;">
-            <tr>
-          <% if student_signed_in? %>
-          <% if current_student.id == @student.id %>
-          <th><%= link_to 'Edit', edit_student_path(@student), :class=>"ui-button ui-corner-all ui-widget" %></th>
-          <% end %>
-          <%end%>
-          <% if student_signed_in? || teacher_signed_in? %>
-          <th><%= link_to 'Students', students_path, :class=>"ui-button ui-corner-all ui-widget" %></th>
-          <%end%>
-          <% if student_signed_in? %>
-          <% if current_student.id == @student.id %>
-          <th><%= link_to('Log Out', destroy_student_session_path, :method => :delete, :class=>"ui-button ui-corner-all ui-widget") %></th>
-          <% end %>
-          <%end%>
-        </tr>
-      </table>
-        </div>
-      </div>
-    </div>
+        <!--div class="col-md-8 col-md-offset-2">
+        <table class="table">
+        <tbody>
+        <th>Contibutions</th>
+        <%@student.contributions.each do |contribution|%>
+        <tr>
+        <td style="padding-top: 1px; padding-bottom: 1px;">
+        <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%>
+      </td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+</div-->
+<div class="dropdown">
+  <a role="button" data-toggle="dropdown" class="btn dropbtn">
+    Contributions <span class="caret"></span>
+  </a>
+  <div class="dropdown-menu dropdown-menu_2">
+    <%@student.contributions.each do |contribution|%>
+    <li><a>
+      <%= link_to contribution.name, :controller => "contributions", :action => "show", :id => contribution.id%></a>
+    </li>
+    <%end%>
   </div>
+</div>
+<div class="profile-userbuttons", style="margin-top: 5px;">
+  <% if student_signed_in? %>
+  <%= link_to 'Mis Eventos', {:controller=>"events",:action=>"index",:id=>current_student.id},:class=>"btn btn1" %>
+  <% if current_student.id == @student.id %>
+  <%= link_to 'Edit', edit_student_path(@student), :class=>"btn btn1" %>
+  <% end %>
+  <%end%>
+  <% if student_signed_in? || teacher_signed_in? %>
+  <%= link_to 'Students', students_path, :class=>"btn btn1" %>
+  <%end%>
+  <% if student_signed_in? %>
+  <% if current_student.id == @student.id %>
+  <%= link_to('Log out', destroy_student_session_path, :method => :delete, :class=>"btn btn1") %>
+  <% end %>
+  <%end%>
+</div>
+</div>
+</div>
+</div>
 </div>
