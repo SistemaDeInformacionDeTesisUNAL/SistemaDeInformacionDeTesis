@@ -16,6 +16,8 @@ class InvestigationGroupsController < ApplicationController
   def show
     #Owner
     @allContributions=InvestigationGroup.contributions_group(:group_id => @investigation_group.id)
+    @colors=[]
+    @allContributions.count.times{    @colors<<'#'+("%06x" % (rand * 0xffffff)).to_s}
     @Owner=InvestigationGroup.teacher_group_owner(:id => @investigation_group.id)
     @Admins=InvestigationGroup.admins_group(:id => @investigation_group.id)
     @Teachers=InvestigationGroup.teachers_group(:id => @investigation_group.id)

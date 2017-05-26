@@ -3,6 +3,9 @@
   <head>
     <title>Sistema de información de tesis :: Universidad Nacional de Colombia</title>
     <link rel="shortcut icon" href="/assets/unal/favicon.ico" type="image/x-icon">
+
+    <script src="http//www.google.com/jsapi","chartkick" ></script>
+
     <%= csrf_meta_tags %>
     <%=stylesheet_link_tag 'css/reset'%>
 
@@ -75,14 +78,14 @@
   $(document).ready(function() {
     var table= $('#data-table').DataTable({
       lengthChange: false,
-      ScrollY: "100%",
-      ScrollXInner: "150%",
+    //  ScrollY: "100%",
+    //  ScrollXInner: "150%",
        scrollCollapse: true,
        fixedHeader: true,
 
        autoFill:true,
       responsive: true,
-      scrollY:true,
+    //  scrollY:true,
       jQueryUI: true,
       pagingType: "full"
     });

@@ -4,6 +4,7 @@
        $( "#tabs" ).tabs();
      } );
  </script>
+ <br>
 <div id="tabs">
 
   <ul>
@@ -117,7 +118,6 @@
     <%=link_to 'Edit', edit_investigation_group_path, :class=>"ui-button ui-corner-all ui-widget"%>
   <%end%>
 <%end%>
-<%=link_to 'Investigation Groups', investigation_groups_path, :class=>"ui-button ui-corner-all ui-widget" %>
 
 </div>
 
@@ -129,14 +129,13 @@
   <!-- Line Chart - Single Series -->
   <div class="col-xs-6">
   <h3>Contributions By month</h3>
-  <%= pie_chart  @allContributions.group_by_month(:publication_date, format: "%B %d, %Y").count, width: "100%", height: "100%" %>
+  <%= pie_chart  @allContributions.group_by_month(:publication_date, format: "%B %d, %Y").count, legend: false,colors: @colors,library: { animation: { easing: 'easeOutQuad' } }%>
 </div>
 <div class="col-xs-6">
     <h3>Contributions By month</h3>
     <%= column_chart @allContributions.group_by_month(:publication_date, format: "%B %d, %Y").count, discrete: true%>
     </div>
 </div>
-<%=link_to 'Investigation Groups', investigation_groups_path, :class=>"btn btn1" %>
   <!--/div>>-->
 
 </div>
@@ -144,16 +143,14 @@
   <!--div class="col-xs-6">-->
 <div class="col-xs-6">
       <h3>Contributions By day</h3>
-    <%= pie_chart  @allContributions.group_by_day(:publication_date, format: "%B %d, %Y").count, width: "100%", height: "100%" %>
+    <%= pie_chart  @allContributions.group_by_day(:publication_date, format: "%B %d, %Y").count, legend: false, colors: @colors, library: { animation: { easing: 'easeOutQuad' } }%>
     </div>
 <div class="col-xs-6">
     <h3>Contributions By day</h3>
     <%= column_chart   @allContributions.group_by_day(:publication_date, format: "%B %d, %Y").count %>
         </div>
-<%=link_to 'Investigation Groups', investigation_groups_path, :class=>"btn btn1" %>
-  <!--/div>-->
 </div>
-<%=link_to 'Investigation Groups', investigation_groups_path, :class=>"btn btn1" %>
+<%=link_to 'Investigation Groups', investigation_groups_path, :class=>"ui-button ui-corner-all ui-widget" %>
 
 
 
